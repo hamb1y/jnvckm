@@ -1,10 +1,11 @@
 ---
 import Layout from '../components/Layout.astro';
+import BlogGrid from '../components/BlogGrid.astro';
 
 const postImports = import.meta.glob('./events/*.md', { eager: true });
 
 const posts = Object.entries(postImports).map(([path, post]) => ({
-  url: path.replace('./blogs', '/blogs').replace('.md', ''),
+  url: path.replace('./events', '/events').replace('.md', ''),
   title: post.frontmatter.title,
   date: post.frontmatter.date,
   thumbnail: post.frontmatter.thumbnail,
@@ -12,14 +13,7 @@ const posts = Object.entries(postImports).map(([path, post]) => ({
 }));
 ---
 
-<Layout title="All Events">
-  <h1><ul><b>All Events:</b></ul></h1>
-
-  {posts.map(post => (
-    <article>
-      <h2><a href={post.url}>{post.title}</a></h2>
-      <p><em>{new Date(post.date).toDateString()}</em></p>
-      {post.thumbnail && <img src={post.thumbnail} alt={post.title} style="max-width: 200px;" />}
-    </article>
-  ))}
+<Layout title="All Blog Posts">
+  <h1><ul><b>All Blog Posts:</b></ul></h1>
+  <BlogGrid posts={posts} />
 </Layout>

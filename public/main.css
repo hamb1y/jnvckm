@@ -4,12 +4,12 @@
 
 @font-face {
     font-family: "Lato";
-    src: url(../public/fonts/latoR.ttf);
+    src: url(/fonts/latoR.ttf);
 }
 
 @font-face {
     font-family: "Crete";
-    src: url(../public/fonts/creteRoundR.ttf);
+    src: url(/fonts/creteRoundR.ttf);
 }
 
 /* ==========================================================================
