@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Make sure a commit message is provided
+if [ -z "$1" ]; then
+  echo "❌ Please provide a commit message."
+  echo "Usage: ./git-sync.sh 'Your commit message here'"
+  exit 1
+fi
+
+COMMIT_MSG="$1"
+
+# Pull latest changes
+echo "🔄 Pulling latest changes..."
+git pull
+
+# Add all changes
+echo "➕ Staging changes..."
+git add .
+
+# Commit with provided message
+echo "✅ Committing with message: '$COMMIT_MSG'"
+git commit -m "$COMMIT_MSG"
+
+# Push to current branch
+echo "🚀 Pushing to GitHub..."
+git push
+
+echo "🎉 Done!"
