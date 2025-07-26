@@ -1,317 +1,266 @@
 /* ==========================================================================
    1. FONT DEFINITIONS
    ========================================================================== */
-
 @font-face {
-    font-family: "Lato";
-    src: url(/fonts/latoR.ttf);
+  font-family: "Lato";
+  src: url(/fonts/latoR.ttf);
 }
 
 @font-face {
-    font-family: "Crete";
-    src: url(/fonts/creteRoundR.ttf);
+  font-family: "Crete";
+  src: url(/fonts/creteRoundR.ttf);
 }
 
 /* ==========================================================================
-   1. DEFAULT LIGHT THEME VARIABLES
+   2. THEME VARIABLES
    ========================================================================== */
 
+/* Light Theme */
 :root {
-    --background-color: #f7f9f8;     /* Light background */
-    --secondary-color: #111312;      /* Text and key UI elements */
-    --adaptive-gray: #6b6b6b;        /* Neutral gray */
-    --accent-color: #7cbf8a;         /* Soft green */
+  --primary-color: #ffffff;
+  --background-color: #f7f9f8;
+  --secondary-color: #111312;
+  --adaptive-gray: #6b6b6b;
+  --accent-color: #7cbf8a;
+  --text-color: #111312;
 }
 
-/* ==========================================================================
-   2. DARK THEME VARIABLES (WHEN DARK MODE IS ENABLED)
-   ========================================================================== */
-
+/* Dark Theme */
 body:has(#dark:checked) {
-    --background-color: #111312;     /* Dark background */
-    --secondary-color: #f7f9f8;      /* Light text */
-    --adaptive-gray: #c1c1c1;        /* Light neutral gray */
-    --accent-color: #5aaf6e;         /* Muted green for contrast */
+  --primary-color: #111312;
+  --background-color: #111312;
+  --secondary-color: #f7f9f8;
+  --adaptive-gray: #c1c1c1;
+  --accent-color: #5aaf6e;
+  --text-color: #f7f9f8;
 }
 
 /* ==========================================================================
    3. BASE STYLES
    ========================================================================== */
-
 body {
-    font-family: "Lato", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--background-color);
-    color: var(--secondary-color);
+  font-family: "Lato", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 * {
-    font-family: "Lato", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Lato", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
 
 /* ==========================================================================
    4. TYPOGRAPHY
    ========================================================================== */
-
-h1 {
-    font-size: 3rem;
+h1, h2, h3, h4, h5, h6, .title {
+  font-family: "Crete", 'Times New Roman', Times, serif;
 }
 
-h1, h2, h3, h4, h5, h6, .title {
-    font-family: "Crete", 'Times New Roman', Times, serif;
+h1 {
+  font-size: 3rem;
 }
 
 h2 {
-    font-size: 2.5rem;
+  font-size: 2.5rem;
 }
 
 .sub {
-    /* Subtitling */
-    color: var(--adaptive-gray);
-    font-size: 1.5rem;
+  color: var(--adaptive-gray);
+  font-size: 1.5rem;
 }
 
 ul.descStyle li {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 
 /* ==========================================================================
    5. FORMS & INPUTS
    ========================================================================== */
-
 .form-group {
-    margin-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-size: 1.2rem;
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
 }
 
 input[type="text"],
 input[type="number"],
 textarea {
-    width: 100%;
-    padding: 0.75rem;
-    border: 2px solid var(--adaptive-gray);
-    border-radius: 8px;
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    font-size: 1rem;
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--adaptive-gray);
+  border-radius: 8px;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  font-size: 1rem;
 }
 
 .radio-group label {
-    display: inline-block;
-    margin-right: 1rem;
-    cursor: pointer;
+  display: inline-block;
+  margin-right: 1rem;
+  cursor: pointer;
 }
 
 /* ==========================================================================
    6. BUTTONS
    ========================================================================== */
-
 .button {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    border: 2px solid var(--accent-color);
-    border-radius: 8px;
-    background-color: var(--primary-color);
-    color: var(--accent-color);
-    font-size: 1rem;
-    font-weight: 500;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    gap: 1rem;
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid var(--accent-color);
+  border-radius: 8px;
+  background-color: var(--primary-color);
+  color: var(--accent-color);
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  gap: 1rem;
 }
 
 .button:hover {
-    background-color: var(--accent-color);
-    color: var(--primary-color);
+  background-color: var(--accent-color);
+  color: var(--primary-color);
 }
 
 .button[disabled] {
-    border-color: var(--adaptive-gray);
-    color: var(--adaptive-gray);
-    cursor: not-allowed;
+  border-color: var(--adaptive-gray);
+  color: var(--adaptive-gray);
+  cursor: not-allowed;
 }
 
 .button[disabled]:hover {
-    background-color: var(--primary-color);
-    color: var(--adaptive-gray);
+  background-color: var(--primary-color);
+  color: var(--adaptive-gray);
 }
-
 
 /* ==========================================================================
-   7. COMPONENT & THEME-SPECIFIC STYLES
+   7. UTILITY CLASSES
    ========================================================================== */
-
-/* Invert theme switcher button based on selected theme */
-body:has(#dark:checked) .invertDark {
-    --primary-color: #f7f9f8;
-    --secondary-color: #7cbf8a;
-    --adaptive-gray: #6b6b6b;
-}
-
-body:has(#light:checked) .invertLight {
-    --primary-color: #111312;
-    --secondary-color: #c1c1c1;
-    --adaptive-gray: #90d9a0;
-}
-
-/* Invert icons in dark mode */
-body:has(#dark:checked) img.icon {
-    filter: invert(100%);
-}
-
-.feedback-section {
-    margin-top: 2rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--adaptive-gray);
-}
-
-/* --- dialog
-\
-uePlayer & trackPlayer --- */
-.dialogue-player,
-.track-player {
-    padding: 1.5rem;
-    border: 2px solid var(--adaptive-gray);
-    border-radius: 8px;
-    margin-bottom: 1rem;
-}
-
-.track-player h3 {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-}
-
-/* --- audioVisualizer --- */
-.audio-visualizer {
-    width: 100%;
-    height: 100px;
-    background-color: var(--primary-color);
-    border: 2px solid var(--adaptive-gray);
-    border-radius: 8px;
-    margin-top: 1rem;
-}
-
-
-/* ==========================================================================
-   8. UTILITY CLASSES
-   ========================================================================== */
-
-/* Centers child elements both horizontally and vertically */
 .doCenter {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    width: 100%;
-    direction: ltr;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  direction: ltr;
 }
 
 .doCenter > * {
   flex-shrink: 0;
 }
 
-hr .invisible {
-    border: solid var(--accent-color);
-}
-
-/* Centers text horizontally */
 .centerText {
-    text-align: center;
+  text-align: center;
 }
 
-/* Hides an element completely */
 .invisible {
-    display: none;
+  display: none;
 }
 
-/* =========================================================================
-   9. COMPONENTS
+/* Fix: hr.invisible */
+hr.invisible {
+  border: none;
+  height: 1px;
+  background-color: var(--adaptive-gray);
+}
+
+/* Global <hr> style */
+hr {
+  border: none;
+  border-top: 1px solid var(--adaptive-gray);
+}
+
+/* ==========================================================================
+   8. COMPONENT STYLES
    ========================================================================== */
 
 /* --- Header --- */
 header {
-    display: flex;
-    justify-content: flex-end; /* Aligns items to the right */
-    align-items: center; /* Vertically centers items if they have different heights */
-    padding: 1rem;
-    gap: 1rem; /* Adds space between flex items */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 1rem;
+  gap: 1rem;
 }
 
 header hr {
-    width: auto; /* Allow hr to shrink/grow as needed */
-    flex-grow: 1; /* Allow hr to take up available space */
-    border: none; /* Remove default hr border */
-    border-top: 1px solid var(--adaptive-gray); /* Apply your adaptive gray */
+  width: auto;
+  flex-grow: 1;
+  border: none;
+  border-top: 1px solid var(--adaptive-gray);
 }
 
 .navbar {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: row;
-    gap: 0.5rem;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
 }
 
 .navbar li a {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    border: 2px solid transparent;
-    border-radius: 8px;
-    background-color: transparent;
-    color: var(--text-color);
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: 500;
-    transition: all 0.2s ease-in-out;
-
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid var(--accent-color);
+  border-radius: 8px;
+  background-color: transparent;
+  color: var(--accent-color);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
 }
 
 .navbar li a:hover {
-    background-color: var(--adaptive-gray);
-    color: var(--primary-color);
+  background-color: var(--accent-color);
+  color: var(--primary-color);
 }
 
-/* === FIXES === */
-
-/* Fix: hr.invisible was using . instead of space */
-hr.invisible {
-    border: none;
-    height: 1px;
-    background-color: var(--adaptive-gray);
+/* --- Theme Switcher Icons --- */
+body:has(#dark:checked) img.icon {
+  filter: invert(100%);
 }
 
-/* Apply adaptive-gray color to <hr> globally */
-hr {
-    border: none;
-    border-top: 1px solid var(--adaptive-gray);
+/* --- Feedback Section --- */
+.feedback-section {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--adaptive-gray);
 }
 
-/* Navbar buttons now styled with accent color */
-.navbar li a {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    border: 2px solid var(--accent-color);
-    border-radius: 8px;
-    background-color: transparent;
-    color: var(--accent-color);
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: 500;
-    transition: all 0.2s ease-in-out;
+/* --- Dialogue & Track Players --- */
+.dialogue-player,
+.track-player {
+  padding: 1.5rem;
+  border: 2px solid var(--adaptive-gray);
+  border-radius: 8px;
+  margin-bottom: 1rem;
 }
 
-.navbar li a:hover {
-    background-color: var(--accent-color);
-    color: var(--primary-color);
+.track-player h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
 }
+
+/* --- Audio Visualizer --- */
+.audio-visualizer {
+  width: 100%;
+  height: 100px;
+  background-color: var(--primary-color);
+  border: 2px solid var(--adaptive-gray);
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+/* ==========================================================================
+   9. BLOGS & POSTS
+   ========================================================================== */
 
 .blog-grid {
   display: grid;
@@ -344,6 +293,7 @@ hr {
   height: 180px;
   object-fit: cover;
   background-color: var(--adaptive-gray);
+  border-radius: 0;
 }
 
 .blog-content {
@@ -360,6 +310,7 @@ hr {
 .blog-date {
   font-size: 0.9rem;
   color: var(--adaptive-gray);
+  margin-bottom: 1rem;
 }
 
 .post-layout {
@@ -373,18 +324,3 @@ hr {
   margin-bottom: 0.5rem;
   color: var(--accent-color);
 }
-
-.blog-date {
-  font-size: 0.9rem;
-  color: var(--adaptive-gray);
-  margin-bottom: 1rem;
-}
-
-.blog-thumb {
-  width: 100%;
-  max-height: 300px;
-  object-fit: cover;
-  margin-bottom: 1.5rem;
-  border-radius: 1rem;
-}
-

@@ -2,8 +2,8 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: "/public/images"   # where uploads are saved *in repo*
-public_folder: "/images"   
+media_folder: "/public/images"
+public_folder: "/images"
 
 collections:
   - name: "blogs"
@@ -37,12 +37,12 @@ collections:
       - label: "Title"
         name: "title"
         widget: "string"
-      - label: "Event Date"
-        name: "event_date"
+      - label: "Publish Date"
+        name: "date"
         widget: "datetime"
-      - label: "Location"
-        name: "location"
-        widget: "string"
+      - label: "Featured Image"
+        name: "thumbnail"
+        widget: "image"
       - label: "Body"
         name: "body"
         widget: "markdown"
@@ -54,21 +54,20 @@ collections:
     label: "Contributions"
     folder: "src/pages/contributions"
     create: true
-    slug: "{{slug}}"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - label: "Title"
         name: "title"
         widget: "string"
-      - label: "Contributor"
-        name: "contributor"
-        widget: "string"
-      - label: "Date"
+      - label: "Publish Date"
         name: "date"
         widget: "datetime"
+      - label: "Featured Image"
+        name: "thumbnail"
+        widget: "image"
       - label: "Body"
         name: "body"
         widget: "markdown"
       - name: "layout"
         widget: "hidden"
         default: "/src/components/BlogLayout.astro"
-
