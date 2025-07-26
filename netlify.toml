@@ -1,0 +1,9 @@
+[build]
+  publish = "dist"
+  command = "astro build"
+
+[[redirects]]
+  from = "/admin/*"
+  to = "/admin/index.html"
+  status = 200
+
