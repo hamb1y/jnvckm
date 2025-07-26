@@ -1,41 +1,123 @@
 ---
 import ThemeSwitcher from "./ThemeSwitcher.astro"
+import Button from "./Button.astro"
 ---
 <header class="doCenter">
-    <hr class="">
-    <img src="/images/jnvckm-logo.webp" sub="jnvckm-logo" height="80px">
+  <hr>
+    <Button label="☰" for="menu-toggle" class="hamburger" />
+  <img src="/images/jnvckm-logo.webp" sub="jnvckm-logo" height="80px" />
+  
+  <button class="hamburger" aria-label="Toggle navigation menu">&#9776;</button>
+  
+  <nav class="navigation-menu" aria-hidden="true">
     <ul class="navbar">
-        <li><a href="/">Home</a></li>
-        <li><a href="/about">About Us</a></li>
-        <li><a href="/blogs">Blogs</a></li>
-        <li><a href="/events">Events</a></li>
-        <li><a href="/contributions">Contributions</a></li>
-        <li><a href="/gallery">Gallery</a></li>
-        <li><a href="/faq">FAQ</a></li>
-        <li><a href="/alumni">Alumni Corner</a></li>
-        <li><a href="/students">Student's Corner</a></li>
-        <li><a href="https://jnvckm.vercel.app/admin/index.html">Admin Login</a></li>
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About Us</a></li>
+      <li><a href="/blogs">Blogs</a></li>
+      <li><a href="/events">Events</a></li>
+      <li><a href="/contributions">Contributions</a></li>
+      <li><a href="/gallery">Gallery</a></li>
+      <li><a href="/faq">FAQ</a></li>
+      <li><a href="/alumni">Alumni Corner</a></li>
+      <li><a href="/students">Student's Corner</a></li>
+      <li><a href="https://jnvckm.netlify.app/admin/index.html">Admin Login</a></li>
     </ul>
-    
-    <ThemeSwitcher />
-    <hr class="">
+  </nav>
+  
+  <ThemeSwitcher />
+  <hr>
 </header>
 
+<script is:global>
+  document.addEventListener('DOMContentLoaded', () => {
+    const hamburger = document.querySelector('.hamburger');
+    const nav = document.querySelector('.navigation-menu');
+    const links = document.querySelectorAll('.navbar a');
+
+    if (hamburger && nav) {
+      hamburger.addEventListener('click', () => {
+        nav.classList.toggle('active');
+        // Accessibility: toggle aria-hidden attribute
+        if (nav.classList.contains('active')) {
+          nav.setAttribute('aria-hidden', 'false');
+        } else {
+          nav.setAttribute('aria-hidden', 'true');
+        }
+      });
+
+      // Close menu when clicking a nav link (mobile UX)
+      links.forEach(link => {
+        link.addEventListener('click', () => {
+          nav.classList.remove('active');
+          nav.setAttribute('aria-hidden', 'true');
+        });
+      });
+    }
+  });
+</script>
+
 <style>
-    header, footer {
-        display: flex;
-        justify-content: flex-end; /* Aligns items to the right */
-        align-items: center; /* Vertically centers items if they have different heights */
-        /* You might want to add some padding or gap here */
-        padding: 1rem;
-        gap: 1rem; /* Adds space between flex items */
+  /* Show hamburger and mobile nav for screens <= 820px OR in portrait mode */
+
+    .hamburger {
+        display: none;
+        font-size: 2rem;
+        border: none;
+        background: none;
+        cursor: pointer;
+        user-select: none;
+        z-index: 1100;
     }
 
-    /* Adjust hr to fit within the flex layout if needed */
-    hr {
-        width: auto; /* Allow hr to shrink/grow as needed */
-        flex-grow: 1; /* Allow hr to take up available space */
-        border: none; /* Remove default hr border */
-        border-top: 1px solid var(--accent-color); /* Apply your adaptive gray */
+
+    @media (max-width: 820px), (orientation: portrait) {
+        .hamburger {
+        display: block;
     }
+  
+  .navigation-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: var(--background-color);
+    box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: width 0.3s ease, opacity 0.3s ease;
+    flex-direction: column;
+    padding-top: 60px;
+    z-index: 1050;
+  }
+
+  .navigation-menu.active {
+    width: 250px;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .navbar {
+    flex-direction: column;
+    width: 100%;
+    padding-left: 1rem;
+  }
+
+  .navbar li {
+    margin-bottom: 1rem;
+  }
+
+  .navbar a {
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: var(--text-color);
+    user-select: none;
+  }
+
+  .navbar a:hover,
+  .navbar a:focus {
+    color: var(--accent-color);
+  }
+}
 </style>
