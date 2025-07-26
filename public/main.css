@@ -13,39 +13,41 @@
 }
 
 /* ==========================================================================
-   2. THEME & COLOR VARIABLES
+   1. DEFAULT LIGHT THEME VARIABLES
    ========================================================================== */
 
 :root {
-    /* Default theme is dark */
-    --primary-color: #000;
-    --secondary-color: #fff;
-    --adaptive-gray: #313131;
-}
-
-body:has(#light:checked) {
-    --primary-color: #fff;
-    --secondary-color: #000;
-    --adaptive-gray: #656565;
+    --background-color: #f7f9f8;     /* Light background */
+    --secondary-color: #111312;      /* Text and key UI elements */
+    --adaptive-gray: #6b6b6b;        /* Neutral gray */
+    --accent-color: #7cbf8a;         /* Soft green */
 }
 
 /* ==========================================================================
-   3. BASE & BODY STYLES
+   2. DARK THEME VARIABLES (WHEN DARK MODE IS ENABLED)
+   ========================================================================== */
+
+body:has(#dark:checked) {
+    --background-color: #111312;     /* Dark background */
+    --secondary-color: #f7f9f8;      /* Light text */
+    --adaptive-gray: #c1c1c1;        /* Light neutral gray */
+    --accent-color: #5aaf6e;         /* Muted green for contrast */
+}
+
+/* ==========================================================================
+   3. BASE STYLES
    ========================================================================== */
 
 body {
-    --background-color: var(--primary-color);
-    --accent-color: #224d31;
-    --text-color: var(--secondary-color);
-
     font-family: "Lato", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--background-color);
-    color: var(--text-color);
+    color: var(--secondary-color);
 }
 
 * {
-    font-family: "Lato", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: inherit;
 }
+
 
 /* ==========================================================================
    4. TYPOGRAPHY
@@ -146,10 +148,16 @@ textarea {
    ========================================================================== */
 
 /* Invert theme switcher button based on selected theme */
-body:has(#light:checked) .invertLight,
 body:has(#dark:checked) .invertDark {
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
+    --primary-color: #f7f9f8;
+    --secondary-color: #7cbf8a;
+    --adaptive-gray: #6b6b6b;
+}
+
+body:has(#light:checked) .invertLight {
+    --primary-color: #111312;
+    --secondary-color: #c1c1c1;
+    --adaptive-gray: #90d9a0;
 }
 
 /* Invert icons in dark mode */
@@ -163,7 +171,9 @@ body:has(#dark:checked) img.icon {
     border-top: 1px solid var(--adaptive-gray);
 }
 
-/* --- dialoguePlayer & trackPlayer --- */
+/* --- dialog
+\
+uePlayer & trackPlayer --- */
 .dialogue-player,
 .track-player {
     padding: 1.5rem;
@@ -267,5 +277,114 @@ header hr {
 .navbar li a:hover {
     background-color: var(--adaptive-gray);
     color: var(--primary-color);
+}
+
+/* === FIXES === */
+
+/* Fix: hr.invisible was using . instead of space */
+hr.invisible {
+    border: none;
+    height: 1px;
+    background-color: var(--adaptive-gray);
+}
+
+/* Apply adaptive-gray color to <hr> globally */
+hr {
+    border: none;
+    border-top: 1px solid var(--adaptive-gray);
+}
+
+/* Navbar buttons now styled with accent color */
+.navbar li a {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border: 2px solid var(--accent-color);
+    border-radius: 8px;
+    background-color: transparent;
+    color: var(--accent-color);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+.navbar li a:hover {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.blog-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-color);
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.blog-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  border-color: var(--accent-color);
+}
+
+.blog-thumb {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  background-color: var(--adaptive-gray);
+}
+
+.blog-content {
+  padding: 1rem;
+}
+
+.blog-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--accent-color);
+}
+
+.blog-date {
+  font-size: 0.9rem;
+  color: var(--adaptive-gray);
+}
+
+.post-layout {
+  padding: 2rem;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.post-layout h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--accent-color);
+}
+
+.blog-date {
+  font-size: 0.9rem;
+  color: var(--adaptive-gray);
+  margin-bottom: 1rem;
+}
+
+.blog-thumb {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  margin-bottom: 1.5rem;
+  border-radius: 1rem;
 }
 

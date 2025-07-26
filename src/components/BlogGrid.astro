@@ -1,0 +1,18 @@
+---
+// BlogGrid.astro
+const { posts } = Astro.props;
+---
+
+<section class="blog-grid">
+  {posts.map((post) => (
+    <a href={post.url} class="blog-card">
+      {post.thumbnail && (
+        <img src={post.thumbnail} alt={post.title} class="blog-thumb" />
+      )}
+      <div class="blog-content">
+        <h2 class="blog-title">{post.title}</h2>
+        <p class="blog-date">{new Date(post.date).toDateString()}</p>
+      </div>
+    </a>
+  ))}
+</section>

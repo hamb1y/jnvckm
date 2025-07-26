@@ -1,31 +1,53 @@
 backend:
   name: git-gateway
-  branch: main # Branch to update (optional; defaults to master)\
+  branch: main
 
-media_folder: "images" # Media files will be stored in the repo under images
+media_folder: "images"
 
 collections:
-  - name: "blog"
-    label: "Blog"
-    folder: "src/pages/blog"
+  - name: "blogs"
+    label: "Blogs"
+    folder: "src/pages/blogs"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Featured Image", name: "thumbnail", widget: "image" }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - label: "Title"
+        name: "title"
+        widget: "string"
+      - label: "Publish Date"
+        name: "date"
+        widget: "datetime"
+      - label: "Featured Image"
+        name: "thumbnail"
+        widget: "image"
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+      - name: "layout"
+        widget: "hidden"
+        default: "../../../layouts/BlogLayout.astro"
 
-  - name: "event"
-    label: "Event"
-    folder: "src/pages/event"
+  - name: "events"
+    label: "Events"
+    folder: "src/pages/events"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Event Date", name: "event_date", widget: "datetime" }
-      - { label: "Location", name: "location", widget: "string" }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - label: "Title"
+        name: "title"
+        widget: "string"
+      - label: "Event Date"
+        name: "event_date"
+        widget: "datetime"
+      - label: "Location"
+        name: "location"
+        widget: "string"
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+      - name: "layout"
+        widget: "hidden"
+        default: "../../../layouts/BlogLayout.astro"
 
   - name: "contributions"
     label: "Contributions"
@@ -33,7 +55,19 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Contributor", name: "contributor", widget: "string" }
-      - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - label: "Title"
+        name: "title"
+        widget: "string"
+      - label: "Contributor"
+        name: "contributor"
+        widget: "string"
+      - label: "Date"
+        name: "date"
+        widget: "datetime"
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+      - name: "layout"
+        widget: "hidden"
+        default: "../../../layouts/BlogLayout.astro"
+
