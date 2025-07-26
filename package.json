@@ -10,5 +10,8 @@
   },
   "dependencies": {
     "astro": "^5.12.3"
+  },
+  "devDependencies": {
+    "netlify-cms": "^2.10.192"
   }
 }

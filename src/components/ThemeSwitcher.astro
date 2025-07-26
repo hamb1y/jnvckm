@@ -1,0 +1,20 @@
+---
+import Button from './Button.astro';
+---
+
+<div class="themeSwitcher">
+    <input type="radio" id="light" name="theme" value="light">
+    <Button label="Light" for="light" class="invertLight"/>
+    <input type="radio" id="dark" name="theme" value="dark" checked>
+    <Button label="Dark" for="dark" class="invertDark"/>
+</div>
+
+<style>
+    .themeSwitcher input[type="radio"] {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+</style>

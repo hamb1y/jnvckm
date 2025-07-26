@@ -1,0 +1,271 @@
+/* ==========================================================================
+   1. FONT DEFINITIONS
+   ========================================================================== */
+
+@font-face {
+    font-family: "Lato";
+    src: url(../public/fonts/latoR.ttf);
+}
+
+@font-face {
+    font-family: "Crete";
+    src: url(../public/fonts/creteRoundR.ttf);
+}
+
+/* ==========================================================================
+   2. THEME & COLOR VARIABLES
+   ========================================================================== */
+
+:root {
+    /* Default theme is dark */
+    --primary-color: #000;
+    --secondary-color: #fff;
+    --adaptive-gray: #313131;
+}
+
+body:has(#light:checked) {
+    --primary-color: #fff;
+    --secondary-color: #000;
+    --adaptive-gray: #656565;
+}
+
+/* ==========================================================================
+   3. BASE & BODY STYLES
+   ========================================================================== */
+
+body {
+    --background-color: var(--primary-color);
+    --accent-color: #224d31;
+    --text-color: var(--secondary-color);
+
+    font-family: "Lato", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+* {
+    font-family: "Lato", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ==========================================================================
+   4. TYPOGRAPHY
+   ========================================================================== */
+
+h1 {
+    font-size: 3rem;
+}
+
+h1, h2, h3, h4, h5, h6, .title {
+    font-family: "Crete", 'Times New Roman', Times, serif;
+}
+
+h2 {
+    font-size: 2.5rem;
+}
+
+.sub {
+    /* Subtitling */
+    color: var(--adaptive-gray);
+    font-size: 1.5rem;
+}
+
+ul.descStyle li {
+    font-size: 2rem;
+}
+
+/* ==========================================================================
+   5. FORMS & INPUTS
+   ========================================================================== */
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid var(--adaptive-gray);
+    border-radius: 8px;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+.radio-group label {
+    display: inline-block;
+    margin-right: 1rem;
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   6. BUTTONS
+   ========================================================================== */
+
+.button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border: 2px solid var(--accent-color);
+    border-radius: 8px;
+    background-color: var(--primary-color);
+    color: var(--accent-color);
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    gap: 1rem;
+}
+
+.button:hover {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+}
+
+.button[disabled] {
+    border-color: var(--adaptive-gray);
+    color: var(--adaptive-gray);
+    cursor: not-allowed;
+}
+
+.button[disabled]:hover {
+    background-color: var(--primary-color);
+    color: var(--adaptive-gray);
+}
+
+
+/* ==========================================================================
+   7. COMPONENT & THEME-SPECIFIC STYLES
+   ========================================================================== */
+
+/* Invert theme switcher button based on selected theme */
+body:has(#light:checked) .invertLight,
+body:has(#dark:checked) .invertDark {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+/* Invert icons in dark mode */
+body:has(#dark:checked) img.icon {
+    filter: invert(100%);
+}
+
+.feedback-section {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--adaptive-gray);
+}
+
+/* --- dialoguePlayer & trackPlayer --- */
+.dialogue-player,
+.track-player {
+    padding: 1.5rem;
+    border: 2px solid var(--adaptive-gray);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.track-player h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+/* --- audioVisualizer --- */
+.audio-visualizer {
+    width: 100%;
+    height: 100px;
+    background-color: var(--primary-color);
+    border: 2px solid var(--adaptive-gray);
+    border-radius: 8px;
+    margin-top: 1rem;
+}
+
+
+/* ==========================================================================
+   8. UTILITY CLASSES
+   ========================================================================== */
+
+/* Centers child elements both horizontally and vertically */
+.doCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    direction: ltr;
+}
+
+.doCenter > * {
+  flex-shrink: 0;
+}
+
+hr .invisible {
+    border: solid var(--accent-color);
+}
+
+/* Centers text horizontally */
+.centerText {
+    text-align: center;
+}
+
+/* Hides an element completely */
+.invisible {
+    display: none;
+}
+
+/* =========================================================================
+   9. COMPONENTS
+   ========================================================================== */
+
+/* --- Header --- */
+header {
+    display: flex;
+    justify-content: flex-end; /* Aligns items to the right */
+    align-items: center; /* Vertically centers items if they have different heights */
+    padding: 1rem;
+    gap: 1rem; /* Adds space between flex items */
+}
+
+header hr {
+    width: auto; /* Allow hr to shrink/grow as needed */
+    flex-grow: 1; /* Allow hr to take up available space */
+    border: none; /* Remove default hr border */
+    border-top: 1px solid var(--adaptive-gray); /* Apply your adaptive gray */
+}
+
+.navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+
+.navbar li a {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    background-color: transparent;
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+
+}
+
+.navbar li a:hover {
+    background-color: var(--adaptive-gray);
+    color: var(--primary-color);
+}
+
