@@ -2,7 +2,8 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: "images"
+media_folder: "/public/images"   # where uploads are saved *in repo*
+public_folder: "/images"   
 
 collections:
   - name: "blogs"
