@@ -1,33 +1,30 @@
 backend:
   name: git-gateway
-  branch: main
+  branch: main # Branch to update (optional; defaults to master)\
 
-media_folder: "public/uploads"
-public_folder: "/uploads"
+media_folder: "images" # Media files will be stored in the repo under images
 
 collections:
-  - name: "events"
-    label: "Events"
-    folder: "src/pages/events"
+  - name: "blog"
+    label: "Blog"
+    folder: "src/pages/blog"
     create: true
-    slug: "{{slug}}"
-    extension: "md"
-    format: "frontmatter"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Featured Image", name: "thumbnail", widget: "image" }
       - { label: "Body", name: "body", widget: "markdown" }
 
-  - name: "blogs"
-    label: "Blogs"
-    folder: "src/pages/blogs"
+  - name: "event"
+    label: "Event"
+    folder: "src/pages/event"
     create: true
-    slug: "{{slug}}"
-    extension: "md"
-    format: "frontmatter"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Author", name: "author", widget: "string" }
+      - { label: "Event Date", name: "event_date", widget: "datetime" }
+      - { label: "Location", name: "location", widget: "string" }
       - { label: "Body", name: "body", widget: "markdown" }
 
   - name: "contributions"
@@ -35,10 +32,8 @@ collections:
     folder: "src/pages/contributions"
     create: true
     slug: "{{slug}}"
-    extension: "md"
-    format: "frontmatter"
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Link", name: "link", widget: "string" }
+      - { label: "Contributor", name: "contributor", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
       - { label: "Body", name: "body", widget: "markdown" }
-
