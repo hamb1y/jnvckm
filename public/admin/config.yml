@@ -25,7 +25,7 @@ collections:
         widget: "markdown"
       - name: "layout"
         widget: "hidden"
-        default: "../components/BlogLayout.astro"
+        default: "/src/components/BlogLayout.astro"
 
   - name: "events"
     label: "Events"
@@ -47,7 +47,7 @@ collections:
         widget: "markdown"
       - name: "layout"
         widget: "hidden"
-        default: "../components/BlogLayout.astro"
+        default: "/src/components/BlogLayout.astro"
 
   - name: "contributions"
     label: "Contributions"
@@ -69,5 +69,5 @@ collections:
         widget: "markdown"
       - name: "layout"
         widget: "hidden"
-        default: "../components/BlogLayout.astro"
+        default: "/src/components/BlogLayout.astro"
 
