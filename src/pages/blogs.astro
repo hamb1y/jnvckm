@@ -1,0 +1,25 @@
+---
+import Layout from '../components/Layout.astro';
+
+const postImports = import.meta.glob('./blog/*.md', { eager: true });
+
+const posts = Object.entries(postImports).map(([path, post]) => ({
+  url: path.replace('./blogs', '/blogs').replace('.md', ''),
+  title: post.frontmatter.title,
+  date: post.frontmatter.date,
+  thumbnail: post.frontmatter.thumbnail,
+  content: post.compiledContent(),
+}));
+---
+
+<Layout title="All Blog Posts">
+  <h1>All Blog Posts</h1>
+
+  {posts.map(post => (
+    <article>
+      <h2><a href={post.url}>{post.title}</a></h2>
+      <p><em>{new Date(post.date).toDateString()}</em></p>
+      {post.thumbnail && <img src={post.thumbnail} alt={post.title} style="max-width: 200px;" />}
+    </article>
+  ))}
+</Layout>
