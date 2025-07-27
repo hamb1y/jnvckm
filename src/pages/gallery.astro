@@ -3,7 +3,7 @@ import Layout from '../components/Layout.astro'
 import fs from 'fs';
 import path from 'path';
 
-const imageDir = '/public/images';
+const imageDir = '../../public/images';
 const files = fs.readdirSync(imageDir).filter(file =>
   /\.(jpe?g|png|webp|gif)$/i.test(file)
 );
