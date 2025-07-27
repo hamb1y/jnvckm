@@ -4,26 +4,12 @@ import Button from "./Button.astro"
 ---
 <header class="doCenter">
   <hr>
-    <Button label="☰" for="menu-toggle" class="hamburger" />
+  <Button label="☰" for="menu-toggle" class="hamburger primary" />
+  <button class="hamburger secondary nvisible" aria-label="Toggle navigation menu">&#9776;</button>
   <img src="/images/jnvckm-logo.webp" sub="jnvckm-logo" height="80px" />
   
-  <button class="hamburger" aria-label="Toggle navigation menu">&#9776;</button>
   
-  <nav class="navigation-menu" aria-hidden="true">
-    <ul class="navbar" invisOnPhone="true">
-      <li><a href="/">Home</a></li>
-      <li><a href="/about">About Us</a></li>
-      <li><a href="/blogs">Blogs</a></li>
-      <li><a href="/events">Events</a></li>
-      <li><a href="/contributions">Contributions</a></li>
-      <li><a href="/gallery">Gallery</a></li>
-      <li><a href="/faq">FAQ</a></li>
-      <li><a href="/alumni">Alumni Corner</a></li>
-      <li><a href="/students">Student's Corner</a></li>
-      <li><a href="https://jnvckm.netlify.app/admin/index.html">Admin Login</a></li>
-    </ul>
-  </nav>
-
+  
   <nav class="navigation-menu" aria-hidden="true">
     <ul class="navbar">
       <li><a href="/">Home</a></li>
@@ -133,7 +119,9 @@ import Button from "./Button.astro"
 
   .navbar a:hover,
   .navbar a:focus {
-    color: var(--accent-color);
   }
 }
+  button.hamburger.secondary.nvisible {
+  display: none !important;
+  }
 </style>

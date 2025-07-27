@@ -87,14 +87,13 @@ label {
 
 input[type="text"],
 input[type="number"],
-textarea {
+textarea, .textarea{
   width: 100%;
-  padding: 0.75rem;
-  border: 2px solid var(--adaptive-gray);
-  border-radius: 8px;
+  padding: 1rem;
+
   background-color: var(--primary-color);
   color: var(--text-color);
-  font-size: 1rem;
+  font-size: 2rem;
 }
 
 .radio-group label {
@@ -323,4 +322,23 @@ body:has(#dark:checked) img.icon {
   font-size: 2rem;
   margin-bottom: 0.5rem;
   color: var(--accent-color);
+}
+
+button.hamburger.secondary.nvisible {
+  display: none !important;
+}
+
+p, ul, li, ol {
+  padding-left: 1rem;
+}
+
+img.big {
+  padding: 0;
+  gap: 0;
+  width: 99vw;
+  display: block;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  padding: 1rem;
 }

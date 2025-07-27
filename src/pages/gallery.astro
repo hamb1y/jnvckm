@@ -1,7 +1,53 @@
 ---
-import Layout from "../components/Layout.astro";
+import Layout from '../components/Layout.astro'
+import fs from 'fs';
+import path from 'path';
+
+const imageDir = './public/staticServe/images';
+const files = fs.readdirSync(imageDir).filter(file =>
+  /\.(jpe?g|png|webp|gif)$/i.test(file)
+);
 ---
 
 <Layout>
-    <h1>page</h1>
+  <style>
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 1rem;
+      justify-content: center;
+    }
+
+    .card {
+      backdrop-filter: blur(8px);
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 1rem;
+      overflow: hidden;
+      transition: transform 0.2s ease;
+      max-width: 300px;
+      max-height: 300px;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+    }
+
+    .card img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 1rem;
+    }
+  </style>
+
+  <div class="gallery">
+    {files.map((file, i) => (
+      <div class="card" key={i}>
+        <a href={`/staticServe/images/${file}`} download>
+          <img src={`/staticServe/images/${file}`} alt={file} loading="lazy" />
+        </a>
+      </div>
+    ))}
+  </div>
 </Layout>
