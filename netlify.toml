@@ -3,6 +3,7 @@
   command = "astro build"
 
 [[redirects]]
-  from = "/admin/*"
+  from = "/admin"
   to = "/admin/index.html"
   status = 200
+
