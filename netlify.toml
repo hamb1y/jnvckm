@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /admin/index.html
+Disallow: /admin/config.yml
+
+Sitemap: https://jnvckm.netlify.app/sitemap.xml
