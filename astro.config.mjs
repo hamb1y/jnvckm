@@ -2,10 +2,7 @@ import { defineConfig } from 'astro/config';
 import path from 'node:path';
 
 export default defineConfig({
-  site: "https://jnvckm.netlify.app", // 🔑 Required
-  integrations: [sitemap({
-    exclude: ["/admin/**", "/admin"]
-  })],
+  site: "https://jnvckm.netlify.app",
   vite: {
     resolve: {
       alias: {
