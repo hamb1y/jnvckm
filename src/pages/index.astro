@@ -1,12 +1,15 @@
 ---
+title: "Home"
 import Button from "../components/Button.astro";
 import ThemeSwitcher from "../components/ThemeSwitcher.astro";
 import Layout from "../components/Layout.astro";
+
+const { title } = Astro.props;
 ---
 
-<Layout><div class="textarea">
+<Layout title={title}><div class="textarea">
   <h1 class="centerText">JNVCKM Alumni Association</h1>
-  <img class="big" src="/public/staticServe/images/img4.webp" sub="JNVCKM IMAGE">
+  <img class="big" src="images/img4.webp" alt="JNVCKM IMAGE">
   <p>The official alumni network of Jawahar Navodaya Vidyalaya, Chikkamagaluru. Welcome to your second home—built by and for the alumni of JNVCKM.</p>
 
   <h2>Our Mission</h2>

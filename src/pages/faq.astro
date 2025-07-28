@@ -1,9 +1,13 @@
 ---
+title: "Feedback & Questions"
 import Layout from "../components/Layout.astro";
+
+const { title } = Astro.props;
 ---
 
 
-<Layout>
+<Layout title={title}>
+
   <section class="faq-section">
     <h1>Frequently Asked Questions</h1>
     <p class="sub">Still wondering how things work? Here are answers to some common questions.</p>

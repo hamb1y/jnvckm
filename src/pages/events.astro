@@ -1,4 +1,5 @@
 ---
+title: "Events"
 import Layout from '../components/Layout.astro';
 import BlogGrid from '../components/BlogGrid.astro';
 
@@ -11,9 +12,11 @@ const posts = Object.entries(postImports).map(([path, post]) => ({
   thumbnail: post.frontmatter.thumbnail,
   content: post.compiledContent(),
 }));
+
+const { title } = Astro.props;
 ---
 
-<Layout title="All Events">
+<Layout title={title}>
   <h1><ul><b>📅 All Events:</b></ul></h1>
   <BlogGrid posts={posts} />
 </Layout>

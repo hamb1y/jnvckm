@@ -1,7 +1,11 @@
 ---
+title: "Students Corner"
 import Layout from "../components/Layout.astro";
+
+const { title } = Astro.props;
 ---
 
-<Layout>
+<Layout title={title}>
+
     <h1>page</h1>
 </Layout>

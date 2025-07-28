@@ -6,28 +6,6 @@ media_folder: "/public/images"
 public_folder: "/images"
 
 collections:
-  - name: "blogs"
-    label: "Blogs"
-    folder: "src/pages/blogs"
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    fields:
-      - label: "Title"
-        name: "title"
-        widget: "string"
-      - label: "Publish Date"
-        name: "date"
-        widget: "datetime"
-      - label: "Featured Image"
-        name: "thumbnail"
-        widget: "image"
-      - label: "Body"
-        name: "body"
-        widget: "markdown"
-      - name: "layout"
-        widget: "hidden"
-        default: "/src/components/BlogLayout.astro"
-
   - name: "events"
     label: "Events"
     folder: "src/pages/events"
