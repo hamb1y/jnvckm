@@ -1,43 +1,91 @@
-# Astro Starter Kit: Minimal
+# DynaTemp
 
-```sh
-pnpm create astro@latest -- --template minimal
+DynaTemp is a dynamic website template built with [Astro.js](https://astro.build/), [Decap CMS](https://decapcms.org/) (formerly Netlify CMS), and [Netlify Identity](https://www.netlify.com/products/identity/). It's designed to be a flexible and easily customizable foundation for building content-driven websites.
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+*   [Node.js](https://nodejs.org/) (v18 or higher)
+*   [pnpm](https://pnpm.io/)
+
+### Installation
+
+1.  Clone the repository:
+    ```bash
+    git clone <repository-url>
+    ```
+2.  Navigate to the project directory:
+    ```bash
+    cd <project-directory>
+    ```
+3.  Install the dependencies:
+    ```bash
+    pnpm install
+    ```
+
+### Development
+
+To start the local development server, run the following command:
+
+```bash
+pnpm dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+This will start a development server at `http://localhost:4321`.
 
-## 🚀 Project Structure
+### Building for Production
 
-Inside of your Astro project, you'll see the following folders and files:
+To build the website for production, run the following command:
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```bash
+pnpm build
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+This will create a `dist` directory with the production-ready files.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Decap CMS
 
-Any static assets, like images, can be placed in the `public/` directory.
+Decap CMS is used to manage the content of the website. You can access the CMS by navigating to `/admin` on your live site or local development server.
 
-## 🧞 Commands
+### Configuration
 
-All commands are run from the root of the project, from a terminal:
+The Decap CMS configuration is located in the `public/admin/config.yml` file. This file defines the content collections, fields, and other settings for the CMS.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+The following collections are pre-configured:
 
-## 👀 Want to learn more?
+*   **Events:** For creating and managing events.
+*   **Contributions:** For creating and managing contributions.
+*   **Reunions:** For creating and managing reunions.
+*   **Gallery:** For creating and managing gallery items.
+*   **Pages:** For creating and managing static pages.
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+You can customize these collections or add new ones to fit your needs.
+
+## Netlify Identity
+
+Netlify Identity is used for authentication with Decap CMS. When you deploy the website to Netlify, you can enable Identity to manage users who can access the CMS.
+
+## Deployment
+
+This project is configured for deployment to [Netlify](https://www.netlify.com/). When you deploy to Netlify, make sure to do the following:
+
+1.  **Enable Identity:** In your Netlify site settings, go to the "Identity" tab and enable it.
+2.  **Enable Git Gateway:** Under the Identity settings, enable Git Gateway to allow Decap CMS to interact with your Git repository.
+
+## Customization
+
+### Content Collections
+
+To customize the content collections, edit the `public/admin/config.yml` file. You can add, remove, or modify the collections and their fields.
+
+### Website Pages and Components
+
+The website's pages and components are located in the `src` directory.
+
+*   **Pages:** The `src/pages` directory contains the Astro pages for the website.
+*   **Components:** The `src/components` directory contains reusable Astro components.
+
+You can modify these files to change the layout, styling, and functionality of the website.
