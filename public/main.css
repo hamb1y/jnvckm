@@ -342,3 +342,25 @@ img.big {
 h1,h2,h3,h4,h5,h6 {
   padding: 1rem;
 }
+
+.logo-light {
+  display: block;
+}
+.logo-dark {
+  display: none;
+}
+
+/* When dark mode is active: swap images */
+body:has(#dark:checked) .logo-light {
+  display: none;
+}
+body:has(#dark:checked) .logo-dark {
+  display: block;
+}
+
+body:has(#light:checked) .logo-dark {
+  display: none;
+}
+body:has(#light:checked) .logo-light {
+  display: block;
+}
