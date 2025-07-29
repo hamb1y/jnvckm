@@ -1,7 +1,7 @@
 ---
 title: Workshop on Creative Writing by Mr. H.S. Raviprakash
 date: 1671249600000
-thumbnail: 
+thumbnail: /images/whatsapp_image_2022-12-17_at_8.04.45_am.webp
 layout: /src/components/BlogLayout.astro
 ---
 
