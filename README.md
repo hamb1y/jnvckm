@@ -65,6 +65,7 @@ The site will be available at `http://localhost:4321`.
 
 This project follows a modular folder layout separating setup templates, CMS, static assets, and dynamic components.  
 Includes Astro `.astro` components, Markdown content folders, CMS config, and public assets.
+```
 jnvckm
 ├── public/                  # Static files served as-is
 │   ├── admin/               # Decap CMS setup
@@ -103,6 +104,7 @@ jnvckm
 ├── pnpm-workspace.yaml
 ├── tsconfig.json
 └── README.md
+```
 ---
 
 ## 📦 Deployment
