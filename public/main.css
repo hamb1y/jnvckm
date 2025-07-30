@@ -26,14 +26,6 @@
 }
 
 /* Dark Theme */
-body:has(#dark:checked) {
-  --primary-color: #111312;
-  --background-color: #111312;
-  --secondary-color: #f7f9f8;
-  --adaptive-gray: #c1c1c1;
-  --accent-color: #5aaf6e;
-  --text-color: #f7f9f8;
-}
 
 /* ==========================================================================
    3. BASE STYLES
@@ -221,9 +213,6 @@ header hr {
 }
 
 /* --- Theme Switcher Icons --- */
-body:has(#dark:checked) img.icon {
-  filter: invert(100%);
-}
 
 /* --- Feedback Section --- */
 .feedback-section {
@@ -351,16 +340,3 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 /* When dark mode is active: swap images */
-body:has(#dark:checked) .logo-light {
-  display: none;
-}
-body:has(#dark:checked) .logo-dark {
-  display: block;
-}
-
-body:has(#light:checked) .logo-dark {
-  display: none;
-}
-body:has(#light:checked) .logo-light {
-  display: block;
-}
