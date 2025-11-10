@@ -1,6 +1,12 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { getEvent } from "../../lib/content";
+import { getEvent, getEvents } from "../../lib/content";
+
+export function getStaticPaths() {
+  return getEvents().map((event) => ({
+    params: { slug: event.slug },
+  }));
+}
 
 const { slug } = Astro.params;
 const event = slug ? getEvent(slug) : undefined;
