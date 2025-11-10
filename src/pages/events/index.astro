@@ -1,39 +1,18 @@
 ---
-import type { MarkdownInstance } from "astro";
-
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CardEvent from "../../components/CardEvent.astro";
 import SectionHeading from "../../components/SectionHeading.astro";
+import { getEvents } from "../../lib/content";
 
-type EventFrontmatter = {
-  title: string;
-  date: string;
-  location?: string;
-  summary: string;
-  tags?: string[];
-  featured?: boolean;
-};
-
-const modules = import.meta.glob<MarkdownInstance<EventFrontmatter>>(
-  "../../../content/events/*.md",
-  { eager: true }
-);
-
-const events = Object.entries(modules)
-  .map(([path, entry]) => ({
-    slug: path.split("/").pop()?.replace(".md", "") ?? "",
-    ...entry.frontmatter,
-  }))
-  .filter((event) => event.title && event.date)
-  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+const events = getEvents();
 ---
 
-<BaseLayout title="Events — Jawahar Navodaya Vidyalaya Chikkamagluru">
+<BaseLayout title="Events | JNVCKM" description="Gatherings, outreach visits, and drives hosted by the JNVCKM community.">
   <section class="section page-shell">
     <SectionHeading
       eyebrow="Events"
-      title="Moments that bring the Navodaya family together"
-      description="Reunions, student drives, mentoring circles, and outreach visits curated by the alumni network."
+      title="All events and outreach"
+      description="Browse every alumni get‑together, campus visit, and student support drive."
     />
     {events.length > 0 ? (
       <div class="cards-grid">
@@ -42,7 +21,7 @@ const events = Object.entries(modules)
         ))}
       </div>
     ) : (
-      <p>No events yet. Publish one from Decap CMS to get started.</p>
+      <p>No events are published yet. Use Decap CMS to add the first story.</p>
     )}
   </section>
 </BaseLayout>

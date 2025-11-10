@@ -1,74 +1,42 @@
 ---
-import type { MarkdownInstance } from "astro";
-
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getContribution } from "../../lib/content";
 
-type ContributionFrontmatter = {
-  title: string;
-  date: string;
-  type?: string;
-  initiated_by?: string;
-  summary?: string;
-  tags?: string[];
-};
+const { slug } = Astro.params;
+const contribution = slug ? getContribution(slug) : undefined;
 
-const modules = import.meta.glob<MarkdownInstance<ContributionFrontmatter>>(
-  "../../../content/contributions/*.md",
-  { eager: true }
-);
-
-const slug = Astro.params.slug ?? "";
-const entry = Object.entries(modules).find(([path]) => path.endsWith(`${slug}.md`))?.[1];
-
-if (!entry) {
-  throw new Error(`Contribution not found for slug: ${slug}`);
+if (!contribution) {
+  return Astro.redirect("/404");
 }
 
-const { title, date, type, initiated_by, summary, tags = [] } = entry.frontmatter;
-const Content = entry.default;
 const formatter = new Intl.DateTimeFormat("en-IN", { dateStyle: "long" });
+const formattedDate = formatter.format(new Date(contribution.date));
+const { Content } = contribution;
+const description = contribution.summary || `Contribution update from ${contribution.title}`;
 ---
 
-<BaseLayout title={`${title} — JNVCKM Contribution`} description={summary ?? "Contribution highlight from JNVCKM alumni"}>
-  <article class="section page-shell">
-    <p>
-      <a href="/contributions">← Back to contributions</a>
-    </p>
-    <p class="eyebrow">Contribution</p>
-    <h1>{title}</h1>
-    <p>
-      <strong>{formatter.format(new Date(date))}</strong>
-      {type && <> · {type}</>}
-    </p>
-    {initiated_by && <p>Initiated by: {initiated_by}</p>}
-    {summary && <p>{summary}</p>}
-    {tags.length > 0 && (
-      <div class="tags">
-        {tags.map((tag) => (
+<BaseLayout title={`${contribution.title} | JNVCKM Contributions`} description={description}>
+  <article class="article-shell">
+    <a class="back-link" href="/contributions">← All contributions</a>
+    <div class="article-meta">
+      <p class="eyebrow">{formattedDate}</p>
+      {contribution.type && <p class="meta">Type: {contribution.type}</p>}
+      {contribution.initiated_by && <p class="meta">Initiated by: {contribution.initiated_by}</p>}
+    </div>
+    {contribution.tags && contribution.tags.length > 0 && (
+      <div class="tag-list">
+        {contribution.tags.map((tag) => (
           <span>{tag}</span>
         ))}
       </div>
     )}
-    <div class="prose">
+    {contribution.thumbnail && (
+      <div class="article-figure">
+        <img src={contribution.thumbnail} alt={contribution.title} loading="lazy" decoding="async" />
+      </div>
+    )}
+    <div class="article-content">
       <Content />
     </div>
   </article>
 </BaseLayout>
-
-<style>
-  .prose :global(p) {
-    margin-bottom: 1rem;
-  }
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin: 1rem 0;
-  }
-  .tags span {
-    border: 1px solid var(--color-border-soft);
-    border-radius: 999px;
-    padding: 0.2rem 0.75rem;
-    background: rgba(26, 117, 159, 0.08);
-  }
-</style>

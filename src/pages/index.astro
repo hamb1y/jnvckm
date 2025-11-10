@@ -1,5 +1,4 @@
 ---
-import type { MarkdownInstance } from "astro";
 import fs from "node:fs/promises";
 
 import BaseLayout from "../layouts/BaseLayout.astro";
@@ -10,48 +9,10 @@ import FAQAccordion from "../components/FAQAccordion.astro";
 import HeroCarousel from "../components/HeroCarousel.astro";
 import HeroOverlayCard from "../components/HeroOverlayCard.astro";
 import SectionHeading from "../components/SectionHeading.astro";
+import { getContributions, getEvents } from "../lib/content";
 
-type EventFrontmatter = {
-  title: string;
-  date: string;
-  location?: string;
-  summary: string;
-  tags?: string[];
-  featured?: boolean;
-};
-
-type ContributionFrontmatter = {
-  title: string;
-  date: string;
-  type?: string;
-  initiated_by?: string;
-  summary: string;
-  tags?: string[];
-};
-
-const eventModules = import.meta.glob<MarkdownInstance<EventFrontmatter>>("../../content/events/*.md", {
-  eager: true,
-});
-const contributionModules = import.meta.glob<MarkdownInstance<ContributionFrontmatter>>(
-  "../../content/contributions/*.md",
-  { eager: true }
-);
-
-const events = Object.entries(eventModules)
-  .map(([path, entry]) => ({
-    slug: path.split("/").pop()?.replace(".md", "") ?? "",
-    ...entry.frontmatter,
-  }))
-  .filter((event) => event.title && event.date)
-  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-
-const contributions = Object.entries(contributionModules)
-  .map(([path, entry]) => ({
-    slug: path.split("/").pop()?.replace(".md", "") ?? "",
-    ...entry.frontmatter,
-  }))
-  .filter((item) => item.title && item.date)
-  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+const events = getEvents();
+const contributions = getContributions();
 
 const heroDir = new URL("../../public/hero", import.meta.url);
 const heroFiles = await fs.readdir(heroDir).catch(() => []);

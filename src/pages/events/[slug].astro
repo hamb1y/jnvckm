@@ -1,72 +1,41 @@
 ---
-import type { MarkdownInstance } from "astro";
-
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getEvent } from "../../lib/content";
 
-type EventFrontmatter = {
-  title: string;
-  date: string;
-  location?: string;
-  summary?: string;
-  tags?: string[];
-};
+const { slug } = Astro.params;
+const event = slug ? getEvent(slug) : undefined;
 
-const modules = import.meta.glob<MarkdownInstance<EventFrontmatter>>(
-  "../../../content/events/*.md",
-  { eager: true }
-);
-
-const slug = Astro.params.slug ?? "";
-const entry = Object.entries(modules).find(([path]) => path.endsWith(`${slug}.md`))?.[1];
-
-if (!entry) {
-  throw new Error(`Event not found for slug: ${slug}`);
+if (!event) {
+  return Astro.redirect("/404");
 }
 
-const { title, date, location, summary, tags = [] } = entry.frontmatter;
-const Content = entry.default;
 const formatter = new Intl.DateTimeFormat("en-IN", { dateStyle: "long" });
+const formattedDate = formatter.format(new Date(event.date));
+const { Content } = event;
+const description = event.summary || `Updates from ${event.title}`;
 ---
 
-<BaseLayout title={`${title} — JNVCKM Events`} description={summary ?? "JNVCKM event update"}>
-  <article class="section page-shell">
-    <p>
-      <a href="/events">← Back to events</a>
-    </p>
-    <p class="eyebrow">Event</p>
-    <h1>{title}</h1>
-    <p>
-      <strong>{formatter.format(new Date(date))}</strong>
-      {location && <> · {location}</>}
-    </p>
-    {summary && <p>{summary}</p>}
-    {tags.length > 0 && (
-      <div class="tags">
-        {tags.map((tag) => (
+<BaseLayout title={`${event.title} | JNVCKM Events`} description={description}>
+  <article class="article-shell">
+    <a class="back-link" href="/events">← All events</a>
+    <div class="article-meta">
+      <p class="eyebrow">{formattedDate}</p>
+      {event.location && <p class="meta">{event.location}</p>}
+    </div>
+    {event.tags && event.tags.length > 0 && (
+      <div class="tag-list">
+        {event.tags.map((tag) => (
           <span>{tag}</span>
         ))}
       </div>
     )}
-    <div class="prose">
+    {event.thumbnail && (
+      <div class="article-figure">
+        <img src={event.thumbnail} alt={event.title} loading="lazy" decoding="async" />
+      </div>
+    )}
+    <div class="article-content">
       <Content />
     </div>
   </article>
 </BaseLayout>
-
-<style>
-  .prose :global(p) {
-    margin-bottom: 1rem;
-  }
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin: 1rem 0;
-  }
-  .tags span {
-    border: 1px solid var(--color-border-soft);
-    border-radius: 999px;
-    padding: 0.2rem 0.75rem;
-    background: rgba(26, 117, 159, 0.08);
-  }
-</style>
