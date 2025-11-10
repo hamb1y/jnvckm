@@ -1,0 +1,30 @@
+---
+interface Props {
+  title?: string;
+  tagline?: string;
+  primaryHref?: string;
+  primaryLabel?: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
+}
+
+const {
+  title = "Jawahar Navodaya Vidyalaya Chikkamagluru (JNVCKM)",
+  tagline = "Giving back to our Alma Mater",
+  primaryHref = "/events",
+  primaryLabel = "Upcoming Events",
+  secondaryHref = "/#contact",
+  secondaryLabel = "Contact Team",
+} = Astro.props;
+---
+
+<div class="hero-overlay-card">
+  <img class="logo" src="/assets/logo.webp" alt="JNVCKM logo" width="72" height="72" loading="lazy" />
+  <p class="eyebrow">Alumni & Community</p>
+  <h1>{title}</h1>
+  <p>{tagline}</p>
+  <div class="actions">
+    <a class="btn btn-primary" href={primaryHref}>{primaryLabel}</a>
+    <a class="btn btn-secondary" href={secondaryHref}>{secondaryLabel}</a>
+  </div>
+</div>

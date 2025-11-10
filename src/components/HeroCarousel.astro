@@ -1,0 +1,132 @@
+---
+interface Slide {
+  src: string;
+  alt?: string;
+}
+
+interface Props {
+  slides?: Slide[];
+}
+
+const defaults: Slide[] = [
+  { src: "/hero/hero-1.jpg", alt: "JNVCKM campus morning light" },
+  { src: "/hero/hero-2.jpg", alt: "Students pathways at JNVCKM" },
+  { src: "/hero/hero-3.jpg", alt: "Alumni community gathering" },
+];
+
+const { slides = [] } = Astro.props;
+const safeSlides = slides.length ? slides : defaults;
+const carouselId = `hero-carousel-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<section
+  class="hero-carousel"
+  data-carousel-id={carouselId}
+  aria-roledescription="carousel"
+  tabindex="0"
+>
+  <div class="track" style={`--slide-count: ${safeSlides.length}`}>
+    {safeSlides.map((slide, index) => (
+      <figure class={`slide ${index === 0 ? "active" : ""}`}>
+        <img src={slide.src} alt={slide.alt ?? "JNVCKM highlight"} loading={index === 0 ? "eager" : "lazy"} />
+      </figure>
+    ))}
+  </div>
+
+  <button class="control prev" type="button" aria-label="Previous slide">
+    ‹
+  </button>
+  <button class="control next" type="button" aria-label="Next slide">
+    ›
+  </button>
+
+  <div class="dots" role="tablist" aria-label="Hero slides">
+    {safeSlides.map((_, index) => (
+      <button
+        class={`dot ${index === 0 ? "active" : ""}`}
+        type="button"
+        data-index={index}
+        aria-label={`Go to slide ${index + 1}`}
+        aria-selected={index === 0}
+        role="tab"
+      />
+    ))}
+  </div>
+
+  <script>
+    (() => {
+      const root = document.currentScript?.parentElement;
+      if (!root) {
+        return;
+      }
+
+      const slides = Array.from(root.querySelectorAll(".slide"));
+      const dots = Array.from(root.querySelectorAll(".dot"));
+      const prevButton = root.querySelector(".control.prev");
+      const nextButton = root.querySelector(".control.next");
+
+      if (slides.length === 0) {
+        return;
+      }
+
+      let index = 0;
+      let timer = null;
+
+      const setActive = (nextIndex) => {
+        index = (nextIndex + slides.length) % slides.length;
+        slides.forEach((slide, idx) => slide.classList.toggle("active", idx === index));
+        dots.forEach((dot, idx) => {
+          dot.classList.toggle("active", idx === index);
+          dot.setAttribute("aria-selected", String(idx === index));
+        });
+      };
+
+      const startAuto = () => {
+        stopAuto();
+        timer = window.setInterval(() => setActive(index + 1), 6000);
+      };
+
+      const stopAuto = () => {
+        if (timer) {
+          window.clearInterval(timer);
+          timer = null;
+        }
+      };
+
+      prevButton?.addEventListener("click", () => {
+        setActive(index - 1);
+        startAuto();
+      });
+
+      nextButton?.addEventListener("click", () => {
+        setActive(index + 1);
+        startAuto();
+      });
+
+      dots.forEach((dot) => {
+        dot.addEventListener("click", () => {
+          const target = Number(dot.dataset.index ?? "0");
+          setActive(target);
+          startAuto();
+        });
+      });
+
+      root.addEventListener("mouseenter", stopAuto);
+      root.addEventListener("mouseleave", startAuto);
+      root.addEventListener("focusin", stopAuto);
+      root.addEventListener("focusout", startAuto);
+      root.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft") {
+          setActive(index - 1);
+          startAuto();
+        }
+        if (event.key === "ArrowRight") {
+          setActive(index + 1);
+          startAuto();
+        }
+      });
+
+      startAuto();
+    })();
+  </script>
+</section>

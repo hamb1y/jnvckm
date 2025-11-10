@@ -1,0 +1,48 @@
+---
+import type { MarkdownInstance } from "astro";
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CardContribution from "../../components/CardContribution.astro";
+import SectionHeading from "../../components/SectionHeading.astro";
+
+type ContributionFrontmatter = {
+  title: string;
+  date: string;
+  type?: string;
+  initiated_by?: string;
+  summary: string;
+  tags?: string[];
+};
+
+const modules = import.meta.glob<MarkdownInstance<ContributionFrontmatter>>(
+  "../../../content/contributions/*.md",
+  { eager: true }
+);
+
+const contributions = Object.entries(modules)
+  .map(([path, entry]) => ({
+    slug: path.split("/").pop()?.replace(".md", "") ?? "",
+    ...entry.frontmatter,
+  }))
+  .filter((entry) => entry.title && entry.date)
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+---
+
+<BaseLayout title="Contributions — Jawahar Navodaya Vidyalaya Chikkamagluru">
+  <section class="section page-shell">
+    <SectionHeading
+      eyebrow="Contributions"
+      title="Collective efforts that uplift the campus"
+      description="Transparent log of scholarships, infrastructure projects, and outreach drives initiated by JNVCKM alumni."
+    />
+    {contributions.length ? (
+      <div class="cards-grid">
+        {contributions.map((item) => (
+          <CardContribution {...item} />
+        ))}
+      </div>
+    ) : (
+      <p>No contributions recorded yet.</p>
+    )}
+  </section>
+</BaseLayout>

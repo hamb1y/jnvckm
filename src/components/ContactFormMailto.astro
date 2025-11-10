@@ -1,0 +1,54 @@
+---
+const formId = `contact-form-${Math.random().toString(36).slice(2, 8)}`;
+const email = "jnvckm@example.com";
+const subject = "Contact from JNVCKM Site";
+---
+
+<div class="contact-card">
+  <form id={formId}>
+    <div>
+      <label for={`${formId}-name`}>Name</label>
+      <input id={`${formId}-name`} name="name" type="text" required autocomplete="name" />
+    </div>
+    <div>
+      <label for={`${formId}-email`}>Email</label>
+      <input id={`${formId}-email`} name="email" type="email" required autocomplete="email" />
+    </div>
+    <div>
+      <label for={`${formId}-relation`}>Relation to JNVCKM</label>
+      <select id={`${formId}-relation`} name="relation" required>
+        <option value="Student">Current Student</option>
+        <option value="Alumnus">Alumnus / Alumna</option>
+        <option value="Parent">Parent / Guardian</option>
+        <option value="Other">Well-wisher / Other</option>
+      </select>
+    </div>
+    <div>
+      <label for={`${formId}-message`}>Message</label>
+      <textarea id={`${formId}-message`} name="message" rows="4" required></textarea>
+    </div>
+    <button class="btn btn-primary" type="submit">Send email</button>
+    <small>Submitting opens your email app.</small>
+  </form>
+</div>
+
+<script is:inline>
+  (() => {
+    const targetEmail = ${JSON.stringify(email)};
+    const subjectText = ${JSON.stringify(subject)};
+    const form = document.getElementById("${formId}");
+    if (!form) return;
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const name = encodeURIComponent(data.get("name") || "");
+      const emailInput = encodeURIComponent(data.get("email") || "");
+      const relation = encodeURIComponent(data.get("relation") || "");
+      const message = encodeURIComponent(data.get("message") || "");
+      const body = `Name: ${name}%0AEmail: ${emailInput}%0ARelation: ${relation}%0A%0AMessage:%0A${message}`;
+      window.location.href = `mailto:${targetEmail}?subject=${encodeURIComponent(
+        subjectText
+      )}&body=${body}`;
+    });
+  })();
+</script>

@@ -1,0 +1,47 @@
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionHeading from "../../components/SectionHeading.astro";
+
+export const prerender = false;
+
+const auth = Astro.locals?.auth?.();
+const signedIn = Boolean(auth?.userId);
+const signInUrl = import.meta.env.PUBLIC_CLERK_SIGN_IN_URL || "/sign-in";
+---
+
+<BaseLayout title="Admin — Decap CMS">
+  {signedIn ? (
+    <section class="section page-shell">
+      <SectionHeading
+        eyebrow="Admin"
+        title="Decap CMS"
+        description="Manage events, contributions, and FAQs directly from Git-backed Decap."
+      />
+      <div class="cms-frame">
+        <iframe src="/admin/index.html" title="Decap CMS" loading="lazy"></iframe>
+      </div>
+    </section>
+  ) : (
+    <section class="section page-shell" style="text-align:center;">
+      <p class="eyebrow">Restricted</p>
+      <h1>Sign in required to access admin.</h1>
+      <p>Use your Clerk account to continue.</p>
+      <a class="btn btn-primary" href={signInUrl}>Go to Clerk sign in</a>
+    </section>
+  )}
+</BaseLayout>
+
+<style>
+  .cms-frame {
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+    min-height: 80vh;
+  }
+  .cms-frame iframe {
+    width: 100%;
+    min-height: 80vh;
+    border: none;
+    background: #fff;
+  }
+</style>

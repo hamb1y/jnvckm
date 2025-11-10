@@ -1,0 +1,48 @@
+---
+import type { MarkdownInstance } from "astro";
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CardEvent from "../../components/CardEvent.astro";
+import SectionHeading from "../../components/SectionHeading.astro";
+
+type EventFrontmatter = {
+  title: string;
+  date: string;
+  location?: string;
+  summary: string;
+  tags?: string[];
+  featured?: boolean;
+};
+
+const modules = import.meta.glob<MarkdownInstance<EventFrontmatter>>(
+  "../../../content/events/*.md",
+  { eager: true }
+);
+
+const events = Object.entries(modules)
+  .map(([path, entry]) => ({
+    slug: path.split("/").pop()?.replace(".md", "") ?? "",
+    ...entry.frontmatter,
+  }))
+  .filter((event) => event.title && event.date)
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+---
+
+<BaseLayout title="Events — Jawahar Navodaya Vidyalaya Chikkamagluru">
+  <section class="section page-shell">
+    <SectionHeading
+      eyebrow="Events"
+      title="Moments that bring the Navodaya family together"
+      description="Reunions, student drives, mentoring circles, and outreach visits curated by the alumni network."
+    />
+    {events.length > 0 ? (
+      <div class="cards-grid">
+        {events.map((event) => (
+          <CardEvent {...event} />
+        ))}
+      </div>
+    ) : (
+      <p>No events yet. Publish one from Decap CMS to get started.</p>
+    )}
+  </section>
+</BaseLayout>

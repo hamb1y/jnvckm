@@ -1,0 +1,48 @@
+---
+import type { MarkdownInstance } from "astro";
+import { marked } from "marked";
+
+type FaqFile = MarkdownInstance<{
+  question?: string;
+  answer?: string;
+  order?: number;
+}>;
+
+const modules = import.meta.glob<FaqFile>("../../content/faqs/*.md", { eager: true });
+
+const faqs = await Promise.all(
+  Object.entries(modules).map(async ([path, entry]) => {
+    const slug = path.split("/").pop()?.replace(".md", "") ?? path;
+    const question = entry.frontmatter.question ?? entry.frontmatter.title ?? "FAQ";
+    const order = entry.frontmatter.order ?? 0;
+    const answerField = entry.frontmatter.answer ?? "";
+    const answerHtml = answerField
+      ? marked.parse(answerField)
+      : await entry.compiledContent();
+
+    return {
+      slug,
+      question,
+      order,
+      answerHtml,
+    };
+  })
+);
+
+faqs.sort((a, b) => {
+  if (a.order === b.order) return a.question.localeCompare(b.question);
+  return a.order - b.order;
+});
+---
+
+<div class="faq-list" id="faq">
+  {faqs.map((faq, index) => (
+    <details class="faq-item" open={index === 0}>
+      <summary>
+        <span>{faq.question}</span>
+        <span aria-hidden="true">+</span>
+      </summary>
+      <div class="answer" set:html={faq.answerHtml}></div>
+    </details>
+  ))}
+</div>

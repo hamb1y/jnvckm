@@ -1,0 +1,31 @@
+---
+const currentPath = Astro.url.pathname;
+
+const navItems = [
+  { label: "Home", href: "/", match: ["/"] },
+  { label: "About", href: "/#about" },
+  { label: "FAQ", href: "/#faq" },
+  { label: "Events", href: "/events", match: ["/events"] },
+  { label: "Contributions", href: "/contributions", match: ["/contributions"] },
+  { label: "Contact", href: "/#contact" },
+];
+
+const isActive = (matches?: string[]) =>
+  matches?.some((match) => currentPath === match || currentPath.startsWith(`${match}/`));
+---
+
+<header class="site-header">
+  <div class="page-shell inner">
+    <a class="brand" href="/">
+      <img src="/assets/logo.webp" alt="JNVCKM crest" width="48" height="48" loading="lazy" />
+      <span>JNVCKM</span>
+    </a>
+    <nav aria-label="Site">
+      {navItems.map((item) => (
+        <a href={item.href} aria-current={isActive(item.match) ? "page" : undefined}>
+          {item.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>

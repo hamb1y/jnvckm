@@ -1,0 +1,51 @@
+---
+interface ContributionProps {
+  title: string;
+  date: string;
+  summary: string;
+  slug: string;
+  type?: string;
+  initiated_by?: string;
+  tags?: string[];
+}
+
+const formatter = new Intl.DateTimeFormat("en-IN", { dateStyle: "medium" });
+const { title, date, summary, slug, type, initiated_by, tags = [] } = Astro.props as ContributionProps;
+---
+
+<article class="card contribution-card">
+  <p class="eyebrow">{formatter.format(new Date(date))}</p>
+  <h3>
+    <a href={`/contributions/${slug}`}>{title}</a>
+  </h3>
+  {type && <p class="meta">Type: {type}</p>}
+  {initiated_by && <p class="meta">Initiated by: {initiated_by}</p>}
+  <p>{summary}</p>
+  {tags.length > 0 && (
+    <div class="tags">
+      {tags.map((tag) => (
+        <span>{tag}</span>
+      ))}
+    </div>
+  )}
+</article>
+
+<style>
+  .contribution-card .meta {
+    color: rgba(4, 15, 20, 0.7);
+    font-weight: 600;
+  }
+  .contribution-card .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.75rem;
+  }
+  .contribution-card .tags span {
+    border: 1px solid var(--color-border-soft);
+    border-radius: 999px;
+    padding: 0.15rem 0.65rem;
+    font-size: 0.85rem;
+    background: rgba(26, 117, 159, 0.08);
+  }
+</style>
