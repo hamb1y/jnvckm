@@ -33,7 +33,7 @@ const subject = "Contact from JNVCKM Site";
 </div>
 
 <script is:inline>
-  (() => {
+  {`(() => {
     const targetEmail = ${JSON.stringify(email)};
     const subjectText = ${JSON.stringify(subject)};
     const form = document.getElementById("${formId}");
@@ -45,10 +45,8 @@ const subject = "Contact from JNVCKM Site";
       const emailInput = encodeURIComponent(data.get("email") || "");
       const relation = encodeURIComponent(data.get("relation") || "");
       const message = encodeURIComponent(data.get("message") || "");
-      const body = `Name: ${name}%0AEmail: ${emailInput}%0ARelation: ${relation}%0A%0AMessage:%0A${message}`;
-      window.location.href = `mailto:${targetEmail}?subject=${encodeURIComponent(
-        subjectText
-      )}&body=${body}`;
+      const body = \`Name: \${name}%0AEmail: \${emailInput}%0ARelation: \${relation}%0A%0AMessage:%0A\${message}\`;
+      window.location.href = \`mailto:\${targetEmail}?subject=\${encodeURIComponent(subjectText)}&body=\${body}\`;
     });
-  })();
+  })();`}
 </script>

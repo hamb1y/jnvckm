@@ -12,15 +12,22 @@ const navItems = [
 
 const isActive = (matches?: string[]) =>
   matches?.some((match) => currentPath === match || currentPath.startsWith(`${match}/`));
+
+const navId = `primary-nav-${Math.random().toString(36).slice(2, 8)}`;
 ---
 
-<header class="site-header">
+<header class="site-header" data-nav-open="false">
   <div class="page-shell inner">
     <a class="brand" href="/">
       <img src="/assets/logo.webp" alt="JNVCKM crest" width="48" height="48" loading="lazy" />
       <span>JNVCKM</span>
     </a>
-    <nav aria-label="Site">
+    <button class="nav-toggle" type="button" aria-controls={navId} aria-expanded="false" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav id={navId} aria-label="Site" data-open="false">
       {navItems.map((item) => (
         <a href={item.href} aria-current={isActive(item.match) ? "page" : undefined}>
           {item.label}
@@ -28,4 +35,33 @@ const isActive = (matches?: string[]) =>
       ))}
     </nav>
   </div>
+  <script is:inline>
+    (() => {
+      const header = document.currentScript?.closest("header");
+      const toggle = header?.querySelector(".nav-toggle");
+      const nav = header?.querySelector("nav");
+      if (!header || !toggle || !nav) return;
+
+      const setState = (open) => {
+        header.dataset.navOpen = String(open);
+        nav.dataset.open = String(open);
+        toggle.setAttribute("aria-expanded", String(open));
+      };
+
+      toggle.addEventListener("click", () => {
+        const next = nav.dataset.open !== "true";
+        setState(next);
+      });
+
+      nav.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => setState(false));
+      });
+
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 768) {
+          setState(false);
+        }
+      });
+    })();
+  </script>
 </header>
