@@ -1,15 +1,13 @@
 ---
 const currentPath = Astro.url.pathname;
 
-const navItems = [
-  { label: "Home", href: "/", match: ["/"] },
-  { label: "About", href: "/#about" },
-  { label: "FAQ", href: "/#faq" },
-  { label: "Events", href: "/events", match: ["/events"] },
-  { label: "Contributions", href: "/contributions", match: ["/contributions"] },
-  { label: "Contact", href: "/#contact" },
-  { label: "Admin", href: "/admin"},
-];
+import { getSiteSettings } from "../lib/content";
+
+const { navigation, logo, logo_alt } = getSiteSettings();
+const navItems = navigation.map((item) => ({
+  ...item,
+  match: item.href.startsWith("/#") ? undefined : [item.href],
+}));
 
 const isActive = (matches?: string[]) =>
   matches?.some((match) => currentPath === match || currentPath.startsWith(`${match}/`));
@@ -20,7 +18,7 @@ const navId = `primary-nav-${Math.random().toString(36).slice(2, 8)}`;
 <header class="site-header" data-nav-open="false">
   <div class="page-shell inner">
     <a class="brand" href="/">
-      <img src="/assets/logo.webp" alt="JNVCKM crest" width="48" height="48" loading="lazy" />
+      <img src={logo} alt={logo_alt} width="48" height="48" />
       <span>JNVCKM</span>
     </a>
     <button class="nav-toggle" type="button" aria-controls={navId} aria-expanded="false" aria-label="Toggle navigation">

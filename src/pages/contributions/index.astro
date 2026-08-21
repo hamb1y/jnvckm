@@ -2,20 +2,21 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CardContribution from "../../components/CardContribution.astro";
 import SectionHeading from "../../components/SectionHeading.astro";
-import { getContributions } from "../../lib/content";
+import { getContributions, getSiteSettings } from "../../lib/content";
 
 const contributions = getContributions();
+const copy = getSiteSettings().pages.contributions;
 ---
 
 <BaseLayout
-  title="Contributions | JNVCKM"
-  description="Scholarships, infrastructure upgrades, and mentoring programs led by alumni batches."
+  title={`${copy.title} | JNVCKM`}
+  description={copy.description}
 >
   <section class="section page-shell">
     <SectionHeading
-      eyebrow="Contributions"
-      title="Every way alumni give back"
-      description="Financial aid, mentorship, and school improvements powered by the JNVCKM network."
+      eyebrow={copy.eyebrow}
+      title={copy.title}
+      description={copy.description}
     />
     {contributions.length > 0 ? (
       <div class="cards-grid">
@@ -24,7 +25,7 @@ const contributions = getContributions();
         ))}
       </div>
     ) : (
-      <p>No contributions captured yet. Publish the first story from Decap CMS.</p>
+      <p>{copy.empty_text}</p>
     )}
   </section>
 </BaseLayout>

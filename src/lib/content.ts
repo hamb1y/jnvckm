@@ -20,6 +20,53 @@ export type ContributionFrontmatter = {
   thumbnail?: string;
 };
 
+export type SiteSettings = {
+  title: string;
+  description: string;
+  logo: string;
+  logo_alt: string;
+  hero: {
+    eyebrow: string;
+    title: string;
+    tagline: string;
+    primary_label: string;
+    primary_href: string;
+    secondary_label: string;
+    secondary_href: string;
+    slides: Array<{ image: string; alt: string }>;
+  };
+  about: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    cards: Array<{ title: string; description: string }>;
+  };
+  events_section: { eyebrow: string; title: string; description: string; link_label: string };
+  contributions_section: { eyebrow: string; title: string; description: string; link_label: string };
+  faq_section: { eyebrow: string; title: string; description: string };
+  contact: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    email: string;
+    subject: string;
+    name_label: string;
+    email_label: string;
+    relation_label: string;
+    message_label: string;
+    submit_label: string;
+    help_text: string;
+    relation_options: string[];
+  };
+  navigation: Array<{ label: string; href: string }>;
+  footer: { copyright: string; credit_label: string; credit_url: string; repository_label: string; repository_url: string };
+  pages: {
+    events: { eyebrow: string; title: string; description: string; empty_text: string; back_label: string; type_label: string };
+    contributions: { eyebrow: string; title: string; description: string; empty_text: string; back_label: string; type_label: string; initiated_label: string };
+    not_found: { title: string; description: string; home_label: string };
+  };
+};
+
 type MarkdownModules<T> = Record<string, MarkdownInstance<T>>;
 
 export type EventEntry = EventFrontmatter & {
@@ -41,6 +88,9 @@ const contributionModules = import.meta.glob<MarkdownInstance<ContributionFrontm
   "../../content/contributions/*.md",
   { eager: true }
 );
+const siteModules = import.meta.glob<MarkdownInstance<SiteSettings>>("../../content/site.md", {
+  eager: true,
+});
 
 function toPlainText(markdown: string) {
   return markdown
@@ -81,15 +131,27 @@ function normalizeCollection<T extends { title: string; date: string | number; s
         Content: entry.Content,
       };
     })
-    .filter((item) => Boolean(item.title) && Boolean(item.date))
+    .filter((item) => Boolean(item.title) && Boolean(item.date) && !Number.isNaN(new Date(item.date).getTime()))
     .sort(
-      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+      (a, b) =>
+        Number(Boolean((b as { featured?: boolean }).featured)) -
+          Number(Boolean((a as { featured?: boolean }).featured)) ||
+        new Date(b.date).getTime() - new Date(a.date).getTime()
     );
 }
 
 const eventsCache: EventEntry[] = normalizeCollection<EventFrontmatter>(eventModules);
 const contributionsCache: ContributionEntry[] =
   normalizeCollection<ContributionFrontmatter>(contributionModules);
+
+const siteSettings = Object.values(siteModules)[0]?.frontmatter;
+
+export function getSiteSettings(): SiteSettings {
+  if (!siteSettings) {
+    throw new Error("Missing required content/site.md site settings file");
+  }
+  return siteSettings;
+}
 
 export function getEvents(): EventEntry[] {
   return eventsCache;

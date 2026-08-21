@@ -2,17 +2,18 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CardEvent from "../../components/CardEvent.astro";
 import SectionHeading from "../../components/SectionHeading.astro";
-import { getEvents } from "../../lib/content";
+import { getEvents, getSiteSettings } from "../../lib/content";
 
 const events = getEvents();
+const copy = getSiteSettings().pages.events;
 ---
 
-<BaseLayout title="Events | JNVCKM" description="Gatherings, outreach visits, and drives hosted by the JNVCKM community.">
+<BaseLayout title={`${copy.title} | JNVCKM`} description={copy.description}>
   <section class="section page-shell">
     <SectionHeading
-      eyebrow="Events"
-      title="All events and outreach"
-      description="Browse every alumni get‑together, campus visit, and student support drive."
+      eyebrow={copy.eyebrow}
+      title={copy.title}
+      description={copy.description}
     />
     {events.length > 0 ? (
       <div class="cards-grid">
@@ -21,7 +22,7 @@ const events = getEvents();
         ))}
       </div>
     ) : (
-      <p>No events are published yet. Use Decap CMS to add the first story.</p>
+      <p>{copy.empty_text}</p>
     )}
   </section>
 </BaseLayout>

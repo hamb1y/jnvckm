@@ -1,6 +1,4 @@
 ---
-import fs from "node:fs/promises";
-
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CardContribution from "../components/CardContribution.astro";
 import CardEvent from "../components/CardEvent.astro";
@@ -9,58 +7,43 @@ import FAQAccordion from "../components/FAQAccordion.astro";
 import HeroCarousel from "../components/HeroCarousel.astro";
 import HeroOverlayCard from "../components/HeroOverlayCard.astro";
 import SectionHeading from "../components/SectionHeading.astro";
-import { getContributions, getEvents } from "../lib/content";
+import { getContributions, getEvents, getSiteSettings } from "../lib/content";
 
 const events = getEvents();
 const contributions = getContributions();
-
-const heroDir = new URL("../../public/hero", import.meta.url);
-const heroFiles = await fs.readdir(heroDir).catch(() => []);
-const heroSlides =
-  heroFiles
-    .filter((file) => /\.(png|jpe?g|webp)$/i.test(file))
-    .sort()
-    .map((file, index) => ({
-      src: `/hero/${file}`,
-      alt: `JNVCKM highlight ${index + 1}`,
-    })) ?? [];
+const site = getSiteSettings();
+const heroSlides = site.hero.slides.map((slide) => ({ src: slide.image, alt: slide.alt }));
 ---
 
 <BaseLayout>
   <section class="hero">
     <div class="hero-grid">
-      <HeroCarousel client:load slides={heroSlides} />
+      <HeroCarousel slides={heroSlides} />
       <HeroOverlayCard />
     </div>
   </section>
 
   <section id="about" class="section page-shell">
     <SectionHeading
-      eyebrow="About JNVCKM"
-      title="Residential learning rooted in community"
-      description="Established on 23 October 1986, JNV Chikkamagluru nurtures talented rural students through free, residential CBSE education backed by Navodaya Vidyalaya Samiti."
+      eyebrow={site.about.eyebrow}
+      title={site.about.title}
+      description={site.about.description}
     />
     <div class="cards-grid">
-      <article class="card">
-        <h3>PM SHRI Campus</h3>
-        <p>Spread across 15 serene acres near Balehonnur with dedicated classrooms, science labs, music &amp; art rooms, and modern residential blocks.</p>
-      </article>
-      <article class="card">
-        <h3>Whole-child focus</h3>
-        <p>Sports grounds, NCC, Scouts &amp; Guides, Youth Parliament, and cultural clubs keep students rooted while expanding their horizons.</p>
-      </article>
-      <article class="card">
-        <h3>Alumni network</h3>
-        <p>Graduates serve as mentors, donors, and champions, ensuring the Navodaya spirit of giving back remains alive for every new batch.</p>
-      </article>
+      {site.about.cards.map((card) => (
+        <article class="card">
+          <h3>{card.title}</h3>
+          <p>{card.description}</p>
+        </article>
+      ))}
     </div>
   </section>
 
   <section class="section page-shell">
     <SectionHeading
-      eyebrow="Events"
-      title="Upcoming and recent gatherings"
-      description="Stay informed about reunions, outreach visits, and student support drives."
+      eyebrow={site.events_section.eyebrow}
+      title={site.events_section.title}
+      description={site.events_section.description}
     />
     {events.length > 0 ? (
       <>
@@ -70,19 +53,19 @@ const heroSlides =
           ))}
         </div>
         <div style="margin-top:1.5rem;">
-          <a class="btn btn-secondary" href="/events">Browse all events</a>
+          <a class="btn btn-secondary" href="/events">{site.events_section.link_label}</a>
         </div>
       </>
     ) : (
-      <p>No events published yet. Use Decap CMS to add the first story.</p>
+      <p>{site.pages.events.empty_text}</p>
     )}
   </section>
 
   <section class="section page-shell">
     <SectionHeading
-      eyebrow="Contributions"
-      title="How alumni give back"
-      description="Scholarships, infrastructure upgrades, and mentoring programs led by batches across decades."
+      eyebrow={site.contributions_section.eyebrow}
+      title={site.contributions_section.title}
+      description={site.contributions_section.description}
     />
     {contributions.length > 0 ? (
       <>
@@ -92,19 +75,19 @@ const heroSlides =
           ))}
         </div>
         <div style="margin-top:1.5rem;">
-          <a class="btn btn-secondary" href="/contributions">See all contributions</a>
+          <a class="btn btn-secondary" href="/contributions">{site.contributions_section.link_label}</a>
         </div>
       </>
     ) : (
-      <p>No contributions recorded yet.</p>
+      <p>{site.pages.contributions.empty_text}</p>
     )}
   </section>
 
   <section id="faq" class="section page-shell">
     <SectionHeading
-      eyebrow="FAQs"
-      title="Questions from alumni and parents"
-      description="Answers collected from the community and school leadership."
+      eyebrow={site.faq_section.eyebrow}
+      title={site.faq_section.title}
+      description={site.faq_section.description}
       align="center"
     />
     <FAQAccordion />
@@ -112,9 +95,9 @@ const heroSlides =
 
   <section id="contact" class="section page-shell">
     <SectionHeading
-      eyebrow="Contact"
-      title="Reach the alumni coordination team"
-      description="Share collaboration ideas, volunteer for drives, or simply say hello."
+      eyebrow={site.contact.eyebrow}
+      title={site.contact.title}
+      description={site.contact.description}
     />
     <ContactFormMailto />
   </section>

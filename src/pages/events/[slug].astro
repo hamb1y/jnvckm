@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { getEvent, getEvents } from "../../lib/content";
+import { getEvent, getEvents, getSiteSettings } from "../../lib/content";
 
 export function getStaticPaths() {
   return getEvents().map((event) => ({
@@ -19,14 +19,15 @@ const formatter = new Intl.DateTimeFormat("en-IN", { dateStyle: "long" });
 const formattedDate = formatter.format(new Date(event.date));
 const { Content } = event;
 const description = event.summary || `Updates from ${event.title}`;
+const copy = getSiteSettings().pages.events;
 ---
 
 <BaseLayout title={`${event.title} | JNVCKM Events`} description={description}>
   <article class="article-shell">
-    <a class="back-link" href="/events">← All events</a>
+    <a class="back-link" href="/events">← {copy.back_label}</a>
     <div class="article-meta">
       <p class="eyebrow">{formattedDate}</p>
-      {event.location && <p class="meta">{event.location}</p>}
+      {event.location && <p class="meta">{copy.type_label}: {event.location}</p>}
     </div>
     {event.tags && event.tags.length > 0 && (
       <div class="tag-list">

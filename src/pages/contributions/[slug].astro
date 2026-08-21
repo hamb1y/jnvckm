@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { getContribution, getContributions } from "../../lib/content";
+import { getContribution, getContributions, getSiteSettings } from "../../lib/content";
 
 export function getStaticPaths() {
   return getContributions().map((item) => ({
@@ -19,15 +19,16 @@ const formatter = new Intl.DateTimeFormat("en-IN", { dateStyle: "long" });
 const formattedDate = formatter.format(new Date(contribution.date));
 const { Content } = contribution;
 const description = contribution.summary || `Contribution update from ${contribution.title}`;
+const copy = getSiteSettings().pages.contributions;
 ---
 
 <BaseLayout title={`${contribution.title} | JNVCKM Contributions`} description={description}>
   <article class="article-shell">
-    <a class="back-link" href="/contributions">← All contributions</a>
+    <a class="back-link" href="/contributions">← {copy.back_label}</a>
     <div class="article-meta">
       <p class="eyebrow">{formattedDate}</p>
-      {contribution.type && <p class="meta">Type: {contribution.type}</p>}
-      {contribution.initiated_by && <p class="meta">Initiated by: {contribution.initiated_by}</p>}
+      {contribution.type && <p class="meta">{copy.type_label}: {contribution.type}</p>}
+      {contribution.initiated_by && <p class="meta">{copy.initiated_label}: {contribution.initiated_by}</p>}
     </div>
     {contribution.tags && contribution.tags.length > 0 && (
       <div class="tag-list">

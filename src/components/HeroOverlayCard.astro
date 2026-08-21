@@ -1,30 +1,16 @@
 ---
-interface Props {
-  title?: string;
-  tagline?: string;
-  primaryHref?: string;
-  primaryLabel?: string;
-  secondaryHref?: string;
-  secondaryLabel?: string;
-}
+import { getSiteSettings } from "../lib/content";
 
-const {
-  title = "Jawahar Navodaya Vidyalaya Chikkamagluru (JNVCKM)",
-  tagline = "Giving back to our Alma Mater",
-  primaryHref = "/events",
-  primaryLabel = "Upcoming Events",
-  secondaryHref = "/#contact",
-  secondaryLabel = "Contact Team",
-} = Astro.props;
+const { hero, logo, logo_alt } = getSiteSettings();
 ---
 
 <div class="hero-overlay-card">
-  <img class="logo" src="/assets/logo.webp" alt="JNVCKM logo" width="72" height="72" loading="lazy" />
-  <p class="eyebrow">Alumni & Community</p>
-  <h1>{title}</h1>
-  <p>{tagline}</p>
+  <img class="logo" src={logo} alt={logo_alt} width="72" height="72" />
+  <p class="eyebrow">{hero.eyebrow}</p>
+  <h1>{hero.title}</h1>
+  <p>{hero.tagline}</p>
   <div class="actions">
-    <a class="btn btn-primary" href={primaryHref}>{primaryLabel}</a>
-    <a class="btn btn-secondary" href={secondaryHref}>{secondaryLabel}</a>
+    <a class="btn btn-primary" href={hero.primary_href}>{hero.primary_label}</a>
+    <a class="btn btn-secondary" href={hero.secondary_href}>{hero.secondary_label}</a>
   </div>
 </div>

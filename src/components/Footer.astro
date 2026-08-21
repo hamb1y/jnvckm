@@ -1,10 +1,13 @@
 ---
 const year = new Date().getFullYear();
+import { getSiteSettings } from "../lib/content";
+
+const { footer } = getSiteSettings();
 ---
 
 <footer class="site-footer ">
   <div class="page-shell centerText">
-    <p>© {year} Jawahar Navodaya Vidyalaya Chikkamagluru Alumni Collective.</p>
-   <p> Built by <a href="https://github.com/hamb1y">Rishi Malnad</a> · <a href="https://github.com/hamb1y/jnvckm">Github</a></p>
+    <p>© {year} {footer.copyright}</p>
+    <p>Built by <a href={footer.credit_url}>{footer.credit_label}</a> · <a href={footer.repository_url}>{footer.repository_label}</a></p>
   </div>
 </footer>

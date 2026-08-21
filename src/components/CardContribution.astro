@@ -9,8 +9,11 @@ interface ContributionProps {
   tags?: string[];
 }
 
+import { getSiteSettings } from "../lib/content";
+
 const formatter = new Intl.DateTimeFormat("en-IN", { dateStyle: "medium" });
 const { title, date, summary, slug, type, initiated_by, tags = [] } = Astro.props as ContributionProps;
+const labels = getSiteSettings().pages.contributions;
 ---
 
 <article class="card contribution-card">
@@ -18,8 +21,8 @@ const { title, date, summary, slug, type, initiated_by, tags = [] } = Astro.prop
   <h3>
     <a href={`/contributions/${slug}`}>{title}</a>
   </h3>
-  {type && <p class="meta">Type: {type}</p>}
-  {initiated_by && <p class="meta">Initiated by: {initiated_by}</p>}
+  {type && <p class="meta">{labels.type_label}: {type}</p>}
+  {initiated_by && <p class="meta">{labels.initiated_label}: {initiated_by}</p>}
   <p>{summary}</p>
   {tags.length > 0 && (
     <div class="tags">

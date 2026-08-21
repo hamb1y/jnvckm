@@ -4,6 +4,7 @@ import "../styles/components.css";
 
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
+import { getSiteSettings } from "../lib/content";
 
 interface Props {
     title?: string;
@@ -11,9 +12,9 @@ interface Props {
     ogImage?: string;
 }
 
-const defaultTitle = "JNVCKM — Giving back to our Alma Mater";
-const defaultDescription =
-    "Jawahar Navodaya Vidyalaya Chikkamagluru alumni network supporting events, contributions, and student success.";
+const site = getSiteSettings();
+const defaultTitle = site.title;
+const defaultDescription = site.description;
 const {
     title = defaultTitle,
     description = defaultDescription,

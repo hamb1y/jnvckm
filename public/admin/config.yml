@@ -33,6 +33,133 @@ site_url: https://jnvckm.netlify.app
 media_folder: "public/uploads"
 public_folder: "/uploads"
 collections:
+  - name: "site"
+    label: "Site Settings"
+    files:
+      - name: "settings"
+        label: "Site Settings"
+        file: "content/site.md"
+        fields:
+          - { label: "Site title", name: "title", widget: "string" }
+          - { label: "Site description", name: "description", widget: "text" }
+          - { label: "Logo", name: "logo", widget: "image" }
+          - { label: "Logo alt text", name: "logo_alt", widget: "string" }
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Tagline", name: "tagline", widget: "string" }
+              - { label: "Primary button label", name: "primary_label", widget: "string" }
+              - { label: "Primary button link", name: "primary_href", widget: "string" }
+              - { label: "Secondary button label", name: "secondary_label", widget: "string" }
+              - { label: "Secondary button link", name: "secondary_href", widget: "string" }
+              - label: "Slides"
+                name: "slides"
+                widget: "list"
+                fields:
+                  - { label: "Image", name: "image", widget: "image" }
+                  - { label: "Alt text", name: "alt", widget: "string" }
+          - label: "About section"
+            name: "about"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - label: "Cards"
+                name: "cards"
+                widget: "list"
+                fields:
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Description", name: "description", widget: "text" }
+          - label: "Events section"
+            name: "events_section"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Link label", name: "link_label", widget: "string" }
+          - label: "Contributions section"
+            name: "contributions_section"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Link label", name: "link_label", widget: "string" }
+          - label: "FAQ section"
+            name: "faq_section"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+          - label: "Contact"
+            name: "contact"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Recipient email", name: "email", widget: "string" }
+              - { label: "Email subject", name: "subject", widget: "string" }
+              - { label: "Name label", name: "name_label", widget: "string" }
+              - { label: "Email label", name: "email_label", widget: "string" }
+              - { label: "Relation label", name: "relation_label", widget: "string" }
+              - { label: "Message label", name: "message_label", widget: "string" }
+              - { label: "Submit button label", name: "submit_label", widget: "string" }
+              - { label: "Form help text", name: "help_text", widget: "string" }
+              - { label: "Relation options", name: "relation_options", widget: "list" }
+          - label: "Navigation"
+            name: "navigation"
+            widget: "list"
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "Link", name: "href", widget: "string" }
+          - label: "Footer"
+            name: "footer"
+            widget: "object"
+            fields:
+              - { label: "Copyright text", name: "copyright", widget: "string" }
+              - { label: "Credit label", name: "credit_label", widget: "string" }
+              - { label: "Credit link", name: "credit_url", widget: "string" }
+              - { label: "Repository label", name: "repository_label", widget: "string" }
+              - { label: "Repository link", name: "repository_url", widget: "string" }
+          - label: "Page copy"
+            name: "pages"
+            widget: "object"
+            fields:
+              - label: "Events page"
+                name: "events"
+                widget: "object"
+                fields:
+                  - { label: "Eyebrow", name: "eyebrow", widget: "string" }
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Description", name: "description", widget: "text" }
+                  - { label: "Empty state", name: "empty_text", widget: "text" }
+                  - { label: "Back link label", name: "back_label", widget: "string" }
+                  - { label: "Location label", name: "type_label", widget: "string" }
+              - label: "Contributions page"
+                name: "contributions"
+                widget: "object"
+                fields:
+                  - { label: "Eyebrow", name: "eyebrow", widget: "string" }
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Description", name: "description", widget: "text" }
+                  - { label: "Empty state", name: "empty_text", widget: "text" }
+                  - { label: "Back link label", name: "back_label", widget: "string" }
+                  - { label: "Type label", name: "type_label", widget: "string" }
+                  - { label: "Initiated-by label", name: "initiated_label", widget: "string" }
+              - label: "Not found page"
+                name: "not_found"
+                widget: "object"
+                fields:
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Description", name: "description", widget: "text" }
+                  - { label: "Home link label", name: "home_label", widget: "string" }
   - name: "events"
     label: "Events"
     folder: "content/events"
@@ -43,6 +170,7 @@ collections:
       - { label: "Date", name: "date", widget: "datetime" }
       - { label: "Location", name: "location", widget: "string", required: false }
       - { label: "Summary", name: "summary", widget: "text" }
+      - { label: "Thumbnail", name: "thumbnail", widget: "image", required: false }
       - { label: "Body", name: "body", widget: "markdown" }
       - { label: "Tags", name: "tags", widget: "list", required: false }
       - { label: "Featured", name: "featured", widget: "boolean", default: false }
@@ -54,10 +182,11 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Type", name: "type", widget: "string" }
-      - { label: "Initiated By / Donor", name: "initiated_by", widget: "string", required: false }
-      - { label: "Summary", name: "summary", widget: "text" }
-      - { label: "Body", name: "body", widget: "markdown" }
+       - { label: "Type", name: "type", widget: "string" }
+       - { label: "Initiated By / Donor", name: "initiated_by", widget: "string", required: false }
+       - { label: "Summary", name: "summary", widget: "text" }
+       - { label: "Thumbnail", name: "thumbnail", widget: "image", required: false }
+       - { label: "Body", name: "body", widget: "markdown" }
       - { label: "Tags", name: "tags", widget: "list", required: false }
   - name: "faqs"
     label: "FAQs"
