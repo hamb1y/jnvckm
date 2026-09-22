@@ -1,4 +1,5 @@
 ---
+import { ArrowUpRight } from "lucide-astro";
 import { site } from "@/data/site";
 import { lx, t } from "@/i18n/utils";
 import { localePath } from "@/lib/paths";
@@ -14,34 +15,37 @@ const emailReady = contact.emailVerified && contact.email !== null;
 const phoneReady = contact.phoneVerified && contact.phone !== null;
 ---
 
-<div class="container section">
+<div class="container">
   <header class="page-head">
     <h1>{t(lang, "connect.title")}</h1>
     <p>{t(lang, "connect.lede")}</p>
   </header>
+</div>
 
-  <div class="connect-grid">
-    <section class="connect-block">
-      <h2>{t(lang, "connect.volunteerTitle")}</h2>
-      <p>{t(lang, "connect.volunteerBody")}</p>
-    </section>
+<section class="accent-brand">
+  <div class="container connect">
+    <div class="connect-main">
+      <article>
+        <h2>{t(lang, "connect.volunteerTitle")}</h2>
+        <p>{t(lang, "connect.volunteerBody")}</p>
+      </article>
 
-    <section class="connect-block">
-      <h2>{t(lang, "connect.batchRepsTitle")}</h2>
-      <p>{t(lang, "connect.batchRepsBody")}</p>
-      <p>
-        <a href={localePath("/stories/batch-representatives", lang)}>
-          {t(lang, "posts.kind.news")}
+      <article>
+        <h2>{t(lang, "connect.batchRepsTitle")}</h2>
+        <p>{t(lang, "connect.batchRepsBody")}</p>
+        <a class="more" href={localePath("/stories/batch-representatives", lang)}>
+          {t(lang, "connect.batchRepsLink")}
+          <ArrowUpRight size={15} stroke-width={1.7} aria-hidden="true" />
         </a>
-      </p>
-    </section>
+      </article>
 
-    <section class="connect-block">
-      <h2>{t(lang, "connect.contributeTitle")}</h2>
-      <p>{lx(site.donations.note, lang)}</p>
-    </section>
+      <article>
+        <h2>{t(lang, "connect.contributeTitle")}</h2>
+        <p>{lx(site.donations.note, lang)}</p>
+      </article>
+    </div>
 
-    <section class="connect-block">
+    <aside class="connect-card">
       <h2>{t(lang, "connect.address")}</h2>
       <address>
         <span>{lx(site.contact.address, lang)}</span>
@@ -65,30 +69,52 @@ const phoneReady = contact.phoneVerified && contact.phone !== null;
         }
       </address>
       {!emailReady && <p class="unconfirmed-note">{t(lang, "connect.unconfirmedNote")}</p>}
-    </section>
+    </aside>
   </div>
-</div>
+</section>
 
 <style>
-  .connect-grid {
+  .connect {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    gap: clamp(var(--s-7), 5vw, var(--s-10));
+    align-items: start;
+  }
+
+  .connect-main {
+    display: grid;
     gap: clamp(var(--s-6), 4vw, var(--s-8));
   }
 
-  .connect-block h2 {
+  .connect-main h2 {
     font-size: var(--step-2);
     margin-block-end: var(--s-3);
   }
 
-  .connect-block p {
+  .connect-main p {
     color: var(--text-2);
-    max-inline-size: 52ch;
+    max-inline-size: 54ch;
   }
 
-  .connect-block address {
+  .connect-main .more {
+    margin-block-start: var(--s-4);
+  }
+
+  .connect-card {
+    padding: var(--s-5);
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: var(--r-2);
+  }
+
+  .connect-card h2 {
+    font-size: var(--step-1);
+    margin-block-end: var(--s-4);
+  }
+
+  .connect-card address {
     display: grid;
-    gap: var(--s-2);
+    gap: var(--s-3);
     font-style: normal;
     color: var(--text-2);
   }
@@ -98,8 +124,16 @@ const phoneReady = contact.phoneVerified && contact.phone !== null;
   }
 
   .unconfirmed-note {
-    margin-block-start: var(--s-3);
+    margin-block-start: var(--s-4);
+    padding-block-start: var(--s-4);
+    border-block-start: 1px solid var(--rule);
     font-size: var(--step--1);
     color: var(--text-3);
+  }
+
+  @media (max-width: 900px) {
+    .connect {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

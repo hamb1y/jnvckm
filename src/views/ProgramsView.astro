@@ -12,84 +12,111 @@ export interface Props {
 const { lang } = Astro.props;
 ---
 
-<div class="container section">
+<div class="container">
   <header class="page-head">
     <h1>{t(lang, "programs.title")}</h1>
     <p>{t(lang, "programs.lede")}</p>
   </header>
-
-  <div class="program-list">
-    {
-      programs.map((program, index) => (
-        <article class:list={["program", index === 0 && "program-lead"]}>
-          <div class="program-text">
-            <h2>
-              <a href={localePath(`/programs/${program.id}`, lang)}>{lx(program.name, lang)}</a>
-            </h2>
-            <p class="program-tagline">{lx(program.tagline, lang)}</p>
-            <p class="program-summary">{lx(program.summary, lang)}</p>
-            <p class="program-note mono">{lx(program.startNote, lang)}</p>
-          </div>
-          <Figure media={program.image} locale={lang} ratio="3 / 2" />
-        </article>
-      ))
-    }
-  </div>
 </div>
 
+<section class="accent-program">
+  <div class="container">
+    <div class="programs">
+      {
+        programs.map((program, index) => (
+          <article
+            class:list={[
+              "program",
+              index % 2 === 1 && "program--flip",
+              program.image === null && "program--text",
+            ]}
+          >
+            {program.image && (
+              <div class="program-media">
+                <Figure media={program.image} locale={lang} ratio="4 / 3" />
+              </div>
+            )}
+            <div class="program-main">
+              <h2>
+                <a href={localePath(`/programs/${program.id}`, lang)}>{lx(program.name, lang)}</a>
+              </h2>
+              <p class="program-tagline">{lx(program.tagline, lang)}</p>
+              <p class="program-summary">{lx(program.summary, lang)}</p>
+              <p class="program-note mono">{lx(program.startNote, lang)}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
 <style>
-  .program-list {
+  .programs {
     display: grid;
-    gap: clamp(var(--s-7), 5vw, var(--s-9));
   }
 
   .program {
     display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-    gap: clamp(var(--s-5), 5vw, var(--s-8));
-    align-items: start;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(var(--s-6), 5vw, var(--s-9));
+    align-items: center;
+    padding-block: clamp(var(--s-6), 4vw, var(--s-8));
   }
 
-  .program-lead {
-    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  .program--flip .program-media {
+    order: 2;
   }
 
-  .program h2 {
-    font-size: var(--step-3);
+  /* A program with no photograph gets the row to itself. */
+  .program--text {
+    grid-template-columns: minmax(0, 1fr);
   }
 
-  .program h2 a {
+  .program--text .program-main {
+    max-inline-size: 46rem;
+  }
+
+  .program-main h2 {
+    max-inline-size: 18ch;
+  }
+
+  .program-main h2 a {
     color: var(--ink);
     text-decoration: none;
   }
 
-  .program h2 a:hover {
-    text-decoration: underline;
+  .program-main h2 a:hover {
+    color: var(--accent);
   }
 
   .program-tagline {
-    margin-block-start: var(--s-3);
+    margin-block-start: var(--s-2);
     font-weight: 600;
-    color: var(--accent-program);
+    color: var(--accent);
   }
 
   .program-summary {
-    margin-block-start: var(--s-3);
+    margin-block-start: var(--s-4);
     color: var(--text-2);
-    max-inline-size: 58ch;
+    max-inline-size: 54ch;
   }
 
   .program-note {
-    margin-block-start: var(--s-4);
-    padding-block-start: var(--s-3);
+    margin-block-start: var(--s-5);
+    padding-block-start: var(--s-4);
     border-block-start: 1px solid var(--rule);
     color: var(--text-3);
+    max-inline-size: 54ch;
   }
 
   @media (max-width: 900px) {
-    .program,
-    .program-lead {
+    .program {
       grid-template-columns: 1fr;
+    }
+
+    .program--flip .program-media {
+      order: 0;
     }
   }
 </style>

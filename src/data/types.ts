@@ -42,7 +42,7 @@ export interface EntryBase {
   image: Media | null;
   documents: Media[];
   /** Where a migrated record came from. */
-  source?: string;
+  source?: Localized;
 }
 
 export interface EventEntry extends EntryBase {

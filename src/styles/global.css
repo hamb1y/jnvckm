@@ -180,7 +180,7 @@ section {
 /* --- Section furniture --------------------------------------------------- */
 .page-head {
   max-inline-size: 46rem;
-  padding-block-end: var(--s-6);
+  padding-block: clamp(2rem, 4vw, 3rem) 0;
 }
 
 .page-head h1 + p {

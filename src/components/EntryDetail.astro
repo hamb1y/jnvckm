@@ -19,7 +19,7 @@ export interface Props {
   image?: Media | null;
   documents?: Media[];
   archiveNote?: Localized | null;
-  source?: string;
+  source?: Localized;
   backHref: string;
   backLabel: string;
   priority?: boolean;
@@ -44,6 +44,7 @@ const {
 const bodyText = lx(body, lang);
 const bodyIsFallback = bodyText !== "" && isFallback(body, lang);
 const note = archiveNote ? lx(archiveNote, lang) : "";
+const sourceText = lx(source, lang);
 ---
 
 <article class="entry container section">
@@ -88,7 +89,7 @@ const note = archiveNote ? lx(archiveNote, lang) : "";
     )
   }
 
-  {source !== "" && <p class="entry-source mono">{t(lang, "common.source")} · {source}</p>}
+  {sourceText !== "" && <p class="entry-source mono">{t(lang, "common.source")} · {sourceText}</p>}
 </article>
 
 <style>

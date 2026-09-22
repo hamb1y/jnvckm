@@ -1,4 +1,4 @@
-import { isoDate, media, mediaList, num, optionalStr, recordsIn, str, text } from "./load";
+import { isoDate, media, mediaList, num, recordsIn, str, text } from "./load";
 import { CONTRIBUTION_CATEGORIES, type ContributionCategory, type ContributionEntry } from "./types";
 
 function asCategory(value: unknown): ContributionCategory {
@@ -18,7 +18,7 @@ function toContribution(record: Record<string, unknown>): ContributionEntry {
     body: text(record.body),
     image: media(record.image),
     documents: mediaList(record.documents),
-    source: optionalStr(record.source) ?? undefined,
+    source: text(record.source),
     category: asCategory(record.category),
     batch: batch === "" ? null : batch,
     amount: num(record.amount),

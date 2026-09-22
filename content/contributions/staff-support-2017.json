@@ -10,11 +10,17 @@
   "amount": null,
   "summary": {
     "en": "A monthly contribution scheme was organised for a D-staff member facing a run of family difficulties.",
-    "kn": "ಕುಟುಂಬದ ಕಷ್ಟಗಳ ಸರಣಿ ಎದುರಿಸುತ್ತಿದ್ದ ಡಿ-ಸಿಬ್ಬಂದಿಗೆ ಮಾಸಿಕ ಕೊಡುಗೆ ಯೋಜನೆ ಆಯೋಜಿಸಲಾಯಿತು."
+    "kn": "ಒಂದಾದ ಮೇಲೊಂದು ಕುಟುಂಬದ ಕಷ್ಟ ಎದುರಿಸುತ್ತಿದ್ದ ಡಿ-ಸಿಬ್ಬಂದಿಗೆ ಮಾಸಿಕ ಕೊಡುಗೆ ಯೋಜನೆಯನ್ನು ಆಯೋಜಿಸಲಾಯಿತು."
   },
   "body": "",
-  "archiveNote": "This record was first published by the alumni community in an earlier era. Obsolete bank and payment details have been removed for privacy and safety; the historical account is otherwise intact.",
-  "source": "JNVCKM alumni archive",
+  "archiveNote": {
+    "en": "This record was first published by the alumni community in an earlier era. Obsolete bank and payment details have been removed for privacy and safety; the historical account is otherwise intact.",
+    "kn": "ಈ ದಾಖಲೆಯನ್ನು ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಮುದಾಯ ಹಿಂದಿನ ದಶಕಗಳಲ್ಲಿ ಪ್ರಕಟಿಸಿತ್ತು. ಹಳೆಯ ಬ್ಯಾಂಕ್ ಮತ್ತು ಪಾವತಿ ವಿವರಗಳನ್ನು ಖಾಸಗಿತ್ವ ಮತ್ತು ಸುರಕ್ಷತೆಗಾಗಿ ತೆಗೆದುಹಾಕಲಾಗಿದೆ; ಉಳಿದ ದಾಖಲೆ ಹಾಗೆಯೇ ಇದೆ."
+  },
+  "source": {
+    "en": "JNVCKM alumni archive",
+    "kn": "ಜೆಎನ್‌ವಿಸಿಕೆಎಂ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಂಗ್ರಹ"
+  },
   "image": null,
   "documents": []
 }

@@ -77,15 +77,17 @@ const facts = [
 
   .fact-list {
     list-style: none;
-    margin: var(--s-8) 0 0;
+    margin: var(--s-7) 0 0;
     padding: 0;
     display: grid;
-    gap: var(--s-4);
-    max-inline-size: var(--measure);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+    gap: 0 var(--s-8);
+    max-inline-size: 72rem;
   }
 
   .fact-list li {
     padding-block-end: var(--s-4);
+    margin-block-end: var(--s-4);
     border-block-end: 1px solid var(--rule);
     color: var(--text-2);
   }

@@ -9,10 +9,13 @@
   "location": "JNV Balehonnur",
   "summary": {
     "en": "Health check-ups and services for the school community.",
-    "kn": "ಶಾಲಾ ಸಮುದಾಯಕ್ಕೆ ಆರೋಗ್ಯ ತಪಾಸಣೆ ಮತ್ತು ಸೇವೆಗಳು."
+    "kn": "ಶಾಲಾ ಸಮುದಾಯಕ್ಕೆ ಆರೋಗ್ಯ ತಪಾಸಣೆ ಮತ್ತು ಚಿಕಿತ್ಸಾ ಸೇವೆಗಳನ್ನು ನೀಡಲಾಯಿತು."
   },
   "body": "A comprehensive medical camp was organized for JNV students and staff members, providing essential healthcare services and health check-ups. This initiative demonstrated the alumni association's commitment to the well-being of the current school community.",
-  "source": "JNVCKM alumni archive",
+  "source": {
+    "en": "JNVCKM alumni archive",
+    "kn": "ಜೆಎನ್‌ವಿಸಿಕೆಎಂ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಂಗ್ರಹ"
+  },
   "image": {
     "src": "/images/dsc0043.webp",
     "alt": {

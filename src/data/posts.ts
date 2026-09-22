@@ -1,4 +1,4 @@
-import { isoDate, media, mediaList, optionalStr, recordsIn, str, text } from "./load";
+import { isoDate, media, mediaList, recordsIn, str, text } from "./load";
 import type { PostEntry, PostKind } from "./types";
 
 const KINDS: PostKind[] = ["news", "report", "story"];
@@ -19,7 +19,7 @@ function toPost(record: Record<string, unknown>): PostEntry {
     body: text(record.body),
     image: media(record.image),
     documents: mediaList(record.documents),
-    source: optionalStr(record.source) ?? undefined,
+    source: text(record.source),
     kind: asKind(record.kind),
     author: text(record.author),
     batch: batch === "" ? null : batch,

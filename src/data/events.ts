@@ -1,4 +1,4 @@
-import { isoDate, media, mediaList, optionalStr, recordsIn, str, text } from "./load";
+import { isoDate, media, mediaList, recordsIn, str, text } from "./load";
 import type { EventEntry, ProgramId } from "./types";
 
 const PROGRAM_IDS = ["ignite", "ncl", "meet", "workshop"] as const;
@@ -23,7 +23,7 @@ function toEvent(record: Record<string, unknown>): EventEntry {
     body: text(record.body),
     image: media(record.image),
     documents: mediaList(record.documents),
-    source: optionalStr(record.source) ?? undefined,
+    source: text(record.source),
     program: asProgram(record.program),
     location: asLocation(record.location),
   };
