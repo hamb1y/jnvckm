@@ -227,7 +227,7 @@ const AUDIT = () => {
     }
 
     if (style.backgroundImage.includes("gradient")) out.gradients.push(style.backgroundImage.slice(0, 60));
-    if (style.webkitBackgroundClip === "text" || style.backgroundClip === "text") {
+    if (style.backgroundClip === "text") {
       out.clippedText.push(text.slice(0, 30));
     }
 

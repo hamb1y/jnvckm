@@ -99,11 +99,12 @@ could not be corroborated were deliberately **not** migrated; they remain on
 
 ## Deploy
 
-Cloudflare Pages, Git integration on `main`.
+Cloudflare Pages, Git integration on `main`. There is no separate CI pipeline:
+Pages already builds on every push, so the type gate lives in the build command.
 
-- Build command: `bun run build`
+- Build command: `bun run check && bun run build`
 - Output directory: `dist`
-- Environment: `BUN_VERSION` pinned
+- Environment: `BUN_VERSION` pinned (currently `1.4.2`)
 - Project name `jnvckm` (this determines `jnvckm.pages.dev`)
 
 Canonical URLs come from `site` in `astro.config.mjs` (`https://jnvckm.org`).

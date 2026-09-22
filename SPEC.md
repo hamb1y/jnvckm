@@ -17,7 +17,7 @@ are built. Never hand-write a `/kn` prefix.
 
 | Path | View | Notes |
 | --- | --- | --- |
-| `/` | `HomeView` | Hero, evidence line, latest news and events, programs, giving, "where it began", connect |
+| `/` | `HomeView` | Masthead, the ledger of giving, latest news and events, programs, "where it began", connect |
 | `/about` | `AboutView` | Who the association is, what it does, formed 1993 |
 | `/programs` | `ProgramsView` | IGNITE and NCL |
 | `/programs/[id]` | `ProgramDetailView` | `ignite` \| `ncl`, plus that program's editions/seasons |
@@ -73,6 +73,14 @@ Guards that exist on purpose:
 Dates are formatted from a table in `src/utils/format.ts`, not `Intl`: Kannada
 month names are missing from some ICU builds and `Intl` silently produced
 "22, 2024". Amounts use `Intl` with Indian digit grouping.
+
+## Layout
+
+`Section.astro` renders every page block as a rail + body grid. The rail carries
+the block heading, a one-line lede and an optional link; the body is a slot.
+`EntryRow.astro` renders one dated record in a ledger; `Figure.astro`,
+`Document.astro` and `Markdown.astro` render media and prose. Global rhythm
+lives in `global.css` under "Page rhythm" and "Masthead".
 
 ## Islands
 

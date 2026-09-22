@@ -1,5 +1,6 @@
 ---
 import Figure from "@/components/Figure.astro";
+import Section from "@/components/Section.astro";
 import { site } from "@/data/site";
 import { lx, t } from "@/i18n/utils";
 import { localePath } from "@/lib/paths";
@@ -45,108 +46,56 @@ const work = [
     kn: "ಕಷ್ಟದಲ್ಲಿರುವ ವಿದ್ಯಾರ್ಥಿಗಳು, ಸಿಬ್ಬಂದಿ ಮತ್ತು ಕುಟುಂಬಗಳಿಗೆ ಸಹಾಯ",
   },
 ];
-
-const facts = [
-  { label: t(lang, "site.formedShort"), value: "" },
-  { label: lx(site.contact.address, lang), value: "" },
-];
 ---
 
-<div class="container section">
+<div class="container">
   <header class="page-head">
     <h1>{t(lang, "about.title")}</h1>
     <p>{t(lang, "about.lede")}</p>
   </header>
 
-  <div class="about-grid">
-    <section class="page-section">
-      <h2>{t(lang, "about.whatWeDo")}</h2>
-      <ul class="work-list">
-        {work.map((item) => <li>{lx(item, lang)}</li>)}
-      </ul>
-    </section>
+  <Section id="what-we-do" label={t(lang, "about.whatWeDo")}>
+    <ul class="work-list">
+      {work.map((item) => <li>{lx(item, lang)}</li>)}
+    </ul>
+  </Section>
 
-    <aside class="about-aside">
-      <h2>{lx(site.name, lang)}</h2>
-      <dl>
-        {facts.map((fact) => (fact.label !== "" && <dd>{fact.label}</dd>))}
-      </dl>
-      <p>{lx(site.tagline, lang)}</p>
-      <p class="about-links">
-        <a href={localePath("/programs", lang)}>{t(lang, "nav.programs")}</a>
-        <a href={localePath("/contributions", lang)}>{t(lang, "nav.impact")}</a>
-        <a href={localePath("/vidyalaya", lang)}>{t(lang, "nav.vidyalaya")}</a>
-      </p>
-    </aside>
-  </div>
-
-  <Figure media={group} locale={lang} ratio="16 / 9" showCaption={false} />
+  <Section id="the-vidyalaya" label={t(lang, "about.schoolTitle")}>
+    <p class="lede">{lx(site.tagline, lang)}</p>
+    <p class="links">
+      <a href={localePath("/programs", lang)}>{t(lang, "nav.programs")}</a>
+      <a href={localePath("/contributions", lang)}>{t(lang, "nav.impact")}</a>
+      <a href={localePath("/vidyalaya", lang)}>{t(lang, "nav.vidyalaya")}</a>
+    </p>
+    <Figure media={group} locale={lang} ratio="16 / 9" />
+  </Section>
 </div>
 
 <style>
-  .about-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-    gap: clamp(var(--s-6), 5vw, var(--s-9));
-    align-items: start;
-  }
-
   .work-list {
     display: grid;
     gap: var(--s-3);
     margin: 0;
     padding: 0;
     list-style: none;
+    max-inline-size: var(--measure);
   }
 
   .work-list li {
     padding-block-end: var(--s-3);
     border-block-end: 1px solid var(--rule);
-    color: var(--text-2);
-  }
-
-  .about-aside {
-    padding: var(--s-5);
-    background: var(--surface);
-    border: 1px solid var(--rule);
-    border-radius: var(--r-2);
-  }
-
-  .about-aside h2 {
     font-size: var(--step-1);
   }
 
-  .about-aside dl {
-    margin: var(--s-4) 0 0;
-    display: grid;
-    gap: var(--s-2);
-    color: var(--text-2);
-  }
-
-  .about-aside dd {
-    margin: 0;
-    font-size: var(--step--1);
-  }
-
-  .about-aside p {
-    margin-block-start: var(--s-4);
-    color: var(--text-2);
-  }
-
-  .about-links {
+  .links {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--s-4);
+    gap: var(--s-5);
+    margin-block: var(--s-5) var(--s-6);
     font-weight: 600;
   }
 
-  .container > figure {
-    margin-block-start: var(--s-8);
-  }
-
-  @media (max-width: 900px) {
-    .about-grid {
-      grid-template-columns: 1fr;
-    }
+  .container :global(.figure) {
+    margin-block-start: var(--s-6);
   }
 </style>

@@ -1,5 +1,6 @@
 ---
 import EntryRow from "@/components/EntryRow.astro";
+import Section from "@/components/Section.astro";
 import { events } from "@/data/events";
 import { lx, t } from "@/i18n/utils";
 import { localePath } from "@/lib/paths";
@@ -18,17 +19,16 @@ const upcoming = events
 const past = events.filter((entry) => entry.date < today);
 ---
 
-<div class="container section">
+<div class="container">
   <header class="page-head">
     <h1>{t(lang, "events.title")}</h1>
     <p>{t(lang, "events.lede")}</p>
   </header>
 
-  <section class="page-section">
-    <h2>{t(lang, "events.upcoming")}</h2>
+  <Section id="upcoming" label={t(lang, "events.upcoming")}>
     {
       upcoming.length > 0 ? (
-        <ul class="rows">
+        <ul class="ledger">
           {upcoming.map((entry) => (
             <EntryRow
               href={localePath(`/events/${entry.slug}`, lang)}
@@ -45,13 +45,12 @@ const past = events.filter((entry) => entry.date < today);
         <p class="empty-state">{t(lang, "events.empty")}</p>
       )
     }
-  </section>
+  </Section>
 
   {
     past.length > 0 && (
-      <section class="page-section">
-        <h2>{t(lang, "events.past")}</h2>
-        <ul class="rows">
+      <Section id="past" label={t(lang, "events.past")}>
+        <ul class="ledger">
           {past.map((entry) => (
             <EntryRow
               href={localePath(`/events/${entry.slug}`, lang)}
@@ -64,7 +63,7 @@ const past = events.filter((entry) => entry.date < today);
             />
           ))}
         </ul>
-      </section>
+      </Section>
     )
   }
 </div>

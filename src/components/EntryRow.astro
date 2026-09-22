@@ -3,10 +3,9 @@ import type { Locale, Media } from "@/data/types";
 import { lx } from "@/i18n/utils";
 
 /**
- * The site's signature primitive: a ruled, dated record. Date on the left in
- * the mono face, the record itself in the middle, an amount on the right when
- * there is one, and a small plate when a photo exists. Reused for the home
- * feed, events, contributions and stories.
+ * One dated record in a ledger. The date sits in mono on the left, the record
+ * carries the middle, the figure sits on the right where there is one, and a
+ * small plate shows a photograph when the archive has one.
  */
 export interface Props {
   href: string;
@@ -35,15 +34,15 @@ const {
 const imageAlt = image ? lx(image.alt, locale) : "";
 ---
 
-<li class="row" data-entry {...attrs}>
-  <a class="row-link" href={href}>
-    <time class="row-date mono" datetime={date}>{date}</time>
-    <span class="row-body">
-      <span class="row-title">{title}</span>
-      {summary !== undefined && summary !== "" && <span class="row-summary">{summary}</span>}
+<li class="ledger-row" data-entry {...attrs}>
+  <a class="ledger-link" href={href}>
+    <time class="ledger-date mono" datetime={date}>{date}</time>
+    <span class="ledger-main">
+      <span class="ledger-title">{title}</span>
+      {summary !== undefined && summary !== "" && <span class="ledger-summary">{summary}</span>}
       {
         meta.length > 0 && (
-          <span class="row-meta mono">
+          <span class="ledger-meta mono">
             {meta.map((item, index) => (
               <span>
                 {index > 0 && <span aria-hidden="true"> · </span>}
@@ -54,11 +53,11 @@ const imageAlt = image ? lx(image.alt, locale) : "";
         )
       }
     </span>
-    {amount !== null && <span class="row-amount mono">{amount}</span>}
+    {amount !== null && <span class="ledger-amount mono">{amount}</span>}
     {
       image && (
         <img
-          class="row-thumb"
+          class="ledger-thumb"
           src={image.src}
           alt={imageAlt}
           width="160"
@@ -72,66 +71,70 @@ const imageAlt = image ? lx(image.alt, locale) : "";
 </li>
 
 <style>
-  .row {
+  .ledger-row {
     border-block-start: 1px solid var(--rule);
   }
 
-  .row:last-child {
+  .ledger-row:last-child {
     border-block-end: 1px solid var(--rule);
   }
 
-  .row-link {
+  .ledger-link {
     display: grid;
-    grid-template-columns: 7.5rem 1fr auto;
+    grid-template-columns: 6.5rem minmax(0, 1fr) auto 4.5rem;
     align-items: start;
     gap: var(--s-2) var(--s-5);
-    padding-block: var(--s-5);
+    padding-block: var(--s-4);
     padding-inline: var(--s-2);
     color: var(--ink);
     text-decoration: none;
     transition: background-color var(--dur-1) var(--ease-out);
   }
 
-  .row-link:hover {
+  .ledger-link:hover {
     background: var(--surface);
   }
 
-  .row-date {
+  .ledger-date {
     color: var(--text-3);
-    padding-block-start: 0.28em;
+    font-size: var(--step--1);
+    padding-block-start: 0.45em;
   }
 
-  .row-body {
+  .ledger-main {
     display: grid;
     gap: var(--s-1);
   }
 
-  .row-title {
+  .ledger-title {
     font-family: var(--font-display);
     font-size: var(--step-1);
-    font-weight: 700;
-    line-height: 1.25;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
   }
 
-  .row-summary {
+  .ledger-summary {
     color: var(--text-2);
-    max-inline-size: 62ch;
+    max-inline-size: 64ch;
   }
 
-  .row-meta {
+  .ledger-meta {
     color: var(--text-3);
+    font-size: var(--step--1);
   }
 
-  .row-amount {
+  .ledger-amount {
     color: var(--accent-give);
+    font-size: var(--step-1);
     font-weight: 600;
+    line-height: 1.2;
     white-space: nowrap;
-    padding-block-start: 0.28em;
+    text-align: end;
+    padding-block-start: 0.1em;
   }
 
-  .row-thumb {
-    grid-column: 3;
-    inline-size: 6.5rem;
+  .ledger-thumb {
+    inline-size: 4.5rem;
     block-size: auto;
     aspect-ratio: 3 / 2;
     object-fit: cover;
@@ -139,30 +142,26 @@ const imageAlt = image ? lx(image.alt, locale) : "";
     background: var(--surface-sunk);
   }
 
-  /* An amount and a thumbnail can both sit in the last column. */
-  .row-amount + .row-thumb {
-    justify-self: end;
-  }
-
-  @media (max-width: 640px) {
-    .row-link {
-      grid-template-columns: 1fr auto;
+  @media (max-width: 720px) {
+    .ledger-link {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: var(--s-1) var(--s-4);
     }
 
-    .row-date {
+    .ledger-date {
       grid-column: 1 / -1;
+      padding-block-start: 0;
+      margin-block-end: var(--s-2);
     }
 
-    .row-body {
-      grid-column: 1;
+    .ledger-amount {
+      justify-self: end;
     }
 
-    .row-meta {
-      grid-column: 1;
-    }
-
-    .row-thumb {
-      inline-size: 4.5rem;
+    .ledger-thumb {
+      grid-column: 2;
+      grid-row: 2 / span 2;
+      inline-size: 3.5rem;
     }
   }
 </style>

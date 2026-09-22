@@ -27,7 +27,7 @@ const KIND_LABEL: Record<string, UIKey> = {
 
   {
     posts.length > 0 ? (
-      <ul class="rows">
+      <ul class="ledger">
         {posts.map((entry) => (
           <EntryRow
             href={localePath(`/stories/${entry.slug}`, lang)}

@@ -5,6 +5,10 @@
  * and gold of its printed financial-report covers, and the burnt orange,
  * charcoal and green of the JNVCkm Alumni logotype. It is deliberately not a
  * general-purpose palette.
+ *
+ * The art direction is "the annual report, set by a designer": a masthead, a
+ * left rail that labels every block, and a ledger of real figures. Calm, but
+ * composed — no gradients, no shadows, no colour used decoratively.
  */
 
 :root {
@@ -19,12 +23,13 @@
   --rule: #ddd4bf;
   --rule-strong: #c3b89e;
 
-  /* --- Brand (structure: header, footer, dark bands) --------------------- */
+  /* --- Brand (structure: masthead, rules, footer, bands) ----------------- */
   --brand: #3d4a21;
   --brand-deep: #2b3416;
   --brand-ink: #f7f3e8; /* text on --brand */
   --brand-tint: color-mix(in oklab, var(--brand) 8%, var(--paper));
-  --brand-line: color-mix(in oklab, var(--brand) 24%, var(--paper));
+  --brand-wash: color-mix(in oklab, var(--brand) 4%, var(--paper));
+  --brand-line: color-mix(in oklab, var(--brand) 30%, var(--paper));
 
   /* --- Accents, one per content pillar ----------------------------------- */
   /* Programs (IGNITE, NCL) — gold from the report covers. */
@@ -46,13 +51,14 @@
 
   --step--1: clamp(0.83rem, 0.8rem + 0.12vw, 0.9rem);
   --step-0: clamp(1rem, 0.97rem + 0.16vw, 1.09rem);
-  --step-1: clamp(1.15rem, 1.08rem + 0.34vw, 1.32rem);
-  --step-2: clamp(1.4rem, 1.26rem + 0.7vw, 1.75rem);
-  --step-3: clamp(1.75rem, 1.45rem + 1.5vw, 2.5rem);
-  --step-4: clamp(2.15rem, 1.6rem + 2.6vw, 3.4rem);
+  --step-1: clamp(1.2rem, 1.1rem + 0.42vw, 1.45rem);
+  --step-2: clamp(1.55rem, 1.3rem + 1.15vw, 2.15rem);
+  --step-3: clamp(2rem, 1.5rem + 2.4vw, 3.1rem);
+  --step-4: clamp(2.1rem, 1.6rem + 3.6vw, 4rem);
+  --step-5: clamp(2.9rem, 1.5rem + 6vw, 5.4rem);
 
   --leading-body: 1.62;
-  --leading-display: 1.12;
+  --leading-display: 1.05;
   --measure: 66ch;
   --measure-narrow: 52ch;
 
@@ -77,6 +83,8 @@
   /* --- Layout ------------------------------------------------------------ */
   --container: 78rem;
   --gutter: clamp(1.25rem, 5vw, 4rem);
+  /* Width of the left rail that labels every block. */
+  --rail: 13rem;
 
   /* --- Motion ------------------------------------------------------------ */
   --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);

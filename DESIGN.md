@@ -43,15 +43,26 @@ giving. Nothing is coloured for decoration.
 Kannada headings fall back to Noto Serif Kannada, paired with Arvo. No Latin-only
 flourishes (drop caps, small caps) are applied to Kannada.
 
-## 3. One repeated primitive — the dated record
+## 3. One repeated structure — the rail, and the ledger inside it
 
-Everything in this archive is dated, so one form repeats: a ruled row with the
-date in mono on the left, the record in the middle, an amount on the right when
-there is one, and a small photo plate when one exists (`EntryRow.astro`).
+Two moves, applied everywhere.
 
-It is the home feed, the events index, the contributions ledger, the stories
-index, and the "editions and seasons" list on a program page. One form,
-content-derived, rather than a different treatment per section.
+**The rail.** Every block of the page is a two-column grid: a narrow left rail
+(`--rail`, 13rem) carrying the block's heading, a one-line lede and a "view all"
+link, and a wide right body carrying the content (`Section.astro`, styled by
+`.section-block` in `global.css`). On wide screens this gives every page the same
+editorial rhythm and a stable place for the eye; below 900px it collapses to one
+column. The rail label *is* the section heading, so nothing is labelled twice.
+
+**The ledger.** The content is a record of dated things, so the records are a
+ruled list (`EntryRow.astro`): date in mono on the left, the record in the
+middle, the figure set large on the right in burnt orange, and a small plate
+when a photograph exists. The home page opens with the ledger of giving, because
+real amounts are the most convincing thing the site has.
+
+The home page also carries a **masthead** (`.masthead`): the association's name
+in Arvo at `--step-4`, a 2px olive rule under it, and one real photograph. It is
+a printed-report cover, not a hero banner.
 
 Two supporting components, because the archive contains two kinds of image:
 
@@ -68,6 +79,13 @@ Two supporting components, because the archive contains two kinds of image:
   background, no glowing border.
 - No thick coloured stripe on a card edge; no coloured border on a rounded
   element. Surfaces get a hairline border **or** a shadow, never both.
+- No centred stack of identical full-width bands. The rail gives every block a
+  different proportion, and the page has one dominant element rather than six
+  equal ones.
+- No timid type scale: the masthead is `--step-4`, section headings `--step-2`,
+  ledger figures `--step-1`. Nothing hovers in a single narrow band.
+- Colour is placed, not sprinkled: olive for structure, gold for program
+  identity, orange only on figures and the primary action.
 - Radii are 2–8px, drawn from the token scale.
 - No all-caps headings or labels; no wide letter-spacing; body text is 16px+ at
   a 1.62 line-height and a measure of 66ch.

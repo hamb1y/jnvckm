@@ -2,6 +2,7 @@
 import EntryRow from "@/components/EntryRow.astro";
 import Figure from "@/components/Figure.astro";
 import Markdown from "@/components/Markdown.astro";
+import Section from "@/components/Section.astro";
 import { eventsForProgram } from "@/data/events";
 import { programById } from "@/data/programs";
 import { lx, t } from "@/i18n/utils";
@@ -35,11 +36,10 @@ const editions = eventsForProgram(id);
 
   <Markdown value={lx(program.body, lang)} />
 
-  <section class="page-section">
-    <h2>{t(lang, "programs.relatedEvents")}</h2>
+  <Section id="from-the-archive" label={t(lang, "programs.relatedEvents")}>
     {
       editions.length > 0 ? (
-        <ul class="rows">
+        <ul class="ledger">
           {editions.map((entry) => (
             <EntryRow
               href={localePath(`/events/${entry.slug}`, lang)}
@@ -56,7 +56,7 @@ const editions = eventsForProgram(id);
         <p class="empty-state">{t(lang, "empty.generic")}</p>
       )
     }
-  </section>
+  </Section>
 </div>
 
 <style>
@@ -87,7 +87,7 @@ const editions = eventsForProgram(id);
     margin-block-start: var(--s-7);
   }
 
-  .page-section {
-    margin-block-start: var(--s-8);
+  .container > :global(.section-block) {
+    margin-block-start: var(--s-7);
   }
 </style>

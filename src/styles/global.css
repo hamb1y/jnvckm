@@ -60,6 +60,7 @@ h4 {
   line-height: var(--leading-display);
   letter-spacing: -0.01em;
   text-wrap: balance;
+  overflow-wrap: break-word;
 }
 
 h1 {
@@ -237,30 +238,68 @@ figcaption {
   cursor: not-allowed;
 }
 
-/* --- Shared page patterns ------------------------------------------------ */
-.rows {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
+/* --- Page rhythm --------------------------------------------------------- */
+/* One editorial structure for the whole site: a narrow rail that labels the
+   block, and a wide body that carries it. Every section uses it, so the pages
+   read as a composed document rather than a stack of centred bands. */
 .page-head {
-  max-inline-size: var(--measure);
-  margin-block-end: var(--s-7);
+  max-inline-size: 44rem;
+  padding-block-end: clamp(var(--s-6), 4vw, var(--s-8));
 }
 
 .page-head h1 + p {
-  margin-block-start: var(--s-4);
-  font-size: var(--step-1);
+  margin-block-start: var(--s-5);
+  font-size: var(--step-2);
   color: var(--text-2);
+  max-inline-size: var(--measure-narrow);
+  text-wrap: pretty;
 }
 
-.page-section + .page-section {
-  margin-block-start: var(--s-8);
+.section-block {
+  display: grid;
+  grid-template-columns: var(--rail) minmax(0, 1fr);
+  gap: var(--s-4) clamp(var(--s-6), 4vw, var(--s-8));
+  padding-block: clamp(var(--s-7), 5vw, var(--s-9));
+  border-block-start: 1px solid var(--rule);
 }
 
-.page-section > h2 {
-  margin-block-end: var(--s-4);
+.rail {
+  display: grid;
+  gap: var(--s-3);
+  align-content: start;
+}
+
+.rail-label {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.rail-label--program {
+  color: var(--accent-program);
+}
+
+.rail-lede {
+  color: var(--text-2);
+  font-size: var(--step--1);
+  max-inline-size: 30ch;
+}
+
+.rail-link {
+  justify-self: start;
+  font-size: var(--step--1);
+  font-weight: 700;
+  color: var(--accent-give);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+/* --- Ledger: the site's signature list of dated records ------------------ */
+.ledger {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .empty-state {
@@ -275,23 +314,65 @@ figcaption {
   color: var(--text-2);
 }
 
-/* --- Section headers ----------------------------------------------------- */
-.section-head {
+/* --- Masthead ------------------------------------------------------------ */
+.masthead {
+  border-block-end: 2px solid var(--brand-line);
+}
+
+.masthead-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(var(--s-6), 5vw, var(--s-9));
+  padding-block: clamp(var(--s-7), 5.5vw, var(--s-9));
+}
+
+.masthead-name {
+  font-size: var(--step-4);
+  letter-spacing: -0.035em;
+}
+
+.masthead-line {
+  margin-block-start: var(--s-5);
+  font-size: var(--step-2);
+  color: var(--text-2);
+  max-inline-size: 30ch;
+  text-wrap: pretty;
+}
+
+.masthead-actions {
   display: flex;
   flex-wrap: wrap;
-  align-items: end;
-  justify-content: space-between;
-  gap: var(--s-3) var(--s-5);
-  margin-block-end: var(--s-6);
+  gap: var(--s-3);
+  margin-block-start: var(--s-6);
 }
 
-.section-head > .section-lede {
-  max-width: var(--measure-narrow);
+.masthead-facts {
+  margin-block-start: clamp(var(--s-6), 4vw, var(--s-8));
+  padding-block-start: var(--s-5);
+  border-block-start: 1px solid var(--rule);
   color: var(--text-2);
+  font-size: var(--step--1);
+  max-inline-size: var(--measure);
 }
 
-.section-head h2 + p {
-  margin-block-start: var(--s-2);
+@media (max-width: 900px) {
+  .section-block {
+    grid-template-columns: 1fr;
+    gap: var(--s-5);
+  }
+
+  .rail {
+    gap: var(--s-2);
+  }
+
+  .rail-lede {
+    max-inline-size: var(--measure);
+  }
+
+  .masthead-inner {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* --- On-brand band ------------------------------------------------------- */
