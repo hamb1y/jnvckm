@@ -6,16 +6,19 @@
   },
   "date": "2016-12-04",
   "program": "meet",
-  "location": "JNV Balehonnur",
+  "location": {
+    "en": "JNV Balehonnur",
+    "kn": "ಜೆಎನ್‌ವಿ ಬಾಳೆಹೊನ್ನೂರು"
+  },
   "summary": {
-    "en": "The annual campus gathering, held on 4 December 2016.",
+    "en": "The annual campus meet, held on 4 December 2016.",
     "kn": "ಡಿಸೆಂಬರ್ 4, 2016ರಂದು ನಡೆದ ವಾರ್ಷಿಕ ಆವರಣ ಸಮಾವೇಶ."
   },
-  "body": "The Annual Alumni Meet 2016 was held on December 4, 2016, at JNV Balehonnur. This gathering provided alumni with an opportunity to revisit their alma mater, meet former classmates and teachers, and contribute to the institution's ongoing development.",
-  "source": {
-    "en": "JNVCKM alumni archive",
-    "kn": "ಜೆಎನ್‌ವಿಸಿಕೆಎಂ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಂಗ್ರಹ"
+  "body": {
+    "en": "The annual meet brings alumni back to the campus at Seegodu. In 2016 it fell on 4 December, the first Sunday of the month — the date the school has kept for the meet for years.\n\nAlumni walked the campus, met teachers and staff, and caught up with classmates across batches. The gathering was also a chance to contribute to the projects the association had under way.",
+    "kn": "ವಾರ್ಷಿಕ ಸಮಾವೇಶ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳನ್ನು ಸೀಗೋಡುವಿನ ಆವರಣಕ್ಕೆ ಕರೆತರುತ್ತದೆ. 2016ರಲ್ಲಿ ಇದು ಡಿಸೆಂಬರ್ 4ರಂದು, ಅಂದರೆ ತಿಂಗಳ ಮೊದಲ ಭಾನುವಾರ ನಡೆಯಿತು — ವರ್ಷಗಳಿಂದ ಈ ಸಮಾವೇಶಕ್ಕೆ ಶಾಲೆ ಇಟ್ಟುಕೊಂಡಿರುವ ದಿನ.\n\nಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳು ಆವರಣದಲ್ಲಿ ತಿರುಗಾಡಿ, ಶಿಕ್ಷಕರು ಮತ್ತು ಸಿಬ್ಬಂದಿಯನ್ನು ಭೇಟಿಯಾಗಿ, ವಿವಿಧ ಬ್ಯಾಚ್‌ಗಳ ಸ್ನೇಹಿತರೊಂದಿಗೆ ಮಾತನಾಡಿದರು. ಸಂಘವು ಕೈಗೆತ್ತಿಕೊಂಡಿದ್ದ ಯೋಜನೆಗಳಿಗೆ ಕೊಡುಗೆ ನೀಡಲು ಇದೊಂದು ಅವಕಾಶವೂ ಆಗಿತ್ತು."
   },
+  "source": "",
   "image": {
     "src": "/images/img-20161204-wa0001-1.webp",
     "alt": "A speaker at a microphone on a stage, with students seated at tables on either side."

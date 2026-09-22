@@ -6,16 +6,19 @@
   },
   "date": "2015-12-19",
   "program": null,
-  "location": "JNV Balehonnur",
+  "location": {
+    "en": "JNV Balehonnur",
+    "kn": "ಜೆಎನ್‌ವಿ ಬಾಳೆಹೊನ್ನೂರು"
+  },
   "summary": {
     "en": "The Mangalore Amateur Radio Club introduced students to amateur radio, with a live demonstration.",
-    "kn": "ಮಂಗಳೂರು ಹವ್ಯಾಸಿ ರೇಡಿಯೋ ಕ್ಲಬ್ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಹ್ಯಾಮ್ ರೇಡಿಯೋ ಪರಿಚಯಿಸಿ, ನೇರ ಪ್ರದರ್ಶನ ನೀಡಿತು."
+    "kn": "ಮಂಗಳೂರು ಹವ್ಯಾಸಿ ರೇಡಿಯೋ ಕ್ಲಬ್, ನೇರ ಪ್ರದರ್ಶನದೊಂದಿಗೆ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಪರಿಚಯ."
   },
-  "body": "Members of the Mangalore Amateur Radio Club (MARC) from Mangalore provided students at Jawahar Navodaya Vidyalaya Balehonnur with an introduction to Amateur Radio (also known as HAM radio) and accompanied it with a live demonstration.\n\nThis technical workshop exposed students to radio communication technology and provided hands-on experience with amateur radio equipment, broadening their understanding of communication systems and technology.",
-  "source": {
-    "en": "JNVCKM alumni archive",
-    "kn": "ಜೆಎನ್‌ವಿಸಿಕೆಎಂ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಂಗ್ರಹ"
+  "body": {
+    "en": "Members of the Mangalore Amateur Radio Club visited the Vidyalaya in December 2015 and introduced students to amateur radio. They brought equipment and ran a live demonstration, so students could see a working station rather than only hear about one.",
+    "kn": "ಮಂಗಳೂರು ಹವ್ಯಾಸಿ ರೇಡಿಯೋ ಕ್ಲಬ್‌ನ ಸದಸ್ಯರು ಡಿಸೆಂಬರ್ 2015ರಲ್ಲಿ ವಿದ್ಯಾಲಯಕ್ಕೆ ಬಂದು ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಹವ್ಯಾಸಿ ರೇಡಿಯೋ ಪರಿಚಯಿಸಿದರು. ಅವರು ಉಪಕರಣಗಳನ್ನು ತಂದು ನೇರ ಪ್ರದರ್ಶನ ನಡೆಸಿದರು; ಹೀಗಾಗಿ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಕೇವಲ ಕೇಳುವ ಬದಲು ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತಿರುವ ಸ್ಟೇಷನ್ ಅನ್ನು ನೋಡುವ ಅವಕಾಶ ಸಿಕ್ಕಿತು."
   },
+  "source": "",
   "image": {
     "src": "/images/img-20151220-wa0011.webp",
     "alt": {

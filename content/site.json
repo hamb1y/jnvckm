@@ -29,8 +29,12 @@
   "socials": [],
   "repository": "https://github.com/hamb1y/jnvckm",
   "credit": {
-    "label": "Rishi Malnad",
+    "label": "Rishi Malnad (hamb1y)",
     "url": "https://github.com/hamb1y"
+  },
+  "license": {
+    "label": "CWSL-1.0",
+    "url": "https://github.com/hamb1y/jnvckm/blob/main/LICENSE"
   },
   "donations": {
     "enabled": false,

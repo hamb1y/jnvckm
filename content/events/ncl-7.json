@@ -6,16 +6,19 @@
   },
   "date": "2017-11-11",
   "program": "ncl",
-  "location": "RNS Institute of Technology Grounds, Bengaluru",
+  "location": {
+    "en": "RNS Institute of Technology Grounds, Bengaluru",
+    "kn": "ಆರ್‌ಎನ್‌ಎಸ್ ಇನ್‌ಸ್ಟಿಟ್ಯೂಟ್ ಆಫ್ ಟೆಕ್ನಾಲಜಿ ಮೈದಾನ, ಬೆಂಗಳೂರು"
+  },
   "summary": {
     "en": "A two-day tournament bringing batches together.",
     "kn": "ಬ್ಯಾಚ್‌ಗಳನ್ನು ಒಂದೆಡೆ ತಂದ ಎರಡು ದಿನಗಳ ಪಂದ್ಯಾವಳಿ."
   },
-  "body": "The seventh edition of the Navodaya Cricket League (NCL) was organized as a two-day sports tournament, bringing together alumni from different batches to compete and reconnect through the spirit of cricket.",
-  "source": {
-    "en": "JNVCKM alumni archive",
-    "kn": "ಜೆಎನ್‌ವಿಸಿಕೆಎಂ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಂಗ್ರಹ"
+  "body": {
+    "en": "The seventh edition ran over two days at the RNS Institute of Technology grounds in Bengaluru, with alumni from across the batches taking part.",
+    "kn": "ಏಳನೇ ಆವೃತ್ತಿ ಎರಡು ದಿನಗಳ ಪಂದ್ಯಾವಳಿಯಾಗಿ ಬೆಂಗಳೂರಿನ ಆರ್‌ಎನ್‌ಎಸ್ ಇನ್‌ಸ್ಟಿಟ್ಯೂಟ್ ಆಫ್ ಟೆಕ್ನಾಲಜಿ ಮೈದಾನದಲ್ಲಿ ನಡೆಯಿತು; ವಿವಿಧ ಬ್ಯಾಚ್‌ಗಳ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳು ಪಾಲ್ಗೊಂಡರು."
   },
+  "source": "",
   "image": null,
   "documents": []
 }

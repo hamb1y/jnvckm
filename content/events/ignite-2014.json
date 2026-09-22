@@ -6,16 +6,19 @@
   },
   "date": "2014-12-06",
   "program": "ignite",
-  "location": "JNV Balehonnur",
+  "location": {
+    "en": "JNV Balehonnur",
+    "kn": "ಜೆಎನ್‌ವಿ ಬಾಳೆಹೊನ್ನೂರು"
+  },
   "summary": {
     "en": "The tenth edition, reported by both Prajavani and Udayavani.",
     "kn": "ಹತ್ತನೇ ಆವೃತ್ತಿ; ಪ್ರಜಾವಾಣಿ ಮತ್ತು ಉದಯವಾಣಿ ಎರಡೂ ವರದಿ ಮಾಡಿದವು."
   },
-  "body": "The 10th edition of IGNITE was organized as a career and personality development workshop, continuing the decade-long tradition of providing valuable guidance to students about their future prospects and personal growth.",
-  "source": {
-    "en": "JNVCKM alumni archive",
-    "kn": "ಜೆಎನ್‌ವಿಸಿಕೆಎಂ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಂಗ್ರಹ"
+  "body": {
+    "en": "The tenth edition of IGNITE was held at the Vidyalaya in December 2014. Alumni spoke with students of classes 10 to 12 about the paths open after school, and both Prajavani and Udayavani carried reports on it. Copies of those reports are with this record.",
+    "kn": "ಇಗ್ನೈಟ್‌ನ ಹತ್ತನೇ ಆವೃತ್ತಿ ಡಿಸೆಂಬರ್ 2014ರಲ್ಲಿ ವಿದ್ಯಾಲಯದಲ್ಲಿ ನಡೆಯಿತು. ಶಾಲೆಯ ನಂತರದ ದಾರಿಗಳ ಬಗ್ಗೆ 10ರಿಂದ 12ನೇ ತರಗತಿಯ ವಿದ್ಯಾರ್ಥಿಗಳೊಂದಿಗೆ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳು ಮಾತನಾಡಿದರು. ಪ್ರಜಾವಾಣಿ ಮತ್ತು ಉದಯವಾಣಿ ಎರಡೂ ಇದರ ವರದಿ ಪ್ರಕಟಿಸಿದವು; ಆ ವರದಿಗಳ ಪ್ರತಿಗಳು ಈ ದಾಖಲೆಯಲ್ಲಿವೆ."
   },
+  "source": "",
   "image": null,
   "documents": [
     {

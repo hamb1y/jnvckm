@@ -6,16 +6,19 @@
   },
   "date": "2016-12-03",
   "program": "ignite",
-  "location": "JNV Balehonnur",
+  "location": {
+    "en": "JNV Balehonnur",
+    "kn": "ಜೆಎನ್‌ವಿ ಬಾಳೆಹೊನ್ನೂರು"
+  },
   "summary": {
-    "en": "The twelfth edition of the student-development workshop.",
-    "kn": "ವಿದ್ಯಾರ್ಥಿ ಅಭಿವೃದ್ಧಿ ಕಾರ್ಯಾಗಾರದ ಹನ್ನೆರಡನೇ ಆವೃತ್ತಿ."
+    "en": "The twelfth edition. Mindbenders, the quiz, was held as part of it.",
+    "kn": "ಹನ್ನೆರಡನೇ ಆವೃತ್ತಿ; ಇದರ ಭಾಗವಾಗಿ ಮೈಂಡ್‌ಬೆಂಡರ್ಸ್ ರಸಪ್ರಶ್ನೆ."
   },
-  "body": "The 12th edition of IGNITE was organized as a comprehensive career and personality development workshop. This session continued the tradition of providing valuable guidance to current students about their future career prospects and personal development.",
-  "source": {
-    "en": "JNVCKM alumni archive",
-    "kn": "ಜೆಎನ್‌ವಿಸಿಕೆಎಂ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಂಗ್ರಹ"
+  "body": {
+    "en": "The twelfth edition of IGNITE was held at the Vidyalaya in December 2016. Mindbenders, the quiz for students of classes 8 to 12, ran as part of the same programme on 3 December.",
+    "kn": "ಇಗ್ನೈಟ್‌ನ ಹನ್ನೆರಡನೇ ಆವೃತ್ತಿ ಡಿಸೆಂಬರ್ 2016ರಲ್ಲಿ ವಿದ್ಯಾಲಯದಲ್ಲಿ ನಡೆಯಿತು. ಅದೇ ಕಾರ್ಯಕ್ರಮದ ಭಾಗವಾಗಿ, 8ರಿಂದ 12ನೇ ತರಗತಿಯ ವಿದ್ಯಾರ್ಥಿಗಳಿಗಾಗಿ ಮೈಂಡ್‌ಬೆಂಡರ್ಸ್ ರಸಪ್ರಶ್ನೆ ಡಿಸೆಂಬರ್ 3ರಂದು ನಡೆಯಿತು."
   },
+  "source": "",
   "image": null,
   "documents": []
 }

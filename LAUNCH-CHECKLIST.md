@@ -47,6 +47,10 @@ school or Navodaya Vidyalaya Samiti website.
 
 ## Still to be supplied if wanted
 
+- **The CWSL-1.1 licence text, if it exists.** The footer and `LICENSE` say
+  CWSL-1.0, taken from the licence text used on the sibling project. Confirm
+  whether 1.0 or a newer revision should apply, and who the copyright holder
+  should be named as.
 - Complete IGNITE edition list, and the year the name IGNITE was first used
 - Complete NCL season list: years, champions, venues
 - Whether the Cultural Park project was completed, and completion photographs

@@ -6,16 +6,16 @@
   },
   "date": "2022-08-13",
   "program": null,
-  "location": "JNV Chikkamagaluru",
+  "location": {
+    "en": "JNV Chikkamagaluru",
+    "kn": "ಜೆಎನ್‌ವಿ ಚಿಕ್ಕಮಗಳೂರು"
+  },
   "summary": {
     "en": "Staff honoured for their service, and the Class XII board topper recognised.",
     "kn": "ಸೇವೆಗಾಗಿ ಸಿಬ್ಬಂದಿಗೆ ಸನ್ಮಾನ; 12ನೇ ತರಗತಿ ಬೋರ್ಡ್ ಪರೀಕ್ಷೆಯಲ್ಲಿ ಪ್ರಥಮ ಸ್ಥಾನ ಪಡೆದ ವಿದ್ಯಾರ್ಥಿಗೂ ಗೌರವ."
   },
   "body": "On August 13, 2022, at JNV Chikkamagaluru, the JNVCKM Alumni Association felicitated all staff members for their outstanding and exemplary service to our JNV and students. The board examination results were one of the highlights. The efforts from all students and faculty deserve applause.\n\nDuring this occasion, the association congratulated all students who brought laurels to the Vidyalaya in board examinations. Mr. Deekshith Patel, the 12th board examination topper, was awarded a cash prize.\n\nMr. Gopal Krishna was transferred to JNV Hassan. The JNVCKM Alumni Association felicitated him with a gift voucher. His service to our JNV and support for our association will be remembered fondly.\n\nFinancial Details: Cash prize for topper + Gift voucher for GK + Felicitation logistics = INR 30,165",
-  "source": {
-    "en": "JNVCKM alumni archive",
-    "kn": "ಜೆಎನ್‌ವಿಸಿಕೆಎಂ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಂಗ್ರಹ"
-  },
+  "source": "",
   "image": {
     "src": "/images/whatsapp-image-2022-08-18-at-12-32-11-pm.webp",
     "alt": "Teachers and guests seated at desks, wearing shawls presented during a felicitation."

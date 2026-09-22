@@ -6,16 +6,19 @@
   },
   "date": "2018-12-08",
   "program": "ignite",
-  "location": "JNV Balehonnur",
+  "location": {
+    "en": "JNV Balehonnur",
+    "kn": "ಜೆಎನ್‌ವಿ ಬಾಳೆಹೊನ್ನೂರು"
+  },
   "summary": {
-    "en": "Six focus areas across engineering, medicine, sciences, government service, time management and scholarships.",
-    "kn": "ಎಂಜಿನಿಯರಿಂಗ್, ವೈದ್ಯಕೀಯ, ವಿಜ್ಞಾನ, ಸರ್ಕಾರಿ ಸೇವೆ, ಸಮಯ ನಿರ್ವಹಣೆ ಮತ್ತು ವಿದ್ಯಾರ್ಥಿವೇತನ — ಈ ಆರು ಕ್ಷೇತ್ರಗಳಿಗೆ ಆದ್ಯತೆ ನೀಡಲಾಯಿತು."
+    "en": "Six focus areas, from engineering to scholarships.",
+    "kn": "ಎಂಜಿನಿಯರಿಂಗ್‌ನಿಂದ ವಿದ್ಯಾರ್ಥಿವೇತನದವರೆಗೆ ಆರು ಗಮನ ಕ್ಷೇತ್ರಗಳು."
   },
-  "body": "IGNITE 2018 was a comprehensive career and personality development workshop organized by the JNVCKM Alumni Association for students of the institution.\n\nThe workshop covered six main focus areas: Engineering career paths and entrance examinations, Medicine and associated healthcare fields, Pure sciences including agricultural courses and veterinary science, Government jobs and defense opportunities, Time management skills, and Scholarships and financial aid opportunities.\n\nAll sessions were designed to be interactive and completed within 20-30 minutes, with informative handouts distributed after each session. The workshop also included sessions by senior alumni based on their availability.\n\nA special program was conducted for 10th-grade students covering career choices after 10th grade and soft skills development, helping students make informed decisions about their academic future.",
-  "source": {
-    "en": "JNVCKM alumni archive",
-    "kn": "ಜೆಎನ್‌ವಿಸಿಕೆಎಂ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಂಗ್ರಹ"
+  "body": {
+    "en": "IGNITE 2018 covered six areas: engineering and entrance examinations; medicine and allied healthcare; pure sciences, agriculture and veterinary science; government jobs and defence; time management; and scholarships and financial aid.\n\nSessions were kept to 20–30 minutes and run interactively, with a handout after each one, and senior alumni joined for sessions where they could. A separate programme ran for Class 10 students on the choices open after the 10th, and on the soft skills that go with them.",
+    "kn": "ಇಗ್ನೈಟ್ 2018 ಆರು ಕ್ಷೇತ್ರಗಳನ್ನು ಒಳಗೊಂಡಿತ್ತು: ಎಂಜಿನಿಯರಿಂಗ್ ಮತ್ತು ಪ್ರವೇಶ ಪರೀಕ್ಷೆಗಳು; ವೈದ್ಯಕೀಯ ಮತ್ತು ಸಂಬಂಧಿತ ಆರೋಗ್ಯ ಕ್ಷೇತ್ರ; ವಿಜ್ಞಾನ, ಕೃಷಿ ಮತ್ತು ಪಶುವೈದ್ಯಕೀಯ ವಿಜ್ಞಾನ; ಸರ್ಕಾರಿ ಉದ್ಯೋಗ ಮತ್ತು ರಕ್ಷಣಾ ಕ್ಷೇತ್ರ; ಸಮಯ ನಿರ್ವಹಣೆ; ಮತ್ತು ವಿದ್ಯಾರ್ಥಿವೇತನ ಹಾಗೂ ಆರ್ಥಿಕ ನೆರವು.\n\nಅವಧಿಗಳನ್ನು 20–30 ನಿಮಿಷಗಳಿಗೆ ಸೀಮಿತಗೊಳಿಸಿ ಸಂವಾದಾತ್ಮಕವಾಗಿ ನಡೆಸಲಾಯಿತು; ಪ್ರತಿ ಅವಧಿಯ ನಂತರ ಕೈಪಿಡಿ ನೀಡಲಾಯಿತು. ಸಾಧ್ಯವಿದ್ದಲ್ಲಿ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳು ಅವಧಿಗಳಲ್ಲಿ ಪಾಲ್ಗೊಂಡರು. 10ನೇ ತರಗತಿ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಪ್ರತ್ಯೇಕ ಕಾರ್ಯಕ್ರಮ ನಡೆಯಿತು — 10ನೇ ತರಗತಿಯ ನಂತರದ ಆಯ್ಕೆಗಳು ಮತ್ತು ಅಗತ್ಯವಿರುವ ಮೃದು ಕೌಶಲಗಳ ಬಗ್ಗೆ."
   },
+  "source": "",
   "image": null,
   "documents": []
 }

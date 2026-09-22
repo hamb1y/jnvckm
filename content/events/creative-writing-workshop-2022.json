@@ -6,16 +6,19 @@
   },
   "date": "2022-12-17",
   "program": null,
-  "location": "JNV Balehonnur",
+  "location": {
+    "en": "JNV Balehonnur",
+    "kn": "ಜೆಎನ್‌ವಿ ಬಾಳೆಹೊನ್ನೂರು"
+  },
   "summary": {
     "en": "Mr. H. S. Raviprakash worked with sixty selected students on creative writing.",
     "kn": "ಶ್ರೀ ಹೆಚ್. ಎಸ್. ರವಿಪ್ರಕಾಶ್ ಆಯ್ದ ಅರವತ್ತು ವಿದ್ಯಾರ್ಥಿಗಳೊಂದಿಗೆ ಸೃಜನಶೀಲ ಬರವಣಿಗೆಯ ಕಾರ್ಯಾಗಾರ ನಡೆಸಿದರು."
   },
-  "body": "Mr. H.S. Raviprakash conducted a workshop session on creative writing at Namma JNV on December 17, 2022. Sixty selected students from JNV participated in this session. Raviprakash guided the students through creative writing techniques followed by engaging activities. It was an excellent learning experience for the students.\n\nOn behalf of the JNVCKM family (JNVCKM Alumni Association), we thank Raviprakash for spending time with students and introducing them to the magical world of creative writing.\n\n\"More than my students, I am deeply inspired and touched. His simplicity, dedication, and commitment are phenomenal.\" - Mr. Prem Kumar, Principal, JNVCKM",
-  "source": {
-    "en": "JNVCKM alumni archive",
-    "kn": "ಜೆಎನ್‌ವಿಸಿಕೆಎಂ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಂಗ್ರಹ"
+  "body": {
+    "en": "Mr. H. S. Raviprakash ran a creative-writing workshop at the Vidyalaya on 17 December 2022, working with sixty selected students on technique and then on exercises of their own.\n\nThe association thanks him for the time he spent with the students.\n\n\"More than my students, I am deeply inspired and touched. His simplicity, dedication, and commitment are phenomenal.\" — Mr. Prem Kumar, Principal, JNVCKM",
+    "kn": "ಶ್ರೀ ಹೆಚ್. ಎಸ್. ರವಿಪ್ರಕಾಶ್ 17 ಡಿಸೆಂಬರ್ 2022ರಂದು ವಿದ್ಯಾಲಯದಲ್ಲಿ ಸೃಜನಶೀಲ ಬರವಣಿಗೆಯ ಕಾರ್ಯಾಗಾರ ನಡೆಸಿದರು. ಆಯ್ದ ಅರವತ್ತು ವಿದ್ಯಾರ್ಥಿಗಳೊಂದಿಗೆ ಅವರು ಮೊದಲು ಬರವಣಿಗೆಯ ತಂತ್ರಗಳನ್ನು, ನಂತರ ತಮ್ಮದೇ ಅಭ್ಯಾಸಗಳನ್ನು ಮಾಡಿಸಿದರು.\n\nವಿದ್ಯಾರ್ಥಿಗಳೊಂದಿಗೆ ಸಮಯ ಕಳೆದ ಅವರಿಗೆ ಸಂಘ ಕೃತಜ್ಞತೆ ಸಲ್ಲಿಸುತ್ತದೆ.\n\nಶ್ರೀ ಪ್ರೇಮ್ ಕುಮಾರ್ (ಪ್ರಾಂಶುಪಾಲರು, ಜೆಎನ್‌ವಿಸಿಕೆಎಂ) ಅವರ ಮಾತು: \"More than my students, I am deeply inspired and touched. His simplicity, dedication, and commitment are phenomenal.\""
   },
+  "source": "",
   "image": {
     "src": "/images/whatsapp-image-2022-12-17-at-8-04-45-am.webp",
     "alt": "A man seated on a sofa in a living room."

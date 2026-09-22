@@ -6,16 +6,19 @@
   },
   "date": "2016-11-11",
   "program": "ncl",
-  "location": "RNS Institute of Technology Grounds, Bengaluru",
+  "location": {
+    "en": "RNS Institute of Technology Grounds, Bengaluru",
+    "kn": "ಆರ್‌ಎನ್‌ಎಸ್ ಇನ್‌ಸ್ಟಿಟ್ಯೂಟ್ ಆಫ್ ಟೆಕ್ನಾಲಜಿ ಮೈದಾನ, ಬೆಂಗಳೂರು"
+  },
   "summary": {
-    "en": "The sixth edition of the alumni cricket tournament.",
-    "kn": "ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಕ್ರಿಕೆಟ್ ಪಂದ್ಯಾವಳಿಯ ಆರನೇ ಆವೃತ್ತಿ."
+    "en": "The sixth edition of the league.",
+    "kn": "ಲೀಗ್‌ನ ಆರನೇ ಆವೃತ್ತಿ."
   },
-  "body": "The sixth edition of the Navodaya Cricket League was organized as an annual sports tournament, fostering camaraderie and healthy competition among alumni from different batches.",
-  "source": {
-    "en": "JNVCKM alumni archive",
-    "kn": "ಜೆಎನ್‌ವಿಸಿಕೆಎಂ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಂಗ್ರಹ"
+  "body": {
+    "en": "The sixth season was played at the RNS Institute of Technology grounds in Bengaluru, with teams drawn from across the batches. It is as much a reunion as a tournament: teams are built around batches, so a season puts alumni from different generations on the same ground.",
+    "kn": "ಆರನೇ ಸೀಸನ್ ಬೆಂಗಳೂರಿನ ಆರ್‌ಎನ್‌ಎಸ್ ಇನ್‌ಸ್ಟಿಟ್ಯೂಟ್ ಆಫ್ ಟೆಕ್ನಾಲಜಿ ಮೈದಾನದಲ್ಲಿ ನಡೆಯಿತು; ತಂಡಗಳು ಬೇರೆ ಬೇರೆ ಬ್ಯಾಚ್‌ಗಳಿಂದ ಕಟ್ಟಲ್ಪಟ್ಟವು. ಇದು ಪಂದ್ಯಾವಳಿ ಮಾತ್ರವಲ್ಲ, ಪುನರ್ಮಿಲನವೂ ಹೌದು — ತಂಡಗಳು ಬ್ಯಾಚ್‌ಗಳ ಸುತ್ತ ಕಟ್ಟುವುದರಿಂದ, ಒಂದು ಸೀಸನ್‌ನಲ್ಲಿ ವಿವಿಧ ಪೀಳಿಗೆಯ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳು ಒಂದೇ ಮೈದಾನದಲ್ಲಿ ಸೇರುತ್ತಾರೆ."
   },
+  "source": "",
   "image": null,
   "documents": []
 }

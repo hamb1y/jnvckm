@@ -6,16 +6,19 @@
   },
   "date": "2010-12-04",
   "program": "ignite",
-  "location": "JNV Balehonnur",
+  "location": {
+    "en": "JNV Balehonnur",
+    "kn": "ಜೆಎನ್‌ವಿ ಬಾಳೆಹೊನ್ನೂರು"
+  },
   "summary": {
-    "en": "A two-day personality-development and career-guidance workshop.",
-    "kn": "ಎರಡು ದಿನಗಳ ವ್ಯಕ್ತಿತ್ವ ವಿಕಸನ ಮತ್ತು ವೃತ್ತಿ ಮಾರ್ಗದರ್ಶನ ಕಾರ್ಯಾಗಾರ."
+    "en": "A two-day workshop covering career guidance and personality development.",
+    "kn": "ಎರಡು ದಿನಗಳ ಕಾರ್ಯಾಗಾರ; ವೃತ್ತಿ ಮಾರ್ಗದರ್ಶನ ಮತ್ತು ವ್ಯಕ್ತಿತ್ವ ವಿಕಸನ."
   },
-  "body": "A comprehensive two-day workshop on personality development and career guidance was organized. IGNITE-10 marked an important milestone in the alumni association's commitment to student development and career counseling.",
-  "source": {
-    "en": "JNVCKM alumni archive",
-    "kn": "ಜೆಎನ್‌ವಿಸಿಕೆಎಂ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಂಗ್ರಹ"
+  "body": {
+    "en": "IGNITE 2010 ran over two days, covering both halves of the programme: career guidance and personality development. It was aimed at students of classes 10 to 12, and alumni came back to the Vidyalaya to speak about the fields open to them after school.",
+    "kn": "ಇಗ್ನೈಟ್ 2010 ಎರಡು ದಿನಗಳ ಕಾರ್ಯಾಗಾರ. ಇದರಲ್ಲಿ ವೃತ್ತಿ ಮಾರ್ಗದರ್ಶನ ಮತ್ತು ವ್ಯಕ್ತಿತ್ವ ವಿಕಸನ ಎರಡೂ ಇದ್ದವು. 10ರಿಂದ 12ನೇ ತರಗತಿಯ ವಿದ್ಯಾರ್ಥಿಗಳಿಗಾಗಿ ನಡೆದ ಈ ಕಾರ್ಯಕ್ರಮದಲ್ಲಿ, ಶಾಲೆಯ ನಂತರ ಲಭ್ಯವಿರುವ ಕ್ಷೇತ್ರಗಳ ಬಗ್ಗೆ ಮಾತನಾಡಲು ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳು ವಿದ್ಯಾಲಯಕ್ಕೆ ಬಂದರು."
   },
+  "source": "",
   "image": null,
   "documents": []
 }

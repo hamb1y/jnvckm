@@ -28,7 +28,6 @@ function credit(value: unknown): { label: string; url: string } | null {
   const url = optionalStr(record.url);
   return label && url ? { label, url } : null;
 }
-
 export const site: SiteSettings = {
   name: text(raw.name),
   schoolName: text(raw.schoolName),
@@ -45,6 +44,7 @@ export const site: SiteSettings = {
   socials: socials(raw.socials),
   repository: optionalStr(raw.repository) ?? "https://github.com/hamb1y/jnvckm",
   credit: credit(raw.credit),
+  license: credit(raw.license),
   donations: {
     enabled: bool(donations.enabled),
     note: text(donations.note),

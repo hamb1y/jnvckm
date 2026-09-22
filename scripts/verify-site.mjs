@@ -405,6 +405,16 @@ async function auditDictionaries() {
     }
   }
   notes.push(`dictionaries: ${en.size} keys, en and kn in parity`);
+
+  // Every font stack must carry a Kannada fallback. Without one, Kannada set in
+  // that face renders as tofu boxes — which is how the mono date stamps broke.
+  const tokens = await readFile(path.join(ROOT, "src/styles/tokens.css"), "utf8");
+  for (const stack of ["display", "body", "mono"]) {
+    const line = tokens.match(new RegExp(`--font-${stack}:[^;]+;`))?.[0] ?? "";
+    if (!/Kannada/.test(line)) {
+      fail("src/styles/tokens.css", `--font-${stack} has no Kannada fallback`);
+    }
+  }
 }
 
 async function main() {

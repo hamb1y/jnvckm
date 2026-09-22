@@ -64,19 +64,32 @@ const { contact } = site;
   </div>
 
   <div class="container footer-base">
-    <p class="muted">
-      © {year} {siteName} · {t(lang, "site.formedShort")}
+    <p class="muted">© {year} {siteName} · {t(lang, "site.formedShort")}</p>
+    <p class="muted footer-credit">
+      {
+        site.credit && (
+          <>
+            {t(lang, "footer.creditLabel")}{" "}
+            <a href={site.credit.url} rel="noopener">
+              {site.credit.label}
+            </a>
+          </>
+        )
+      }
+      {
+        site.credit && site.license && <span aria-hidden="true"> · </span>
+      }
+      {
+        site.license && (
+          <>
+            {t(lang, "footer.licenseLabel")}{" "}
+            <a href={site.license.url} rel="noopener">
+              {site.license.label}
+            </a>
+          </>
+        )
+      }
     </p>
-    {
-      site.credit && (
-        <p class="muted">
-          {t(lang, "footer.credit")}:{" "}
-          <a href={site.credit.url} rel="noopener">
-            {site.credit.label}
-          </a>
-        </p>
-      )
-    }
   </div>
 </footer>
 

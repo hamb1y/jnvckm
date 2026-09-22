@@ -6,16 +6,19 @@
   },
   "date": "2006-12-02",
   "program": null,
-  "location": "JNV Balehonnur",
+  "location": {
+    "en": "JNV Balehonnur",
+    "kn": "ಜೆಎನ್‌ವಿ ಬಾಳೆಹೊನ್ನೂರು"
+  },
   "summary": {
-    "en": "The earliest documented alumni-led career workshop, and the beginning of what became IGNITE.",
-    "kn": "ದಾಖಲಾದ ಮೊದಲ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳ ನೇತೃತ್ವದ ವೃತ್ತಿ ಕಾರ್ಯಾಗಾರ; ಇದೇ ಮುಂದೆ ಇಗ್ನೈಟ್ ಆಗಿ ಬೆಳೆಯಿತು."
+    "en": "The association's earliest documented career workshop, and where IGNITE began.",
+    "kn": "ಸಂಘದ ದಾಖಲಿತ ಮೊದಲ ವೃತ್ತಿ ಕಾರ್ಯಾಗಾರ; ಇಗ್ನೈಟ್ ಇಲ್ಲಿಂದಲೇ ಆರಂಭವಾಯಿತು."
   },
-  "body": "The alumni association organized one of the earliest comprehensive career guidance workshops, establishing a foundation for future IGNITE programs. This workshop demonstrated the alumni association's continuous connection with alumni worldwide and their commitment to involving them in the development of the Vidyalaya.\n\nThe association promoted and encouraged alumni to exchange professional knowledge by undertaking and facilitating workshops, meetings, and social gatherings among alumni, students, faculty, and others.",
-  "source": {
-    "en": "JNVCKM alumni archive",
-    "kn": "ಜೆಎನ್‌ವಿಸಿಕೆಎಂ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಂಗ್ರಹ"
+  "body": {
+    "en": "This was the association's first documented career-guidance workshop, and the point the programme that became IGNITE grew from. Alumni returned to the Vidyalaya to speak with students of classes 10 to 12 about what comes after school.",
+    "kn": "ಇದು ಸಂಘದ ದಾಖಲಿತ ಮೊದಲ ವೃತ್ತಿ ಮಾರ್ಗದರ್ಶನ ಕಾರ್ಯಾಗಾರ; ಇದೇ ಮುಂದೆ ಇಗ್ನೈಟ್ ಆಗಿ ಬೆಳೆಯಿತು. ಶಾಲೆಯ ನಂತರದ ದಾರಿಗಳ ಬಗ್ಗೆ 10ರಿಂದ 12ನೇ ತರಗತಿಯ ವಿದ್ಯಾರ್ಥಿಗಳೊಂದಿಗೆ ಮಾತನಾಡಲು ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳು ವಿದ್ಯಾಲಯಕ್ಕೆ ಮರಳಿದರು."
   },
+  "source": "",
   "image": null,
   "documents": []
 }

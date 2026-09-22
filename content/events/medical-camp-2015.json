@@ -6,16 +6,19 @@
   },
   "date": "2015-01-25",
   "program": null,
-  "location": "JNV Balehonnur",
+  "location": {
+    "en": "JNV Balehonnur",
+    "kn": "ಜೆಎನ್‌ವಿ ಬಾಳೆಹೊನ್ನೂರು"
+  },
   "summary": {
-    "en": "Health check-ups and services for the school community.",
-    "kn": "ಶಾಲಾ ಸಮುದಾಯಕ್ಕೆ ಆರೋಗ್ಯ ತಪಾಸಣೆ ಮತ್ತು ಚಿಕಿತ್ಸಾ ಸೇವೆಗಳನ್ನು ನೀಡಲಾಯಿತು."
+    "en": "Health check-ups for students and staff at the Vidyalaya.",
+    "kn": "ವಿದ್ಯಾರ್ಥಿಗಳು ಮತ್ತು ಸಿಬ್ಬಂದಿಗೆ ಆರೋಗ್ಯ ತಪಾಸಣೆ."
   },
-  "body": "A comprehensive medical camp was organized for JNV students and staff members, providing essential healthcare services and health check-ups. This initiative demonstrated the alumni association's commitment to the well-being of the current school community.",
-  "source": {
-    "en": "JNVCKM alumni archive",
-    "kn": "ಜೆಎನ್‌ವಿಸಿಕೆಎಂ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಂಗ್ರಹ"
+  "body": {
+    "en": "A medical camp was held at the Vidyalaya for students and staff, offering health check-ups and basic services. Doctors sat as a panel for the gathering, and a registration desk ran through the day. Both are in the photographs with this record.",
+    "kn": "ವಿದ್ಯಾರ್ಥಿಗಳು ಮತ್ತು ಸಿಬ್ಬಂದಿಗಾಗಿ ವಿದ್ಯಾಲಯದಲ್ಲಿ ವೈದ್ಯಕೀಯ ಶಿಬಿರ ನಡೆಯಿತು. ಆರೋಗ್ಯ ತಪಾಸಣೆ ಮತ್ತು ಮೂಲಭೂತ ಸೇವೆಗಳನ್ನು ನೀಡಲಾಯಿತು. ವೈದ್ಯರು ಪ್ಯಾನೆಲ್ ಆಗಿ ಸಭೆಯನ್ನು ಉದ್ದೇಶಿಸಿ ಮಾತನಾಡಿದರು; ದಿನವಿಡೀ ನೋಂದಣಿ ಮೇಜು ನಡೆಯಿತು. ಎರಡೂ ಈ ದಾಖಲೆಯ ಚಿತ್ರಗಳಲ್ಲಿವೆ."
   },
+  "source": "",
   "image": {
     "src": "/images/dsc0043.webp",
     "alt": {

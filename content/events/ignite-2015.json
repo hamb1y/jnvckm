@@ -6,16 +6,19 @@
   },
   "date": "2015-12-05",
   "program": "ignite",
-  "location": "JNV Balehonnur",
+  "location": {
+    "en": "JNV Balehonnur",
+    "kn": "ಜೆಎನ್‌ವಿ ಬಾಳೆಹೊನ್ನೂರು"
+  },
   "summary": {
-    "en": "The eleventh edition of the career and personality-development workshop.",
-    "kn": "ವೃತ್ತಿ ಮತ್ತು ವ್ಯಕ್ತಿತ್ವ ವಿಕಸನ ಕಾರ್ಯಾಗಾರದ ಹನ್ನೊಂದನೇ ಆವೃತ್ತಿ."
+    "en": "The eleventh edition of the workshop.",
+    "kn": "ಕಾರ್ಯಾಗಾರದ ಹನ್ನೊಂದನೇ ಆವೃತ್ತಿ."
   },
-  "body": "IGNITE is a career and personality development workshop organized at Namma JNV for the students of the institution by the JNVCKM Alumni Association. The 11th edition of IGNITE continued the tradition of providing comprehensive career guidance and personality development sessions to help students make informed decisions about their future.",
-  "source": {
-    "en": "JNVCKM alumni archive",
-    "kn": "ಜೆಎನ್‌ವಿಸಿಕೆಎಂ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಂಗ್ರಹ"
+  "body": {
+    "en": "The eleventh edition of IGNITE was held at the Vidyalaya in December 2015. Alumni from different fields spoke with students of classes 10 to 12 about the options open to them after school, and took their questions.",
+    "kn": "ಇಗ್ನೈಟ್‌ನ ಹನ್ನೊಂದನೇ ಆವೃತ್ತಿ ಡಿಸೆಂಬರ್ 2015ರಲ್ಲಿ ವಿದ್ಯಾಲಯದಲ್ಲಿ ನಡೆಯಿತು. ವಿವಿಧ ಕ್ಷೇತ್ರಗಳ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳು, ಶಾಲೆಯ ನಂತರ ಲಭ್ಯವಿರುವ ಆಯ್ಕೆಗಳ ಬಗ್ಗೆ 10ರಿಂದ 12ನೇ ತರಗತಿಯ ವಿದ್ಯಾರ್ಥಿಗಳೊಂದಿಗೆ ಮಾತನಾಡಿ ಅವರ ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರಿಸಿದರು."
   },
+  "source": "",
   "image": null,
   "documents": []
 }

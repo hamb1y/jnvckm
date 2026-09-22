@@ -90,6 +90,17 @@ Bilingual fields store both languages in one file. A record that exists only in
 English still renders on Kannada pages: `lx()` falls back to English and the
 page tells the reader the archived record is in its original language.
 
+## Licence
+
+The source is governed by the **Controlled Website Source License (CWSL-1.0)** —
+see `LICENSE`. It is a source-available licence, not an open-source one: the code
+is public for inspection and evaluation, and the association named as the
+Authorized Recipient may operate and modify it.
+
+All JNVCKM Alumni Association content, photographs, documents and marks are
+Recipient Content and remain the property of their respective owners; they are
+not relicensed by CWSL.
+
 ## History
 
 This is a rebuild. The previous site lives on the **`archive`** branch, and the

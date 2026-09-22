@@ -6,16 +6,19 @@
   },
   "date": "2016-12-03",
   "program": "ignite",
-  "location": "JNV Balehonnur",
+  "location": {
+    "en": "JNV Balehonnur",
+    "kn": "ಜೆಎನ್‌ವಿ ಬಾಳೆಹೊನ್ನೂರು"
+  },
   "summary": {
-    "en": "A quiz event held as part of IGNITE 2016, open to students of classes 8 to 12.",
-    "kn": "ಇಗ್ನೈಟ್ 2016ರ ಭಾಗವಾಗಿ ನಡೆದ ರಸಪ್ರಶ್ನೆ ಕಾರ್ಯಕ್ರಮ. ಇದು 8ರಿಂದ 12ನೇ ತರಗತಿಯ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಮುಕ್ತವಾಗಿತ್ತು."
+    "en": "A quiz for students of classes 8 to 12, held as part of IGNITE 2016.",
+    "kn": "ಇಗ್ನೈಟ್ 2016ರ ಭಾಗವಾಗಿ ನಡೆದ ರಸಪ್ರಶ್ನೆ; 8ರಿಂದ 12ನೇ ತರಗತಿಯ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಮುಕ್ತ."
   },
-  "body": "Mindbenders 2016 was a quiz and mental challenge event organized to test the intellectual capabilities of participants and promote healthy academic competition among the alumni community.",
-  "source": {
-    "en": "JNVCKM alumni archive",
-    "kn": "ಜೆಎನ್‌ವಿಸಿಕೆಎಂ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಂಗ್ರಹ"
+  "body": {
+    "en": "Mindbenders was the quiz held as part of IGNITE 2016, on the evening of 3 December. It was open to students of classes 8 to 12. The poster for the event is with this record.",
+    "kn": "ಇಗ್ನೈಟ್ 2016ರ ಭಾಗವಾಗಿ, ಡಿಸೆಂಬರ್ 3ರ ಸಂಜೆ ಮೈಂಡ್‌ಬೆಂಡರ್ಸ್ ರಸಪ್ರಶ್ನೆ ನಡೆಯಿತು. ಇದು 8ರಿಂದ 12ನೇ ತರಗತಿಯ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಮುಕ್ತವಾಗಿತ್ತು. ಕಾರ್ಯಕ್ರಮದ ಪೋಸ್ಟರ್ ಈ ದಾಖಲೆಯಲ್ಲಿದೆ."
   },
+  "source": "",
   "image": null,
   "documents": [
     {

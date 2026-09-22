@@ -6,16 +6,19 @@
   },
   "date": "2017-12-02",
   "program": "ignite",
-  "location": "JNV Balehonnur",
+  "location": {
+    "en": "JNV Balehonnur",
+    "kn": "ಜೆಎನ್‌ವಿ ಬಾಳೆಹೊನ್ನೂರು"
+  },
   "summary": {
-    "en": "The thirteenth edition of the career-guidance workshop.",
-    "kn": "ವೃತ್ತಿ ಮಾರ್ಗದರ್ಶನ ಕಾರ್ಯಾಗಾರದ ಹದಿಮೂರನೇ ಆವೃತ್ತಿ."
+    "en": "The thirteenth edition of the workshop.",
+    "kn": "ಕಾರ್ಯಾಗಾರದ ಹದಿಮೂರನೇ ಆವೃತ್ತಿ."
   },
-  "body": "The 13th edition of IGNITE workshop was organized as part of the ongoing career guidance and personality development initiatives by the JNVCKM Alumni Association. This workshop continued the tradition of providing valuable career guidance to current students.",
-  "source": {
-    "en": "JNVCKM alumni archive",
-    "kn": "ಜೆಎನ್‌ವಿಸಿಕೆಎಂ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಂಗ್ರಹ"
+  "body": {
+    "en": "The thirteenth edition of IGNITE was held at the Vidyalaya in December 2017. Alumni returned to speak with students of classes 10 to 12 about the careers and courses open to them after school.",
+    "kn": "ಇಗ್ನೈಟ್‌ನ ಹದಿಮೂರನೇ ಆವೃತ್ತಿ ಡಿಸೆಂಬರ್ 2017ರಲ್ಲಿ ವಿದ್ಯಾಲಯದಲ್ಲಿ ನಡೆಯಿತು. ಶಾಲೆಯ ನಂತರ ಲಭ್ಯವಿರುವ ವೃತ್ತಿ ಮತ್ತು ಕೋರ್ಸ್‌ಗಳ ಬಗ್ಗೆ 10ರಿಂದ 12ನೇ ತರಗತಿಯ ವಿದ್ಯಾರ್ಥಿಗಳೊಂದಿಗೆ ಮಾತನಾಡಲು ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳು ಮರಳಿ ಬಂದರು."
   },
+  "source": "",
   "image": null,
   "documents": []
 }

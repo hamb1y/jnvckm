@@ -100,6 +100,7 @@ export interface SiteSettings {
   socials: Social[];
   repository: string;
   credit: { label: string; url: string } | null;
+  license: { label: string; url: string } | null;
   donations: {
     enabled: boolean;
     note: Localized;

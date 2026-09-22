@@ -45,6 +45,10 @@ that are easy to break by accident.
   and it read as a stack of identical bands. Sections are separated by space;
   every section gets its own shape, and photographs are given size. See
   `DESIGN.md` §3.
+- **Font stacks must carry a Kannada fallback.** The mono stack is used for date
+  stamps and amounts; without a Kannada fallback the month names rendered as
+  tofu boxes. `bun run verify` now fails if any of `--font-display`, `--font-body`
+  or `--font-mono` in `tokens.css` lacks a Kannada family.
 - **Dates**: do not use `Intl.DateTimeFormat` for the month. Kannada month names
   are missing from some ICU builds and it silently renders "22, 2024". Use
   `formatDate()`.
