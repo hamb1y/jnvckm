@@ -2,7 +2,6 @@
 import EntryRow from "@/components/EntryRow.astro";
 import Figure from "@/components/Figure.astro";
 import Markdown from "@/components/Markdown.astro";
-import Section from "@/components/Section.astro";
 import { eventsForProgram } from "@/data/events";
 import { programById } from "@/data/programs";
 import { lx, t } from "@/i18n/utils";
@@ -22,24 +21,39 @@ if (!program) throw new Error(`Unknown program: ${id}`);
 const editions = eventsForProgram(id);
 ---
 
-<div class="container section">
-  <a class="back" href={localePath("/programs", lang)}>{t(lang, "programs.title")}</a>
+<article class="accent-program">
+  <div class="container">
+    <header class="page-head">
+      <a class="back" href={localePath("/programs", lang)}>{t(lang, "programs.title")}</a>
+      <h1>{lx(program.name, lang)}</h1>
+      <p>{lx(program.tagline, lang)}</p>
+    </header>
 
-  <header class="page-head">
-    <h1>{lx(program.name, lang)}</h1>
-    <p>{lx(program.tagline, lang)}</p>
-  </header>
+    <div class="program-intro">
+      <div class="program-media">
+        <Figure
+          media={program.image}
+          locale={lang}
+          ratio="4 / 3"
+          priority={true}
+          placeholder={true}
+          placeholderLabel={lx(program.name, lang)}
+        />
+      </div>
+      <div class="program-copy">
+        <p class="program-note mono">{lx(program.startNote, lang)}</p>
+        <Markdown value={lx(program.body, lang)} />
+      </div>
+    </div>
+  </div>
 
-  <Figure media={program.image} locale={lang} ratio="16 / 9" priority={true} />
-
-  <p class="start-note mono">{lx(program.startNote, lang)}</p>
-
-  <Markdown value={lx(program.body, lang)} />
-
-  <Section id="from-the-archive" label={t(lang, "programs.relatedEvents")}>
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">{t(lang, "programs.relatedEvents")}</h2>
+    </div>
     {
       editions.length > 0 ? (
-        <ul class="ledger">
+        <ul class="records">
           {editions.map((entry) => (
             <EntryRow
               href={localePath(`/events/${entry.slug}`, lang)}
@@ -56,38 +70,47 @@ const editions = eventsForProgram(id);
         <p class="empty-state">{t(lang, "empty.generic")}</p>
       )
     }
-  </Section>
-</div>
+  </div>
+</article>
 
 <style>
+  .container {
+    padding-block-start: clamp(2rem, 5vw, 4rem);
+  }
+
   .back {
     display: inline-block;
-    margin-block-end: var(--s-6);
-    font-weight: 600;
+    margin-block-end: var(--s-5);
+    font-weight: 700;
   }
 
   .page-head h1 + p {
-    color: var(--accent-program);
+    color: var(--accent);
     font-weight: 600;
   }
 
-  .container > figure {
-    margin-block-start: var(--s-6);
+  .program-intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(var(--s-6), 5vw, var(--s-9));
+    align-items: start;
   }
 
-  .start-note {
-    margin-block-start: var(--s-5);
-    padding-block-start: var(--s-4);
-    border-block-start: 1px solid var(--rule);
+  .program-note {
+    padding-block-end: var(--s-4);
+    border-block-end: 1px solid var(--rule);
     color: var(--text-3);
-    max-inline-size: var(--measure);
+    max-inline-size: 52ch;
   }
 
-  .container > :global(.prose) {
-    margin-block-start: var(--s-7);
+  .container > .section-head {
+    padding-block-start: clamp(var(--s-6), 5vw, var(--s-8));
+    margin-block-end: var(--s-5);
   }
 
-  .container > :global(.section-block) {
-    margin-block-start: var(--s-7);
+  @media (max-width: 900px) {
+    .program-intro {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

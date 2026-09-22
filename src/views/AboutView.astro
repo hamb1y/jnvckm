@@ -1,6 +1,5 @@
 ---
 import Figure from "@/components/Figure.astro";
-import Section from "@/components/Section.astro";
 import { site } from "@/data/site";
 import { lx, t } from "@/i18n/utils";
 import { localePath } from "@/lib/paths";
@@ -53,49 +52,99 @@ const work = [
     <h1>{t(lang, "about.title")}</h1>
     <p>{t(lang, "about.lede")}</p>
   </header>
-
-  <Section id="what-we-do" label={t(lang, "about.whatWeDo")}>
-    <ul class="work-list">
-      {work.map((item) => <li>{lx(item, lang)}</li>)}
-    </ul>
-  </Section>
-
-  <Section id="the-vidyalaya" label={t(lang, "about.schoolTitle")}>
-    <p class="lede">{lx(site.tagline, lang)}</p>
-    <p class="links">
-      <a href={localePath("/programs", lang)}>{t(lang, "nav.programs")}</a>
-      <a href={localePath("/contributions", lang)}>{t(lang, "nav.impact")}</a>
-      <a href={localePath("/vidyalaya", lang)}>{t(lang, "nav.vidyalaya")}</a>
-    </p>
-    <Figure media={group} locale={lang} ratio="16 / 9" />
-  </Section>
 </div>
 
+<section class="accent-brand">
+  <div class="container about">
+    <div class="about-copy">
+      <h2 class="section-title">{t(lang, "about.whatWeDo")}</h2>
+      <ul class="work-list">
+        {work.map((item) => <li>{lx(item, lang)}</li>)}
+      </ul>
+      <p class="links">
+        <a href={localePath("/programs", lang)}>{t(lang, "nav.programs")}</a>
+        <a href={localePath("/contributions", lang)}>{t(lang, "nav.impact")}</a>
+        <a href={localePath("/vidyalaya", lang)}>{t(lang, "nav.vidyalaya")}</a>
+      </p>
+    </div>
+    <div class="about-media">
+      <Figure media={group} locale={lang} ratio="4 / 3" showCaption={true} />
+    </div>
+  </div>
+</section>
+
+<section class="accent-brand">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">{t(lang, "about.schoolTitle")}</h2>
+    </div>
+    <p class="measure">{lx(site.tagline, lang)}</p>
+    <p class="measure school">{lx(site.schoolName, lang)}</p>
+  </div>
+</section>
+
 <style>
+  .container {
+    padding-block-start: clamp(2rem, 5vw, 4rem);
+  }
+
+  .about {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: clamp(var(--s-6), 5vw, var(--s-9));
+    align-items: center;
+  }
+
   .work-list {
+    list-style: none;
+    margin: var(--s-5) 0 0;
+    padding: 0;
     display: grid;
     gap: var(--s-3);
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    max-inline-size: var(--measure);
   }
 
   .work-list li {
-    padding-block-end: var(--s-3);
-    border-block-end: 1px solid var(--rule);
+    position: relative;
+    padding-inline-start: 1.1rem;
     font-size: var(--step-1);
+    max-inline-size: 46ch;
+  }
+
+  .work-list li::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: 0;
+    inset-block-start: 0.6em;
+    inline-size: 6px;
+    block-size: 6px;
+    border-radius: 50%;
+    background: var(--accent);
   }
 
   .links {
     display: flex;
     flex-wrap: wrap;
     gap: var(--s-5);
-    margin-block: var(--s-5) var(--s-6);
-    font-weight: 600;
+    margin-block-start: var(--s-6);
+    font-weight: 700;
   }
 
-  .container :global(.figure) {
-    margin-block-start: var(--s-6);
+  .container > section {
+    padding-block: 0;
+  }
+
+  section + section .container {
+    padding-block-start: clamp(var(--s-7), 5vw, var(--s-9));
+  }
+
+  .school {
+    margin-block-start: var(--s-4);
+    color: var(--text-2);
+  }
+
+  @media (max-width: 900px) {
+    .about {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

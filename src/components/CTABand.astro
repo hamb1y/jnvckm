@@ -1,0 +1,92 @@
+---
+/** The closing call to action, on the brand ground. */
+export interface Props {
+  kicker: string;
+  title: string;
+  body: string;
+  primaryHref: string;
+  primaryLabel: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
+}
+
+const { kicker, title, body, primaryHref, primaryLabel, secondaryHref, secondaryLabel } =
+  Astro.props;
+---
+
+<section class="cta on-brand">
+  <div class="container cta-inner">
+    <div>
+      <p class="eyebrow cta-kicker">{kicker}</p>
+      <h2 class="cta-title">{title}</h2>
+      <p class="cta-body">{body}</p>
+    </div>
+    <div class="cta-actions">
+      <a class="btn cta-primary" href={primaryHref}>{primaryLabel}</a>
+      {
+        secondaryHref && secondaryLabel && (
+          <a class="btn cta-secondary" href={secondaryHref}>
+            {secondaryLabel}
+          </a>
+        )
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    align-items: end;
+    gap: clamp(var(--s-6), 5vw, var(--s-9));
+  }
+
+  .cta-kicker {
+    color: color-mix(in oklab, var(--brand-ink) 70%, var(--brand));
+  }
+
+  .cta-title {
+    margin-block-start: var(--s-3);
+    max-inline-size: 22ch;
+  }
+
+  .cta-body {
+    margin-block-start: var(--s-4);
+    max-inline-size: 52ch;
+    color: color-mix(in oklab, var(--brand-ink) 88%, var(--brand));
+  }
+
+  .cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+    justify-content: flex-end;
+  }
+
+  .cta-primary {
+    --btn-bg: var(--accent-give);
+    --btn-fg: #fff8f2;
+    --btn-border: var(--accent-give);
+  }
+
+  .cta-secondary {
+    --btn-fg: var(--brand-ink);
+    --btn-border: color-mix(in oklab, var(--brand-ink) 40%, var(--brand));
+  }
+
+  .cta-secondary:hover {
+    --btn-bg: color-mix(in oklab, var(--brand-ink) 14%, var(--brand));
+  }
+
+  @media (max-width: 900px) {
+    .cta-inner {
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+
+    .cta-actions {
+      justify-content: flex-start;
+    }
+  }
+</style>

@@ -76,11 +76,13 @@ month names are missing from some ICU builds and `Intl` silently produced
 
 ## Layout
 
-`Section.astro` renders every page block as a rail + body grid. The rail carries
-the block heading, a one-line lede and an optional link; the body is a slot.
-`EntryRow.astro` renders one dated record in a ledger; `Figure.astro`,
-`Document.astro` and `Markdown.astro` render media and prose. Global rhythm
-lives in `global.css` under "Page rhythm" and "Masthead".
+Sections are separated by space (`section { padding-block: … }`), not by a rule
+above every block. `Figure.astro` owns all image rendering (ratio, crop, caption,
+empty state). `EntryRow.astro` renders one dated record in a `.records` list;
+`EntryCard.astro` renders a curated record with a photograph; `Band.astro` is a
+full-bleed photograph with its caption in a solid bar beneath. `.ledger` is only
+for label/value figures. Global rhythm, accents and utilities live in
+`global.css`.
 
 ## Islands
 

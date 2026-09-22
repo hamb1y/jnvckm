@@ -41,6 +41,10 @@ that are easy to break by accident.
 
 ## Gotchas this repo has already been bitten by
 
+- **Don't put a rule or a label rail above every section.** The first rebuild did
+  and it read as a stack of identical bands. Sections are separated by space;
+  every section gets its own shape, and photographs are given size. See
+  `DESIGN.md` §3.
 - **Dates**: do not use `Intl.DateTimeFormat` for the month. Kannada month names
   are missing from some ICU builds and it silently renders "22, 2024". Use
   `formatDate()`.

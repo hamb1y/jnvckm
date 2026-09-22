@@ -43,49 +43,63 @@ giving. Nothing is coloured for decoration.
 Kannada headings fall back to Noto Serif Kannada, paired with Arvo. No Latin-only
 flourishes (drop caps, small caps) are applied to Kannada.
 
-## 3. One repeated structure — the rail, and the ledger inside it
+## 3. How pages are composed
 
-Two moves, applied everywhere.
+**Photographs lead, at size.** The archive's real photographs are the site's
+strongest asset, so they are given real width — half a row, a full-bleed band,
+a 4:3 card — and the text supports them. No postage-stamp thumbnails, no stock
+imagery, no illustration standing in for evidence.
 
-**The rail.** Every block of the page is a two-column grid: a narrow left rail
-(`--rail`, 13rem) carrying the block's heading, a one-line lede and a "view all"
-link, and a wide right body carrying the content (`Section.astro`, styled by
-`.section-block` in `global.css`). On wide screens this gives every page the same
-editorial rhythm and a stable place for the eye; below 900px it collapses to one
-column. The rail label *is* the section heading, so nothing is labelled twice.
+**Every section has its own shape.** A page is not one primitive repeated. The
+home page runs: a hero split (copy left, photograph right), a photograph plus a
+ledger of figures, a full-bleed band, alternating image/text program rows, a
+three-up card row, a two-column "where it began", then a closing band. The
+shapes vary because the content does; a uniform grid is what made the first
+attempt monotonous.
 
-**The ledger.** The content is a record of dated things, so the records are a
-ruled list (`EntryRow.astro`): date in mono on the left, the record in the
-middle, the figure set large on the right in burnt orange, and a small plate
-when a photograph exists. The home page opens with the ledger of giving, because
-real amounts are the most convincing thing the site has.
+**Sections are separated by space, not by rules.** `section` carries
+`padding-block: clamp(3rem, 7vw, 6rem)` and nothing else. There is no hairline
+above every block.
 
-The home page also carries a **masthead** (`.masthead`): the association's name
-in Arvo at `--step-4`, a 2px olive rule under it, and one real photograph. It is
-a printed-report cover, not a hero banner.
+**The ledger is for figures, not for page structure.** `.ledger` renders
+label/value rows and is used where the content really is an account — the
+summary of what alumni funded, on the home page. Complete dated indexes (all
+events, all contributions) use `.records`, which is `EntryRow.astro`: date in
+mono, the record, a place or a figure, and a small plate when a photograph
+exists. Curated selections use `EntryCard.astro`.
 
-Two supporting components, because the archive contains two kinds of image:
+**A section can carry an accent.** `.accent-program` (gold), `.accent-give`
+(burnt orange) and `.accent-brand` (olive) set `--accent`, which `.eyebrow`,
+dots and hover states consume. One accent per section, applied by a wrapper.
 
-- **`Figure.astro`** — documentary photographs. Cropped to a ratio, with
-  `object-position` from a position select. Renders nothing when there is no
-  image; it never renders a broken frame.
-- **`Document.astro`** — posters, press clippings, report covers, screenshots.
-  Shown uncropped, in a frame, linked to the full-size file. Cropping a Prajavani
-  clipping or a Zoom screenshot into a 3:2 photo card would destroy it.
+> **Removed by design — do not reintroduce:** the first rebuild gave every block
+> a left rail (a label column) and a hairline rule above it. With the same shape
+> on every section it read as a stack of identical bands, and the rules competed
+> with the photographs. Labels are now sentence-case eyebrows inside the flow,
+> and sections are separated by space. Do not bring back the rail, and do not
+> put a rule above every block.
+
+Two supporting components:
+
+- **`Figure.astro`** — the one frame that owns image rendering: ratio, crop
+  position, caption, and an explicit dashed empty state. A record with no
+  photograph renders nothing (or, where a frame is expected, the empty state)
+  rather than a broken `<img>`.
+- **`Band.astro`** — a full-bleed photograph with its caption in a solid brand
+  bar *beneath* the image, never as a scrim over it, so the photograph is never
+  partly hidden.
 
 ## What this design deliberately avoids
 
 - No gradient, no glassmorphism, no coloured box-shadow, no decorative grid
-  background, no glowing border.
+  background, no glowing border. (The one functional exception is the subtle
+  paper grain on the body ground.)
 - No thick coloured stripe on a card edge; no coloured border on a rounded
   element. Surfaces get a hairline border **or** a shadow, never both.
-- No centred stack of identical full-width bands. The rail gives every block a
-  different proportion, and the page has one dominant element rather than six
-  equal ones.
-- No timid type scale: the masthead is `--step-4`, section headings `--step-2`,
-  ledger figures `--step-1`. Nothing hovers in a single narrow band.
-- Colour is placed, not sprinkled: olive for structure, gold for program
-  identity, orange only on figures and the primary action.
+- No rule above every block, and no label rail beside every block. Sections are
+  separated by space; one shape for every section is what makes a page monotone.
+- No postage-stamp photographs. If a record has a real photograph, give it size;
+  if it does not, do not invent one.
 - Radii are 2–8px, drawn from the token scale.
 - No all-caps headings or labels; no wide letter-spacing; body text is 16px+ at
   a 1.62 line-height and a measure of 66ch.

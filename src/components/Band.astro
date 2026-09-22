@@ -1,0 +1,93 @@
+---
+import { ArrowUpRight } from "lucide-astro";
+
+/**
+ * A full-bleed photograph that breaks the vertical rhythm. The caption sits in
+ * a solid band beneath the image, never as a scrim over it, so the photograph
+ * is never partly hidden.
+ */
+export interface Props {
+  href: string;
+  src: string;
+  alt: string;
+  caption: string;
+  meta?: string;
+}
+
+const { href, src, alt, caption, meta = "" } = Astro.props;
+---
+
+<section class="band">
+  <a class="band-link" href={href}>
+    <img src={src} alt={alt} loading="lazy" decoding="async" />
+    <div class="band-caption">
+      <span class="band-text">
+        <span class="band-title">{caption}</span>
+        {meta !== "" && <span class="band-meta mono">{meta}</span>}
+      </span>
+      <ArrowUpRight size={18} stroke-width={1.7} aria-hidden="true" />
+    </div>
+  </a>
+</section>
+
+<style>
+  .band {
+    padding-block: clamp(var(--s-6), 5vw, var(--s-8));
+  }
+
+  .band-link {
+    display: block;
+    color: var(--brand-ink);
+    text-decoration: none;
+  }
+
+  .band-link img {
+    inline-size: 100%;
+    aspect-ratio: 21 / 9;
+    object-fit: cover;
+    background: var(--surface-sunk);
+  }
+
+  .band-caption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-5);
+    padding: var(--s-4) var(--gutter);
+    background: var(--brand);
+  }
+
+  .band-text {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--s-2) var(--s-5);
+  }
+
+  .band-title {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    letter-spacing: -0.015em;
+  }
+
+  .band-meta {
+    color: color-mix(in oklab, var(--brand-ink) 74%, var(--brand));
+  }
+
+  .band-link:hover .band-title {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  @media (max-width: 900px) {
+    .band-link img {
+      aspect-ratio: 16 / 9;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .band-link img {
+      aspect-ratio: 4 / 3;
+    }
+  }
+</style>

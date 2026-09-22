@@ -6,9 +6,9 @@
  * charcoal and green of the JNVCkm Alumni logotype. It is deliberately not a
  * general-purpose palette.
  *
- * The art direction is "the annual report, set by a designer": a masthead, a
- * left rail that labels every block, and a ledger of real figures. Calm, but
- * composed — no gradients, no shadows, no colour used decoratively.
+ * The art direction is "a well-kept record book": real photographs lead at
+ * size, dates and figures are set in mono, and every section has its own shape
+ * rather than one primitive repeated.
  */
 
 :root {
@@ -23,25 +23,24 @@
   --rule: #ddd4bf;
   --rule-strong: #c3b89e;
 
-  /* --- Brand (structure: masthead, rules, footer, bands) ----------------- */
+  /* --- Brand (structure: header, footer, bands) -------------------------- */
   --brand: #3d4a21;
   --brand-deep: #2b3416;
   --brand-ink: #f7f3e8; /* text on --brand */
   --brand-tint: color-mix(in oklab, var(--brand) 8%, var(--paper));
-  --brand-wash: color-mix(in oklab, var(--brand) 4%, var(--paper));
+  --brand-wash: color-mix(in oklab, var(--brand) 5%, var(--paper));
   --brand-line: color-mix(in oklab, var(--brand) 30%, var(--paper));
 
-  /* --- Accents, one per content pillar ----------------------------------- */
+  /* --- Pillar accents, set per section via --accent --------------------- */
   /* Programs (IGNITE, NCL) — gold from the report covers. */
-  --accent-program: #7e5a0a; /* text-safe on paper */
-  --accent-program-mark: #c08a16; /* marks/rules only, never small text */
+  --accent-program: #7e5a0a;
+  --accent-program-wash: color-mix(in oklab, #c08a16 12%, var(--paper));
   /* Giving (contributions, support) — the logotype's burnt orange. */
-  --accent-give: #a8410f; /* text-safe on paper */
-  --accent-give-mark: #d2701f; /* fills, never small text */
-
-  /* Tints derived, never hand-picked. */
-  --accent-program-wash: color-mix(in oklab, var(--accent-program) 8%, var(--paper));
-  --accent-give-wash: color-mix(in oklab, var(--accent-give) 8%, var(--paper));
+  --accent-give: #a8410f;
+  --accent-give-wash: color-mix(in oklab, #d2701f 10%, var(--paper));
+  /* The association itself — olive. */
+  --accent-brand: #3d4a21;
+  --accent-brand-wash: color-mix(in oklab, #3d4a21 8%, var(--paper));
 
   /* --- Type -------------------------------------------------------------- */
   /* Arvo is the slab serif of the association's own logotype. */
@@ -51,14 +50,13 @@
 
   --step--1: clamp(0.83rem, 0.8rem + 0.12vw, 0.9rem);
   --step-0: clamp(1rem, 0.97rem + 0.16vw, 1.09rem);
-  --step-1: clamp(1.2rem, 1.1rem + 0.42vw, 1.45rem);
-  --step-2: clamp(1.55rem, 1.3rem + 1.15vw, 2.15rem);
-  --step-3: clamp(2rem, 1.5rem + 2.4vw, 3.1rem);
-  --step-4: clamp(2.1rem, 1.6rem + 3.6vw, 4rem);
-  --step-5: clamp(2.9rem, 1.5rem + 6vw, 5.4rem);
+  --step-1: clamp(1.15rem, 1.08rem + 0.35vw, 1.3rem);
+  --step-2: clamp(1.35rem, 1.2rem + 0.7vw, 1.7rem);
+  --step-3: clamp(1.6rem, 1.35rem + 1.4vw, 2.2rem);
+  --step-4: clamp(2rem, 1.6rem + 2.4vw, 3.3rem);
 
   --leading-body: 1.62;
-  --leading-display: 1.05;
+  --leading-display: 1.1;
   --measure: 66ch;
   --measure-narrow: 52ch;
 
@@ -80,11 +78,12 @@
   --r-3: 6px;
   --r-4: 8px;
 
+  /* Rare, and low. Never combined with a border on the same surface. */
+  --shadow-lift: 0 1px 0 rgba(36, 31, 23, 0.04), 0 8px 24px -16px rgba(36, 31, 23, 0.35);
+
   /* --- Layout ------------------------------------------------------------ */
   --container: 78rem;
   --gutter: clamp(1.25rem, 5vw, 4rem);
-  /* Width of the left rail that labels every block. */
-  --rail: 13rem;
 
   /* --- Motion ------------------------------------------------------------ */
   --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);

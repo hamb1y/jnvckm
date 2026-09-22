@@ -1,0 +1,135 @@
+---
+import { ArrowUpRight } from "lucide-astro";
+import Figure from "./Figure.astro";
+import type { Locale, Media } from "@/data/types";
+
+/** A curated record on a card: photograph first, then the record. */
+export interface Props {
+  href: string;
+  title: string;
+  summary?: string;
+  date?: string;
+  label?: string;
+  location?: string;
+  image?: Media | null;
+  locale: Locale;
+  accent?: "program" | "give" | "brand";
+  ratio?: string;
+  placeholder?: boolean;
+}
+
+const {
+  href,
+  title,
+  summary = "",
+  date = "",
+  label = "",
+  location = "",
+  image = null,
+  locale,
+  accent = "brand",
+  ratio = "3 / 2",
+  placeholder = false,
+} = Astro.props;
+---
+
+<article class:list={["card", `accent-${accent}`]}>
+  <Figure
+    media={image}
+    locale={locale}
+    ratio={ratio}
+    showCaption={false}
+    placeholder={placeholder}
+    accent={accent}
+  />
+
+  <div class="meta mono">
+    {date !== "" && <span class="date">{date}</span>}
+    {
+      label !== "" && (
+        <span class="label">
+          <span class="dot" aria-hidden="true" />
+          {label}
+        </span>
+      )
+    }
+  </div>
+
+  <h3 class="title">
+    <a href={href}>
+      {title}
+      <ArrowUpRight size={17} stroke-width={1.6} aria-hidden="true" />
+    </a>
+  </h3>
+
+  {summary !== "" && <p class="summary">{summary}</p>}
+  {location !== "" && <p class="place mono">{location}</p>}
+</article>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+
+  .meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--s-4);
+    font-size: var(--step--1);
+    color: var(--text-3);
+  }
+
+  .date {
+    color: var(--text-2);
+  }
+
+  .label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .dot {
+    inline-size: 7px;
+    block-size: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex: none;
+  }
+
+  .title {
+    font-size: var(--step-2);
+    margin: 0;
+  }
+
+  .title a {
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .title a:hover {
+    color: var(--accent);
+  }
+
+  .title :global(svg) {
+    display: inline-block;
+    vertical-align: baseline;
+    margin-inline-start: 0.15em;
+    color: var(--accent);
+  }
+
+  .summary {
+    color: var(--text-2);
+    max-inline-size: 58ch;
+  }
+
+  .place {
+    font-size: var(--step--1);
+    color: var(--text-3);
+  }
+</style>
