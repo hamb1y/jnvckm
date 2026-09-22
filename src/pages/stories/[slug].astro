@@ -1,0 +1,31 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import StoryDetailView from "@/views/StoryDetailView.astro";
+import { posts } from "@/data/posts";
+import { lx } from "@/i18n/utils";
+
+export function getStaticPaths() {
+  return posts.map((entry) => ({
+    params: { slug: entry.slug },
+    props: {
+      title: lx(entry.title, "en"),
+      summary: lx(entry.summary, "en"),
+      image: entry.image ? entry.image.src : null,
+    },
+  }));
+}
+
+const lang = "en" as const;
+const { slug } = Astro.params;
+const { title, summary, image } = Astro.props;
+---
+
+<BaseLayout
+  lang={lang}
+  path={`/stories/${slug}`}
+  title={title}
+  description={summary}
+  image={image}
+>
+  <StoryDetailView lang={lang} slug={slug!} />
+</BaseLayout>

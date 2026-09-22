@@ -1,0 +1,42 @@
+{
+  "name": {
+    "en": "JNVCKM Alumni Association",
+    "kn": "ಜೆಎನ್‌ವಿಸಿಕೆಎಂ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಂಘ"
+  },
+  "schoolName": {
+    "en": "PM SHRI Jawahar Navodaya Vidyalaya, Chikkamagaluru",
+    "kn": "ಪಿಎಂ ಶ್ರೀ ಜವಾಹರ ನವೋದಯ ವಿದ್ಯಾಲಯ, ಚಿಕ್ಕಮಗಳೂರು"
+  },
+  "formed": 1993,
+  "tagline": {
+    "en": "Generations of Navodayans, connected by Seegodu and committed to giving back.",
+    "kn": "ಸೀಗೋಡು ಬೆಸೆದ ನವೋದಯ ಪೀಳಿಗೆಗಳು, ತಮ್ಮ ವಿದ್ಯಾಲಯಕ್ಕೆ ಕೊಡುಗೆ ಸಲ್ಲಿಸಲು ಬದ್ಧ."
+  },
+  "description": {
+    "en": "The alumni community of Jawahar Navodaya Vidyalaya Chikkamagaluru: IGNITE, the Navodaya Cricket League, reunions, mentoring, batch projects and years of giving back.",
+    "kn": "ಜವಾಹರ ನವೋದಯ ವಿದ್ಯಾಲಯ ಚಿಕ್ಕಮಗಳೂರಿನ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಮುದಾಯ: ಇಗ್ನೈಟ್, ನವೋದಯ ಕ್ರಿಕೆಟ್ ಲೀಗ್, ಪುನರ್ಮಿಲನಗಳು, ಮಾರ್ಗದರ್ಶನ, ಬ್ಯಾಚ್ ಯೋಜನೆಗಳು ಮತ್ತು ವರ್ಷಗಳ ಕೊಡುಗೆ."
+  },
+  "contact": {
+    "email": null,
+    "emailVerified": false,
+    "phone": null,
+    "phoneVerified": false,
+    "address": {
+      "en": "Seegodu, near Balehonnur, Koppa Taluk, Chikkamagaluru district, Karnataka",
+      "kn": "ಸೀಗೋಡು, ಬಾಳೆಹೊನ್ನೂರು ಸಮೀಪ, ಕೊಪ್ಪ ತಾಲೂಕು, ಚಿಕ್ಕಮಗಳೂರು ಜಿಲ್ಲೆ, ಕರ್ನಾಟಕ"
+    }
+  },
+  "socials": [],
+  "repository": "https://github.com/hamb1y/jnvckm",
+  "credit": {
+    "label": "Rishi Malnad",
+    "url": "https://github.com/hamb1y"
+  },
+  "donations": {
+    "enabled": false,
+    "note": {
+      "en": "The association's current ways to contribute are being confirmed. Until they are published here, please reach a batch representative.",
+      "kn": "ಸಂಘಕ್ಕೆ ಕೊಡುಗೆ ನೀಡುವ ಪ್ರಸ್ತುತ ದಾರಿಗಳನ್ನು ದೃಢೀಕರಿಸಲಾಗುತ್ತಿದೆ. ಅವು ಇಲ್ಲಿ ಪ್ರಕಟವಾಗುವವರೆಗೆ, ದಯವಿಟ್ಟು ನಿಮ್ಮ ಬ್ಯಾಚ್ ಪ್ರತಿನಿಧಿಯನ್ನು ಸಂಪರ್ಕಿಸಿ."
+    }
+  }
+}

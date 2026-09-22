@@ -1,0 +1,16 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import EventsView from "@/views/EventsView.astro";
+import { t } from "@/i18n/utils";
+
+const lang = "kn" as const;
+---
+
+<BaseLayout
+  lang={lang}
+  path="/events"
+  title={t(lang, "events.title")}
+  description={t(lang, "events.lede")}
+>
+  <EventsView lang={lang} />
+</BaseLayout>

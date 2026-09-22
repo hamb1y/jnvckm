@@ -1,0 +1,136 @@
+---
+import { SECONDARY_NAV } from "@/lib/nav";
+import { localePath } from "@/lib/paths";
+import { site } from "@/data/site";
+import { lx, t } from "@/i18n/utils";
+import type { Locale } from "@/data/types";
+
+export interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const siteName = lx(site.name, lang);
+const schoolName = lx(site.schoolName, lang);
+const year = new Date().getFullYear();
+const { contact } = site;
+---
+
+<footer class="site-footer on-brand">
+  <div class="container footer-grid">
+    <div class="footer-block">
+      <h2 class="footer-title">{siteName}</h2>
+      <p class="muted">{t(lang, "footer.independent")}</p>
+    </div>
+
+    <div class="footer-block">
+      <h2 class="footer-title">{t(lang, "footer.association")}</h2>
+      <ul class="footer-list">
+        {
+          SECONDARY_NAV.map((item) => (
+            <li>
+              <a href={localePath(item.path, lang)}>{t(lang, item.key)}</a>
+            </li>
+          ))
+        }
+        <li>
+          <a href={site.repository} rel="noopener">
+            {t(lang, "footer.repository")}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="footer-block">
+      <h2 class="footer-title">{t(lang, "connect.address")}</h2>
+      <address class="footer-address">
+        <span class="muted">{lx(site.contact.address, lang)}</span>
+        {
+          contact.emailVerified && contact.email ? (
+            <a href={`mailto:${contact.email}`}>{contact.email}</a>
+          ) : null
+        }
+        {
+          contact.phoneVerified && contact.phone ? (
+            <a href={`tel:${contact.phone.replace(/\s+/g, "")}`}>{contact.phone}</a>
+          ) : null
+        }
+        {!contact.emailVerified && !contact.phoneVerified ? (
+          <span class="footer-unconfirmed">{t(lang, "connect.unconfirmed")}</span>
+        ) : null}
+      </address>
+      <p class="muted footer-school">{schoolName}</p>
+    </div>
+  </div>
+
+  <div class="container footer-base">
+    <p class="muted">
+      © {year} {siteName} · {t(lang, "site.formedShort")}
+    </p>
+    {
+      site.credit && (
+        <p class="muted">
+          {t(lang, "footer.credit")}:{" "}
+          <a href={site.credit.url} rel="noopener">
+            {site.credit.label}
+          </a>
+        </p>
+      )
+    }
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-block-start: var(--s-9);
+    padding-block: var(--s-8) var(--s-5);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+    gap: var(--s-7);
+  }
+
+  .footer-title {
+    font-size: var(--step-1);
+    margin-block-end: var(--s-3);
+  }
+
+  .footer-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--s-2);
+  }
+
+  .footer-list a,
+  .footer-address a {
+    color: var(--brand-ink);
+  }
+
+  .footer-address {
+    display: grid;
+    gap: var(--s-2);
+    font-style: normal;
+  }
+
+  .footer-unconfirmed {
+    font-weight: 600;
+  }
+
+  .footer-school {
+    margin-block-start: var(--s-4);
+  }
+
+  .footer-base {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--s-3) var(--s-6);
+    margin-block-start: var(--s-8);
+    padding-block-start: var(--s-4);
+    border-block-start: 1px solid color-mix(in oklab, var(--brand-ink) 26%, var(--brand));
+  }
+</style>

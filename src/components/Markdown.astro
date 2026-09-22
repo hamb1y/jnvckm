@@ -1,0 +1,49 @@
+---
+import { marked } from "marked";
+
+export interface Props {
+  value: string;
+  class?: string;
+}
+
+const { value, class: className } = Astro.props;
+const html = value.trim() === "" ? "" : await marked.parse(value);
+---
+
+{html !== "" && <div class:list={["prose", className]} set:html={html} />}
+
+<style>
+  .prose {
+    max-inline-size: var(--measure);
+  }
+
+  .prose :global(p),
+  .prose :global(ul),
+  .prose :global(ol) {
+    margin-block-start: var(--s-4);
+  }
+
+  .prose :global(p:first-child) {
+    margin-block-start: 0;
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    padding-inline-start: 1.3em;
+    display: grid;
+    gap: var(--s-2);
+  }
+
+  .prose :global(h2),
+  .prose :global(h3) {
+    margin-block-start: var(--s-6);
+  }
+
+  .prose :global(a) {
+    overflow-wrap: anywhere;
+  }
+
+  .prose :global(strong) {
+    font-weight: 700;
+  }
+</style>

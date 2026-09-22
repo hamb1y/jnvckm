@@ -1,0 +1,31 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ContributionDetailView from "@/views/ContributionDetailView.astro";
+import { contributions } from "@/data/contributions";
+import { lx } from "@/i18n/utils";
+
+export function getStaticPaths() {
+  return contributions.map((entry) => ({
+    params: { slug: entry.slug },
+    props: {
+      title: lx(entry.title, "kn"),
+      summary: lx(entry.summary, "kn"),
+      image: entry.image ? entry.image.src : null,
+    },
+  }));
+}
+
+const lang = "kn" as const;
+const { slug } = Astro.params;
+const { title, summary, image } = Astro.props;
+---
+
+<BaseLayout
+  lang={lang}
+  path={`/contributions/${slug}`}
+  title={title}
+  description={summary}
+  image={image}
+>
+  <ContributionDetailView lang={lang} slug={slug!} />
+</BaseLayout>

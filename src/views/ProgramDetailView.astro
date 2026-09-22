@@ -1,0 +1,93 @@
+---
+import EntryRow from "@/components/EntryRow.astro";
+import Figure from "@/components/Figure.astro";
+import Markdown from "@/components/Markdown.astro";
+import { eventsForProgram } from "@/data/events";
+import { programById } from "@/data/programs";
+import { lx, t } from "@/i18n/utils";
+import { localePath } from "@/lib/paths";
+import { formatDate } from "@/utils/format";
+import type { Locale } from "@/data/types";
+
+export interface Props {
+  lang: Locale;
+  id: "ignite" | "ncl";
+}
+
+const { lang, id } = Astro.props;
+const program = programById(id);
+if (!program) throw new Error(`Unknown program: ${id}`);
+
+const editions = eventsForProgram(id);
+---
+
+<div class="container section">
+  <a class="back" href={localePath("/programs", lang)}>{t(lang, "programs.title")}</a>
+
+  <header class="page-head">
+    <h1>{lx(program.name, lang)}</h1>
+    <p>{lx(program.tagline, lang)}</p>
+  </header>
+
+  <Figure media={program.image} locale={lang} ratio="16 / 9" priority={true} />
+
+  <p class="start-note mono">{lx(program.startNote, lang)}</p>
+
+  <Markdown value={lx(program.body, lang)} />
+
+  <section class="page-section">
+    <h2>{t(lang, "programs.relatedEvents")}</h2>
+    {
+      editions.length > 0 ? (
+        <ul class="rows">
+          {editions.map((entry) => (
+            <EntryRow
+              href={localePath(`/events/${entry.slug}`, lang)}
+              title={lx(entry.title, lang)}
+              date={formatDate(entry.date, lang)}
+              summary={lx(entry.summary, lang)}
+              image={entry.image}
+              meta={entry.location ? [lx(entry.location, lang)] : []}
+              locale={lang}
+            />
+          ))}
+        </ul>
+      ) : (
+        <p class="empty-state">{t(lang, "empty.generic")}</p>
+      )
+    }
+  </section>
+</div>
+
+<style>
+  .back {
+    display: inline-block;
+    margin-block-end: var(--s-6);
+    font-weight: 600;
+  }
+
+  .page-head h1 + p {
+    color: var(--accent-program);
+    font-weight: 600;
+  }
+
+  .container > figure {
+    margin-block-start: var(--s-6);
+  }
+
+  .start-note {
+    margin-block-start: var(--s-5);
+    padding-block-start: var(--s-4);
+    border-block-start: 1px solid var(--rule);
+    color: var(--text-3);
+    max-inline-size: var(--measure);
+  }
+
+  .container > :global(.prose) {
+    margin-block-start: var(--s-7);
+  }
+
+  .page-section {
+    margin-block-start: var(--s-8);
+  }
+</style>

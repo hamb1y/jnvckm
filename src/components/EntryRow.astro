@@ -1,0 +1,168 @@
+---
+import type { Locale, Media } from "@/data/types";
+import { lx } from "@/i18n/utils";
+
+/**
+ * The site's signature primitive: a ruled, dated record. Date on the left in
+ * the mono face, the record itself in the middle, an amount on the right when
+ * there is one, and a small plate when a photo exists. Reused for the home
+ * feed, events, contributions and stories.
+ */
+export interface Props {
+  href: string;
+  title: string;
+  date: string;
+  meta?: string[];
+  summary?: string;
+  amount?: string | null;
+  image?: Media | null;
+  locale: Locale;
+  /** Extra data-* attributes, used by the contributions filter. */
+  attrs?: Record<string, string>;
+}
+
+const {
+  href,
+  title,
+  date,
+  meta = [],
+  summary,
+  amount = null,
+  image = null,
+  locale,
+  attrs = {},
+} = Astro.props;
+const imageAlt = image ? lx(image.alt, locale) : "";
+---
+
+<li class="row" data-entry {...attrs}>
+  <a class="row-link" href={href}>
+    <time class="row-date mono" datetime={date}>{date}</time>
+    <span class="row-body">
+      <span class="row-title">{title}</span>
+      {summary !== undefined && summary !== "" && <span class="row-summary">{summary}</span>}
+      {
+        meta.length > 0 && (
+          <span class="row-meta mono">
+            {meta.map((item, index) => (
+              <span>
+                {index > 0 && <span aria-hidden="true"> · </span>}
+                {item}
+              </span>
+            ))}
+          </span>
+        )
+      }
+    </span>
+    {amount !== null && <span class="row-amount mono">{amount}</span>}
+    {
+      image && (
+        <img
+          class="row-thumb"
+          src={image.src}
+          alt={imageAlt}
+          width="160"
+          height="107"
+          loading="lazy"
+          decoding="async"
+        />
+      )
+    }
+  </a>
+</li>
+
+<style>
+  .row {
+    border-block-start: 1px solid var(--rule);
+  }
+
+  .row:last-child {
+    border-block-end: 1px solid var(--rule);
+  }
+
+  .row-link {
+    display: grid;
+    grid-template-columns: 7.5rem 1fr auto;
+    align-items: start;
+    gap: var(--s-2) var(--s-5);
+    padding-block: var(--s-5);
+    padding-inline: var(--s-2);
+    color: var(--ink);
+    text-decoration: none;
+    transition: background-color var(--dur-1) var(--ease-out);
+  }
+
+  .row-link:hover {
+    background: var(--surface);
+  }
+
+  .row-date {
+    color: var(--text-3);
+    padding-block-start: 0.28em;
+  }
+
+  .row-body {
+    display: grid;
+    gap: var(--s-1);
+  }
+
+  .row-title {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .row-summary {
+    color: var(--text-2);
+    max-inline-size: 62ch;
+  }
+
+  .row-meta {
+    color: var(--text-3);
+  }
+
+  .row-amount {
+    color: var(--accent-give);
+    font-weight: 600;
+    white-space: nowrap;
+    padding-block-start: 0.28em;
+  }
+
+  .row-thumb {
+    grid-column: 3;
+    inline-size: 6.5rem;
+    block-size: auto;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border-radius: var(--r-1);
+    background: var(--surface-sunk);
+  }
+
+  /* An amount and a thumbnail can both sit in the last column. */
+  .row-amount + .row-thumb {
+    justify-self: end;
+  }
+
+  @media (max-width: 640px) {
+    .row-link {
+      grid-template-columns: 1fr auto;
+    }
+
+    .row-date {
+      grid-column: 1 / -1;
+    }
+
+    .row-body {
+      grid-column: 1;
+    }
+
+    .row-meta {
+      grid-column: 1;
+    }
+
+    .row-thumb {
+      inline-size: 4.5rem;
+    }
+  }
+</style>

@@ -1,0 +1,22 @@
+# build
+dist/
+.astro/
+node_modules/
+
+# env
+.env
+.env.production
+.dev.vars
+
+# os / editor
+.DS_Store
+*.log
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+
+# local scratch
+/scratch/
+
+# generated verification output
+screenshots/

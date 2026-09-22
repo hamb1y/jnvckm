@@ -1,0 +1,152 @@
+---
+import Figure from "@/components/Figure.astro";
+import { site } from "@/data/site";
+import { lx, t } from "@/i18n/utils";
+import { localePath } from "@/lib/paths";
+import type { Locale, Media } from "@/data/types";
+
+export interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+
+const group: Media = {
+  src: "/images/23116700-10212457321081858-6312346336155469781-o.webp",
+  alt: {
+    en: "A large group photographed together on a sports ground, with trophies on the grass in front.",
+    kn: "ಕ್ರೀಡಾ ಮೈದಾನದಲ್ಲಿ ಒಟ್ಟಿಗೆ ಚಿತ್ರೀಕರಿಸಿಕೊಂಡ ದೊಡ್ಡ ಗುಂಪು; ಮುಂದೆ ಹುಲ್ಲಿನ ಮೇಲೆ ಟ್ರೋಫಿಗಳು.",
+  },
+};
+
+const work = [
+  {
+    en: "IGNITE — student-development and career-guidance sessions for classes 10 to 12",
+    kn: "ಇಗ್ನೈಟ್ — 10ರಿಂದ 12ನೇ ತರಗತಿ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಅಭಿವೃದ್ಧಿ ಮತ್ತು ವೃತ್ತಿ ಮಾರ್ಗದರ್ಶನ ಅವಧಿಗಳು",
+  },
+  {
+    en: "The Navodaya Cricket League — an annual alumni tournament built around batches",
+    kn: "ನವೋದಯ ಕ್ರಿಕೆಟ್ ಲೀಗ್ — ಬ್ಯಾಚ್‌ಗಳ ಸುತ್ತ ನಡೆಯುವ ವಾರ್ಷಿಕ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಪಂದ್ಯಾವಳಿ",
+  },
+  {
+    en: "The annual campus meet, reunions and city meet-ups",
+    kn: "ವಾರ್ಷಿಕ ಆವರಣ ಸಮಾವೇಶ, ಪುನರ್ಮಿಲನಗಳು ಮತ್ತು ನಗರ ಭೇಟಿಗಳು",
+  },
+  {
+    en: "Batch representatives who carry news to their own batchmates",
+    kn: "ಸಂಘದ ಸುದ್ದಿಯನ್ನು ತಮ್ಮ ಬ್ಯಾಚ್‌ ಸ್ನೇಹಿತರಿಗೆ ತಲುಪಿಸುವ ಬ್ಯಾಚ್ ಪ್ರತಿನಿಧಿಗಳು",
+  },
+  {
+    en: "Batch-led school projects — lighting, classrooms, laboratories, audio-visual and cultural facilities",
+    kn: "ಬ್ಯಾಚ್‌ಗಳ ಶಾಲಾ ಯೋಜನೆಗಳು — ಬೆಳಕು, ತರಗತಿ ಕೊಠಡಿ, ಪ್ರಯೋಗಾಲಯ, ಶ್ರವ್ಯ-ದೃಶ್ಯ ಮತ್ತು ಸಾಂಸ್ಕೃತಿಕ ಸೌಲಭ್ಯಗಳು",
+  },
+  {
+    en: "Support for students, staff and families in difficulty",
+    kn: "ಕಷ್ಟದಲ್ಲಿರುವ ವಿದ್ಯಾರ್ಥಿಗಳು, ಸಿಬ್ಬಂದಿ ಮತ್ತು ಕುಟುಂಬಗಳಿಗೆ ಸಹಾಯ",
+  },
+];
+
+const facts = [
+  { label: t(lang, "site.formedShort"), value: "" },
+  { label: lx(site.contact.address, lang), value: "" },
+];
+---
+
+<div class="container section">
+  <header class="page-head">
+    <h1>{t(lang, "about.title")}</h1>
+    <p>{t(lang, "about.lede")}</p>
+  </header>
+
+  <div class="about-grid">
+    <section class="page-section">
+      <h2>{t(lang, "about.whatWeDo")}</h2>
+      <ul class="work-list">
+        {work.map((item) => <li>{lx(item, lang)}</li>)}
+      </ul>
+    </section>
+
+    <aside class="about-aside">
+      <h2>{lx(site.name, lang)}</h2>
+      <dl>
+        {facts.map((fact) => (fact.label !== "" && <dd>{fact.label}</dd>))}
+      </dl>
+      <p>{lx(site.tagline, lang)}</p>
+      <p class="about-links">
+        <a href={localePath("/programs", lang)}>{t(lang, "nav.programs")}</a>
+        <a href={localePath("/contributions", lang)}>{t(lang, "nav.impact")}</a>
+        <a href={localePath("/vidyalaya", lang)}>{t(lang, "nav.vidyalaya")}</a>
+      </p>
+    </aside>
+  </div>
+
+  <Figure media={group} locale={lang} ratio="16 / 9" showCaption={false} />
+</div>
+
+<style>
+  .about-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: clamp(var(--s-6), 5vw, var(--s-9));
+    align-items: start;
+  }
+
+  .work-list {
+    display: grid;
+    gap: var(--s-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .work-list li {
+    padding-block-end: var(--s-3);
+    border-block-end: 1px solid var(--rule);
+    color: var(--text-2);
+  }
+
+  .about-aside {
+    padding: var(--s-5);
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: var(--r-2);
+  }
+
+  .about-aside h2 {
+    font-size: var(--step-1);
+  }
+
+  .about-aside dl {
+    margin: var(--s-4) 0 0;
+    display: grid;
+    gap: var(--s-2);
+    color: var(--text-2);
+  }
+
+  .about-aside dd {
+    margin: 0;
+    font-size: var(--step--1);
+  }
+
+  .about-aside p {
+    margin-block-start: var(--s-4);
+    color: var(--text-2);
+  }
+
+  .about-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-4);
+    font-weight: 600;
+  }
+
+  .container > figure {
+    margin-block-start: var(--s-8);
+  }
+
+  @media (max-width: 900px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

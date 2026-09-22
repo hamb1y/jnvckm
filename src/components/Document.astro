@@ -1,0 +1,51 @@
+---
+import type { Locale, Media } from "@/data/types";
+import { lx } from "@/i18n/utils";
+
+/**
+ * A poster, press clipping, report cover or screenshot. These must never be
+ * cropped into a photo grid: their aspect ratio and embedded text matter, so
+ * the frame keeps the whole document and links to the full-size file.
+ */
+export interface Props {
+  document: Media;
+  locale: Locale;
+}
+
+const { document: doc, locale } = Astro.props;
+const alt = lx(doc.alt, locale);
+const caption = lx(doc.caption ?? "", locale);
+---
+
+<figure class="document">
+  <a class="document-frame" href={doc.src} target="_blank" rel="noopener">
+    <img src={doc.src} alt={alt} loading="lazy" decoding="async" />
+  </a>
+  {caption !== "" && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+  .document {
+    margin: 0;
+  }
+
+  .document-frame {
+    display: block;
+    padding: var(--s-3);
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: var(--r-2);
+  }
+
+  .document-frame img {
+    inline-size: auto;
+    max-inline-size: 100%;
+    max-block-size: 30rem;
+    margin-inline: auto;
+    object-fit: contain;
+  }
+
+  figcaption {
+    margin-block-start: var(--s-2);
+  }
+</style>

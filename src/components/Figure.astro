@@ -1,0 +1,72 @@
+---
+import type { FocalPosition, Locale, Media } from "@/data/types";
+import { lx } from "@/i18n/utils";
+
+export interface Props {
+  media: Media | null;
+  locale: Locale;
+  ratio?: string;
+  priority?: boolean;
+  showCaption?: boolean;
+  class?: string;
+}
+
+const POSITIONS: Record<FocalPosition, string> = {
+  center: "50% 50%",
+  top: "50% 0%",
+  bottom: "50% 100%",
+  left: "0% 50%",
+  right: "100% 50%",
+};
+
+const {
+  media,
+  locale,
+  ratio = "3 / 2",
+  priority = false,
+  showCaption = false,
+  class: className,
+} = Astro.props;
+
+// Null-safe by construction: an entry without a real image renders nothing
+// rather than a broken frame.
+const alt = media ? lx(media.alt, locale) : "";
+const caption = media ? lx(media.caption ?? "", locale) : "";
+const objectPosition = media?.position ? POSITIONS[media.position] : "50% 50%";
+---
+
+{
+  media && (
+    <figure class:list={["figure", className]}>
+      <img
+        src={media.src}
+        alt={alt}
+        width="1600"
+        height="1067"
+        loading={priority ? "eager" : "lazy"}
+        fetchpriority={priority ? "high" : "auto"}
+        decoding="async"
+        style={`aspect-ratio:${ratio};object-position:${objectPosition}`}
+      />
+      {showCaption && caption !== "" && <figcaption>{caption}</figcaption>}
+    </figure>
+  )
+}
+
+<style>
+  .figure {
+    margin: 0;
+  }
+
+  .figure img {
+    inline-size: 100%;
+    block-size: auto;
+    object-fit: cover;
+    background: var(--surface-sunk);
+    border-radius: var(--r-2);
+  }
+
+  figcaption {
+    margin-block-start: var(--s-2);
+  }
+</style>

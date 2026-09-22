@@ -1,0 +1,16 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ContributionsView from "@/views/ContributionsView.astro";
+import { t } from "@/i18n/utils";
+
+const lang = "en" as const;
+---
+
+<BaseLayout
+  lang={lang}
+  path="/contributions"
+  title={t(lang, "impact.title")}
+  description={t(lang, "impact.lede")}
+>
+  <ContributionsView lang={lang} />
+</BaseLayout>

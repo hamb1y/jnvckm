@@ -1,0 +1,230 @@
+---
+import { NAV, isActive } from "@/lib/nav";
+import { alternatePath, localePath, stripLocale } from "@/lib/paths";
+import { site } from "@/data/site";
+import { lx, t } from "@/i18n/utils";
+import type { Locale } from "@/data/types";
+
+export interface Props {
+  lang: Locale;
+  pathname: string;
+}
+
+const { lang, pathname } = Astro.props;
+const here = stripLocale(pathname);
+const other: Locale = lang === "en" ? "kn" : "en";
+const otherHref = alternatePath(pathname, other);
+const siteName = lx(site.name, lang);
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href={localePath("/", lang)}>
+      <img
+        class="brand-mark"
+        src="/logo-mark.webp"
+        alt={siteName}
+        width="420"
+        height="193"
+      />
+    </a>
+
+    <nav class="site-nav" aria-label={t(lang, "a11y.primaryNav")}>
+      <details class="nav-details">
+        <summary class="nav-summary">{t(lang, "a11y.menu")}</summary>
+        <ul class="nav-list">
+          {
+            NAV.map((item) => (
+              <li>
+                <a
+                  href={localePath(item.path, lang)}
+                  aria-current={isActive(item, here) ? "page" : undefined}
+                >
+                  {t(lang, item.key)}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </details>
+
+      <ul class="nav-list nav-inline">
+        {
+          NAV.map((item) => (
+            <li>
+              <a
+                href={localePath(item.path, lang)}
+                aria-current={isActive(item, here) ? "page" : undefined}
+              >
+                {t(lang, item.key)}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <a class="lang-switch" href={otherHref} hreflang={other} aria-label={t(lang, "lang.switchAria")}>
+        {t(lang, "lang.switchLabel")}
+      </a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-block-end: 1px solid var(--rule);
+    background: var(--paper);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-5);
+    padding-block: var(--s-3);
+  }
+
+  .brand {
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .brand-mark {
+    width: clamp(9.5rem, 22vw, 13rem);
+    height: auto;
+  }
+
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--s-5);
+  }
+
+  .nav-list {
+    display: flex;
+    align-items: center;
+    gap: var(--s-5);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .nav-list a {
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    padding-block: var(--s-1);
+    border-block-end: 2px solid transparent;
+  }
+
+  .nav-list a:hover {
+    border-block-end-color: var(--rule-strong);
+  }
+
+  .nav-list a[aria-current="page"] {
+    border-block-end-color: var(--accent-give);
+  }
+
+  .lang-switch {
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: none;
+    padding: var(--s-1) var(--s-3);
+    border: 1px solid var(--rule-strong);
+    border-radius: var(--r-2);
+    white-space: nowrap;
+  }
+
+  .lang-switch:hover {
+    background: var(--brand-tint);
+    border-color: var(--brand);
+  }
+
+  .nav-details {
+    display: none;
+  }
+
+  .nav-summary {
+    cursor: pointer;
+    font-weight: 600;
+    padding: var(--s-2) var(--s-3);
+    border: 1px solid var(--rule-strong);
+    border-radius: var(--r-2);
+    /* Push the marker to the far side so the label stays left-aligned. */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-4);
+    min-width: 7rem;
+  }
+
+  .nav-summary::after {
+    content: "";
+    inline-size: 0.5rem;
+    block-size: 0.5rem;
+    border-inline-end: 2px solid currentColor;
+    border-block-end: 2px solid currentColor;
+    rotate: 45deg;
+    margin-block-start: -0.2rem;
+  }
+
+  .nav-details[open] .nav-summary::after {
+    margin-block-start: 0.2rem;
+    rotate: -135deg;
+  }
+
+  .nav-details .nav-list {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    margin-block-start: var(--s-3);
+    border-block-start: 1px solid var(--rule);
+  }
+
+  .nav-details .nav-list a {
+    display: block;
+    padding-block: var(--s-3);
+    border-block-end: 1px solid var(--rule);
+    border-inline-end: 0;
+  }
+
+  .nav-details .nav-list a[aria-current="page"] {
+    color: var(--accent-give);
+  }
+
+  @media (max-width: 900px) {
+    .header-inner {
+      flex-wrap: wrap;
+    }
+
+    .nav-inline {
+      display: none;
+    }
+
+    .nav-details {
+      display: block;
+    }
+
+    .site-nav {
+      gap: var(--s-3);
+    }
+
+    /* The open menu spans the full width beneath the bar. */
+    .nav-details[open] {
+      position: absolute;
+      inset-inline: 0;
+      padding-inline: var(--gutter);
+      padding-block-end: var(--s-4);
+      background: var(--paper);
+      border-block-end: 1px solid var(--rule);
+      z-index: 20;
+    }
+  }
+
+  @media (min-width: 901px) {
+    .nav-details {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,61 @@
+---
+import ContributionFilter from "@/components/ContributionFilter.svelte";
+import EntryRow from "@/components/EntryRow.astro";
+import { contributions, usedCategories } from "@/data/contributions";
+import { lx, t, tDynamic } from "@/i18n/utils";
+import { localePath } from "@/lib/paths";
+import { formatAmount, formatDate } from "@/utils/format";
+import type { Locale } from "@/data/types";
+
+export interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+
+const categories = usedCategories().map((id) => ({
+  id,
+  label: tDynamic(lang, `categories.${id}`),
+}));
+const total = contributions.length;
+---
+
+<div class="container section">
+  <header class="page-head">
+    <h1>{t(lang, "impact.title")}</h1>
+    <p>{t(lang, "impact.lede")}</p>
+  </header>
+
+  <ContributionFilter
+    client:idle
+    categories={categories}
+    total={total}
+    allLabel={t(lang, "impact.all")}
+    filterLabel={t(lang, "impact.filterLabel")}
+    emptyLabel={t(lang, "impact.empty")}
+    countTemplate={t(lang, "impact.count")}
+  />
+
+  <ul class="rows" data-contribution-list>
+    {
+      contributions.map((entry) => (
+        <EntryRow
+          href={localePath(`/contributions/${entry.slug}`, lang)}
+          title={lx(entry.title, lang)}
+          date={formatDate(entry.date, lang)}
+          summary={lx(entry.summary, lang)}
+          image={entry.image}
+          amount={entry.amount !== null ? formatAmount(entry.amount, lang) : null}
+          meta={[
+            tDynamic(lang, `categories.${entry.category}`),
+            ...(entry.batch ? [lx(entry.batch, lang)] : []),
+          ]}
+          locale={lang}
+          attrs={{ "data-contribution": "", "data-category": entry.category }}
+        />
+      ))
+    }
+  </ul>
+
+  <p class="empty-state" data-filter-empty hidden>{t(lang, "impact.empty")}</p>
+</div>

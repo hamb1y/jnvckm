@@ -1,0 +1,47 @@
+---
+import EntryRow from "@/components/EntryRow.astro";
+import { posts } from "@/data/posts";
+import { lx, t } from "@/i18n/utils";
+import { localePath } from "@/lib/paths";
+import { formatDate } from "@/utils/format";
+import type { Locale } from "@/data/types";
+import type { UIKey } from "@/i18n/ui";
+
+export interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const KIND_LABEL: Record<string, UIKey> = {
+  news: "posts.kind.news",
+  report: "posts.kind.report",
+  story: "posts.kind.story",
+};
+---
+
+<div class="container section">
+  <header class="page-head">
+    <h1>{t(lang, "stories.title")}</h1>
+    <p>{t(lang, "stories.lede")}</p>
+  </header>
+
+  {
+    posts.length > 0 ? (
+      <ul class="rows">
+        {posts.map((entry) => (
+          <EntryRow
+            href={localePath(`/stories/${entry.slug}`, lang)}
+            title={lx(entry.title, lang)}
+            date={formatDate(entry.date, lang)}
+            summary={lx(entry.summary, lang)}
+            image={entry.image}
+            meta={[t(lang, KIND_LABEL[entry.kind]), ...(entry.batch ? [lx(entry.batch, lang)] : [])]}
+            locale={lang}
+          />
+        ))}
+      </ul>
+    ) : (
+      <p class="empty-state">{t(lang, "stories.empty")}</p>
+    )
+  }
+</div>

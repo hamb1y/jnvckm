@@ -1,0 +1,46 @@
+---
+import EntryDetail from "@/components/EntryDetail.astro";
+import { postBySlug } from "@/data/posts";
+import { lx, t } from "@/i18n/utils";
+import { localePath } from "@/lib/paths";
+import { formatDate } from "@/utils/format";
+import type { Locale } from "@/data/types";
+import type { UIKey } from "@/i18n/ui";
+
+export interface Props {
+  lang: Locale;
+  slug: string;
+}
+
+const { lang, slug } = Astro.props;
+const entry = postBySlug(slug);
+if (!entry) throw new Error(`Unknown story: ${slug}`);
+
+const KIND_LABEL: Record<string, UIKey> = {
+  news: "posts.kind.news",
+  report: "posts.kind.report",
+  story: "posts.kind.story",
+};
+
+const meta: { label: string; value: string }[] = [
+  { label: t(lang, "common.category"), value: t(lang, KIND_LABEL[entry.kind]) },
+];
+if (entry.author && lx(entry.author, lang) !== "") {
+  meta.push({ label: t(lang, "common.batch"), value: lx(entry.author, lang) });
+}
+if (entry.batch) meta.push({ label: t(lang, "common.batch"), value: lx(entry.batch, lang) });
+---
+
+<EntryDetail
+  lang={lang}
+  title={lx(entry.title, lang)}
+  date={formatDate(entry.date, lang)}
+  summary={lx(entry.summary, lang)}
+  meta={meta}
+  body={entry.body}
+  image={entry.image}
+  documents={entry.documents}
+  source={entry.source ?? ""}
+  backHref={localePath("/stories", lang)}
+  backLabel={t(lang, "stories.title")}
+/>

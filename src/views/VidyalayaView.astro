@@ -1,0 +1,100 @@
+---
+import Figure from "@/components/Figure.astro";
+import { lx, t } from "@/i18n/utils";
+import { localePath } from "@/lib/paths";
+import type { Locale, Media } from "@/data/types";
+
+export interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+
+const campus: Media = {
+  src: "/images/img4.webp",
+  alt: {
+    en: "Teachers and staff photographed together in front of a school building.",
+    kn: "ಶಾಲಾ ಕಟ್ಟಡದ ಮುಂಭಾಗದಲ್ಲಿ ಒಟ್ಟಿಗೆ ಚಿತ್ರೀಕರಿಸಲಾದ ಶಿಕ್ಷಕರು ಮತ್ತು ಸಿಬ್ಬಂದಿ.",
+  },
+};
+
+const facts = [
+  {
+    en: "Founded in 1986, and among the earlier Jawahar Navodaya Vidyalayas.",
+    kn: "1986ರಲ್ಲಿ ಸ್ಥಾಪಿತ; ಹಳೆಯ ಜವಾಹರ ನವೋದಯ ವಿದ್ಯಾಲಯಗಳಲ್ಲಿ ಒಂದು.",
+  },
+  {
+    en: "Began at the Coffee Research Station in Koppa Taluk, then moved to its permanent campus at Seegodu, about 5 km from Balehonnur.",
+    kn: "ಕೊಪ್ಪ ತಾಲೂಕಿನ ಕಾಫಿ ಸಂಶೋಧನಾ ಕೇಂದ್ರದಲ್ಲಿ ಆರಂಭವಾಗಿ, ನಂತರ ಬಾಳೆಹೊನ್ನೂರಿನಿಂದ ಸುಮಾರು 5 ಕಿ.ಮೀ. ದೂರದ ಸೀಗೋಡುವಿನ ಶಾಶ್ವತ ಆವರಣಕ್ಕೆ ಸ್ಥಳಾಂತರಗೊಂಡಿತು.",
+  },
+  {
+    en: "Fully residential, co-educational, classes 6 to 12, English medium.",
+    kn: "ಸಂಪೂರ್ಣ ವಸತಿ ಶಾಲೆ, ಸಹ-ಶಿಕ್ಷಣ, 6ರಿಂದ 12ನೇ ತರಗತಿ, ಇಂಗ್ಲಿಷ್ ಮಾಧ್ಯಮ.",
+  },
+  {
+    en: "Managed by Navodaya Vidyalaya Samiti, Ministry of Education, Government of India. CBSE affiliation 840012.",
+    kn: "ನವೋದಯ ವಿದ್ಯಾಲಯ ಸಮಿತಿ, ಶಿಕ್ಷಣ ಸಚಿವಾಲಯ, ಭಾರತ ಸರ್ಕಾರದ ಆಡಳಿತದಲ್ಲಿದೆ. ಸಿಬಿಎಸ್‌ಇ ಸಂಲಗ್ನತೆ 840012.",
+  },
+  {
+    en: "Identified as a PM SHRI School.",
+    kn: "ಪಿಎಂ ಶ್ರೀ ಶಾಲೆಯಾಗಿ ಗುರುತಿಸಲ್ಪಟ್ಟಿದೆ.",
+  },
+  {
+    en: "Library, science and computer laboratories, music and art rooms, playgrounds and hostels for boys and girls.",
+    kn: "ಗ್ರಂಥಾಲಯ, ವಿಜ್ಞಾನ ಮತ್ತು ಕಂಪ್ಯೂಟರ್ ಪ್ರಯೋಗಾಲಯಗಳು, ಸಂಗೀತ ಮತ್ತು ಕಲಾ ಕೊಠಡಿಗಳು, ಆಟದ ಮೈದಾನಗಳು, ಹುಡುಗರು ಮತ್ತು ಹುಡುಗಿಯರಿಗೆ ವಸತಿಗೃಹಗಳು.",
+  },
+];
+---
+
+<div class="container section">
+  <header class="page-head">
+    <h1>{t(lang, "vidyalaya.title")}</h1>
+    <p>{t(lang, "vidyalaya.lede")}</p>
+  </header>
+
+  <Figure media={campus} locale={lang} ratio="16 / 9" />
+
+  <ul class="fact-list">
+    {facts.map((fact) => <li>{lx(fact, lang)}</li>)}
+  </ul>
+
+  <div class="vidyalaya-links">
+    <p>
+      <a href="https://navodaya.gov.in" rel="noopener">navodaya.gov.in</a>
+      {" — "}
+      {lang === "kn" ? "ಅಧಿಕೃತ ಶಾಲಾ ಜಾಲತಾಣ" : "the school's official website"}
+    </p>
+    <p>
+      <a href={localePath("/about", lang)}>{t(lang, "about.title")}</a>
+    </p>
+  </div>
+</div>
+
+<style>
+  .container > figure {
+    margin-block-start: var(--s-6);
+  }
+
+  .fact-list {
+    list-style: none;
+    margin: var(--s-8) 0 0;
+    padding: 0;
+    display: grid;
+    gap: var(--s-4);
+    max-inline-size: var(--measure);
+  }
+
+  .fact-list li {
+    padding-block-end: var(--s-4);
+    border-block-end: 1px solid var(--rule);
+    color: var(--text-2);
+  }
+
+  .vidyalaya-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-6);
+    margin-block-start: var(--s-6);
+    font-weight: 600;
+  }
+</style>

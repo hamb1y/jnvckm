@@ -1,0 +1,31 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import EventDetailView from "@/views/EventDetailView.astro";
+import { events } from "@/data/events";
+import { lx } from "@/i18n/utils";
+
+export function getStaticPaths() {
+  return events.map((entry) => ({
+    params: { slug: entry.slug },
+    props: {
+      title: lx(entry.title, "en"),
+      summary: lx(entry.summary, "en"),
+      image: entry.image ? entry.image.src : null,
+    },
+  }));
+}
+
+const lang = "en" as const;
+const { slug } = Astro.params;
+const { title, summary, image } = Astro.props;
+---
+
+<BaseLayout
+  lang={lang}
+  path={`/events/${slug}`}
+  title={title}
+  description={summary}
+  image={image}
+>
+  <EventDetailView lang={lang} slug={slug!} />
+</BaseLayout>

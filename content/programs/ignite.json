@@ -1,0 +1,24 @@
+{
+  "id": "ignite",
+  "name": { "en": "IGNITE", "kn": "ಇಗ್ನೈಟ್" },
+  "tagline": {
+    "en": "Alumni guiding the next generation",
+    "kn": "ಮುಂದಿನ ಪೀಳಿಗೆಗೆ ದಾರಿ ತೋರುವ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳು"
+  },
+  "summary": {
+    "en": "IGNITE is the association's long-running student-development and career-guidance programme. Alumni come back to the Vidyalaya to talk honestly about the paths open after school — engineering, medicine, the sciences, government service, entrepreneurship and more.",
+    "kn": "ಇಗ್ನೈಟ್ ಸಂಘದ ದೀರ್ಘಕಾಲದ ವಿದ್ಯಾರ್ಥಿ ಅಭಿವೃದ್ಧಿ ಮತ್ತು ವೃತ್ತಿ ಮಾರ್ಗದರ್ಶನ ಕಾರ್ಯಕ್ರಮ. ಶಾಲೆಯ ನಂತರ ಲಭ್ಯವಿರುವ ದಾರಿಗಳ ಬಗ್ಗೆ — ಎಂಜಿನಿಯರಿಂಗ್, ವೈದ್ಯಕೀಯ, ವಿಜ್ಞಾನ, ಸರ್ಕಾರಿ ಸೇವೆ, ಉದ್ಯಮ — ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳು ವಿದ್ಯಾಲಯಕ್ಕೆ ಮರಳಿ ಪ್ರಾಮಾಣಿಕವಾಗಿ ಮಾತನಾಡುತ್ತಾರೆ."
+  },
+  "startNote": {
+    "en": "Career-guidance activity is documented from the mid-2000s. IGNITE 2014 was its tenth edition; the thirteenth was held in 2017.",
+    "kn": "ವೃತ್ತಿ ಮಾರ್ಗದರ್ಶನ ಚಟುವಟಿಕೆ 2000ರ ದಶಕದ ಮಧ್ಯದಿಂದ ದಾಖಲಾಗಿದೆ. ಇಗ್ನೈಟ್ 2014 ಹತ್ತನೇ ಆವೃತ್ತಿ; ಹದಿಮೂರನೇ ಆವೃತ್ತಿ 2017ರಲ್ಲಿ ನಡೆಯಿತು."
+  },
+  "body": {
+    "en": "Across its editions IGNITE has covered engineering and entrance examinations, medicine and allied healthcare, pure sciences, agriculture and veterinary science, government jobs and defence, time management, and scholarships. Sessions are kept short and interactive, with handouts, and senior alumni join where they can.\n\nIt began as a career and guidance workshop for students of classes 10 to 12, and it still runs on the same idea: the people who sat in those same classrooms come back and tell students what they found outside.",
+    "kn": "ತನ್ನ ಆವೃತ್ತಿಗಳಲ್ಲಿ ಇಗ್ನೈಟ್ ಎಂಜಿನಿಯರಿಂಗ್ ಮತ್ತು ಪ್ರವೇಶ ಪರೀಕ್ಷೆಗಳು, ವೈದ್ಯಕೀಯ ಮತ್ತು ಸಂಬಂಧಿತ ಆರೋಗ್ಯ ಕ್ಷೇತ್ರ, ವಿಜ್ಞಾನ, ಕೃಷಿ ಮತ್ತು ಪಶುವೈದ್ಯಕೀಯ ವಿಜ್ಞಾನ, ಸರ್ಕಾರಿ ಉದ್ಯೋಗ ಮತ್ತು ರಕ್ಷಣಾ ಕ್ಷೇತ್ರ, ಸಮಯ ನಿರ್ವಹಣೆ ಮತ್ತು ವಿದ್ಯಾರ್ಥಿವೇತನಗಳನ್ನು ಒಳಗೊಂಡಿದೆ. ಅವಧಿಗಳು ಚಿಕ್ಕದಾಗಿ, ಸಂವಾದಾತ್ಮಕವಾಗಿರುತ್ತವೆ; ಕೈಪಿಡಿಗಳನ್ನು ನೀಡಲಾಗುತ್ತದೆ.\n\nಇದು 10ರಿಂದ 12ನೇ ತರಗತಿ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ವೃತ್ತಿ ಮತ್ತು ಮಾರ್ಗದರ್ಶನ ಕಾರ್ಯಾಗಾರವಾಗಿ ಆರಂಭವಾಯಿತು. ಅದೇ ತರಗತಿಗಳಲ್ಲಿ ಕುಳಿತಿದ್ದವರು ಹೊರಗೆ ಕಂಡದ್ದನ್ನು ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಹೇಳಲು ಮರಳಿ ಬರುತ್ತಾರೆ — ಇಂದಿಗೂ ಇದೇ ಕಲ್ಪನೆ ಮುಂದುವರಿದಿದೆ."
+  },
+  "image": {
+    "src": "/images/for-press.webp",
+    "alt": "People gathered on a stage lighting a traditional lamp in front of an event backdrop."
+  }
+}

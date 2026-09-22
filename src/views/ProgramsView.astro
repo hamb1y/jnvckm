@@ -1,0 +1,95 @@
+---
+import Figure from "@/components/Figure.astro";
+import { programs } from "@/data/programs";
+import { lx, t } from "@/i18n/utils";
+import { localePath } from "@/lib/paths";
+import type { Locale } from "@/data/types";
+
+export interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+---
+
+<div class="container section">
+  <header class="page-head">
+    <h1>{t(lang, "programs.title")}</h1>
+    <p>{t(lang, "programs.lede")}</p>
+  </header>
+
+  <div class="program-list">
+    {
+      programs.map((program, index) => (
+        <article class:list={["program", index === 0 && "program-lead"]}>
+          <div class="program-text">
+            <h2>
+              <a href={localePath(`/programs/${program.id}`, lang)}>{lx(program.name, lang)}</a>
+            </h2>
+            <p class="program-tagline">{lx(program.tagline, lang)}</p>
+            <p class="program-summary">{lx(program.summary, lang)}</p>
+            <p class="program-note mono">{lx(program.startNote, lang)}</p>
+          </div>
+          <Figure media={program.image} locale={lang} ratio="3 / 2" />
+        </article>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .program-list {
+    display: grid;
+    gap: clamp(var(--s-7), 5vw, var(--s-9));
+  }
+
+  .program {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: clamp(var(--s-5), 5vw, var(--s-8));
+    align-items: start;
+  }
+
+  .program-lead {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  }
+
+  .program h2 {
+    font-size: var(--step-3);
+  }
+
+  .program h2 a {
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .program h2 a:hover {
+    text-decoration: underline;
+  }
+
+  .program-tagline {
+    margin-block-start: var(--s-3);
+    font-weight: 600;
+    color: var(--accent-program);
+  }
+
+  .program-summary {
+    margin-block-start: var(--s-3);
+    color: var(--text-2);
+    max-inline-size: 58ch;
+  }
+
+  .program-note {
+    margin-block-start: var(--s-4);
+    padding-block-start: var(--s-3);
+    border-block-start: 1px solid var(--rule);
+    color: var(--text-3);
+  }
+
+  @media (max-width: 900px) {
+    .program,
+    .program-lead {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

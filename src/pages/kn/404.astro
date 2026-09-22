@@ -1,0 +1,11 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import NotFoundView from "@/views/NotFoundView.astro";
+import { t } from "@/i18n/utils";
+
+const lang = "kn" as const;
+---
+
+<BaseLayout lang={lang} path="/404" title={t(lang, "notfound.title")} noindex>
+  <NotFoundView lang={lang} />
+</BaseLayout>

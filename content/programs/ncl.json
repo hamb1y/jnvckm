@@ -1,0 +1,25 @@
+{
+  "id": "ncl",
+  "name": {
+    "en": "Navodaya Cricket League",
+    "kn": "ನವೋದಯ ಕ್ರಿಕೆಟ್ ಲೀಗ್"
+  },
+  "shortName": { "en": "NCL", "kn": "ಎನ್‌ಸಿಎಲ್" },
+  "tagline": {
+    "en": "A reunion played out on the cricket field",
+    "kn": "ಕ್ರಿಕೆಟ್ ಮೈದಾನದಲ್ಲಿ ನಡೆಯುವ ಪುನರ್ಮಿಲನ"
+  },
+  "summary": {
+    "en": "NCL is the alumni cricket tournament, and it is really a reunion with a scoreboard. Teams are built around batches, so a season brings alumni from different generations into the same ground.",
+    "kn": "ಎನ್‌ಸಿಎಲ್ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳ ಕ್ರಿಕೆಟ್ ಪಂದ್ಯಾವಳಿ. ವಾಸ್ತವವಾಗಿ ಇದು ಅಂಕಪಟ್ಟಿಯೊಂದಿಗಿನ ಪುನರ್ಮಿಲನ. ತಂಡಗಳು ಬ್ಯಾಚ್‌ಗಳ ಸುತ್ತ ಕಟ್ಟಲ್ಪಡುತ್ತವೆ; ಒಂದು ಸೀಸನ್ ವಿವಿಧ ಪೀಳಿಗೆಯ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳನ್ನು ಒಂದೇ ಮೈದಾನಕ್ಕೆ ತರುತ್ತದೆ."
+  },
+  "startNote": {
+    "en": "Seasons are documented from 2015 (season 5) through 2025 (season 14).",
+    "kn": "ಸೀಸನ್‌ಗಳು 2015 (5ನೇ ಸೀಸನ್) ರಿಂದ 2025 (14ನೇ ಸೀಸನ್) ವರೆಗೆ ದಾಖಲಾಗಿವೆ."
+  },
+  "body": {
+    "en": "The league is usually played in Bengaluru, at the RNS Institute of Technology grounds, and it runs across a weekend. The 2010 batch won season 5; the seventh edition was a two-day tournament. Seasons 11, 12 and 14 followed in 2022, 2023 and 2025.\n\nMatches are recorded on CricHeroes, so scores and scorecards stay public after the weekend is over.",
+    "kn": "ಲೀಗ್ ಸಾಮಾನ್ಯವಾಗಿ ಬೆಂಗಳೂರಿನ ಆರ್‌ಎನ್‌ಎಸ್ ಇನ್‌ಸ್ಟಿಟ್ಯೂಟ್ ಆಫ್ ಟೆಕ್ನಾಲಜಿ ಮೈದಾನದಲ್ಲಿ, ಒಂದು ವಾರಾಂತ್ಯದಲ್ಲಿ ನಡೆಯುತ್ತದೆ. 5ನೇ ಸೀಸನ್ ಅನ್ನು 2010 ಬ್ಯಾಚ್ ಗೆದ್ದಿತು; ಏಳನೇ ಆವೃತ್ತಿ ಎರಡು ದಿನಗಳ ಪಂದ್ಯಾವಳಿ. 2022, 2023 ಮತ್ತು 2025ರಲ್ಲಿ 11, 12 ಮತ್ತು 14ನೇ ಸೀಸನ್‌ಗಳು ನಡೆದವು.\n\nಪಂದ್ಯಗಳು ಕ್ರಿಕ್‌ಹೀರೋಸ್‌ನಲ್ಲಿ ದಾಖಲಾಗುತ್ತವೆ; ಹೀಗಾಗಿ ವಾರಾಂತ್ಯದ ನಂತರವೂ ಅಂಕಗಳು ಸಾರ್ವಜನಿಕವಾಗಿ ಉಳಿಯುತ್ತವೆ."
+  },
+  "image": null
+}

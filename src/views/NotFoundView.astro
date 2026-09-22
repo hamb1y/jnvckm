@@ -1,0 +1,32 @@
+---
+import { t } from "@/i18n/utils";
+import { localePath } from "@/lib/paths";
+import type { Locale } from "@/data/types";
+
+export interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+---
+
+<div class="container section not-found">
+  <h1>{t(lang, "notfound.title")}</h1>
+  <p class="lede">{t(lang, "notfound.lede")}</p>
+  <p class="not-found-links">
+    <a class="btn btn-secondary" href={localePath("/", lang)}>{t(lang, "nav.home")}</a>
+    <a class="btn btn-secondary" href={localePath("/events", lang)}>{t(lang, "nav.events")}</a>
+  </p>
+</div>
+
+<style>
+  .not-found-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+  }
+
+  .lede {
+    margin-block: var(--s-4) var(--s-6);
+  }
+</style>

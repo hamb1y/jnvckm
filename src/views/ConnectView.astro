@@ -1,0 +1,105 @@
+---
+import { site } from "@/data/site";
+import { lx, t } from "@/i18n/utils";
+import { localePath } from "@/lib/paths";
+import type { Locale } from "@/data/types";
+
+export interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const { contact } = site;
+const emailReady = contact.emailVerified && contact.email !== null;
+const phoneReady = contact.phoneVerified && contact.phone !== null;
+---
+
+<div class="container section">
+  <header class="page-head">
+    <h1>{t(lang, "connect.title")}</h1>
+    <p>{t(lang, "connect.lede")}</p>
+  </header>
+
+  <div class="connect-grid">
+    <section class="connect-block">
+      <h2>{t(lang, "connect.volunteerTitle")}</h2>
+      <p>{t(lang, "connect.volunteerBody")}</p>
+    </section>
+
+    <section class="connect-block">
+      <h2>{t(lang, "connect.batchRepsTitle")}</h2>
+      <p>{t(lang, "connect.batchRepsBody")}</p>
+      <p>
+        <a href={localePath("/stories/batch-representatives", lang)}>
+          {t(lang, "posts.kind.news")}
+        </a>
+      </p>
+    </section>
+
+    <section class="connect-block">
+      <h2>{t(lang, "connect.contributeTitle")}</h2>
+      <p>{lx(site.donations.note, lang)}</p>
+    </section>
+
+    <section class="connect-block">
+      <h2>{t(lang, "connect.address")}</h2>
+      <address>
+        <span>{lx(site.contact.address, lang)}</span>
+        {
+          emailReady ? (
+            <a href={`mailto:${contact.email}`}>{contact.email}</a>
+          ) : (
+            <span class="unconfirmed">
+              {t(lang, "connect.email")}: {t(lang, "connect.unconfirmed")}
+            </span>
+          )
+        }
+        {
+          phoneReady ? (
+            <a href={`tel:${contact.phone!.replace(/\s+/g, "")}`}>{contact.phone}</a>
+          ) : (
+            <span class="unconfirmed">
+              {t(lang, "connect.phone")}: {t(lang, "connect.unconfirmed")}
+            </span>
+          )
+        }
+      </address>
+      {!emailReady && <p class="unconfirmed-note">{t(lang, "connect.unconfirmedNote")}</p>}
+    </section>
+  </div>
+</div>
+
+<style>
+  .connect-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    gap: clamp(var(--s-6), 4vw, var(--s-8));
+  }
+
+  .connect-block h2 {
+    font-size: var(--step-2);
+    margin-block-end: var(--s-3);
+  }
+
+  .connect-block p {
+    color: var(--text-2);
+    max-inline-size: 52ch;
+  }
+
+  .connect-block address {
+    display: grid;
+    gap: var(--s-2);
+    font-style: normal;
+    color: var(--text-2);
+  }
+
+  .unconfirmed {
+    color: var(--text-3);
+  }
+
+  .unconfirmed-note {
+    margin-block-start: var(--s-3);
+    font-size: var(--step--1);
+    color: var(--text-3);
+  }
+</style>

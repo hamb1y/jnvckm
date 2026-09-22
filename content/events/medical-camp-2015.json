@@ -1,0 +1,39 @@
+{
+  "slug": "medical-camp-2015",
+  "title": {
+    "en": "Medical camp for students and staff",
+    "kn": "ವಿದ್ಯಾರ್ಥಿಗಳು ಮತ್ತು ಸಿಬ್ಬಂದಿಗೆ ವೈದ್ಯಕೀಯ ಶಿಬಿರ"
+  },
+  "date": "2015-01-25",
+  "program": null,
+  "location": "JNV Balehonnur",
+  "summary": {
+    "en": "Health check-ups and services for the school community.",
+    "kn": "ಶಾಲಾ ಸಮುದಾಯಕ್ಕೆ ಆರೋಗ್ಯ ತಪಾಸಣೆ ಮತ್ತು ಸೇವೆಗಳು."
+  },
+  "body": "A comprehensive medical camp was organized for JNV students and staff members, providing essential healthcare services and health check-ups. This initiative demonstrated the alumni association's commitment to the well-being of the current school community.",
+  "source": "JNVCKM alumni archive",
+  "image": {
+    "src": "/images/dsc0043.webp",
+    "alt": {
+      "en": "Students lined up outside a school building beneath a medical camp banner.",
+      "kn": "ವೈದ್ಯಕೀಯ ಶಿಬಿರದ ಬ್ಯಾನರ್ ಕೆಳಗೆ ಶಾಲಾ ಕಟ್ಟಡದ ಹೊರಗೆ ಸಾಲಾಗಿ ನಿಂತಿರುವ ವಿದ್ಯಾರ್ಥಿಗಳು."
+    }
+  },
+  "documents": [
+    {
+      "src": "/images/dsc0166.webp",
+      "alt": {
+        "en": "A panel seated on a stage beneath the medical camp banner.",
+        "kn": "ವೈದ್ಯಕೀಯ ಶಿಬಿರದ ಬ್ಯಾನರ್ ಕೆಳಗೆ ವೇದಿಕೆಯಲ್ಲಿ ಕುಳಿತಿರುವ ಪ್ಯಾನೆಲ್."
+      }
+    },
+    {
+      "src": "/images/dsc0054.webp",
+      "alt": {
+        "en": "Two people at a registration desk during the camp.",
+        "kn": "ಶಿಬಿರದ ಸಮಯದಲ್ಲಿ ನೋಂದಣಿ ಮೇಜಿನಲ್ಲಿ ಇಬ್ಬರು."
+      }
+    }
+  ]
+}

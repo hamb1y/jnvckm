@@ -1,0 +1,31 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ProgramDetailView from "@/views/ProgramDetailView.astro";
+import { programs } from "@/data/programs";
+import { lx } from "@/i18n/utils";
+
+export function getStaticPaths() {
+  return programs.map((program) => ({
+    params: { id: program.id },
+    props: {
+      title: lx(program.name, "en"),
+      summary: lx(program.summary, "en"),
+      image: program.image ? program.image.src : null,
+    },
+  }));
+}
+
+const lang = "en" as const;
+const { id } = Astro.params;
+const { title, summary, image } = Astro.props;
+---
+
+<BaseLayout
+  lang={lang}
+  path={`/programs/${id}`}
+  title={title}
+  description={summary}
+  image={image}
+>
+  <ProgramDetailView lang={lang} id={id as "ignite" | "ncl"} />
+</BaseLayout>

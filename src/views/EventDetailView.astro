@@ -1,0 +1,40 @@
+---
+import EntryDetail from "@/components/EntryDetail.astro";
+import { eventBySlug } from "@/data/events";
+import { programById } from "@/data/programs";
+import { lx, t } from "@/i18n/utils";
+import { localePath } from "@/lib/paths";
+import { formatDate } from "@/utils/format";
+import type { Locale } from "@/data/types";
+
+export interface Props {
+  lang: Locale;
+  slug: string;
+}
+
+const { lang, slug } = Astro.props;
+const entry = eventBySlug(slug);
+if (!entry) throw new Error(`Unknown event: ${slug}`);
+
+const meta: { label: string; value: string }[] = [];
+if (entry.location) meta.push({ label: t(lang, "common.location"), value: lx(entry.location, lang) });
+if (entry.program) {
+  const program = programById(entry.program as "ignite" | "ncl");
+  if (program) meta.push({ label: t(lang, "common.program"), value: lx(program.name, lang) });
+}
+---
+
+<EntryDetail
+  lang={lang}
+  title={lx(entry.title, lang)}
+  date={formatDate(entry.date, lang)}
+  summary={lx(entry.summary, lang)}
+  meta={meta}
+  body={entry.body}
+  image={entry.image}
+  documents={entry.documents}
+  source={entry.source ?? ""}
+  backHref={localePath("/events", lang)}
+  backLabel={`${t(lang, "events.title")}`}
+  priority={true}
+/>

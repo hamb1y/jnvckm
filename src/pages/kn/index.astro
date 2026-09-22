@@ -1,0 +1,10 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import HomeView from "@/views/HomeView.astro";
+
+const lang = "kn" as const;
+---
+
+<BaseLayout lang={lang} path="/">
+  <HomeView lang={lang} />
+</BaseLayout>

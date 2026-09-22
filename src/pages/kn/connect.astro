@@ -1,0 +1,16 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ConnectView from "@/views/ConnectView.astro";
+import { t } from "@/i18n/utils";
+
+const lang = "kn" as const;
+---
+
+<BaseLayout
+  lang={lang}
+  path="/connect"
+  title={t(lang, "connect.title")}
+  description={t(lang, "connect.lede")}
+>
+  <ConnectView lang={lang} />
+</BaseLayout>

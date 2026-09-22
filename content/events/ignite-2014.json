@@ -1,0 +1,27 @@
+{
+  "slug": "ignite-2014",
+  "title": {
+    "en": "IGNITE 2014",
+    "kn": "ಇಗ್ನೈಟ್ 2014"
+  },
+  "date": "2014-12-06",
+  "program": "ignite",
+  "location": "JNV Balehonnur",
+  "summary": {
+    "en": "The tenth edition, reported by both Prajavani and Udayavani.",
+    "kn": "ಹತ್ತನೇ ಆವೃತ್ತಿ; ಪ್ರಜಾವಾಣಿ ಮತ್ತು ಉದಯವಾಣಿ ಎರಡೂ ವರದಿ ಮಾಡಿದವು."
+  },
+  "body": "The 10th edition of IGNITE was organized as a career and personality development workshop, continuing the decade-long tradition of providing valuable guidance to students about their future prospects and personal growth.",
+  "source": "JNVCKM alumni archive",
+  "image": null,
+  "documents": [
+    {
+      "src": "/images/ignite-14-report-in-prajavani.webp",
+      "alt": "Prajavani's report on IGNITE 2014."
+    },
+    {
+      "src": "/images/udayvani-ignite14.webp",
+      "alt": "Udayavani's report on the personality-development workshop held as part of IGNITE 2014."
+    }
+  ]
+}

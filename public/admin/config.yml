@@ -1,0 +1,152 @@
+# Sveltia CMS. A content edit is a commit; a build consumes it.
+#
+# Editing locally needs no authentication: open /admin/, choose
+# "Work with Local Repository" and pick the repo root (Chromium only).
+#
+# Editing in the browser (GitHub backend) also needs the OAuth worker:
+#   1. deploy github.com/sveltia/sveltia-cms-auth to Cloudflare Workers
+#   2. set GITHUB_CLIENT_ID / GITHUB_CLIENT_SECRET / ALLOWED_DOMAINS there,
+#      with ALLOWED_DOMAINS = jnvckm.org,www.jnvckm.org,jnvckm.pages.dev
+#   3. uncomment base_url below and put the worker URL in
+# See LAUNCH-CHECKLIST.md.
+
+backend:
+  name: github
+  repo: hamb1y/jnvckm
+  branch: main
+  auth_scope: public_repo
+  # base_url: https://sveltia-cms-auth.<your-subdomain>.workers.dev
+
+media_folder: public/images
+public_folder: /images
+
+output:
+  omit_empty_optional_fields: true
+
+i18n:
+  structure: single_file
+  locales: [en, kn]
+  default_locale: en
+
+collections:
+  - name: posts
+    label: Stories and news
+    label_singular: Story
+    folder: content/posts
+    format: json
+    extension: json
+    create: true
+    identifier_field: slug
+    summary: "{{title}} — {{date}}"
+    sortable_fields: [date, title]
+    fields:
+      - { name: slug, label: Slug, widget: string, hint: "Used in the web address. Changing it breaks existing links.", i18n: duplicate }
+      - { name: kind, label: Kind, widget: select, options: [news, report, story], default: news, hint: "News and reports are association updates; stories are memories in an alumni voice.", i18n: duplicate }
+      - { name: title, label: Title, widget: string, i18n: true }
+      - { name: date, label: Date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, i18n: duplicate }
+      - { name: summary, label: Summary, widget: text, hint: "One line, shown in lists and used as the page description.", i18n: true }
+      - { name: body, label: Body, widget: markdown, required: false, hint: "Leave empty for a summary-only record.", i18n: true }
+      - { name: author, label: Author, widget: string, required: false, i18n: true }
+      - { name: batch, label: Batch, widget: string, required: false, hint: 'For example "9th batch".', i18n: true }
+      - { name: image, label: Photo, widget: object, required: false, fields: [ { name: src, label: File, widget: image }, { name: alt, label: Alt text, widget: string, hint: "Describe only what is visible. Required if a photo is set.", i18n: true }, { name: position, label: "Crop focus", widget: select, options: [center, top, bottom, left, right], default: center } ] }
+      - { name: documents, label: Documents, label_singular: Document, widget: list, required: false, hint: "Posters, press clippings, report covers, screenshots. These are shown uncropped.", fields: [ { name: src, label: File, widget: image }, { name: alt, label: Alt text, widget: string, i18n: true }, { name: caption, label: Caption, widget: string, required: false, i18n: true } ] }
+      - { name: source, label: Source, widget: string, required: false, hint: "Where this record came from.", i18n: duplicate }
+
+  - name: events
+    label: Events
+    label_singular: Event
+    folder: content/events
+    format: json
+    extension: json
+    create: true
+    identifier_field: slug
+    summary: "{{title}} — {{date}}"
+    sortable_fields: [date, title]
+    fields:
+      - { name: slug, label: Slug, widget: string, i18n: duplicate }
+      - { name: title, label: Title, widget: string, i18n: true }
+      - { name: date, label: Date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, i18n: duplicate }
+      - { name: program, label: Program, widget: select, required: false, options: [ { label: IGNITE, value: ignite }, { label: "Navodaya Cricket League", value: ncl }, { label: "Alumni meet", value: meet }, { label: Workshop, value: workshop } ], i18n: duplicate }
+      - { name: location, label: Location, widget: string, required: false, i18n: true }
+      - { name: summary, label: Summary, widget: text, i18n: true }
+      - { name: body, label: Body, widget: markdown, required: false, i18n: true }
+      - { name: image, label: Photo, widget: object, required: false, fields: [ { name: src, label: File, widget: image }, { name: alt, label: Alt text, widget: string, i18n: true }, { name: position, label: "Crop focus", widget: select, options: [center, top, bottom, left, right], default: center } ] }
+      - { name: documents, label: Documents, label_singular: Document, widget: list, required: false, fields: [ { name: src, label: File, widget: image }, { name: alt, label: Alt text, widget: string, i18n: true }, { name: caption, label: Caption, widget: string, required: false, i18n: true } ] }
+      - { name: source, label: Source, widget: string, required: false, i18n: duplicate }
+
+  - name: contributions
+    label: Contributions
+    label_singular: Contribution
+    folder: content/contributions
+    format: json
+    extension: json
+    create: true
+    identifier_field: slug
+    summary: "{{title}} — {{batch}}"
+    sortable_fields: [date, title, category]
+    fields:
+      - { name: slug, label: Slug, widget: string, i18n: duplicate }
+      - { name: title, label: Title, widget: string, i18n: true }
+      - { name: date, label: Date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, i18n: duplicate }
+      - { name: category, label: Category, widget: select, options: [ { label: Infrastructure, value: infrastructure }, { label: Technology, value: technology }, { label: "Student support", value: student-support }, { label: Sports, value: sports }, { label: Culture, value: culture }, { label: "Staff and community", value: staff-community } ], i18n: duplicate }
+      - { name: batch, label: Batch, widget: string, required: false, hint: 'For example "8th batch".', i18n: true }
+      - { name: amount, label: "Amount in rupees", widget: number, required: false, hint: "Whole rupees. Leave empty if the record does not state an amount.", i18n: duplicate }
+      - { name: summary, label: Summary, widget: text, i18n: true }
+      - { name: body, label: Body, widget: markdown, required: false, i18n: true }
+      - { name: archiveNote, label: "Archive note", widget: text, required: false, hint: "Shown when a historical record has been redacted for privacy.", i18n: true }
+      - { name: image, label: Photo, widget: object, required: false, fields: [ { name: src, label: File, widget: image }, { name: alt, label: Alt text, widget: string, i18n: true }, { name: position, label: "Crop focus", widget: select, options: [center, top, bottom, left, right], default: center } ] }
+      - { name: documents, label: Documents, label_singular: Document, widget: list, required: false, fields: [ { name: src, label: File, widget: image }, { name: alt, label: Alt text, widget: string, i18n: true }, { name: caption, label: Caption, widget: string, required: false, i18n: true } ] }
+      - { name: source, label: Source, widget: string, required: false, i18n: duplicate }
+
+  - name: programs
+    label: Programs
+    label_singular: Program
+    folder: content/programs
+    format: json
+    extension: json
+    create: false
+    identifier_field: id
+    summary: "{{name}}"
+    fields:
+      - { name: id, label: Id, widget: select, options: [ignite, ncl], hint: "ignite or ncl. The program page address depends on this.", i18n: duplicate }
+      - { name: name, label: Name, widget: string, i18n: true }
+      - { name: shortName, label: "Short name", widget: string, required: false, i18n: true }
+      - { name: tagline, label: Tagline, widget: string, i18n: true }
+      - { name: summary, label: Summary, widget: text, i18n: true }
+      - { name: body, label: Body, widget: markdown, i18n: true }
+      - { name: startNote, label: "History note", widget: text, i18n: true }
+      - { name: image, label: Photo, widget: object, required: false, fields: [ { name: src, label: File, widget: image }, { name: alt, label: Alt text, widget: string, i18n: true }, { name: position, label: "Crop focus", widget: select, options: [center, top, bottom, left, right], default: center } ] }
+
+  - name: settings
+    label: Site settings
+    files:
+      - name: site
+        label: Site
+        file: content/site.json
+        fields:
+          - { name: name, label: "Association name", widget: string, i18n: true }
+          - { name: schoolName, label: "School name", widget: string, i18n: true }
+          - { name: formed, label: "Formed in", widget: number, i18n: duplicate }
+          - { name: tagline, label: Tagline, widget: string, i18n: true }
+          - { name: description, label: Description, widget: text, i18n: true }
+          - name: contact
+            label: Contact
+            widget: object
+            fields:
+              - { name: email, label: Email, widget: string, required: false, hint: "Leave empty until the association confirms it; the site shows a 'to be confirmed' state.", i18n: duplicate }
+              - { name: emailVerified, label: "Email confirmed", widget: boolean, default: false, i18n: duplicate }
+              - { name: phone, label: Phone, widget: string, required: false, i18n: duplicate }
+              - { name: phoneVerified, label: "Phone confirmed", widget: boolean, default: false, i18n: duplicate }
+              - { name: address, label: Address, widget: string, i18n: true }
+          - { name: repository, label: "Repository URL", widget: string, i18n: duplicate }
+          - name: credit
+            label: Credit
+            widget: object
+            required: false
+            fields: [ { name: label, label: Label, widget: string }, { name: url, label: URL, widget: string } ]
+          - name: donations
+            label: Donations
+            widget: object
+            fields:
+              - { name: enabled, label: Enabled, widget: boolean, default: false, i18n: duplicate }
+              - { name: note, label: Note, widget: text, i18n: true }

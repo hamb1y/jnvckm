@@ -1,0 +1,40 @@
+---
+import EntryDetail from "@/components/EntryDetail.astro";
+import { contributionBySlug } from "@/data/contributions";
+import { lx, t, tDynamic } from "@/i18n/utils";
+import { localePath } from "@/lib/paths";
+import { formatAmount, formatDate } from "@/utils/format";
+import type { Locale } from "@/data/types";
+
+export interface Props {
+  lang: Locale;
+  slug: string;
+}
+
+const { lang, slug } = Astro.props;
+const entry = contributionBySlug(slug);
+if (!entry) throw new Error(`Unknown contribution: ${slug}`);
+
+const meta: { label: string; value: string }[] = [
+  { label: t(lang, "common.category"), value: tDynamic(lang, `categories.${entry.category}`) },
+];
+if (entry.batch) meta.push({ label: t(lang, "common.batch"), value: lx(entry.batch, lang) });
+if (entry.amount !== null) {
+  meta.push({ label: t(lang, "common.amount"), value: formatAmount(entry.amount, lang) });
+}
+---
+
+<EntryDetail
+  lang={lang}
+  title={lx(entry.title, lang)}
+  date={formatDate(entry.date, lang)}
+  summary={lx(entry.summary, lang)}
+  meta={meta}
+  body={entry.body}
+  image={entry.image}
+  documents={entry.documents}
+  archiveNote={entry.archiveNote}
+  source={entry.source ?? ""}
+  backHref={localePath("/contributions", lang)}
+  backLabel={t(lang, "impact.title")}
+/>

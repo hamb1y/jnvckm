@@ -1,0 +1,70 @@
+---
+import EntryRow from "@/components/EntryRow.astro";
+import { events } from "@/data/events";
+import { lx, t } from "@/i18n/utils";
+import { localePath } from "@/lib/paths";
+import { formatDate } from "@/utils/format";
+import type { Locale } from "@/data/types";
+
+export interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const today = new Date().toISOString().slice(0, 10);
+const upcoming = events
+  .filter((entry) => entry.date >= today)
+  .sort((a, b) => a.date.localeCompare(b.date));
+const past = events.filter((entry) => entry.date < today);
+---
+
+<div class="container section">
+  <header class="page-head">
+    <h1>{t(lang, "events.title")}</h1>
+    <p>{t(lang, "events.lede")}</p>
+  </header>
+
+  <section class="page-section">
+    <h2>{t(lang, "events.upcoming")}</h2>
+    {
+      upcoming.length > 0 ? (
+        <ul class="rows">
+          {upcoming.map((entry) => (
+            <EntryRow
+              href={localePath(`/events/${entry.slug}`, lang)}
+              title={lx(entry.title, lang)}
+              date={formatDate(entry.date, lang)}
+              summary={lx(entry.summary, lang)}
+              image={entry.image}
+              meta={entry.location ? [lx(entry.location, lang)] : []}
+              locale={lang}
+            />
+          ))}
+        </ul>
+      ) : (
+        <p class="empty-state">{t(lang, "events.empty")}</p>
+      )
+    }
+  </section>
+
+  {
+    past.length > 0 && (
+      <section class="page-section">
+        <h2>{t(lang, "events.past")}</h2>
+        <ul class="rows">
+          {past.map((entry) => (
+            <EntryRow
+              href={localePath(`/events/${entry.slug}`, lang)}
+              title={lx(entry.title, lang)}
+              date={formatDate(entry.date, lang)}
+              summary={lx(entry.summary, lang)}
+              image={entry.image}
+              meta={entry.location ? [lx(entry.location, lang)] : []}
+              locale={lang}
+            />
+          ))}
+        </ul>
+      </section>
+    )
+  }
+</div>

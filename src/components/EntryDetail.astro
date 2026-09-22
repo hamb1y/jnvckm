@@ -1,0 +1,179 @@
+---
+import Document from "./Document.astro";
+import Figure from "./Figure.astro";
+import Markdown from "./Markdown.astro";
+import type { Locale, Localized, Media } from "@/data/types";
+import { isFallback, lx, t } from "@/i18n/utils";
+
+/**
+ * Shared layout for a single event, contribution or story. One implementation
+ * for three collections that render the same shape.
+ */
+export interface Props {
+  lang: Locale;
+  title: string;
+  date?: string;
+  summary?: string;
+  meta?: { label: string; value: string }[];
+  body: Localized;
+  image?: Media | null;
+  documents?: Media[];
+  archiveNote?: Localized | null;
+  source?: string;
+  backHref: string;
+  backLabel: string;
+  priority?: boolean;
+}
+
+const {
+  lang,
+  title,
+  date = "",
+  summary = "",
+  meta = [],
+  body,
+  image = null,
+  documents = [],
+  archiveNote = null,
+  source = "",
+  backHref,
+  backLabel,
+  priority = false,
+} = Astro.props;
+
+const bodyText = lx(body, lang);
+const bodyIsFallback = bodyText !== "" && isFallback(body, lang);
+const note = archiveNote ? lx(archiveNote, lang) : "";
+---
+
+<article class="entry container section">
+  <a class="back" href={backHref}>{backLabel}</a>
+
+  <header class="entry-head">
+    <h1>{title}</h1>
+    {date !== "" && <p class="entry-date mono">{date}</p>}
+    {summary !== "" && <p class="entry-lede">{summary}</p>}
+    {
+      meta.length > 0 && (
+        <dl class="entry-meta">
+          {meta.map((row) => (
+            <div>
+              <dt>{row.label}</dt>
+              <dd>{row.value}</dd>
+            </div>
+          ))}
+        </dl>
+      )
+    }
+  </header>
+
+  {image && <Figure media={image} locale={lang} ratio="16 / 9" priority={priority} showCaption />}
+
+  {bodyText !== "" && <Markdown value={bodyText} />}
+
+  {bodyIsFallback && <p class="entry-note">{t(lang, "common.englishOnly")}</p>}
+
+  {note !== "" && <aside class="entry-archive">{note}</aside>}
+
+  {
+    documents.length > 0 && (
+      <section class="entry-documents">
+        <h2 class="entry-documents-title">{t(lang, "common.documents")}</h2>
+        <div class="document-grid">
+          {documents.map((doc) => (
+            <Document document={doc} locale={lang} />
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  {source !== "" && <p class="entry-source mono">{t(lang, "common.source")} · {source}</p>}
+</article>
+
+<style>
+  .back {
+    display: inline-block;
+    margin-block-end: var(--s-6);
+    font-weight: 600;
+  }
+
+  .entry-head {
+    max-inline-size: var(--measure);
+  }
+
+  .entry-date {
+    margin-block-start: var(--s-3);
+    color: var(--text-3);
+  }
+
+  .entry-lede {
+    margin-block-start: var(--s-4);
+    font-size: var(--step-1);
+    color: var(--text-2);
+  }
+
+  .entry-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3) var(--s-7);
+    margin-block-start: var(--s-6);
+    padding-block-start: var(--s-4);
+    border-block-start: 1px solid var(--rule);
+  }
+
+  .entry-meta dt {
+    font-size: var(--step--1);
+    color: var(--text-3);
+  }
+
+  .entry-meta dd {
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .entry .figure,
+  .entry :global(.prose) {
+    margin-block-start: var(--s-7);
+  }
+
+  .entry-note {
+    margin-block-start: var(--s-5);
+    padding-inline-start: var(--s-4);
+    border-inline-start: 2px solid var(--rule-strong);
+    color: var(--text-3);
+    max-inline-size: var(--measure);
+  }
+
+  .entry-archive {
+    margin-block-start: var(--s-7);
+    padding: var(--s-5);
+    background: var(--surface-sunk);
+    border-radius: var(--r-2);
+    max-inline-size: var(--measure);
+    color: var(--text-2);
+  }
+
+  .entry-documents {
+    margin-block-start: var(--s-8);
+  }
+
+  .entry-documents-title {
+    font-size: var(--step-1);
+    margin-block-end: var(--s-4);
+  }
+
+  .document-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+    gap: var(--s-5);
+    align-items: start;
+  }
+
+  .entry-source {
+    margin-block-start: var(--s-8);
+    padding-block-start: var(--s-4);
+    border-block-start: 1px solid var(--rule);
+    color: var(--text-3);
+  }
+</style>
