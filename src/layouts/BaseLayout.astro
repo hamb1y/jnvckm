@@ -41,7 +41,19 @@ const siteName = lx(site.name, lang);
 const pageTitle = title ? `${title} — ${siteName}` : `${siteName} — ${lx(site.tagline, lang)}`;
 const metaDescription = description ?? lx(site.description, lang);
 const canonical = new URL(localePath(path, lang), origin).href;
-const socialImage = new URL(image ?? "/og-default.png", origin).href;
+
+/**
+ * Crawlers are happiest with JPEG. Every site photograph ships as WebP with a
+ * JPEG twin in /og/ (scripts/build-og.mjs), so point the social card at the
+ * twin and fall back to the branded default.
+ */
+function socialCard(image: string | null): string {
+  if (!image) return "/og-default.png";
+  const match = /^\/images\/(.+)\.webp$/i.exec(image);
+  return match ? `/og/${match[1]}.jpg` : image;
+}
+
+const socialImage = new URL(socialCard(image), origin).href;
 ---
 
 <!doctype html>

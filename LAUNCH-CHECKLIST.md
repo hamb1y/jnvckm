@@ -11,7 +11,7 @@ so it can be sent to the association as-is.
 | 1 | **Official alumni email** (and whether a phone number may be public) | `contact.email`/`phone` are empty and `*Verified` are `false`; the footer and Connect page render "To be confirmed" |
 | 2 | **Registration**: certificate, exact registered name, number, date, current status. Is "JNVCKM Alumni Association (R)" still the legal name? | The site says only "Formed in 1993" and publishes no registration number |
 | 3 | **Current office bearers / executive committee** — who, and what roles may be public? | Not published |
-| 4 | **Kannada review by a native speaker.** All Kannada in `src/i18n/ui.ts`, `content/site.json`, `content/programs/*`, and every record's `title`, `summary`, `batch`, `archiveNote` and `source` was written during this rebuild, not by the association | Published, and needs review. `bun run verify` now checks key parity, empty values and leftover Latin text, but it cannot judge whether the Kannada reads naturally |
+| 4 | **Kannada review by a native speaker.** A full correctness pass was done during the rebuild — grammar, agreement, register, the polite plural, date order, and terminology (Programs = ಯೋಜನೆಗಳು, Events = ಕಾರ್ಯಕ್ರಮಗಳು, Program label = ಯೋಜನೆ) — and `bun run verify` checks key parity, empty values, leftover Latin text and Kannada coverage. But the Kannada is the author's, not a native ear's | Published. One native read before launch would settle idiom and register; everything in `src/i18n/ui.ts`, `content/site.json`, `content/programs/*` and each record's `title`, `summary`, `batch` and `archiveNote` is in scope |
 | 5 | **`jnvckm.org` control** — confirm registrar access, then point it at Cloudflare Pages and set up redirects from known old paths | Canonical is set to `https://jnvckm.org` in `astro.config.mjs` |
 | 6 | **CMS OAuth worker** — deploy `sveltia/sveltia-cms-auth`, set `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`, `ALLOWED_DOMAINS=jnvckm.org,www.jnvckm.org,jnvckm.pages.dev`, create the GitHub OAuth app with callback `<worker-url>/callback`, then set `backend.base_url` in `public/admin/config.yml`. Full procedure in README. Until it exists, editors sign in with a GitHub token (`contents: write`) — both methods are enabled in the config | `base_url` is unset, so OAuth falls back to Netlify's endpoint and will not work. Token sign-in and local repository mode both work now |
 | 7 | **Who may edit the site** (GitHub write access is the access control) | Repo is public; only collaborators with write access can save |
@@ -58,5 +58,5 @@ school or Navodaya Vidyalaya Samiti website.
 - Old `jnvckm.org` backups, Blogger exports, newsletters, higher-resolution
   clippings
 - Whether the association currently accepts donations, and the wording that
-  must be shown if so (`donations.enabled` is `false`, so the Connect page says
-  the ways to contribute are being confirmed)
+  must be shown if so (`content/site.json` → `donations.note`, which currently
+  says the ways to contribute are being confirmed)

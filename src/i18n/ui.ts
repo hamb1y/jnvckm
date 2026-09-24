@@ -141,7 +141,7 @@ export const ui = {
     "common.documents": "ದಾಖಲೆಗಳು",
     "common.source": "ಮೂಲ",
     "common.englishOnly": "ಈ ದಾಖಲೆ ಇಂಗ್ಲಿಷ್‌ನಲ್ಲಿದೆ.",
-    "common.program": "ಕಾರ್ಯಕ್ರಮ",
+    "common.program": "ಯೋಜನೆ",
     "common.author": "ಲೇಖಕ",
     "events.title": "ಕಾರ್ಯಕ್ರಮಗಳು",
     "events.lede": "ಪುನರ್ಮಿಲನಗಳು, ಕಾರ್ಯಾಗಾರಗಳು, ವಾರ್ಷಿಕ ಸಮಾವೇಶ ಮತ್ತು ಕ್ರಿಕೆಟ್ ಲೀಗ್.",
@@ -157,7 +157,7 @@ export const ui = {
     "impact.summary": "ದಾಖಲಾದ {count} ಕೊಡುಗೆಗಳು, {from}–{to}",
     "stories.title": "ಕಥೆಗಳು",
     "stories.lede": "ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಮುದಾಯದ ಸುದ್ದಿ, ವರದಿಗಳು ಮತ್ತು ನೆನಪುಗಳು.",
-    "stories.empty": "ಇನ್ನೂ ಯಾವುದೇ ಬರಹ ಪ್ರಕಟವಾಗಿಲ್ಲ.",
+    "stories.empty": "ಇನ್ನೂ ಯಾವುದೇ ಕಥೆ ಪ್ರಕಟವಾಗಿಲ್ಲ.",
     "vidyalaya.title": "ವಿದ್ಯಾಲಯ",
     "vidyalaya.lede":
       "ಜೆಎನ್‌ವಿಸಿಕೆಎಂ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಂಘ ಸ್ವತಂತ್ರ ಸಂಘಟನೆ. ಇದು ಆ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳು ಓದಿದ ವಿದ್ಯಾಲಯ.",

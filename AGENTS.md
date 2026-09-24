@@ -83,6 +83,8 @@ that are easy to break by accident.
   delete or overwrite `originals/`.
 - `bun run logo` — regenerates the transparent logo mark, favicons and the social
   card from `originals/assets/logo.webp`.
+- `bun run build` — runs `scripts/build-og.mjs` first (JPEG social-card twins in
+  the gitignored `public/og/`), then `astro build`.
 - `bun run verify` — the browser gate. Run it before saying a change works.
 
 ## Commits

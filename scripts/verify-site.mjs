@@ -539,9 +539,14 @@ async function main() {
       const found = await page.evaluate(() => ({
         links: [...document.querySelectorAll("a[href]")].map((a) => a.getAttribute("href")),
         nav: [...document.querySelectorAll("header a[href]")].map((a) => a.getAttribute("href")),
+        og: document.querySelector('meta[property="og:image"]')?.getAttribute("content") ?? "",
       }));
       for (const href of found.links) {
         if (href && href.startsWith("/")) internalLinks.add(href.split("#")[0]);
+      }
+      // The social card must resolve too — it is generated at build time.
+      if (found.og.startsWith("https://jnvckm.org/")) {
+        internalLinks.add(new URL(found.og).pathname);
       }
 
       const isKn = route === "/kn" || route.startsWith("/kn/");
