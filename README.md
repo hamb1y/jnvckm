@@ -79,16 +79,99 @@ scripts/            verify-site.mjs, optimize-images.mjs, make-logo.mjs
 Content is JSON, one file per entry, filename = slug. A content edit is a
 commit; a build consumes it. There is no sync step and no database.
 
-- **Locally**, no authentication: `bun dev`, open
-  <http://localhost:4321/admin/index.html>, choose *Work with Local Repository*
-  and pick the repo root. (Chromium only.)
-- **In the browser**, via GitHub, once the OAuth worker is deployed and its URL
-  is set as `backend.base_url` in `public/admin/config.yml`. See
-  `LAUNCH-CHECKLIST.md`.
+Validate the CMS config whenever you change it:
 
-Bilingual fields store both languages in one file. A record that exists only in
-English still renders on Kannada pages: `lx()` falls back to English and the
-page tells the reader the archived record is in its original language.
+```bash
+bun run cms              # offline: structure, and field coverage vs content
+bun run cms --schema     # ...plus validation against Sveltia's published schema
+```
+
+`bun run verify` also runs the offline checks. **If a field exists in `content/`
+but is not declared in `public/admin/config.yml`, Sveltia drops it when an editor
+saves** — the coverage check is what prevents that quiet data loss.
+
+### 1. Editing locally (no auth, no server)
+
+```bash
+bun dev
+```
+
+Open <http://localhost:4321/admin/index.html> → *Work with Local Repository* →
+select the repo root. Chromium only. (Astro's dev server does not map `/admin/`
+to its `index.html`; production does.)
+
+### 2. Editing in the browser today, with a token
+
+The OAuth worker is not deployed yet, so use a personal access token:
+
+1. Open <http://localhost:4321/admin/index.html>
+2. Choose *Sign in with GitHub*
+3. Follow the token link, or create a fine-grained token with **Contents: write**
+   on `hamb1y/jnvckm`
+4. Paste it in
+
+Only people with write access to the repository can save, whatever the scope.
+
+### 3. Editing in the browser with OAuth (the worker)
+
+1. **Deploy the worker**
+
+   ```bash
+   git clone https://github.com/sveltia/sveltia-cms-auth
+   cd sveltia-cms-auth
+   npm install
+   npx wrangler deploy
+   ```
+
+2. **Set its environment**
+
+   ```bash
+   npx wrangler secret put GITHUB_CLIENT_ID
+   npx wrangler secret put GITHUB_CLIENT_SECRET
+   ```
+
+   And in that project's `wrangler.toml`:
+
+   ```toml
+   [vars]
+   ALLOWED_DOMAINS = "jnvckm.org,www.jnvckm.org,jnvckm.pages.dev"
+   ```
+
+   `ALLOWED_DOMAINS` holds bare hostnames, comma-separated, with no scheme.
+   Include every hostname the admin is served from, or sign-in fails with
+   `UNSUPPORTED_DOMAIN`. The `jnvckm.pages.dev` hostname comes from the Pages
+   project name.
+
+3. **Create the GitHub OAuth app**
+
+   - Homepage URL: `https://jnvckm.org`
+   - Authorization callback URL: `https://<worker-url>/callback`
+
+4. **Verify the worker before trusting it**
+
+   ```bash
+   curl -sI "https://<worker-url>/auth?provider=github&site_id=jnvckm.pages.dev" | head -3
+   ```
+
+   Expect `302` with a `location:` pointing at
+   `https://github.com/login/oauth/authorize?...client_id=...`. A hostname is
+   passed as `site_id`, not a URL. An untrusted hostname must show an error page,
+   not a redirect.
+
+5. **Point the CMS at it** — set `backend.base_url` in
+   `public/admin/config.yml` to the worker origin, then run `bun run cms`.
+
+### Bilingual content
+
+Translatable fields are stored as `{ "en": …, "kn": … }` in the same file;
+everything else is shared and stored once. A record that exists only in English
+still renders on Kannada pages: `lx()` falls back to English and the page tells
+the reader the record is in its original language.
+
+Everything a reader sees except the long-form `body` must carry Kannada —
+`bun run verify` fails on a title, summary, image description, caption, batch,
+location or note that has none. Long-form `body` may stay in its original
+language; the page shows a note when it does.
 
 ## Licence
 

@@ -16,6 +16,7 @@
     filterLabel,
     emptyLabel,
     countTemplate,
+    range = "",
   }: {
     categories: Category[];
     total: number;
@@ -23,6 +24,7 @@
     filterLabel: string;
     emptyLabel: string;
     countTemplate: string;
+    range?: string;
   } = $props();
 
   let active = $state("all");
@@ -66,7 +68,9 @@
       </button>
     {/each}
   </div>
-  <p class="filter-count mono" aria-live="polite">{countLabel}</p>
+  <p class="filter-count mono" aria-live="polite">
+    {countLabel}{range ? ` · ${range}` : ""}
+  </p>
 </div>
 
 <style>

@@ -6,7 +6,6 @@ import { eventsForProgram } from "@/data/events";
 import { programById } from "@/data/programs";
 import { lx, t } from "@/i18n/utils";
 import { localePath } from "@/lib/paths";
-import { formatDate } from "@/utils/format";
 import type { Locale } from "@/data/types";
 
 export interface Props {
@@ -29,17 +28,14 @@ const editions = eventsForProgram(id);
       <p>{lx(program.tagline, lang)}</p>
     </header>
 
-    <div class="program-intro">
-      <div class="program-media">
-        <Figure
-          media={program.image}
-          locale={lang}
-          ratio="4 / 3"
-          priority={true}
-          placeholder={true}
-          placeholderLabel={lx(program.name, lang)}
-        />
-      </div>
+    <div class:list={["program-intro", program.image === null && "program-intro--text"]}>
+      {
+        program.image && (
+          <div class="program-media">
+            <Figure media={program.image} locale={lang} ratio="4 / 3" priority={true} />
+          </div>
+        )
+      }
       <div class="program-copy">
         <p class="program-note mono">{lx(program.startNote, lang)}</p>
         <Markdown value={lx(program.body, lang)} />
@@ -49,7 +45,10 @@ const editions = eventsForProgram(id);
 
   <div class="container">
     <div class="section-head">
-      <h2 class="section-title">{t(lang, "programs.relatedEvents")}</h2>
+      <div>
+        <h2 class="section-title">{t(lang, "programs.relatedEvents")}</h2>
+        <p class="section-lede">{t(lang, "programs.documented")}</p>
+      </div>
     </div>
     {
       editions.length > 0 ? (
@@ -58,7 +57,7 @@ const editions = eventsForProgram(id);
             <EntryRow
               href={localePath(`/events/${entry.slug}`, lang)}
               title={lx(entry.title, lang)}
-              date={formatDate(entry.date, lang)}
+              date={entry.date}
               summary={lx(entry.summary, lang)}
               image={entry.image}
               meta={entry.location ? [lx(entry.location, lang)] : []}
@@ -92,6 +91,15 @@ const editions = eventsForProgram(id);
     align-items: start;
   }
 
+  /* A program with no photograph opens text-led, with no empty frame. */
+  .program-intro--text {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .program-intro--text .program-copy {
+    max-inline-size: 46rem;
+  }
+
   .program-note {
     padding-block-end: var(--s-4);
     border-block-end: 1px solid var(--rule);
@@ -101,6 +109,10 @@ const editions = eventsForProgram(id);
 
   .container > .section-head {
     margin-block-end: var(--s-5);
+  }
+
+  .container + .container {
+    padding-block-start: clamp(var(--s-6), 4vw, var(--s-8));
   }
 
   @media (max-width: 900px) {

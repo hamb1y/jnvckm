@@ -23,19 +23,25 @@ const { lang } = Astro.props;
   <div class="container">
     <div class="programs">
       {
-        programs.map((program, index) => (
-          <article
-            class:list={[
-              "program",
-              index % 2 === 1 && "program--flip",
-              program.image === null && "program--text",
-            ]}
-          >
-            {program.image && (
-              <div class="program-media">
-                <Figure media={program.image} locale={lang} ratio="4 / 3" />
-              </div>
-            )}
+        programs.map((program) => (
+          <article class="program">
+            <div class="program-media">
+              {
+                program.image ? (
+                  <Figure media={program.image} locale={lang} ratio="4 / 3" />
+                ) : (
+                  /* No photograph exists for this program, so it gets a composed
+                     typographic panel rather than an empty frame. */
+                  <div class="program-panel">
+                    <p class="panel-mark mono">
+                      {program.shortName ? lx(program.shortName, lang) : ""}
+                    </p>
+                    <p class="panel-name">{lx(program.name, lang)}</p>
+                    <p class="panel-years mono">{lx(program.startNote, lang)}</p>
+                  </div>
+                )
+              }
+            </div>
             <div class="program-main">
               <h2>
                 <a href={localePath(`/programs/${program.id}`, lang)}>{lx(program.name, lang)}</a>
@@ -52,29 +58,25 @@ const { lang } = Astro.props;
 </section>
 
 <style>
+  .container {
+    padding-block-start: clamp(2rem, 5vw, 4rem);
+  }
+
+  /* Keep the first program close to the page title. */
+  section {
+    padding-block: var(--s-5) clamp(3rem, 6vw, 5rem);
+  }
+
   .programs {
     display: grid;
+    gap: clamp(var(--s-7), 5vw, var(--s-9));
   }
 
   .program {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: clamp(var(--s-6), 5vw, var(--s-9));
-    align-items: center;
-    padding-block: clamp(var(--s-6), 4vw, var(--s-8));
-  }
-
-  .program--flip .program-media {
-    order: 2;
-  }
-
-  /* A program with no photograph gets the row to itself. */
-  .program--text {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .program--text .program-main {
-    max-inline-size: 46rem;
+    align-items: start;
   }
 
   .program-main h2 {
@@ -107,7 +109,38 @@ const { lang } = Astro.props;
     padding-block-start: var(--s-4);
     border-block-start: 1px solid var(--rule);
     color: var(--text-3);
+    font-size: var(--step--1);
     max-inline-size: 54ch;
+  }
+
+  .program-panel {
+    display: grid;
+    align-content: center;
+    gap: var(--s-2);
+    padding: clamp(var(--s-5), 4vw, var(--s-7));
+    background: var(--accent-wash);
+    border: 1px solid var(--rule);
+    border-radius: var(--r-2);
+    aspect-ratio: 4 / 3;
+  }
+
+  .panel-mark {
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+
+  .panel-name {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  .panel-years {
+    font-size: var(--step--1);
+    color: var(--text-3);
   }
 
   @media (max-width: 900px) {
@@ -115,8 +148,8 @@ const { lang } = Astro.props;
       grid-template-columns: 1fr;
     }
 
-    .program--flip .program-media {
-      order: 0;
+    .program-panel {
+      aspect-ratio: auto;
     }
   }
 </style>

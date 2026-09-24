@@ -72,6 +72,7 @@ const siteName = lx(site.name, lang);
 
 <style>
   .site-header {
+    position: relative;
     border-block-end: 1px solid var(--rule);
     background: var(--paper);
   }
@@ -211,14 +212,16 @@ const siteName = lx(site.name, lang);
       gap: var(--s-3);
     }
 
-    /* The open menu spans the full width beneath the bar. */
+    /* The open menu spans the full width, directly beneath the header bar. */
     .nav-details[open] {
       position: absolute;
+      inset-block-start: 100%;
       inset-inline: 0;
       padding-inline: var(--gutter);
       padding-block-end: var(--s-4);
       background: var(--paper);
       border-block-end: 1px solid var(--rule);
+      box-shadow: var(--shadow-lift);
       z-index: 20;
     }
   }

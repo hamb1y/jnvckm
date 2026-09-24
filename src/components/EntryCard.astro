@@ -2,12 +2,21 @@
 import { ArrowUpRight } from "lucide-astro";
 import Figure from "./Figure.astro";
 import type { Locale, Media } from "@/data/types";
+import { formatDate } from "@/utils/format";
 
-/** A curated record on a card: photograph first, then the record. */
+/**
+ * A curated record on a card. The whole card is one click target: the title
+ * link is stretched over it, so the photograph is clickable too and keyboard
+ * focus still lands on real link text.
+ *
+ * A record with no photograph renders as an intentional text card, not an
+ * empty frame.
+ */
 export interface Props {
   href: string;
   title: string;
   summary?: string;
+  /** ISO date, YYYY-MM-DD. */
   date?: string;
   label?: string;
   location?: string;
@@ -15,7 +24,6 @@ export interface Props {
   locale: Locale;
   accent?: "program" | "give" | "brand";
   ratio?: string;
-  placeholder?: boolean;
 }
 
 const {
@@ -29,22 +37,16 @@ const {
   locale,
   accent = "brand",
   ratio = "3 / 2",
-  placeholder = false,
 } = Astro.props;
+
+const display = formatDate(date, locale);
 ---
 
-<article class:list={["card", `accent-${accent}`]}>
-  <Figure
-    media={image}
-    locale={locale}
-    ratio={ratio}
-    showCaption={false}
-    placeholder={placeholder}
-    accent={accent}
-  />
+<article class:list={["card", `accent-${accent}`, !image && "card--text"]}>
+  {image && <Figure media={image} locale={locale} ratio={ratio} accent={accent} />}
 
   <div class="meta mono">
-    {date !== "" && <span class="date">{date}</span>}
+    {display !== "" && <time class="date" datetime={date}>{display}</time>}
     {
       label !== "" && (
         <span class="label">
@@ -68,9 +70,28 @@ const {
 
 <style>
   .card {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: var(--s-3);
+  }
+
+  /* A record without a photograph gets a defined surface, not an empty box and
+     not an accent stripe. */
+  .card--text {
+    padding: var(--s-5);
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: var(--r-2);
+  }
+
+  .card {
+    transition: color var(--dur-1) var(--ease-out);
+  }
+
+  .card:has(.title a:hover) .summary,
+  .card:has(.title a:hover) .date {
+    color: var(--ink);
   }
 
   .meta {
@@ -112,8 +133,21 @@ const {
     text-decoration: none;
   }
 
+  /* Stretch the one link over the whole card. */
+  .title a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: var(--r-2);
+  }
+
   .title a:hover {
     color: var(--accent);
+  }
+
+  .title a:focus-visible::after {
+    outline: 2px solid var(--ink);
+    outline-offset: 3px;
   }
 
   .title :global(svg) {

@@ -3,7 +3,6 @@ import EntryRow from "@/components/EntryRow.astro";
 import { events } from "@/data/events";
 import { lx, t } from "@/i18n/utils";
 import { localePath } from "@/lib/paths";
-import { formatDate } from "@/utils/format";
 import type { Locale } from "@/data/types";
 
 export interface Props {
@@ -16,6 +15,13 @@ const upcoming = events
   .filter((entry) => entry.date >= today)
   .sort((a, b) => a.date.localeCompare(b.date));
 const past = events.filter((entry) => entry.date < today);
+
+// Group by year so a long record stays navigable.
+const years = [...new Set(past.map((entry) => entry.date.slice(0, 4)))];
+const byYear = years.map((year) => ({
+  year,
+  entries: past.filter((entry) => entry.date.startsWith(year)),
+}));
 ---
 
 <div class="container">
@@ -25,46 +31,19 @@ const past = events.filter((entry) => entry.date < today);
   </header>
 </div>
 
-<section class="accent-brand">
-  <div class="container">
-    <div class="section-head">
-      <h2 class="section-title">{t(lang, "events.upcoming")}</h2>
-    </div>
-    {
-      upcoming.length > 0 ? (
+{
+  upcoming.length > 0 && (
+    <section class="accent-brand">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">{t(lang, "events.upcoming")}</h2>
+        </div>
         <ul class="records">
           {upcoming.map((entry) => (
             <EntryRow
               href={localePath(`/events/${entry.slug}`, lang)}
               title={lx(entry.title, lang)}
-              date={formatDate(entry.date, lang)}
-              summary={lx(entry.summary, lang)}
-              image={entry.image}
-              meta={entry.location ? [lx(entry.location, lang)] : []}
-              locale={lang}
-            />
-          ))}
-        </ul>
-      ) : (
-        <p class="empty-state">{t(lang, "events.empty")}</p>
-      )
-    }
-  </div>
-</section>
-
-{
-  past.length > 0 && (
-    <section class="accent-brand">
-      <div class="container">
-        <div class="section-head">
-          <h2 class="section-title">{t(lang, "events.past")}</h2>
-        </div>
-        <ul class="records">
-          {past.map((entry) => (
-            <EntryRow
-              href={localePath(`/events/${entry.slug}`, lang)}
-              title={lx(entry.title, lang)}
-              date={formatDate(entry.date, lang)}
+              date={entry.date}
               summary={lx(entry.summary, lang)}
               image={entry.image}
               meta={entry.location ? [lx(entry.location, lang)] : []}
@@ -77,8 +56,74 @@ const past = events.filter((entry) => entry.date < today);
   )
 }
 
+<section class="accent-brand">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">{t(lang, "events.past")}</h2>
+    </div>
+    {
+      byYear.map(({ year, entries }) => (
+        <div class="year-group">
+          <h3 class="year mono">{year}</h3>
+          <ul class="records">
+            {entries.map((entry) => (
+              <EntryRow
+                href={localePath(`/events/${entry.slug}`, lang)}
+                title={lx(entry.title, lang)}
+                date={entry.date}
+                summary={lx(entry.summary, lang)}
+                image={entry.image}
+                meta={entry.location ? [lx(entry.location, lang)] : []}
+                locale={lang}
+              />
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
 <style>
+  .container {
+    padding-block-start: clamp(2rem, 5vw, 4rem);
+  }
+
+  section {
+    padding-block: 0 clamp(2.5rem, 5vw, 4rem);
+  }
+
   .container .section-head {
     margin-block-end: var(--s-5);
+  }
+
+  .year-group {
+    display: grid;
+    grid-template-columns: 5rem minmax(0, 1fr);
+    gap: var(--s-4);
+    align-items: start;
+  }
+
+  .year-group + .year-group {
+    margin-block-start: var(--s-6);
+  }
+
+  .year {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    font-weight: 400;
+    color: var(--text-3);
+    padding-block-start: var(--s-5);
+  }
+
+  @media (max-width: 720px) {
+    .year-group {
+      grid-template-columns: 1fr;
+      gap: var(--s-2);
+    }
+
+    .year {
+      padding-block-start: var(--s-5);
+    }
   }
 </style>

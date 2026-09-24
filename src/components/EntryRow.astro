@@ -1,15 +1,18 @@
 ---
 import type { Locale, Media } from "@/data/types";
 import { lx } from "@/i18n/utils";
+import { formatDate } from "@/utils/format";
 
 /**
- * One dated record in a ledger. The date sits in mono on the left, the record
- * carries the middle, the figure sits on the right where there is one, and a
- * small plate shows a photograph when the archive has one.
+ * One dated record in a ledger. `date` is the ISO source date so the <time>
+ * element carries machine-readable markup; the localised date is what is shown.
+ * The date sits in mono on the left, the record carries the middle, the figure
+ * sits on the right where there is one, and a small plate shows a photograph.
  */
 export interface Props {
   href: string;
   title: string;
+  /** ISO date, YYYY-MM-DD. */
   date: string;
   meta?: string[];
   summary?: string;
@@ -31,12 +34,14 @@ const {
   locale,
   attrs = {},
 } = Astro.props;
+
+const display = formatDate(date, locale);
 const imageAlt = image ? lx(image.alt, locale) : "";
 ---
 
 <li class="ledger-row" data-entry {...attrs}>
   <a class="ledger-link" href={href}>
-    <time class="ledger-date mono" datetime={date}>{date}</time>
+    <time class="ledger-date mono" datetime={date}>{display}</time>
     <span class="ledger-main">
       <span class="ledger-title">{title}</span>
       {summary !== undefined && summary !== "" && <span class="ledger-summary">{summary}</span>}

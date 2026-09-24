@@ -90,6 +90,8 @@ const sourceText = lx(source, lang);
   }
 
   {sourceText !== "" && <p class="entry-source mono">{t(lang, "common.source")} · {sourceText}</p>}
+
+  <slot name="related" />
 </article>
 
 <style>

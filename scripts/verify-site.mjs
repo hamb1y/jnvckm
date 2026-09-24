@@ -13,6 +13,7 @@ import { existsSync } from "node:fs";
 import { mkdir, readFile, readdir, stat } from "node:fs/promises";
 import path from "node:path";
 import puppeteer from "puppeteer-core";
+import { checkCmsConfig } from "./check-cms-config.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const DIST = path.join(ROOT, "dist");
@@ -406,6 +407,59 @@ async function auditDictionaries() {
   }
   notes.push(`dictionaries: ${en.size} keys, en and kn in parity`);
 
+  // Content: everything a reader sees except long-form `body` must carry
+  // Kannada. Bodies may stay in their original language, with a visible note.
+  const TEXT_KEYS = new Set([
+    "title",
+    "summary",
+    "name",
+    "tagline",
+    "shortName",
+    "alt",
+    "caption",
+    "batch",
+    "location",
+    "archiveNote",
+    "description",
+    "startNote",
+  ]);
+  const files = [];
+  const collect = async (dir) => {
+    for (const item of await readdir(dir, { withFileTypes: true })) {
+      const full = path.join(dir, item.name);
+      if (item.isDirectory()) await collect(full);
+      else if (item.name.endsWith(".json")) files.push(full);
+    }
+  };
+  await collect(path.join(ROOT, "content"));
+
+  let current = "";
+  const walk = (node, key) => {
+    if (Array.isArray(node)) {
+      for (const item of node) walk(item, key);
+      return;
+    }
+    if (node && typeof node === "object") {
+      if (typeof node.en === "string" || typeof node.kn === "string") {
+        if (typeof node.en === "string" && node.en.trim() !== "" && !(typeof node.kn === "string" && node.kn.trim() !== "")) {
+          fail(path.relative(ROOT, current), `${key} has no Kannada value`);
+        }
+        return;
+      }
+      for (const [k, v] of Object.entries(node)) walk(v, k);
+      return;
+    }
+    if (typeof node === "string" && TEXT_KEYS.has(key) && node.trim() !== "") {
+      fail(path.relative(ROOT, current), `${key} is a plain string with no Kannada value`);
+    }
+  };
+
+  for (const candidate of files) {
+    current = candidate;
+    walk(JSON.parse(await readFile(candidate, "utf8")), "");
+  }
+  notes.push(`content: ${files.length} files checked for Kannada coverage`);
+
   // Every font stack must carry a Kannada fallback. Without one, Kannada set in
   // that face renders as tofu boxes — which is how the mono date stamps broke.
   const tokens = await readFile(path.join(ROOT, "src/styles/tokens.css"), "utf8");
@@ -417,6 +471,13 @@ async function auditDictionaries() {
   }
 }
 
+/** The CMS config must stay valid, and must declare every content field. */
+async function auditCms() {
+  const result = await checkCmsConfig({ root: ROOT });
+  for (const problem of result.problems) fail("public/admin/config.yml", problem);
+  for (const cmsNote of result.notes) notes.push(cmsNote);
+}
+
 async function main() {
   if (!existsSync(DIST)) {
     console.error("dist/ not found. Run `bun run build` first.");
@@ -424,6 +485,7 @@ async function main() {
   }
 
   await auditDictionaries();
+  await auditCms();
 
   const server = await startServer();
   const routes = await discoverRoutes();
@@ -517,15 +579,46 @@ async function main() {
     const summary = document.querySelector(".nav-summary");
     if (!details || !summary) return { found: false };
     details.open = true;
-    await new Promise((resolve) => setTimeout(resolve, 50));
-    const links = [...details.querySelectorAll("a")].filter((a) => a.getBoundingClientRect().height > 0);
-    return { found: true, open: details.open, visibleLinks: links.length };
+    await new Promise((resolve) => setTimeout(resolve, 80));
+
+    const box = (el) => {
+      const b = el.getBoundingClientRect();
+      return { top: Math.round(b.top), bottom: Math.round(b.bottom), left: Math.round(b.left), right: Math.round(b.right) };
+    };
+    const panel = box(details.querySelector(".nav-list"));
+    const button = box(summary);
+    const brand = box(document.querySelector(".brand"));
+    const covers = (a, b) =>
+      !(a.bottom <= b.top || b.bottom <= a.top || a.right <= b.left || b.right <= a.left);
+
+    const links = [...details.querySelectorAll("a")].filter(
+      (a) => a.getBoundingClientRect().height > 0,
+    );
+    return {
+      found: true,
+      open: details.open,
+      visibleLinks: links.length,
+      panelOffscreen: panel.top < 0,
+      panelAboveButton: panel.top < button.bottom - 1,
+      panelCoversBrand: covers(panel, brand),
+      panel,
+      button,
+    };
   });
   if (!mobileNav.found) fail("/", "mobile nav control not found");
   else if (!mobileNav.open || mobileNav.visibleLinks === 0) {
     fail("/", `mobile nav did not reveal links (${JSON.stringify(mobileNav)})`);
+  } else if (mobileNav.panelOffscreen) {
+    fail("/", `mobile menu list starts off-screen (top ${mobileNav.panel.top}px)`);
+  } else if (mobileNav.panelAboveButton) {
+    fail(
+      "/",
+      `mobile menu list starts at ${mobileNav.panel.top}px, above the ${mobileNav.button.bottom}px bottom of its toggle`,
+    );
+  } else if (mobileNav.panelCoversBrand) {
+    fail("/", "mobile menu list covers the logo");
   } else {
-    notes.push(`mobile nav: ${mobileNav.visibleLinks} links revealed`);
+    notes.push(`mobile nav: ${mobileNav.visibleLinks} links, list below the bar`);
   }
 
   await interactions.goto(`${ORIGIN}/about`, { waitUntil: "load" });

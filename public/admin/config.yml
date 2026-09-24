@@ -1,20 +1,32 @@
 # Sveltia CMS. A content edit is a commit; a build consumes it.
 #
-# Editing locally needs no authentication: open /admin/, choose
-# "Work with Local Repository" and pick the repo root (Chromium only).
+# Validate this file with `bun run cms`, and against the schema published with
+# the CMS with `bun run cms --schema`. The verifier (`bun run verify`) fails if a
+# field exists in content/ but is not declared here, because Sveltia drops
+# undeclared fields when an editor saves.
 #
-# Editing in the browser (GitHub backend) also needs the OAuth worker:
-#   1. deploy github.com/sveltia/sveltia-cms-auth to Cloudflare Workers
-#   2. set GITHUB_CLIENT_ID / GITHUB_CLIENT_SECRET / ALLOWED_DOMAINS there,
-#      with ALLOWED_DOMAINS = jnvckm.org,www.jnvckm.org,jnvckm.pages.dev
-#   3. uncomment base_url below and put the worker URL in
-# See LAUNCH-CHECKLIST.md.
+# Signing in
+# ----------
+# 1. Locally, no authentication at all: `bun dev`, open /admin/index.html,
+#    choose "Work with Local Repository" and pick the repo root (Chromium only).
+# 2. In the browser, right now: sign in with a GitHub personal access token
+#    (contents: write). No server needed. See README.
+# 3. In the browser, with OAuth: deploy the auth worker, set its secrets and
+#    ALLOWED_DOMAINS, create a GitHub OAuth app whose callback is
+#    <worker-url>/callback, then set `base_url` below to the worker origin.
+#
+# `base_url` is required for OAuth: with it unset, Sveltia falls back to Netlify's
+# auth endpoint, which only works for sites hosted on Netlify. PKCE is not an
+# option here either — Sveltia rejects `auth_type: pkce` for GitHub.
+#
+# See LAUNCH-CHECKLIST.md item 6.
 
 backend:
   name: github
   repo: hamb1y/jnvckm
   branch: main
-  auth_scope: public_repo
+  auth_scope: public_repo # the repository is public, so the narrower grant is enough
+  auth_methods: [oauth, token] # token sign-in works before the worker exists
   # base_url: https://sveltia-cms-auth.<your-subdomain>.workers.dev
 
 media_folder: public/images
@@ -40,7 +52,7 @@ collections:
     summary: "{{title}} — {{date}}"
     sortable_fields: [date, title]
     fields:
-      - { name: slug, label: Slug, widget: string, hint: "Used in the web address. Changing it breaks existing links.", i18n: duplicate }
+      - { name: slug, label: Slug, widget: string, hint: "Used in the web address. Changing it breaks existing links." }
       - { name: kind, label: Kind, widget: select, options: [news, report, story], default: news, hint: "News and reports are association updates; stories are memories in an alumni voice.", i18n: duplicate }
       - { name: title, label: Title, widget: string, i18n: true }
       - { name: date, label: Date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, i18n: duplicate }
@@ -63,7 +75,7 @@ collections:
     summary: "{{title}} — {{date}}"
     sortable_fields: [date, title]
     fields:
-      - { name: slug, label: Slug, widget: string, i18n: duplicate }
+      - { name: slug, label: Slug, widget: string }
       - { name: title, label: Title, widget: string, i18n: true }
       - { name: date, label: Date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, i18n: duplicate }
       - { name: program, label: Program, widget: select, required: false, options: [ { label: IGNITE, value: ignite }, { label: "Navodaya Cricket League", value: ncl }, { label: "Alumni meet", value: meet }, { label: Workshop, value: workshop } ], i18n: duplicate }
@@ -85,7 +97,7 @@ collections:
     summary: "{{title}} — {{batch}}"
     sortable_fields: [date, title, category]
     fields:
-      - { name: slug, label: Slug, widget: string, i18n: duplicate }
+      - { name: slug, label: Slug, widget: string }
       - { name: title, label: Title, widget: string, i18n: true }
       - { name: date, label: Date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, i18n: duplicate }
       - { name: category, label: Category, widget: select, options: [ { label: Infrastructure, value: infrastructure }, { label: Technology, value: technology }, { label: "Student support", value: student-support }, { label: Sports, value: sports }, { label: Culture, value: culture }, { label: "Staff and community", value: staff-community } ], i18n: duplicate }
@@ -108,7 +120,7 @@ collections:
     identifier_field: id
     summary: "{{name}}"
     fields:
-      - { name: id, label: Id, widget: select, options: [ignite, ncl], hint: "ignite or ncl. The program page address depends on this.", i18n: duplicate }
+      - { name: id, label: Id, widget: select, options: [ignite, ncl], hint: "ignite or ncl. The program page address depends on this." }
       - { name: name, label: Name, widget: string, i18n: true }
       - { name: shortName, label: "Short name", widget: string, required: false, i18n: true }
       - { name: tagline, label: Tagline, widget: string, i18n: true }
@@ -144,6 +156,22 @@ collections:
             widget: object
             required: false
             fields: [ { name: label, label: Label, widget: string }, { name: url, label: URL, widget: string } ]
+          - name: license
+            label: Licence
+            widget: object
+            required: false
+            hint: "Shown in the footer next to the author credit."
+            fields: [ { name: label, label: Label, widget: string }, { name: url, label: URL, widget: string } ]
+          - name: socials
+            label: "Social channels"
+            label_singular: Channel
+            widget: list
+            required: false
+            hint: "Only add channels the association has confirmed, and switch on 'Confirmed' when it has. Everything else is treated as unverified."
+            fields:
+              - { name: label, label: Label, widget: string }
+              - { name: url, label: URL, widget: string }
+              - { name: verified, label: Confirmed, widget: boolean, default: false }
           - name: donations
             label: Donations
             widget: object

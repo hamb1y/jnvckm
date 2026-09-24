@@ -84,6 +84,17 @@ full-bleed photograph with its caption in a solid bar beneath. `.ledger` is only
 for label/value figures. Global rhythm, accents and utilities live in
 `global.css`.
 
+- `latest` on the home page is ordered by date, newest first, and is **not**
+  filtered by whether a record has a photograph. Freshness decides the order;
+  the card adapts. (An earlier version filtered to records with images, which
+  promoted older entries over newer text-only ones.)
+- the archive `Band` is height-capped so it cannot dominate the page.
+- `/events` renders `Upcoming` only when it is non-empty, and groups `Past` by
+  year.
+- `/programs/[id]` lists only the editions that have a record, and says so.
+- detail pages close with the other documented records from the same program,
+  where there are any.
+
 ## Islands
 
 One: `ContributionFilter.svelte` (`client:idle`). It toggles `hidden` on

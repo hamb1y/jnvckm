@@ -1,6 +1,7 @@
 ---
 import EntryDetail from "@/components/EntryDetail.astro";
-import { eventBySlug } from "@/data/events";
+import EntryRow from "@/components/EntryRow.astro";
+import { eventBySlug, eventsForProgram } from "@/data/events";
 import { programById } from "@/data/programs";
 import { lx, t } from "@/i18n/utils";
 import { localePath } from "@/lib/paths";
@@ -22,6 +23,11 @@ if (entry.program) {
   const program = programById(entry.program as "ignite" | "ncl");
   if (program) meta.push({ label: t(lang, "common.program"), value: lx(program.name, lang) });
 }
+
+// Closure: the other documented records from the same program, newest first.
+const related = entry.program
+  ? eventsForProgram(entry.program).filter((other) => other.slug !== entry.slug).slice(0, 3)
+  : [];
 ---
 
 <EntryDetail
@@ -37,4 +43,35 @@ if (entry.program) {
   backHref={localePath("/events", lang)}
   backLabel={`${t(lang, "events.title")}`}
   priority={true}
-/>
+>
+  {
+    related.length > 0 && (
+      <section slot="related" class="related">
+        <h2 class="related-title">{t(lang, "programs.relatedEvents")}</h2>
+        <ul class="records">
+          {related.map((other) => (
+            <EntryRow
+              href={localePath(`/events/${other.slug}`, lang)}
+              title={lx(other.title, lang)}
+              date={other.date}
+              summary={lx(other.summary, lang)}
+              image={other.image}
+              locale={lang}
+            />
+          ))}
+        </ul>
+      </section>
+    )
+  }
+</EntryDetail>
+
+<style>
+  .related {
+    margin-block-start: clamp(var(--s-7), 5vw, var(--s-9));
+  }
+
+  .related-title {
+    font-size: var(--step-1);
+    margin-block-end: var(--s-4);
+  }
+</style>

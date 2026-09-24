@@ -7,19 +7,25 @@
   },
   "date": "2021-09-01",
   "summary": {
-    "en": "A published record of the association's collections, expenditure and project funding across a decade.",
-    "kn": "ಒಂದು ದಶಕದ ಸಂಘದ ಸಂಗ್ರಹ, ವೆಚ್ಚ ಮತ್ತು ಯೋಜನೆಗಳಿಗೆ ನೀಡಿದ ಹಣದ ಪ್ರಕಟಿತ ದಾಖಲೆ."
+    "en": "The cover of the association's 2012–2021 financial report, published so contributors can see where the money went.",
+    "kn": "ಕೊಡುಗೆ ನೀಡಿದವರಿಗೆ ಹಣ ಎಲ್ಲಿ ಹೋಗಿದೆ ಎಂಬುದು ಗೊತ್ತಾಗಲಿ ಎಂದು ಪ್ರಕಟಿಸಲಾದ, ಸಂಘದ 2012–2021ರ ಆರ್ಥಿಕ ವರದಿಯ ಮುಖಪುಟ."
   },
   "body": {
     "en": "The 2012–2021 record sets out what the association collected, what it spent, and how each project was funded over the decade.\n\nThe association keeps the detailed accounts and publishes a summary so that anyone who contributes can see where the money went. The cover is with this record.",
     "kn": "2012–2021ರ ದಾಖಲೆಯಲ್ಲಿ ಸಂಘವು ಎಷ್ಟು ಸಂಗ್ರಹಿಸಿತು, ಎಷ್ಟು ಖರ್ಚು ಮಾಡಿತು ಮತ್ತು ಪ್ರತಿ ಯೋಜನೆಗೆ ಹೇಗೆ ಹಣ ಒದಗಿಸಲಾಯಿತು ಎಂಬುದಿದೆ.\n\nಸಂಘವು ವಿವರವಾದ ಲೆಕ್ಕಗಳನ್ನು ಇಟ್ಟುಕೊಂಡು, ಸಾರಾಂಶವನ್ನು ಪ್ರಕಟಿಸುತ್ತದೆ — ಕೊಡುಗೆ ನೀಡುವ ಪ್ರತಿಯೊಬ್ಬರಿಗೂ ಹಣ ಎಲ್ಲಿ ಹೋಗಿದೆ ಎಂಬುದು ಗೊತ್ತಾಗಲಿ ಎಂದು. ಮುಖಪುಟದ ಚಿತ್ರ ಈ ದಾಖಲೆಯಲ್ಲಿದೆ."
   },
-  "source": "",
   "image": null,
   "documents": [
     {
       "src": "/images/1.webp",
-      "alt": "Cover of the association's financial report for 2012–2021."
+      "alt": {
+        "en": "The cover of the association's 2012–2021 financial report, the document this record refers to.",
+        "kn": "ಈ ದಾಖಲೆ ಉಲ್ಲೇಖಿಸುವ, ಸಂಘದ 2012–2021ರ ಆರ್ಥಿಕ ವರದಿಯ ಮುಖಪುಟ."
+      },
+      "caption": {
+        "en": "Report cover, 2012–2021.",
+        "kn": "ವರದಿಯ ಮುಖಪುಟ, 2012–2021."
+      }
     }
   ]
 }

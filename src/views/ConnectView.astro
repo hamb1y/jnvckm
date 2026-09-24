@@ -10,9 +10,6 @@ export interface Props {
 }
 
 const { lang } = Astro.props;
-const { contact } = site;
-const emailReady = contact.emailVerified && contact.email !== null;
-const phoneReady = contact.phoneVerified && contact.phone !== null;
 ---
 
 <div class="container">
@@ -46,34 +43,21 @@ const phoneReady = contact.phoneVerified && contact.phone !== null;
     </div>
 
     <aside class="connect-card">
-      <h2>{t(lang, "connect.address")}</h2>
-      <address>
-        <span>{lx(site.contact.address, lang)}</span>
-        {
-          emailReady ? (
-            <a href={`mailto:${contact.email}`}>{contact.email}</a>
-          ) : (
-            <span class="unconfirmed">
-              {t(lang, "connect.email")}: {t(lang, "connect.unconfirmed")}
-            </span>
-          )
-        }
-        {
-          phoneReady ? (
-            <a href={`tel:${contact.phone!.replace(/\s+/g, "")}`}>{contact.phone}</a>
-          ) : (
-            <span class="unconfirmed">
-              {t(lang, "connect.phone")}: {t(lang, "connect.unconfirmed")}
-            </span>
-          )
-        }
-      </address>
-      {!emailReady && <p class="unconfirmed-note">{t(lang, "connect.unconfirmedNote")}</p>}
+      <h2>{t(lang, "connect.routeTitle")}</h2>
+      <p>{t(lang, "connect.routeBody")}</p>
+      <div class="connect-school">
+        <h3>{t(lang, "nav.vidyalaya")}</h3>
+        <address>{lx(site.contact.address, lang)}</address>
+      </div>
     </aside>
   </div>
 </section>
 
 <style>
+  .container {
+    padding-block-start: clamp(2rem, 5vw, 4rem);
+  }
+
   .connect {
     display: grid;
     grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
@@ -109,26 +93,30 @@ const phoneReady = contact.phoneVerified && contact.phone !== null;
 
   .connect-card h2 {
     font-size: var(--step-1);
-    margin-block-end: var(--s-4);
+    margin-block-end: var(--s-3);
   }
 
-  .connect-card address {
-    display: grid;
-    gap: var(--s-3);
-    font-style: normal;
+  .connect-card > p {
     color: var(--text-2);
   }
 
-  .unconfirmed {
-    color: var(--text-3);
+  .connect-school {
+    margin-block-start: var(--s-5);
+    padding-block-start: var(--s-5);
+    border-block-start: 1px solid var(--rule);
   }
 
-  .unconfirmed-note {
-    margin-block-start: var(--s-4);
-    padding-block-start: var(--s-4);
-    border-block-start: 1px solid var(--rule);
+  .connect-school h3 {
     font-size: var(--step--1);
+    font-weight: 700;
     color: var(--text-3);
+    margin-block-end: var(--s-2);
+  }
+
+  .connect-school address {
+    font-style: normal;
+    color: var(--text-2);
+    max-inline-size: 34ch;
   }
 
   @media (max-width: 900px) {

@@ -43,7 +43,9 @@ const { href, src, alt, caption, meta = "" } = Astro.props;
 
   .band-link img {
     inline-size: 100%;
-    aspect-ratio: 21 / 9;
+    /* Deliberately shorter than the photograph's own ratio so an archive feature
+       does not outweigh the association's current work. */
+    block-size: clamp(12rem, 26vw, 22rem);
     object-fit: cover;
     background: var(--surface-sunk);
   }
@@ -79,15 +81,9 @@ const { href, src, alt, caption, meta = "" } = Astro.props;
     text-underline-offset: 0.2em;
   }
 
-  @media (max-width: 900px) {
-    .band-link img {
-      aspect-ratio: 16 / 9;
-    }
-  }
-
   @media (max-width: 640px) {
     .band-link img {
-      aspect-ratio: 4 / 3;
+      block-size: clamp(10rem, 52vw, 15rem);
     }
   }
 </style>

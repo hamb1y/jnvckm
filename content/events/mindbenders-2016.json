@@ -18,12 +18,14 @@
     "en": "Mindbenders was the quiz held as part of IGNITE 2016, on the evening of 3 December. It was open to students of classes 8 to 12. The poster for the event is with this record.",
     "kn": "ಇಗ್ನೈಟ್ 2016ರ ಭಾಗವಾಗಿ, ಡಿಸೆಂಬರ್ 3ರ ಸಂಜೆ ಮೈಂಡ್‌ಬೆಂಡರ್ಸ್ ರಸಪ್ರಶ್ನೆ ನಡೆಯಿತು. ಇದು 8ರಿಂದ 12ನೇ ತರಗತಿಯ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಮುಕ್ತವಾಗಿತ್ತು. ಕಾರ್ಯಕ್ರಮದ ಪೋಸ್ಟರ್ ಈ ದಾಖಲೆಯಲ್ಲಿದೆ."
   },
-  "source": "",
   "image": null,
   "documents": [
     {
       "src": "/images/copy-of-quiz-night-charity-6.webp",
-      "alt": "Poster for Mindbenders, the quiz event held as part of IGNITE 2016 on 3 December."
+      "alt": {
+        "en": "Poster for Mindbenders, the quiz event held as part of IGNITE 2016 on 3 December.",
+        "kn": "ಡಿಸೆಂಬರ್ 3ರಂದು ಇಗ್ನೈಟ್ 2016ರ ಭಾಗವಾಗಿ ನಡೆದ ಮೈಂಡ್‌ಬೆಂಡರ್ಸ್ ರಸಪ್ರಶ್ನೆಯ ಪೋಸ್ಟರ್."
+      }
     }
   ]
 }

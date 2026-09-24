@@ -18,16 +18,21 @@
     "en": "The tenth edition of IGNITE was held at the Vidyalaya in December 2014. Alumni spoke with students of classes 10 to 12 about the paths open after school, and both Prajavani and Udayavani carried reports on it. Copies of those reports are with this record.",
     "kn": "ಇಗ್ನೈಟ್‌ನ ಹತ್ತನೇ ಆವೃತ್ತಿ ಡಿಸೆಂಬರ್ 2014ರಲ್ಲಿ ವಿದ್ಯಾಲಯದಲ್ಲಿ ನಡೆಯಿತು. ಶಾಲೆಯ ನಂತರದ ದಾರಿಗಳ ಬಗ್ಗೆ 10ರಿಂದ 12ನೇ ತರಗತಿಯ ವಿದ್ಯಾರ್ಥಿಗಳೊಂದಿಗೆ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳು ಮಾತನಾಡಿದರು. ಪ್ರಜಾವಾಣಿ ಮತ್ತು ಉದಯವಾಣಿ ಎರಡೂ ಇದರ ವರದಿ ಪ್ರಕಟಿಸಿದವು; ಆ ವರದಿಗಳ ಪ್ರತಿಗಳು ಈ ದಾಖಲೆಯಲ್ಲಿವೆ."
   },
-  "source": "",
   "image": null,
   "documents": [
     {
       "src": "/images/ignite-14-report-in-prajavani.webp",
-      "alt": "Prajavani's report on IGNITE 2014."
+      "alt": {
+        "en": "Prajavani's report on IGNITE 2014.",
+        "kn": "ಇಗ್ನೈಟ್ 2014ರ ಬಗ್ಗೆ ಪ್ರಜಾವಾಣಿಯ ವರದಿ."
+      }
     },
     {
       "src": "/images/udayvani-ignite14.webp",
-      "alt": "Udayavani's report on the personality-development workshop held as part of IGNITE 2014."
+      "alt": {
+        "en": "Udayavani's report on the personality-development workshop held as part of IGNITE 2014.",
+        "kn": "ಇಗ್ನೈಟ್ 2014ರ ಭಾಗವಾಗಿ ನಡೆದ ವ್ಯಕ್ತಿತ್ವ ವಿಕಸನ ಕಾರ್ಯಾಗಾರದ ಬಗ್ಗೆ ಉದಯವಾಣಿಯ ವರದಿ."
+      }
     }
   ]
 }

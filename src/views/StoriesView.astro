@@ -3,7 +3,6 @@ import EntryRow from "@/components/EntryRow.astro";
 import { posts } from "@/data/posts";
 import { lx, t } from "@/i18n/utils";
 import { localePath } from "@/lib/paths";
-import { formatDate } from "@/utils/format";
 import type { Locale } from "@/data/types";
 import type { UIKey } from "@/i18n/ui";
 
@@ -32,7 +31,7 @@ const KIND_LABEL: Record<string, UIKey> = {
           <EntryRow
             href={localePath(`/stories/${entry.slug}`, lang)}
             title={lx(entry.title, lang)}
-            date={formatDate(entry.date, lang)}
+            date={entry.date}
             summary={lx(entry.summary, lang)}
             image={entry.image}
             meta={[t(lang, KIND_LABEL[entry.kind]), ...(entry.batch ? [lx(entry.batch, lang)] : [])]}

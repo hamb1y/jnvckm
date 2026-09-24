@@ -45,6 +45,17 @@ that are easy to break by accident.
   and it read as a stack of identical bands. Sections are separated by space;
   every section gets its own shape, and photographs are given size. See
   `DESIGN.md` §3.
+- **The mobile menu is an absolutely positioned `<details>` panel.** It needs
+  `position: relative` on `.site-header` **and** `inset-block-start: 100%` on the
+  open panel. Without the block inset it takes a static position that put the
+  list above the viewport, off-screen. `bun run verify` now opens the menu and
+  asserts the list starts below its toggle, inside the viewport, and clear of the
+  logo.
+- **Content must carry Kannada for everything a reader sees except `body`.** The
+  verifier fails on a `title`, `summary`, `alt`, `caption`, `batch`, `location`,
+  `archiveNote`, `name`, `tagline` or `startNote` that has no Kannada value, or
+  that is a plain string instead of `{ en, kn }`. Long-form `body` may stay in its
+  original language — the page shows a note when it does.
 - **Font stacks must carry a Kannada fallback.** The mono stack is used for date
   stamps and amounts; without a Kannada fallback the month names rendered as
   tofu boxes. `bun run verify` now fails if any of `--font-display`, `--font-body`

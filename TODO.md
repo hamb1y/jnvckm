@@ -4,6 +4,16 @@ Open work, roughly in the order it should be tackled.
 
 ## Content
 
+- [ ] **NCL seasons since 2017.** The NCL page says seasons are documented to
+      2025, and the programme list shows only 2015–2017 because those are the
+      only editions with a record on this site. Seasons 11 (2022), 12 (2023) and
+      14 (2025) are publicly documented; add them as records once someone can
+      confirm venue, winner and date. The page already carries a note saying only
+      documented editions are listed.
+- [ ] **Financial report figures.** The 2012–2021 record currently shows the
+      report cover and says the association keeps the detailed accounts. If the
+      association will publish the summary itself, link it rather than describe
+      it.
 - [ ] **Alumni stories.** The old Alumni Mirror blog holds first-person stories
       (a Japan youth exchange, NITK, the Indian Naval Academy). Migrate two or
       three with author, batch, original date and source — they are the site's

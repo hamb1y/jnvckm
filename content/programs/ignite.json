@@ -1,6 +1,9 @@
 {
   "id": "ignite",
-  "name": { "en": "IGNITE", "kn": "ಇಗ್ನೈಟ್" },
+  "name": {
+    "en": "IGNITE",
+    "kn": "ಇಗ್ನೈಟ್"
+  },
   "tagline": {
     "en": "Alumni guiding the next generation",
     "kn": "ಮುಂದಿನ ಪೀಳಿಗೆಗೆ ದಾರಿ ತೋರುವ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳು"
@@ -19,6 +22,9 @@
   },
   "image": {
     "src": "/images/for-press.webp",
-    "alt": "People gathered on a stage lighting a traditional lamp in front of an event backdrop."
+    "alt": {
+      "en": "People gathered on a stage lighting a traditional lamp in front of an event backdrop.",
+      "kn": "ಕಾರ್ಯಕ್ರಮದ ಹಿನ್ನೆಲೆಯ ಮುಂದೆ ವೇದಿಕೆಯಲ್ಲಿ ದೀಪ ಬೆಳಗಿಸುತ್ತಿರುವವರು."
+    }
   }
 }

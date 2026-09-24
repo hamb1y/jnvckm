@@ -9,16 +9,25 @@ import { contributions } from "@/data/contributions";
 import { events } from "@/data/events";
 import { programs } from "@/data/programs";
 import { site } from "@/data/site";
-import { lx, t, tDynamic } from "@/i18n/utils";
+import { lx, t } from "@/i18n/utils";
 import { localePath } from "@/lib/paths";
 import { formatAmount, formatDate } from "@/utils/format";
+import { formatCount } from "@/utils/format";
 import type { Locale, Media } from "@/data/types";
+import type { UIKey } from "@/i18n/ui";
 
 export interface Props {
   lang: Locale;
 }
 
 const { lang } = Astro.props;
+
+const KIND_LABEL: Record<string, UIKey> = {
+  news: "posts.kind.news",
+  report: "posts.kind.report",
+  story: "posts.kind.story",
+  event: "nav.events",
+};
 
 const hero: Media = {
   src: "/images/hero-1.webp",
@@ -40,18 +49,26 @@ const lab: Media = {
   },
 };
 
-// The giving record, newest first, with one photograph to lead it.
-const giving = contributions.filter((entry) => entry.amount !== null).slice(0, 7);
+// The giving record, newest first, with one photograph to lead it. Records with
+// no recorded figure keep their row and an empty figure column, so the list and
+// the count above it agree.
+const giving = contributions;
+const givingYears = contributions.map((entry) => entry.date.slice(0, 4)).sort();
+const givingSummary = t(lang, "impact.summary")
+  .replace("{count}", formatCount(contributions.length, lang))
+  .replace("{from}", givingYears[0] ?? "")
+  .replace("{to}", givingYears.at(-1) ?? "");
 
-// Recent activity, newest first, for the card row.
-const recent = recentActivity(16)
-  .filter((item) => item.image !== null)
+// Newest first, and NOT filtered by whether a photograph exists: freshness
+// decides the order, and a record without a photograph gets a text card.
+const latest = recentActivity(10)
+  .filter((item) => item.kind !== "contribution")
   .slice(0, 3);
 
 const ignite = programs.find((program) => program.id === "ignite");
 const ncl = programs.find((program) => program.id === "ncl");
-
 const hamRadio = events.find((entry) => entry.slug === "ham-radio-workshop-2015");
+
 const campus: Media = {
   src: "/images/img2.webp",
   alt: {
@@ -68,14 +85,14 @@ const campus: Media = {
         <p class="eyebrow accent-brand">{t(lang, "site.formedShort")}</p>
         <h1>{lx(site.name, lang)}</h1>
         <p class="hero-line">{lx(site.tagline, lang)}</p>
-        <p class="hero-body">{lx(site.description, lang)}</p>
+        <p class="hero-body">{t(lang, "home.heroBody")}</p>
         <div class="hero-cta">
           <a class="btn btn-primary" href={localePath("/contributions", lang)}>
             {t(lang, "home.explore")}
             <ArrowRight size={17} stroke-width={1.7} aria-hidden="true" />
           </a>
-          <a class="btn btn-secondary" href={localePath("/connect", lang)}>
-            {t(lang, "home.connect")}
+          <a class="btn btn-secondary" href={localePath("/events", lang)}>
+            {t(lang, "home.latestCta")}
           </a>
         </div>
       </div>
@@ -89,9 +106,12 @@ const campus: Media = {
   <section class="accent-give">
     <div class="container">
       <div class="section-head">
-        <h2 class="section-title">{t(lang, "home.impactTitle")}</h2>
+        <div>
+          <h2 class="section-title">{t(lang, "home.impactTitle")}</h2>
+          <p class="section-lede">{givingSummary}</p>
+        </div>
         <a class="more" href={localePath("/contributions", lang)}>
-          {t(lang, "common.viewAll")}
+          {t(lang, "common.allContributions")}
           <ArrowUpRight size={15} stroke-width={1.7} aria-hidden="true" />
         </a>
       </div>
@@ -101,7 +121,6 @@ const campus: Media = {
           <Figure media={lab} locale={lang} ratio="4 / 3" showCaption={true} />
         </div>
         <div class="giving-copy">
-          <p>{t(lang, "home.impactLede")}</p>
           <ul class="ledger">
             {
               giving.map((entry) => (
@@ -145,38 +164,46 @@ const campus: Media = {
 
       <div class="programs">
         {
-          [ignite, ncl].map((program, index) =>
-            program ? (
-              <article
-                class:list={[
-                  "program",
-                  index % 2 === 1 && "program--flip",
-                  program.image === null && "program--text",
-                ]}
-              >
-                {
-                  program.image && (
-                    <div class="program-media">
-                      <Figure media={program.image} locale={lang} ratio="4 / 3" />
-                    </div>
-                  )
-                }
-                <div class="program-main">
-                  <p class="eyebrow">{lx(program.name, lang)}</p>
-                  <h3>
-                    <a href={localePath(`/programs/${program.id}`, lang)}>
-                      {lx(program.tagline, lang)}
-                    </a>
-                  </h3>
-                  <p>{lx(program.summary, lang)}</p>
-                  <p class="program-note mono">{lx(program.startNote, lang)}</p>
-                  <a class="more" href={localePath(`/programs/${program.id}`, lang)}>
-                    {t(lang, "common.readMore")}
-                    <ArrowUpRight size={15} stroke-width={1.7} aria-hidden="true" />
-                  </a>
-                </div>
-              </article>
-            ) : null,
+          ignite && (
+            <article class="program">
+              <div class="program-media">
+                <Figure media={ignite.image} locale={lang} ratio="4 / 3" />
+              </div>
+              <div class="program-main">
+                <p class="eyebrow">{lx(ignite.name, lang)}</p>
+                <h3>
+                  <a href={localePath("/programs/ignite", lang)}>{lx(ignite.tagline, lang)}</a>
+                </h3>
+                <p>{lx(ignite.summary, lang)}</p>
+                <p class="program-note mono">{lx(ignite.startNote, lang)}</p>
+                <a class="more" href={localePath("/programs/ignite", lang)}>
+                  {t(lang, "programs.more").replace("{name}", lx(ignite.name, lang))}
+                  <ArrowUpRight size={15} stroke-width={1.7} aria-hidden="true" />
+                </a>
+              </div>
+            </article>
+          )
+        }
+        {
+          ncl && (
+            <article class="program program--panel">
+              <div class="program-panel">
+                <p class="panel-mark mono">{ncl.shortName ? lx(ncl.shortName, lang) : ""}</p>
+                <p class="panel-name">{lx(ncl.name, lang)}</p>
+                <p class="panel-years mono">{lx(ncl.startNote, lang)}</p>
+              </div>
+              <div class="program-main">
+                <p class="eyebrow">{lx(ncl.name, lang)}</p>
+                <h3>
+                  <a href={localePath("/programs/ncl", lang)}>{lx(ncl.tagline, lang)}</a>
+                </h3>
+                <p>{lx(ncl.summary, lang)}</p>
+                <a class="more" href={localePath("/programs/ncl", lang)}>
+                  {t(lang, "programs.more").replace("{name}", lx(ncl.name, lang))}
+                  <ArrowUpRight size={15} stroke-width={1.7} aria-hidden="true" />
+                </a>
+              </div>
+            </article>
           )
         }
       </div>
@@ -188,23 +215,22 @@ const campus: Media = {
       <div class="section-head">
         <h2 class="section-title">{t(lang, "home.latestTitle")}</h2>
         <a class="more" href={localePath("/events", lang)}>
-          {t(lang, "common.viewAll")}
+          {t(lang, "common.allEvents")}
           <ArrowUpRight size={15} stroke-width={1.7} aria-hidden="true" />
         </a>
       </div>
       {
-        recent.length > 0 ? (
+        latest.length > 0 ? (
           <div class="recent-grid">
-            {recent.map((item) => (
+            {latest.map((item) => (
               <EntryCard
                 href={localePath(item.path, lang)}
                 title={lx(item.title, lang)}
                 summary={lx(item.summary, lang)}
-                date={formatDate(item.date, lang)}
-                label={tDynamic(lang, item.kind === "event" ? "nav.events" : `posts.kind.${item.kind}`)}
+                date={item.date}
+                label={t(lang, KIND_LABEL[item.kind])}
                 image={item.image}
                 locale={lang}
-                accent={item.kind === "contribution" ? "give" : "brand"}
               />
             ))}
           </div>
@@ -237,7 +263,7 @@ const campus: Media = {
     title={t(lang, "home.connectTitle")}
     body={t(lang, "home.connectLede")}
     primaryHref={localePath("/connect", lang)}
-    primaryLabel={t(lang, "home.connect")}
+    primaryLabel={t(lang, "home.reconnect")}
     secondaryHref={localePath("/about", lang)}
     secondaryLabel={t(lang, "nav.about")}
   />
@@ -245,7 +271,7 @@ const campus: Media = {
 
 <style>
   .hero {
-    padding-block: clamp(2.5rem, 6vw, 5rem) clamp(3rem, 7vw, 6rem);
+    padding-block: clamp(2.5rem, 6vw, 5rem) clamp(2.5rem, 5vw, 4rem);
   }
 
   .hero-grid {
@@ -270,7 +296,7 @@ const campus: Media = {
   .hero-body {
     margin-block-start: var(--s-4);
     color: var(--text-2);
-    max-inline-size: 54ch;
+    max-inline-size: 52ch;
   }
 
   .hero-cta {
@@ -282,15 +308,9 @@ const campus: Media = {
 
   .giving {
     display: grid;
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-    gap: clamp(var(--s-6), 5vw, var(--s-9));
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: clamp(var(--s-6), 4vw, var(--s-8));
     align-items: start;
-  }
-
-  .giving-copy > p {
-    color: var(--text-2);
-    max-inline-size: 48ch;
-    margin-block-end: var(--s-5);
   }
 
   .ledger .batch {
@@ -300,32 +320,18 @@ const campus: Media = {
 
   .programs {
     display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr));
+    gap: clamp(var(--s-6), 4vw, var(--s-8));
   }
 
   .program {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: clamp(var(--s-6), 5vw, var(--s-9));
-    align-items: center;
-    padding-block: clamp(var(--s-6), 4vw, var(--s-8));
-  }
-
-  .program--flip .program-media {
-    order: 2;
-  }
-
-  /* A program with no photograph yet gets the row to itself rather than an
-     empty frame. */
-  .program--text {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .program--text .program-main {
-    max-inline-size: 46rem;
+    gap: var(--s-4);
+    align-content: start;
   }
 
   .program-main h3 {
-    margin-block: var(--s-3);
+    margin-block: var(--s-2) var(--s-3);
     max-inline-size: 20ch;
   }
 
@@ -338,21 +344,51 @@ const campus: Media = {
     color: var(--accent);
   }
 
-  .program-main > p {
+  .program-main p {
     color: var(--text-2);
     max-inline-size: 52ch;
-    margin-block-end: var(--s-4);
   }
 
   .program-note {
-    padding-block-start: var(--s-4);
-    border-block-start: 1px solid var(--rule);
+    margin-block-start: var(--s-3);
     color: var(--text-3);
-    max-inline-size: 52ch;
+    font-size: var(--step--1);
   }
 
   .program-main .more {
-    margin-block-start: var(--s-5);
+    margin-block-start: var(--s-4);
+  }
+
+  /* NCL has no photograph, so it gets a composed typographic panel rather than
+     an empty frame. Never fabricate an image for symmetry. */
+  .program-panel {
+    display: grid;
+    align-content: center;
+    gap: var(--s-2);
+    padding: clamp(var(--s-5), 4vw, var(--s-7));
+    background: var(--accent-wash);
+    border: 1px solid var(--rule);
+    border-radius: var(--r-2);
+    aspect-ratio: 4 / 3;
+  }
+
+  .panel-mark {
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+
+  .panel-name {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  .panel-years {
+    font-size: var(--step--1);
+    color: var(--text-3);
   }
 
   .recent-grid {
@@ -364,7 +400,7 @@ const campus: Media = {
   .origin {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: clamp(var(--s-6), 5vw, var(--s-9));
+    gap: clamp(var(--s-6), 4vw, var(--s-8));
     align-items: center;
   }
 
@@ -389,12 +425,8 @@ const campus: Media = {
       grid-template-columns: 1fr;
     }
 
-    .program {
-      grid-template-columns: 1fr;
-    }
-
-    .program--flip .program-media {
-      order: 0;
+    .program-panel {
+      aspect-ratio: auto;
     }
   }
 </style>

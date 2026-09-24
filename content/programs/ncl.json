@@ -4,7 +4,10 @@
     "en": "Navodaya Cricket League",
     "kn": "ನವೋದಯ ಕ್ರಿಕೆಟ್ ಲೀಗ್"
   },
-  "shortName": { "en": "NCL", "kn": "ಎನ್‌ಸಿಎಲ್" },
+  "shortName": {
+    "en": "NCL",
+    "kn": "ಎನ್‌ಸಿಎಲ್"
+  },
   "tagline": {
     "en": "A reunion played out on the cricket field",
     "kn": "ಕ್ರಿಕೆಟ್ ಮೈದಾನದಲ್ಲಿ ನಡೆಯುವ ಪುನರ್ಮಿಲನ"

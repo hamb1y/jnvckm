@@ -4,7 +4,7 @@ import EntryRow from "@/components/EntryRow.astro";
 import { contributions, usedCategories } from "@/data/contributions";
 import { lx, t, tDynamic } from "@/i18n/utils";
 import { localePath } from "@/lib/paths";
-import { formatAmount, formatDate } from "@/utils/format";
+import { formatAmount } from "@/utils/format";
 import type { Locale } from "@/data/types";
 
 export interface Props {
@@ -18,6 +18,8 @@ const categories = usedCategories().map((id) => ({
   label: tDynamic(lang, `categories.${id}`),
 }));
 const total = contributions.length;
+const years = contributions.map((entry) => entry.date.slice(0, 4)).sort();
+const range = `${years[0]}–${years.at(-1)}`;
 ---
 
 <div class="container section">
@@ -30,6 +32,7 @@ const total = contributions.length;
     client:idle
     categories={categories}
     total={total}
+    range={range}
     allLabel={t(lang, "impact.all")}
     filterLabel={t(lang, "impact.filterLabel")}
     emptyLabel={t(lang, "impact.empty")}
@@ -42,7 +45,7 @@ const total = contributions.length;
         <EntryRow
           href={localePath(`/contributions/${entry.slug}`, lang)}
           title={lx(entry.title, lang)}
-          date={formatDate(entry.date, lang)}
+          date={entry.date}
           summary={lx(entry.summary, lang)}
           image={entry.image}
           amount={entry.amount !== null ? formatAmount(entry.amount, lang) : null}

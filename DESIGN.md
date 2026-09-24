@@ -63,10 +63,21 @@ above every block.
 
 **The ledger is for figures, not for page structure.** `.ledger` renders
 label/value rows and is used where the content really is an account — the
-summary of what alumni funded, on the home page. Complete dated indexes (all
-events, all contributions) use `.records`, which is `EntryRow.astro`: date in
-mono, the record, a place or a figure, and a small plate when a photograph
-exists. Curated selections use `EntryCard.astro`.
+summary of what alumni funded, on the home page, where every contribution gets a
+row and records with no recorded figure keep an empty figure column. Complete
+dated indexes (all events, all contributions) use `.records`, which is
+`EntryRow.astro`: date in mono, the record, a place or a figure, and a small
+plate when a photograph exists. Curated selections use `EntryCard.astro`, and a
+record with no photograph renders as a bordered text card rather than an empty
+frame.
+
+**No photograph is never faked.** A program with no image gets a composed
+typographic panel (see NCL on the home and programs pages), not a placeholder
+frame and not a generated image.
+
+**One archive feature, not a climax.** The full-bleed `Band.astro` is capped in
+height so a single historical photograph cannot outweigh the association's
+current work.
 
 **A section can carry an accent.** `.accent-program` (gold), `.accent-give`
 (burnt orange) and `.accent-brand` (olive) set `--accent`, which `.eyebrow`,
