@@ -3,7 +3,7 @@ import EntryDetail from "@/components/EntryDetail.astro";
 import { contributionBySlug } from "@/data/contributions";
 import { lx, t, tDynamic } from "@/i18n/utils";
 import { localePath } from "@/lib/paths";
-import { formatAmount, formatDate } from "@/utils/format";
+import { formatAmount } from "@/utils/format";
 import type { Locale } from "@/data/types";
 
 export interface Props {
@@ -27,7 +27,7 @@ if (entry.amount !== null) {
 <EntryDetail
   lang={lang}
   title={lx(entry.title, lang)}
-  date={formatDate(entry.date, lang)}
+  date={entry.date}
   summary={lx(entry.summary, lang)}
   meta={meta}
   body={entry.body}

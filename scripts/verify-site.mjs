@@ -478,6 +478,34 @@ async function auditCms() {
   for (const cmsNote of result.notes) notes.push(cmsNote);
 }
 
+/** robots.txt must exist and point at the sitemap, and the sitemap must not
+ *  carry the `noindex` 404 pages. */
+async function auditSeo() {
+  const robots = path.join(DIST, "robots.txt");
+  if (!existsSync(robots)) {
+    fail("robots.txt", "missing from the build");
+  } else {
+    const text = await readFile(robots, "utf8");
+    if (!/^Sitemap:\s*https?:\/\/\S+/m.test(text)) {
+      fail("robots.txt", "has no absolute Sitemap: line");
+    }
+    if (!/^Disallow:\s*\/admin\//m.test(text)) {
+      fail("robots.txt", "does not disallow /admin/");
+    }
+  }
+
+  const sitemap = path.join(DIST, "sitemap-0.xml");
+  if (!existsSync(sitemap)) {
+    fail("sitemap", "sitemap-0.xml not found in the build");
+    return;
+  }
+  const xml = await readFile(sitemap, "utf8");
+  const urls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
+  const noindex = urls.filter((url) => /\/404\/?$/.test(url));
+  if (noindex.length) fail("sitemap", `contains noindex pages: ${noindex.join(", ")}`);
+  else notes.push(`sitemap: ${urls.length} urls, no 404 pages`);
+}
+
 async function main() {
   if (!existsSync(DIST)) {
     console.error("dist/ not found. Run `bun run build` first.");
@@ -486,6 +514,7 @@ async function main() {
 
   await auditDictionaries();
   await auditCms();
+  await auditSeo();
 
   const server = await startServer();
   const routes = await discoverRoutes();

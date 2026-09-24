@@ -102,7 +102,6 @@ export interface SiteSettings {
   credit: { label: string; url: string } | null;
   license: { label: string; url: string } | null;
   donations: {
-    enabled: boolean;
     note: Localized;
   };
 }

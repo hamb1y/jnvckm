@@ -7,7 +7,11 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   site: "https://jnvckm.org",
   output: "static",
-  integrations: [svelte(), sitemap()],
+  // The 404 pages are `noindex`, so they must not be in the sitemap.
+  integrations: [
+    svelte(),
+    sitemap({ filter: (page) => !page.replace(/\/$/, "").endsWith("/404") }),
+  ],
   i18n: {
     defaultLocale: "en",
     locales: ["en", "kn"],

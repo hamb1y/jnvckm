@@ -30,7 +30,11 @@ const caption = lx(doc.caption ?? "", locale);
   }
 
   .document-frame {
-    display: block;
+    display: grid;
+    place-items: center;
+    /* Reserve space before the file loads: document images carry no intrinsic
+       dimensions in the markup, so without a floor the page shifts. */
+    min-block-size: 14rem;
     padding: var(--s-3);
     background: var(--surface);
     border: 1px solid var(--rule);

@@ -80,11 +80,6 @@ export function mediaList(value: unknown): Media[] {
   return value.map(media).filter((item): item is Media => item !== null);
 }
 
-export function stringList(value: unknown): string[] {
-  if (!Array.isArray(value)) return [];
-  return value.filter((item): item is string => typeof item === "string" && item.trim() !== "");
-}
-
 /** A single record such as content/site.json. */
 export function singleton(name: string): Record<string, unknown> {
   const found = files[`/content/${name}.json`];

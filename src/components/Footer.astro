@@ -14,6 +14,8 @@ const siteName = lx(site.name, lang);
 const schoolName = lx(site.schoolName, lang);
 const year = new Date().getFullYear();
 const { contact } = site;
+// Only channels the association has confirmed are published as official.
+const confirmedSocials = site.socials.filter((social) => social.verified);
 ---
 
 <footer class="site-footer on-brand">
@@ -38,6 +40,15 @@ const { contact } = site;
             {t(lang, "footer.repository")}
           </a>
         </li>
+        {
+          confirmedSocials.map((social) => (
+            <li>
+              <a href={social.url} rel="noopener">
+                {social.label}
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </div>
 

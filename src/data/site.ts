@@ -46,7 +46,6 @@ export const site: SiteSettings = {
   credit: credit(raw.credit),
   license: credit(raw.license),
   donations: {
-    enabled: bool(donations.enabled),
     note: text(donations.note),
   },
 };

@@ -11,8 +11,7 @@ import { programs } from "@/data/programs";
 import { site } from "@/data/site";
 import { lx, t } from "@/i18n/utils";
 import { localePath } from "@/lib/paths";
-import { formatAmount, formatDate } from "@/utils/format";
-import { formatCount } from "@/utils/format";
+import { formatAmount, formatCount, formatDate } from "@/utils/format";
 import type { Locale, Media } from "@/data/types";
 import type { UIKey } from "@/i18n/ui";
 
@@ -53,7 +52,10 @@ const lab: Media = {
 // no recorded figure keep their row and an empty figure column, so the list and
 // the count above it agree.
 const giving = contributions;
-const givingYears = contributions.map((entry) => entry.date.slice(0, 4)).sort();
+const givingYears = contributions
+  .map((entry) => entry.date.slice(0, 4))
+  .filter(Boolean)
+  .sort();
 const givingSummary = t(lang, "impact.summary")
   .replace("{count}", formatCount(contributions.length, lang))
   .replace("{from}", givingYears[0] ?? "")
@@ -61,7 +63,9 @@ const givingSummary = t(lang, "impact.summary")
 
 // Newest first, and NOT filtered by whether a photograph exists: freshness
 // decides the order, and a record without a photograph gets a text card.
-const latest = recentActivity(10)
+// Filter before the slice: taking the newest records first would let a run of
+// contributions fill the limit and leave fewer than three cards.
+const latest = recentActivity(Infinity)
   .filter((item) => item.kind !== "contribution")
   .slice(0, 3);
 

@@ -4,6 +4,7 @@ import Figure from "./Figure.astro";
 import Markdown from "./Markdown.astro";
 import type { Locale, Localized, Media } from "@/data/types";
 import { isFallback, lx, t } from "@/i18n/utils";
+import { formatDate } from "@/utils/format";
 
 /**
  * Shared layout for a single event, contribution or story. One implementation
@@ -12,6 +13,7 @@ import { isFallback, lx, t } from "@/i18n/utils";
 export interface Props {
   lang: Locale;
   title: string;
+  /** ISO date, YYYY-MM-DD. */
   date?: string;
   summary?: string;
   meta?: { label: string; value: string }[];
@@ -52,7 +54,11 @@ const sourceText = lx(source, lang);
 
   <header class="entry-head">
     <h1>{title}</h1>
-    {date !== "" && <p class="entry-date mono">{date}</p>}
+    {date !== "" && (
+      <p class="entry-date mono">
+        <time datetime={date}>{formatDate(date, lang)}</time>
+      </p>
+    )}
     {summary !== "" && <p class="entry-lede">{summary}</p>}
     {
       meta.length > 0 && (

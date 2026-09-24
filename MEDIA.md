@@ -45,7 +45,7 @@ they are described publicly.
 | img4.webp | 1920x1080 | 1600x900 | 99 KB | originals/images/img4.webp |
 | img-20151220-051845.webp | 448x306 | 448x306 | 14 KB | originals/images/img_20151220_051845.webp |
 | jnvckm-logo.webp | 1135x476 | 1135x476 | 35 KB | originals/images/jnvckm-logo.webp |
-| jnvckm-logo.webp | 144x70 | 144x70 | 2 KB | originals/images/jnvckm_logo.webp |
+| jnvckm-logo-webp.webp | 144x70 | 144x70 | 2 KB | originals/images/jnvckm_logo.webp |
 | jnvckm-sampath-diary-2nd-dec-14.webp | 60x60 | 60x60 | 1 KB | originals/images/jnvckm_sampath_diary_2nd_dec_14.webp |
 | trinco-property-logo.webp | 1985x2786 | 1600x2246 | 282 KB | originals/images/trinco_property_logo.webp |
 | udayvani-ignite14.webp | 552x304 | 552x304 | 36 KB | originals/images/udayvani_ignite14.webp |
@@ -55,5 +55,5 @@ they are described publicly.
 | whatsapp-image-2022-08-18-at-12-32-20-pm.webp | 1600x739 | 1600x739 | 121 KB | originals/images/whatsapp_image_2022-08-18_at_12.32.20_pm.webp |
 | whatsapp-image-2022-12-17-at-8-04-45-am.webp | 1600x719 | 1600x719 | 119 KB | originals/images/whatsapp_image_2022-12-17_at_8.04.45_am.webp |
 | logo.webp | 477x233 | 477x233 | 8 KB | originals/assets/logo.png |
-| logo.webp | 512x250 | 512x250 | 7 KB | originals/assets/logo.webp |
+| logo-webp.webp | 512x250 | 512x250 | 7 KB | originals/assets/logo.webp |
 | hero-1.webp | 1920x1080 | 1600x900 | 91 KB | originals/hero/hero-1.webp |

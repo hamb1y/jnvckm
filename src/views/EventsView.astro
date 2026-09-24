@@ -12,9 +12,9 @@ export interface Props {
 const { lang } = Astro.props;
 const today = new Date().toISOString().slice(0, 10);
 const upcoming = events
-  .filter((entry) => entry.date >= today)
+  .filter((entry) => entry.date !== "" && entry.date >= today)
   .sort((a, b) => a.date.localeCompare(b.date));
-const past = events.filter((entry) => entry.date < today);
+const past = events.filter((entry) => entry.date !== "" && entry.date < today);
 
 // Group by year so a long record stays navigable.
 const years = [...new Set(past.map((entry) => entry.date.slice(0, 4)))];

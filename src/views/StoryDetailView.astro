@@ -3,7 +3,6 @@ import EntryDetail from "@/components/EntryDetail.astro";
 import { postBySlug } from "@/data/posts";
 import { lx, t } from "@/i18n/utils";
 import { localePath } from "@/lib/paths";
-import { formatDate } from "@/utils/format";
 import type { Locale } from "@/data/types";
 import type { UIKey } from "@/i18n/ui";
 
@@ -26,7 +25,7 @@ const meta: { label: string; value: string }[] = [
   { label: t(lang, "common.category"), value: t(lang, KIND_LABEL[entry.kind]) },
 ];
 if (entry.author && lx(entry.author, lang) !== "") {
-  meta.push({ label: t(lang, "common.batch"), value: lx(entry.author, lang) });
+  meta.push({ label: t(lang, "common.author"), value: lx(entry.author, lang) });
 }
 if (entry.batch) meta.push({ label: t(lang, "common.batch"), value: lx(entry.batch, lang) });
 ---
@@ -34,7 +33,7 @@ if (entry.batch) meta.push({ label: t(lang, "common.batch"), value: lx(entry.bat
 <EntryDetail
   lang={lang}
   title={lx(entry.title, lang)}
-  date={formatDate(entry.date, lang)}
+  date={entry.date}
   summary={lx(entry.summary, lang)}
   meta={meta}
   body={entry.body}

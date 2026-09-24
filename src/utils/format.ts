@@ -32,10 +32,6 @@ export function formatDate(iso: string, locale: Locale): string {
   return name ? `${Number(day)} ${name} ${year}` : iso;
 }
 
-export function formatYear(iso: string): string {
-  return /^\d{4}/.test(iso) ? iso.slice(0, 4) : iso;
-}
-
 /** Whole rupees. Amounts in the archive are never fractional. */
 export function formatAmount(amount: number, locale: Locale): string {
   return new Intl.NumberFormat(INTL_LOCALE[locale], {

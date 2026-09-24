@@ -176,5 +176,4 @@ collections:
             label: Donations
             widget: object
             fields:
-              - { name: enabled, label: Enabled, widget: boolean, default: false, i18n: duplicate }
               - { name: note, label: Note, widget: text, i18n: true }

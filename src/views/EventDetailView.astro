@@ -5,7 +5,6 @@ import { eventBySlug, eventsForProgram } from "@/data/events";
 import { programById } from "@/data/programs";
 import { lx, t } from "@/i18n/utils";
 import { localePath } from "@/lib/paths";
-import { formatDate } from "@/utils/format";
 import type { Locale } from "@/data/types";
 
 export interface Props {
@@ -33,7 +32,7 @@ const related = entry.program
 <EntryDetail
   lang={lang}
   title={lx(entry.title, lang)}
-  date={formatDate(entry.date, lang)}
+  date={entry.date}
   summary={lx(entry.summary, lang)}
   meta={meta}
   body={entry.body}

@@ -24,7 +24,6 @@ export interface Props {
   title?: string;
   description?: string;
   image?: string | null;
-  jsonLd?: Record<string, unknown> | null;
   noindex?: boolean;
 }
 
@@ -34,7 +33,6 @@ const {
   title,
   description,
   image = null,
-  jsonLd = null,
   noindex = false,
 } = Astro.props;
 
@@ -73,7 +71,9 @@ const socialImage = new URL(image ?? "/og-default.png", origin).href;
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content={lang === "kn" ? "kn_IN" : "en_IN"} />
     <meta property="og:image" content={socialImage} />
+    <meta property="og:image:alt" content={siteName} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={socialImage} />
     <meta name="theme-color" content="#3d4a21" />
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -82,12 +82,6 @@ const socialImage = new URL(image ?? "/og-default.png", origin).href;
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <link rel="sitemap" href="/sitemap-index.xml" />
-
-    {
-      jsonLd && (
-        <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-      )
-    }
   </head>
   <body>
     <a class="skip-link" href="#content">{t(lang, "a11y.skip")}</a>

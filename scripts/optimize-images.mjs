@@ -19,7 +19,6 @@ const OUT = path.join(ROOT, "public/images");
 
 const MAX_WIDTH = 1600;
 const QUALITY = 80;
-const SKIP = new Set(["robots.txt", "webp"]);
 
 function slugify(name) {
   return name
@@ -34,13 +33,13 @@ function slugify(name) {
 async function main() {
   await mkdir(OUT, { recursive: true });
   const manifest = [];
+  const used = new Set();
 
   for (const dir of SOURCES) {
     const abs = path.join(ROOT, dir);
     if (!existsSync(abs)) continue;
 
     for (const file of (await readdir(abs)).sort()) {
-      if (SKIP.has(file)) continue;
       const src = path.join(abs, file);
       let meta;
       try {
@@ -51,7 +50,19 @@ async function main() {
       }
       if (!meta.width || !meta.height) continue;
 
-      const name = slugify(file) + ".webp";
+      // Distinct source files can reduce to the same basename. Without this,
+      // the later write silently overwrites the earlier one and the manifest
+      // lies about what exists.
+      let name = slugify(file) + ".webp";
+      if (used.has(name)) {
+        const ext = path.extname(file).replace(/^\./, "").toLowerCase() || "file";
+        const base = `${slugify(file)}-${ext}`;
+        name = `${base}.webp`;
+        let n = 2;
+        while (used.has(name)) name = `${base}-${n++}.webp`;
+        console.warn(`collision: ${dir}/${file} -> ${name}`);
+      }
+      used.add(name);
       const dest = path.join(OUT, name);
       const width = Math.min(meta.width, MAX_WIDTH);
       const info = await sharp(src)
