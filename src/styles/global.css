@@ -258,12 +258,23 @@ section {
 }
 
 .ledger > li {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: baseline;
-  justify-content: space-between;
-  gap: var(--s-5);
+  gap: var(--s-1) var(--s-5);
   padding-block: var(--s-3);
   border-block-end: 1px solid var(--rule);
+}
+
+/* The figure sets the bar's length, so the ledger reads as a chart of giving. */
+.ledger .bar {
+  grid-column: 1 / -1;
+  display: block;
+  block-size: 0.4rem;
+  inline-size: var(--w, 0%);
+  min-inline-size: 0.4rem;
+  background: var(--accent-give);
+  border-radius: var(--r-1);
 }
 
 .ledger .label {
@@ -280,8 +291,8 @@ section {
 }
 
 .ledger .value {
-  font-family: var(--font-mono);
-  font-size: var(--step--1);
+  font-family: var(--font-display);
+  font-size: var(--step-2);
   font-variant-numeric: tabular-nums;
   color: var(--accent-give);
   white-space: nowrap;

@@ -44,6 +44,7 @@ const display = formatDate(date, locale);
 
 <article class:list={["card", `accent-${accent}`, !image && "card--text"]}>
   {image && <Figure media={image} locale={locale} ratio={ratio} accent={accent} />}
+  {!image && display !== "" && <p class="card-date">{display}</p>}
 
   <div class="meta mono">
     {display !== "" && <time class="date" datetime={date}>{display}</time>}
@@ -76,13 +77,58 @@ const display = formatDate(date, locale);
     gap: var(--s-3);
   }
 
-  /* A record without a photograph gets a defined surface, not an empty box and
-     not an accent stripe. */
+  /* A record without a photograph gets a planned surface, not an empty box:
+     the olive block of the report covers, with the date set large. */
   .card--text {
     padding: var(--s-5);
-    background: var(--surface);
-    border: 1px solid var(--rule);
+    background: var(--brand);
+    border: 1px solid var(--brand-deep);
     border-radius: var(--r-2);
+    color: var(--brand-ink);
+    gap: var(--s-4);
+  }
+
+  .card-date {
+    font-family: var(--font-display);
+    font-size: var(--step-4);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin: 0;
+    color: color-mix(in oklab, var(--accent-program) 55%, var(--brand-ink));
+  }
+
+  .card--text .meta {
+    color: color-mix(in oklab, var(--brand-ink) 74%, var(--brand));
+  }
+
+  .card--text .date {
+    color: color-mix(in oklab, var(--brand-ink) 86%, var(--brand));
+  }
+
+  .card--text .label {
+    color: color-mix(in oklab, var(--accent-program) 45%, var(--brand-ink));
+  }
+
+  .card--text .dot {
+    background: color-mix(in oklab, var(--accent-program) 45%, var(--brand-ink));
+  }
+
+  .card--text .title a {
+    color: var(--brand-ink);
+  }
+
+  .card--text .summary,
+  .card--text .place {
+    color: color-mix(in oklab, var(--brand-ink) 84%, var(--brand));
+  }
+
+  .card--text:has(.title a:hover) .summary,
+  .card--text:has(.title a:hover) .date {
+    color: var(--brand-ink);
+  }
+
+  .card--text .title a:focus-visible::after {
+    outline-color: var(--brand-ink);
   }
 
   .card {

@@ -37,7 +37,7 @@ const { lang } = Astro.props;
                       {program.shortName ? lx(program.shortName, lang) : ""}
                     </p>
                     <p class="panel-name">{lx(program.name, lang)}</p>
-                    <p class="panel-years mono">{lx(program.startNote, lang)}</p>
+                    <p class="panel-years">{lx(program.startNote, lang)}</p>
                   </div>
                 )
               }
@@ -48,7 +48,7 @@ const { lang } = Astro.props;
               </h2>
               <p class="program-tagline">{lx(program.tagline, lang)}</p>
               <p class="program-summary">{lx(program.summary, lang)}</p>
-              <p class="program-note mono">{lx(program.startNote, lang)}</p>
+              <p class="program-note">{lx(program.startNote, lang)}</p>
             </div>
           </article>
         ))

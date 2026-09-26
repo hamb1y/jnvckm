@@ -56,6 +56,12 @@ const givingYears = contributions
   .map((entry) => entry.date.slice(0, 4))
   .filter(Boolean)
   .sort();
+// The ledger is the centrepiece, so it leads with the total. Only nine of the
+// twelve records state an amount, so the label says "recorded" and the note
+// says how many. Never present this as total giving.
+const recordedTotal = contributions.reduce((sum, entry) => sum + (entry.amount ?? 0), 0);
+const recordedCount = contributions.filter((entry) => entry.amount !== null).length;
+const largestAmount = Math.max(1, ...contributions.map((entry) => entry.amount ?? 0));
 const givingSummary = t(lang, "impact.summary")
   .replace("{count}", formatCount(contributions.length, lang))
   .replace("{from}", givingYears[0] ?? "")
@@ -86,7 +92,8 @@ const campus: Media = {
   <section class="hero">
     <div class="container hero-grid">
       <div class="hero-copy">
-        <p class="eyebrow accent-brand">{t(lang, "site.formedShort")}</p>
+        <p class="hero-year">1993</p>
+        <p class="eyebrow hero-eyebrow">{t(lang, "site.formedShort")}</p>
         <h1>{lx(site.name, lang)}</h1>
         <p class="hero-line">{lx(site.tagline, lang)}</p>
         <p class="hero-body">{t(lang, "home.heroBody")}</p>
@@ -125,6 +132,17 @@ const campus: Media = {
           <Figure media={lab} locale={lang} ratio="4 / 3" showCaption={true} />
         </div>
         <div class="giving-copy">
+          <p class="given">
+            <span class="given-label">{t(lang, "home.given")}</span>
+            <span class="given-total">{formatAmount(recordedTotal, lang)}</span>
+          </p>
+          <p class="given-note">
+            {
+              t(lang, "home.givenNote")
+                .replace("{with}", formatCount(recordedCount, lang))
+                .replace("{all}", formatCount(contributions.length, lang))
+            }
+          </p>
           <ul class="ledger">
             {
               giving.map((entry) => (
@@ -138,6 +156,13 @@ const campus: Media = {
                   <span class="value">
                     {entry.amount !== null ? formatAmount(entry.amount, lang) : ""}
                   </span>
+                  {entry.amount !== null && (
+                    <span
+                      class="bar"
+                      style={`--w:${Math.max(3, Math.round((entry.amount / largestAmount) * 100))}%`}
+                      aria-hidden="true"
+                    />
+                  )}
                 </li>
               ))
             }
@@ -179,7 +204,7 @@ const campus: Media = {
                   <a href={localePath("/programs/ignite", lang)}>{lx(ignite.tagline, lang)}</a>
                 </h3>
                 <p>{lx(ignite.summary, lang)}</p>
-                <p class="program-note mono">{lx(ignite.startNote, lang)}</p>
+                <p class="program-note">{lx(ignite.startNote, lang)}</p>
                 <a class="more" href={localePath("/programs/ignite", lang)}>
                   {t(lang, "programs.more").replace("{name}", lx(ignite.name, lang))}
                   <ArrowUpRight size={15} stroke-width={1.7} aria-hidden="true" />
@@ -194,7 +219,7 @@ const campus: Media = {
               <div class="program-panel">
                 <p class="panel-mark mono">{ncl.shortName ? lx(ncl.shortName, lang) : ""}</p>
                 <p class="panel-name">{lx(ncl.name, lang)}</p>
-                <p class="panel-years mono">{lx(ncl.startNote, lang)}</p>
+                <p class="panel-years">{lx(ncl.startNote, lang)}</p>
               </div>
               <div class="program-main">
                 <p class="eyebrow">{lx(ncl.name, lang)}</p>
@@ -274,7 +299,11 @@ const campus: Media = {
 </article>
 
 <style>
+  /* The association's own olive, at scale, with the year as the largest mark on
+     the page. The cream pages below then read as the inside of the report. */
   .hero {
+    background: var(--brand);
+    color: var(--brand-ink);
     padding-block: clamp(2.5rem, 6vw, 5rem) clamp(2.5rem, 5vw, 4rem);
   }
 
@@ -285,22 +314,82 @@ const campus: Media = {
     align-items: start;
   }
 
+  .hero-year {
+    font-family: var(--font-display);
+    font-size: clamp(4.5rem, 3rem + 10vw, 11rem);
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+    margin: 0;
+    color: color-mix(in oklab, var(--accent-program) 55%, var(--brand-ink));
+  }
+
+  .hero-eyebrow {
+    color: color-mix(in oklab, var(--brand-ink) 78%, var(--brand));
+    margin-block-start: var(--s-3);
+  }
+
   .hero-copy h1 {
-    margin-block-start: var(--s-4);
+    margin-block-start: var(--s-2);
     max-inline-size: 16ch;
   }
 
   .hero-line {
     margin-block-start: var(--s-5);
     font-size: var(--step-2);
-    color: var(--text-2);
+    color: color-mix(in oklab, var(--brand-ink) 88%, var(--brand));
     max-inline-size: 30ch;
   }
 
   .hero-body {
     margin-block-start: var(--s-4);
-    color: var(--text-2);
+    color: color-mix(in oklab, var(--brand-ink) 82%, var(--brand));
     max-inline-size: 52ch;
+  }
+
+  .hero .btn-secondary {
+    --btn-fg: var(--brand-ink);
+    --btn-border: color-mix(in oklab, var(--brand-ink) 40%, var(--brand));
+  }
+
+  .hero :global(.figure) {
+    background: var(--brand-deep);
+    border-color: color-mix(in oklab, var(--brand-ink) 24%, var(--brand));
+  }
+
+  .hero :global(figcaption) {
+    background: var(--brand-deep);
+    color: color-mix(in oklab, var(--brand-ink) 82%, var(--brand));
+    border-block-start-color: color-mix(in oklab, var(--brand-ink) 24%, var(--brand));
+  }
+
+  /* The ledger total: the largest figure on the page. */
+  .given {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--s-4);
+    flex-wrap: wrap;
+    margin: 0;
+    padding-block-end: var(--s-3);
+  }
+
+  .given-label {
+    font-weight: 600;
+    color: var(--text-2);
+  }
+
+  .given-total {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 1.4rem + 2.4vw, 3.4rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--accent-give);
+  }
+
+  .given-note {
+    margin: 0 0 var(--s-4);
+    color: var(--text-3);
+    font-size: var(--step--1);
   }
 
   .hero-cta {

@@ -50,12 +50,25 @@ strongest asset, so they are given real width — half a row, a full-bleed band,
 a 4:3 card — and the text supports them. No postage-stamp thumbnails, no stock
 imagery, no illustration standing in for evidence.
 
+**The home page opens on the association's own olive.** The hero is a full-width
+`--brand` ground with the founding year set as the largest mark on the page, in
+the report covers' gold, and the association's name beneath it. The cream pages
+that follow then read as the inside of the report. The hero photograph stays a
+framed figure beside the copy.
+
 **Every section has its own shape.** A page is not one primitive repeated. The
-home page runs: a hero split (copy left, photograph right), a photograph plus a
-ledger of figures, a full-bleed band, alternating image/text program rows, a
-three-up card row, a two-column "where it began", then a closing band. The
-shapes vary because the content does; a uniform grid is what made the first
-attempt monotonous.
+home page runs: an olive hero (year, name, copy left, photograph right), a
+photograph plus a ledger of figures, a full-bleed band, alternating image/text
+program rows, a three-up card row, a two-column "where it began", then a closing
+band. The shapes vary because the content does; a uniform grid is what made the
+first attempt monotonous.
+
+**The ledger leads with the total, and bars show the proportions.** The giving
+ledger opens with the recorded total in the largest display type on the page,
+then one row per contribution with the figure set large in Arvo and a bar whose
+length is the figure's share of the largest. The label says *recorded* and a note
+says how many records state an amount, because only some do. This is a chart of
+what is documented, never a claim of total giving.
 
 **Sections are separated by space, not by rules.** `section` carries
 `padding-block: clamp(3rem, 7vw, 6rem)` and nothing else. There is no hairline
@@ -69,7 +82,9 @@ dated indexes (all events, all contributions) use `.records`, which is
 `EntryRow.astro`: date in mono, the record, a place or a figure, and a small
 plate when a photograph exists. Curated selections use `EntryCard.astro`, and a
 record with no photograph renders as a bordered text card rather than an empty
-frame.
+frame. That text card is an olive block: the date set large in the report gold,
+the title beneath it, so a record without a photograph looks planned rather than
+like a photograph that failed to load.
 
 **No photograph is never faked.** A program with no image gets a composed
 typographic panel (see NCL on the home and programs pages), not a placeholder
