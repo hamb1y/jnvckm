@@ -15,11 +15,6 @@ const { kicker, title, body, primaryHref, primaryLabel, secondaryHref, secondary
 ---
 
 <section class="cta on-brand">
-  <svg class="cta-mark" viewBox="0 0 560 190" aria-hidden="true" focusable="false">
-    <text x="560" y="170" text-anchor="end">
-      1993
-    </text>
-  </svg>
   <div class="container cta-inner">
     <div>
       <p class="eyebrow cta-kicker">{kicker}</p>
@@ -41,28 +36,7 @@ const { kicker, title, body, primaryHref, primaryLabel, secondaryHref, secondary
 
 <style>
   .cta {
-    position: relative;
-    overflow: hidden;
     padding-block: clamp(4rem, 9vw, 7.5rem);
-  }
-
-  /* The founding year, very large and quiet, behind the call to action. */
-  .cta-mark {
-    position: absolute;
-    inset-inline-end: -1vw;
-    inset-block-end: -3.5vw;
-    inline-size: clamp(22rem, 62vw, 56rem);
-    block-size: auto;
-    pointer-events: none;
-    user-select: none;
-  }
-
-  .cta-mark text {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 200px;
-    letter-spacing: -8px;
-    fill: var(--brand-2);
   }
 
   .cta-inner {

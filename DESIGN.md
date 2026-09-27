@@ -52,13 +52,18 @@ flourishes (drop caps, small caps) are applied to Kannada.
 
 The site now reads as the association's printed report, cover to back page:
 
-- **The home page is the cover.** Olive ground; `1993` set at poster size (`--step-6`) in the gold; the name, tagline and actions; the campus photograph mounted with a gold keyline offset behind it; and a **figures strip** of three real counts read from the records (documented contributions with their year range, events on record, programs).
-- **Every index page opens on a section divider** (`PageCover.astro`): the olive, the title in paper, the lede, and — where the page has one — a real figure in gold beside it (recorded giving on Contributions, events on record on Events, `1986` on the Vidyalaya, the NCL mark on its program page).
+- **The home page is the cover.** Olive ground; `1993` set at poster size (`--step-6`) in the gold, the one oversized numeral on the site; the name, tagline and actions; and the campus photograph.
+- **Every index page opens on a section divider** (`PageCover.astro`): the olive, the title in paper and the lede. Only Contributions carries a figure beside it, the recorded total, because there the figure is the content.
 - **Detail pages open on the olive too**, with the date in gold mono; the photograph is mounted so it overlaps the cover's lower edge, like a plate, and the who/what/where sits beneath it in a ruled **record strip**.
 - **The giving statement.** On the home page the recorded total is set at display size in a sticky column beside the ledger it adds up; each ledger bar is drawn on a faint full-width track so its length reads as a share.
 - **Events are a timeline**: each year in large gold-brown Arvo, pinned beside its records while you scroll.
 - **NCL's poster.** With no photograph, NCL gets a gold panel with its short name at poster scale — composed, never a placeholder.
-- The CTA carries `1993` very large and quiet behind it, drawn as SVG text so it is decoration, not copy.
+
+### What reads as AI-generated in 2026 (and is banned here)
+
+From design-critique write-ups on "AI slop" and vibe-coded UI (Developers Digest, TeneX Studio, 925 Studios, The Fountain Institute): default font pairings (Inter, Geist, Space Grotesk, Instrument, Fraunces); purple/blue gradients and glows; a badge, pill or dot in front of every label; pills and big radii on everything; identical card or tile rows; **stat-banner rows**; decorative numbering and oversized decorative numerals; offset frames and blobs behind photographs; scroll-reveal and staggered animations; giant footer wordmarks; em dashes as a tic and unsourced numbers.
+
+The rework's first pass had several of these (a three-figure stat strip in the hero, a gold numeral on every cover, a ghost `1993` behind the CTA, an offset keyline behind the hero photograph, pill navigation and pill back links, three identical olive link tiles on About). All were removed. Navigation marks the current page with an underline; back links are plain links; categories are square-cornered chips.
 
 **Kannada at poster scale.** The Kannada short names are much wider than the Latin ones; poster marks drop to a smaller clamp under `:lang(kn)`, and headings drop negative tracking.
 

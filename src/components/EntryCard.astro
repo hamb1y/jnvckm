@@ -52,12 +52,7 @@ const display = formatDate(date, locale);
         {display}
       </time>
     )}
-    {label !== "" && (
-      <span class="label">
-        <span class="card-dot" aria-hidden="true" />
-        {label}
-      </span>
-    )}
+    {label !== "" && <span class="label">{label}</span>}
   </div>
 
   <h3 class="title">
@@ -122,10 +117,6 @@ const display = formatDate(date, locale);
     color: var(--gold);
   }
 
-  .card--text .card-dot {
-    background: var(--gold);
-  }
-
   .card--text .title a {
     color: var(--brand-ink);
   }
@@ -172,14 +163,6 @@ const display = formatDate(date, locale);
     gap: 0.45rem;
     color: var(--accent);
     font-weight: 600;
-  }
-
-  .card-dot {
-    inline-size: 0.5rem;
-    block-size: 0.5rem;
-    border-radius: var(--r-pill);
-    background: var(--accent);
-    flex: none;
   }
 
   .title {

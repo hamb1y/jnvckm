@@ -28,11 +28,6 @@ const editions = eventsForProgram(id);
       <ArrowLeft size={15} stroke-width={1.8} aria-hidden="true" />
       {t(lang, "programs.title")}
     </a>
-    {program.image === null && program.shortName && (
-      <p class="cover-mark" slot="figure" aria-hidden="true">
-        {lx(program.shortName, lang)}
-      </p>
-    )}
   </PageCover>
 
   <div class="container intro-wrap">
@@ -77,17 +72,6 @@ const editions = eventsForProgram(id);
 </article>
 
 <style>
-  /* NCL has no photograph: its short name, set as a poster mark in gold. */
-  .cover-mark {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(5rem, 3rem + 10vw, 12rem);
-    line-height: 0.8;
-    letter-spacing: -0.05em;
-    color: var(--gold);
-    justify-self: end;
-  }
-
   .intro-wrap {
     padding-block: clamp(3rem, 6vw, 5rem);
   }
@@ -135,16 +119,5 @@ const editions = eventsForProgram(id);
     .program-intro {
       grid-template-columns: 1fr;
     }
-
-    .cover-mark {
-      justify-self: start;
-    }
-  }
-
-  /* Kannada set at poster size is far wider than the Latin short name. */
-  :global(:lang(kn)) .cover-mark {
-    font-size: clamp(2.5rem, 1.4rem + 5vw, 5.5rem);
-    letter-spacing: 0;
-    line-height: 1.1;
   }
 </style>

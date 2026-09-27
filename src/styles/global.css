@@ -281,36 +281,30 @@ section {
   }
 }
 
-/* A back link, set as a small pill so it reads as navigation, not prose. */
+/* A back link: a plain link with an arrow, above the title. */
 .back-link {
   display: inline-flex;
   align-items: center;
   gap: var(--s-2);
-  padding: 0.35em 0.95em 0.35em 0.75em;
-  border: 1px solid var(--rule-strong);
-  border-radius: var(--r-pill);
   font-size: var(--step--1);
   font-weight: 700;
   color: var(--ink);
-  text-decoration: none;
-  transition:
-    border-color var(--dur-1) var(--ease-out),
-    background-color var(--dur-1) var(--ease-out);
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-underline-offset: 0.25em;
 }
 
 .back-link:hover {
-  border-color: var(--brand);
-  background: var(--brand-tint);
+  text-decoration-color: currentColor;
 }
 
 .page-cover .back-link {
   color: var(--brand-ink);
-  border-color: var(--brand-rule);
+  text-decoration-color: var(--brand-rule);
 }
 
 .page-cover .back-link:hover {
-  border-color: var(--gold);
-  background: var(--brand-2);
+  text-decoration-color: var(--gold);
 }
 
 /* A record's who / what / when / where, set as data in a ruled strip. */

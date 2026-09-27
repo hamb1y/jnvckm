@@ -47,11 +47,7 @@ const facts = [
 ];
 ---
 
-<PageCover title={t(lang, "vidyalaya.title")} lede={t(lang, "vidyalaya.lede")}>
-  <p class="cover-mark" slot="figure" aria-hidden="true">
-    1986
-  </p>
-</PageCover>
+<PageCover title={t(lang, "vidyalaya.title")} lede={t(lang, "vidyalaya.lede")} />
 
 <div class="container vidyalaya">
   <Figure media={campus} locale={lang} ratio="16 / 9" />
@@ -77,16 +73,6 @@ const facts = [
 </div>
 
 <style>
-  .cover-mark {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(4.5rem, 2.5rem + 8vw, 10rem);
-    line-height: 0.8;
-    letter-spacing: -0.05em;
-    color: var(--gold);
-    justify-self: end;
-  }
-
   .vidyalaya {
     padding-block: clamp(3rem, 6vw, 5rem) clamp(3rem, 7vw, 6rem);
   }
@@ -116,11 +102,5 @@ const facts = [
     padding-block-start: var(--s-5);
     border-block-start: 1px solid var(--rule);
     font-weight: 600;
-  }
-
-  @media (max-width: 900px) {
-    .cover-mark {
-      justify-self: start;
-    }
   }
 </style>
