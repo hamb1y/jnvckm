@@ -1,5 +1,6 @@
 ---
 import Figure from "@/components/Figure.astro";
+import PageCover from "@/components/PageCover.astro";
 import { lx, t } from "@/i18n/utils";
 import { localePath } from "@/lib/paths";
 import type { Locale, Media } from "@/data/types";
@@ -46,21 +47,26 @@ const facts = [
 ];
 ---
 
-<div class="container section">
-  <header class="page-head">
-    <h1>{t(lang, "vidyalaya.title")}</h1>
-    <p>{t(lang, "vidyalaya.lede")}</p>
-  </header>
+<PageCover title={t(lang, "vidyalaya.title")} lede={t(lang, "vidyalaya.lede")}>
+  <p class="cover-mark" slot="figure" aria-hidden="true">
+    1986
+  </p>
+</PageCover>
 
+<div class="container vidyalaya">
   <Figure media={campus} locale={lang} ratio="16 / 9" />
 
   <ul class="fact-list">
-    {facts.map((fact) => <li>{lx(fact, lang)}</li>)}
+    {facts.map((fact) => (
+      <li>{lx(fact, lang)}</li>
+    ))}
   </ul>
 
   <div class="vidyalaya-links">
     <p>
-      <a href="https://navodaya.gov.in" rel="noopener">navodaya.gov.in</a>
+      <a href="https://navodaya.gov.in" rel="noopener">
+        navodaya.gov.in
+      </a>
       {" — "}
       {lang === "kn" ? "ಅಧಿಕೃತ ಶಾಲಾ ಜಾಲತಾಣ" : "the school's official website"}
     </p>
@@ -71,32 +77,50 @@ const facts = [
 </div>
 
 <style>
-  .container > figure {
-    margin-block-start: var(--s-6);
+  .cover-mark {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(4.5rem, 2.5rem + 8vw, 10rem);
+    line-height: 0.8;
+    letter-spacing: -0.05em;
+    color: var(--gold);
+    justify-self: end;
+  }
+
+  .vidyalaya {
+    padding-block: clamp(3rem, 6vw, 5rem) clamp(3rem, 7vw, 6rem);
   }
 
   .fact-list {
     list-style: none;
-    margin: var(--s-7) 0 0;
+    margin: var(--s-8) 0 0;
     padding: 0;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
-    gap: 0 var(--s-8);
-    max-inline-size: 72rem;
+    gap: var(--s-6) var(--s-8);
   }
 
   .fact-list li {
-    padding-block-end: var(--s-4);
-    margin-block-end: var(--s-4);
-    border-block-end: 1px solid var(--rule);
-    color: var(--text-2);
+    padding-block-start: var(--s-4);
+    border-block-start: 2px solid var(--ink);
+    font-size: var(--step-1);
+    line-height: 1.5;
+    color: var(--ink);
   }
 
   .vidyalaya-links {
     display: flex;
     flex-wrap: wrap;
     gap: var(--s-6);
-    margin-block-start: var(--s-6);
+    margin-block-start: var(--s-8);
+    padding-block-start: var(--s-5);
+    border-block-start: 1px solid var(--rule);
     font-weight: 600;
+  }
+
+  @media (max-width: 900px) {
+    .cover-mark {
+      justify-self: start;
+    }
   }
 </style>

@@ -1,5 +1,6 @@
 ---
 import { ArrowUpRight } from "lucide-astro";
+import PageCover from "@/components/PageCover.astro";
 import { site } from "@/data/site";
 import { lx, t } from "@/i18n/utils";
 import { localePath } from "@/lib/paths";
@@ -12,12 +13,7 @@ export interface Props {
 const { lang } = Astro.props;
 ---
 
-<div class="container">
-  <header class="page-head">
-    <h1>{t(lang, "connect.title")}</h1>
-    <p>{t(lang, "connect.lede")}</p>
-  </header>
-</div>
+<PageCover title={t(lang, "connect.title")} lede={t(lang, "connect.lede")} />
 
 <section class="accent-brand">
   <div class="container connect">
@@ -54,74 +50,86 @@ const { lang } = Astro.props;
 </section>
 
 <style>
-  .container {
-    padding-block-start: clamp(2rem, 5vw, 4rem);
-  }
-
   .connect {
     display: grid;
     grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-    gap: clamp(var(--s-7), 5vw, var(--s-10));
+    gap: clamp(var(--s-7), 6vw, var(--s-10));
     align-items: start;
   }
 
   .connect-main {
     display: grid;
-    gap: clamp(var(--s-6), 4vw, var(--s-8));
+    border-block-start: 2px solid var(--ink);
+  }
+
+  .connect-main article {
+    padding-block: var(--s-6);
+    border-block-end: 1px solid var(--rule);
   }
 
   .connect-main h2 {
-    font-size: var(--step-2);
+    font-size: var(--step-3);
     margin-block-end: var(--s-3);
   }
 
   .connect-main p {
     color: var(--text-2);
-    max-inline-size: 54ch;
+    font-size: var(--step-1);
+    line-height: 1.55;
+    max-inline-size: 50ch;
   }
 
   .connect-main .more {
     margin-block-start: var(--s-4);
   }
 
+  /* The route in, on the association's own olive. */
   .connect-card {
-    padding: var(--s-5);
-    background: var(--surface);
-    border: 1px solid var(--rule);
-    border-radius: var(--r-2);
+    position: sticky;
+    inset-block-start: calc(var(--header-h) + var(--s-5));
+    padding: clamp(var(--s-5), 4vw, var(--s-7));
+    background: var(--brand);
+    color: var(--brand-ink);
+    border-radius: var(--r-4);
   }
 
   .connect-card h2 {
-    font-size: var(--step-1);
-    margin-block-end: var(--s-3);
+    font-size: var(--step-3);
+    margin-block-end: var(--s-4);
   }
 
   .connect-card > p {
-    color: var(--text-2);
+    color: var(--brand-muted);
   }
 
   .connect-school {
-    margin-block-start: var(--s-5);
+    margin-block-start: var(--s-6);
     padding-block-start: var(--s-5);
-    border-block-start: 1px solid var(--rule);
+    border-block-start: 1px solid var(--brand-rule);
   }
 
   .connect-school h3 {
+    font-family: var(--font-body);
     font-size: var(--step--1);
     font-weight: 700;
-    color: var(--text-3);
+    color: var(--gold);
     margin-block-end: var(--s-2);
   }
 
   .connect-school address {
     font-style: normal;
-    color: var(--text-2);
+    font-size: var(--step-1);
+    color: var(--brand-ink);
     max-inline-size: 34ch;
   }
 
   @media (max-width: 900px) {
     .connect {
       grid-template-columns: 1fr;
+    }
+
+    .connect-card {
+      position: static;
     }
   }
 </style>

@@ -2,6 +2,8 @@
 import EntryRow from "@/components/EntryRow.astro";
 import Figure from "@/components/Figure.astro";
 import Markdown from "@/components/Markdown.astro";
+import PageCover from "@/components/PageCover.astro";
+import { ArrowLeft } from "lucide-astro";
 import { eventsForProgram } from "@/data/events";
 import { programById } from "@/data/programs";
 import { lx, t } from "@/i18n/utils";
@@ -21,21 +23,25 @@ const editions = eventsForProgram(id);
 ---
 
 <article class="accent-program">
-  <div class="container">
-    <header class="page-head">
-      <a class="back" href={localePath("/programs", lang)}>{t(lang, "programs.title")}</a>
-      <h1>{lx(program.name, lang)}</h1>
-      <p>{lx(program.tagline, lang)}</p>
-    </header>
+  <PageCover title={lx(program.name, lang)} lede={lx(program.tagline, lang)}>
+    <a class="back-link" slot="above" href={localePath("/programs", lang)}>
+      <ArrowLeft size={15} stroke-width={1.8} aria-hidden="true" />
+      {t(lang, "programs.title")}
+    </a>
+    {program.image === null && program.shortName && (
+      <p class="cover-mark" slot="figure" aria-hidden="true">
+        {lx(program.shortName, lang)}
+      </p>
+    )}
+  </PageCover>
 
+  <div class="container intro-wrap">
     <div class:list={["program-intro", program.image === null && "program-intro--text"]}>
-      {
-        program.image && (
-          <div class="program-media">
-            <Figure media={program.image} locale={lang} ratio="4 / 3" priority={true} />
-          </div>
-        )
-      }
+      {program.image && (
+        <div class="program-media">
+          <Figure media={program.image} locale={lang} ratio="4 / 3" priority={true} />
+        </div>
+      )}
       <div class="program-copy">
         <p class="program-note">{lx(program.startNote, lang)}</p>
         <Markdown value={lx(program.body, lang)} />
@@ -43,51 +49,53 @@ const editions = eventsForProgram(id);
     </div>
   </div>
 
-  <div class="container">
+  <div class="container editions">
     <div class="section-head">
       <div>
         <h2 class="section-title">{t(lang, "programs.relatedEvents")}</h2>
         <p class="section-lede">{t(lang, "programs.documented")}</p>
       </div>
     </div>
-    {
-      editions.length > 0 ? (
-        <ul class="records">
-          {editions.map((entry) => (
-            <EntryRow
-              href={localePath(`/events/${entry.slug}`, lang)}
-              title={lx(entry.title, lang)}
-              date={entry.date}
-              summary={lx(entry.summary, lang)}
-              image={entry.image}
-              meta={entry.location ? [lx(entry.location, lang)] : []}
-              locale={lang}
-            />
-          ))}
-        </ul>
-      ) : (
-        <p class="empty-state">{t(lang, "empty.generic")}</p>
-      )
-    }
+    {editions.length > 0 ? (
+      <ul class="records">
+        {editions.map((entry) => (
+          <EntryRow
+            href={localePath(`/events/${entry.slug}`, lang)}
+            title={lx(entry.title, lang)}
+            date={entry.date}
+            summary={lx(entry.summary, lang)}
+            image={entry.image}
+            meta={entry.location ? [lx(entry.location, lang)] : []}
+            locale={lang}
+          />
+        ))}
+      </ul>
+    ) : (
+      <p class="empty-state">{t(lang, "empty.generic")}</p>
+    )}
   </div>
 </article>
 
 <style>
-  .back {
-    display: inline-block;
-    margin-block-end: var(--s-5);
+  /* NCL has no photograph: its short name, set as a poster mark in gold. */
+  .cover-mark {
+    font-family: var(--font-display);
     font-weight: 700;
+    font-size: clamp(5rem, 3rem + 10vw, 12rem);
+    line-height: 0.8;
+    letter-spacing: -0.05em;
+    color: var(--gold);
+    justify-self: end;
   }
 
-  .page-head h1 + p {
-    color: var(--accent);
-    font-weight: 600;
+  .intro-wrap {
+    padding-block: clamp(3rem, 6vw, 5rem);
   }
 
   .program-intro {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: clamp(var(--s-6), 5vw, var(--s-9));
+    gap: clamp(var(--s-6), 6vw, var(--s-9));
     align-items: start;
   }
 
@@ -101,23 +109,42 @@ const editions = eventsForProgram(id);
   }
 
   .program-note {
-    padding-block-end: var(--s-4);
-    border-block-end: 1px solid var(--rule);
-    color: var(--text-3);
+    margin-block-end: var(--s-5);
+    padding: var(--s-4) var(--s-5);
+    background: var(--accent-wash);
+    border-radius: var(--r-2);
+    color: var(--text-2);
+    font-weight: 600;
     max-inline-size: 52ch;
   }
 
-  .container > .section-head {
-    margin-block-end: var(--s-5);
+  .program-copy :global(.prose) {
+    font-size: var(--step-1);
+    line-height: 1.6;
   }
 
-  .container + .container {
-    padding-block-start: clamp(var(--s-6), 4vw, var(--s-8));
+  .editions {
+    padding-block-end: clamp(3rem, 7vw, 6rem);
+  }
+
+  .editions .section-head {
+    margin-block-end: var(--s-5);
   }
 
   @media (max-width: 900px) {
     .program-intro {
       grid-template-columns: 1fr;
     }
+
+    .cover-mark {
+      justify-self: start;
+    }
+  }
+
+  /* Kannada set at poster size is far wider than the Latin short name. */
+  :global(:lang(kn)) .cover-mark {
+    font-size: clamp(2.5rem, 1.4rem + 5vw, 5.5rem);
+    letter-spacing: 0;
+    line-height: 1.1;
   }
 </style>

@@ -19,36 +19,32 @@ const confirmedSocials = site.socials.filter((social) => social.verified);
 ---
 
 <footer class="site-footer on-brand">
-  <div class="container footer-grid">
-    <div class="footer-block">
-      <h2 class="footer-title">{siteName}</h2>
-      <p class="muted">{t(lang, "footer.independent")}</p>
-    </div>
+  <div class="container footer-top">
+    <p class="footer-name">{siteName}</p>
+    <p class="muted footer-independent">{t(lang, "footer.independent")}</p>
+  </div>
 
+  <div class="container footer-grid">
     <div class="footer-block">
       <h2 class="footer-title">{t(lang, "footer.association")}</h2>
       <ul class="footer-list">
-        {
-          SECONDARY_NAV.map((item) => (
-            <li>
-              <a href={localePath(item.path, lang)}>{t(lang, item.key)}</a>
-            </li>
-          ))
-        }
+        {SECONDARY_NAV.map((item) => (
+          <li>
+            <a href={localePath(item.path, lang)}>{t(lang, item.key)}</a>
+          </li>
+        ))}
         <li>
           <a href={site.repository} rel="noopener">
             {t(lang, "footer.repository")}
           </a>
         </li>
-        {
-          confirmedSocials.map((social) => (
-            <li>
-              <a href={social.url} rel="noopener">
-                {social.label}
-              </a>
-            </li>
-          ))
-        }
+        {confirmedSocials.map((social) => (
+          <li>
+            <a href={social.url} rel="noopener">
+              {social.label}
+            </a>
+          </li>
+        ))}
       </ul>
     </div>
 
@@ -56,16 +52,12 @@ const confirmedSocials = site.socials.filter((social) => social.verified);
       <h2 class="footer-title">{t(lang, "connect.address")}</h2>
       <address class="footer-address">
         <span class="muted">{lx(site.contact.address, lang)}</span>
-        {
-          contact.emailVerified && contact.email ? (
-            <a href={`mailto:${contact.email}`}>{contact.email}</a>
-          ) : null
-        }
-        {
-          contact.phoneVerified && contact.phone ? (
-            <a href={`tel:${contact.phone.replace(/\s+/g, "")}`}>{contact.phone}</a>
-          ) : null
-        }
+        {contact.emailVerified && contact.email ? (
+          <a href={`mailto:${contact.email}`}>{contact.email}</a>
+        ) : null}
+        {contact.phoneVerified && contact.phone ? (
+          <a href={`tel:${contact.phone.replace(/\s+/g, "")}`}>{contact.phone}</a>
+        ) : null}
         {!contact.emailVerified && !contact.phoneVerified ? (
           <span class="footer-unconfirmed">{t(lang, "connect.unconfirmed")}</span>
         ) : null}
@@ -75,49 +67,94 @@ const confirmedSocials = site.socials.filter((social) => social.verified);
   </div>
 
   <div class="container footer-base">
-    <p class="muted">© {year} {siteName} · {t(lang, "site.formedShort")}</p>
+    <p class="muted">
+      © {year} {siteName} · {t(lang, "site.formedShort")}
+    </p>
     <p class="muted footer-credit">
-      {
-        site.credit && (
-          <>
-            {t(lang, "footer.creditLabel")}{" "}
-            <a href={site.credit.url} rel="noopener">
-              {site.credit.label}
-            </a>
-          </>
-        )
-      }
-      {
-        site.credit && site.license && <span aria-hidden="true"> · </span>
-      }
-      {
-        site.license && (
-          <>
-            {t(lang, "footer.licenseLabel")}{" "}
-            <a href={site.license.url} rel="noopener">
-              {site.license.label}
-            </a>
-          </>
-        )
-      }
+      {site.credit && (
+        <>
+          {t(lang, "footer.creditLabel")}{" "}
+          <a href={site.credit.url} rel="noopener">
+            {site.credit.label}
+          </a>
+        </>
+      )}
+      {site.credit && site.license && <span aria-hidden="true"> · </span>}
+      {site.license && (
+        <>
+          {t(lang, "footer.licenseLabel")}{" "}
+          <a href={site.license.url} rel="noopener">
+            {site.license.label}
+          </a>
+        </>
+      )}
     </p>
   </div>
 </footer>
 
 <style>
   .site-footer {
-    margin-block-start: var(--s-9);
-    padding-block: var(--s-8) var(--s-5);
+    padding-block: var(--s-9) var(--s-5);
+    background: var(--brand-deep);
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: var(--s-5) clamp(var(--s-6), 6vw, var(--s-9));
+    align-items: end;
+    padding-block-end: var(--s-7);
+  }
+
+  .footer-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--step-4);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    color: var(--gold);
+    max-inline-size: 14ch;
+    text-wrap: balance;
+  }
+
+  :global(:lang(kn)) .footer-name {
+    letter-spacing: 0;
+    line-height: 1.3;
+  }
+
+  .footer-independent {
+    max-inline-size: 48ch;
   }
 
   .footer-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
     gap: var(--s-7);
+    padding-block-start: var(--s-6);
+  }
+
+  /* The rules sit inside the gutters, level with the text they divide. */
+  .footer-grid,
+  .footer-base {
+    position: relative;
+  }
+
+  .footer-grid::before,
+  .footer-base::before {
+    content: "";
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline: var(--gutter);
+    block-size: 1px;
+    background: color-mix(in oklab, var(--brand-ink) 22%, var(--brand-deep));
   }
 
   .footer-title {
-    font-size: var(--step-1);
+    font-family: var(--font-body);
+    font-size: var(--step--1);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: var(--gold);
     margin-block-end: var(--s-3);
   }
 
@@ -132,6 +169,12 @@ const confirmedSocials = site.socials.filter((social) => social.verified);
   .footer-list a,
   .footer-address a {
     color: var(--brand-ink);
+    text-decoration-color: color-mix(in oklab, var(--brand-ink) 40%, transparent);
+  }
+
+  .footer-list a:hover,
+  .footer-address a:hover {
+    text-decoration-color: var(--gold);
   }
 
   .footer-address {
@@ -148,6 +191,10 @@ const confirmedSocials = site.socials.filter((social) => social.verified);
     margin-block-start: var(--s-4);
   }
 
+  .site-footer .muted {
+    color: color-mix(in oklab, var(--brand-ink) 78%, var(--brand-deep));
+  }
+
   .footer-base {
     display: flex;
     flex-wrap: wrap;
@@ -155,6 +202,12 @@ const confirmedSocials = site.socials.filter((social) => social.verified);
     gap: var(--s-3) var(--s-6);
     margin-block-start: var(--s-8);
     padding-block-start: var(--s-4);
-    border-block-start: 1px solid color-mix(in oklab, var(--brand-ink) 26%, var(--brand));
+    font-size: var(--step--1);
+  }
+
+  @media (max-width: 900px) {
+    .footer-top {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

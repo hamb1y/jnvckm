@@ -30,6 +30,12 @@
   --brand-tint: color-mix(in oklab, var(--brand) 8%, var(--paper));
   --brand-wash: color-mix(in oklab, var(--brand) 5%, var(--paper));
   --brand-line: color-mix(in oklab, var(--brand) 30%, var(--paper));
+  /* The report covers' gold caps, for type and rules ON the olive ground only.
+     On paper it is too light; use --accent-program there. */
+  --gold: #dcbd73;
+  --brand-2: #4a5a2a; /* a raised panel on the olive */
+  --brand-rule: color-mix(in oklab, var(--brand-ink) 22%, var(--brand));
+  --brand-muted: color-mix(in oklab, var(--brand-ink) 80%, var(--brand));
 
   /* --- Pillar accents, set per section via --accent --------------------- */
   /* Programs (IGNITE, NCL) — gold from the report covers. */
@@ -46,7 +52,8 @@
   /* Arvo is the slab serif of the association's own logotype. */
   --font-display: "Arvo", "Noto Serif Kannada", Georgia, serif;
   --font-body: "Mukta", "Noto Sans Kannada", -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: "Spline Sans Mono Variable", "Noto Sans Kannada", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-mono:
+    "Spline Sans Mono Variable", "Noto Sans Kannada", ui-monospace, "SF Mono", Menlo, monospace;
 
   --step--1: clamp(0.83rem, 0.8rem + 0.12vw, 0.9rem);
   --step-0: clamp(1rem, 0.97rem + 0.16vw, 1.09rem);
@@ -54,6 +61,9 @@
   --step-2: clamp(1.35rem, 1.2rem + 0.7vw, 1.7rem);
   --step-3: clamp(1.6rem, 1.35rem + 1.4vw, 2.2rem);
   --step-4: clamp(2rem, 1.6rem + 2.4vw, 3.3rem);
+  --step-5: clamp(2.5rem, 1.7rem + 4vw, 4.75rem);
+  /* Poster figures: the founding year, the recorded total. One per view. */
+  --step-6: clamp(4.5rem, 2.4rem + 11vw, 13rem);
 
   --leading-body: 1.62;
   --leading-display: 1.1;
@@ -73,16 +83,19 @@
   --s-10: 8rem;
 
   /* --- Shape ------------------------------------------------------------- */
+  /* Four radii, and only four: the verifier fails a page with more. Circles
+     and pills both use --r-pill, never 50%. */
   --r-1: 2px;
   --r-2: 4px;
-  --r-3: 6px;
   --r-4: 8px;
+  --r-pill: 999px;
 
   /* Rare, and low. Never combined with a border on the same surface. */
   --shadow-lift: 0 1px 0 rgba(36, 31, 23, 0.04), 0 8px 24px -16px rgba(36, 31, 23, 0.35);
 
   /* --- Layout ------------------------------------------------------------ */
-  --container: 78rem;
+  --container: 80rem;
+  --header-h: 4.75rem;
   --gutter: clamp(1.25rem, 5vw, 4rem);
 
   /* --- Motion ------------------------------------------------------------ */

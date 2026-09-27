@@ -10,16 +10,42 @@ export interface Props {
 const { lang } = Astro.props;
 ---
 
-<div class="container section not-found">
-  <h1>{t(lang, "notfound.title")}</h1>
-  <p class="lede">{t(lang, "notfound.lede")}</p>
-  <p class="not-found-links">
-    <a class="btn btn-secondary" href={localePath("/", lang)}>{t(lang, "nav.home")}</a>
-    <a class="btn btn-secondary" href={localePath("/events", lang)}>{t(lang, "nav.events")}</a>
+<div class="container not-found">
+  <p class="code" aria-hidden="true">
+    404
   </p>
+  <div>
+    <h1>{t(lang, "notfound.title")}</h1>
+    <p class="lede">{t(lang, "notfound.lede")}</p>
+    <p class="not-found-links">
+      <a class="btn btn-primary" href={localePath("/", lang)}>
+        {t(lang, "nav.home")}
+      </a>
+      <a class="btn btn-secondary" href={localePath("/events", lang)}>
+        {t(lang, "nav.events")}
+      </a>
+    </p>
+  </div>
 </div>
 
 <style>
+  .not-found {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(var(--s-6), 6vw, var(--s-9));
+    align-items: center;
+    padding-block: clamp(3rem, 9vw, 8rem);
+  }
+
+  .code {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(7rem, 4rem + 14vw, 17rem);
+    line-height: 0.85;
+    letter-spacing: -0.05em;
+    color: var(--accent-program);
+  }
+
   .not-found-links {
     display: flex;
     flex-wrap: wrap;
@@ -28,5 +54,12 @@ const { lang } = Astro.props;
 
   .lede {
     margin-block: var(--s-4) var(--s-6);
+    max-inline-size: 40ch;
+  }
+
+  @media (max-width: 720px) {
+    .not-found {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

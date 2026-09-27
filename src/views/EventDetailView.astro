@@ -17,7 +17,8 @@ const entry = eventBySlug(slug);
 if (!entry) throw new Error(`Unknown event: ${slug}`);
 
 const meta: { label: string; value: string }[] = [];
-if (entry.location) meta.push({ label: t(lang, "common.location"), value: lx(entry.location, lang) });
+if (entry.location)
+  meta.push({ label: t(lang, "common.location"), value: lx(entry.location, lang) });
 if (entry.program) {
   const program = programById(entry.program as "ignite" | "ncl");
   if (program) meta.push({ label: t(lang, "common.program"), value: lx(program.name, lang) });
@@ -25,7 +26,9 @@ if (entry.program) {
 
 // Closure: the other documented records from the same program, newest first.
 const related = entry.program
-  ? eventsForProgram(entry.program).filter((other) => other.slug !== entry.slug).slice(0, 3)
+  ? eventsForProgram(entry.program)
+      .filter((other) => other.slug !== entry.slug)
+      .slice(0, 3)
   : [];
 ---
 
@@ -43,34 +46,33 @@ const related = entry.program
   backLabel={`${t(lang, "events.title")}`}
   priority={true}
 >
-  {
-    related.length > 0 && (
-      <section slot="related" class="related">
-        <h2 class="related-title">{t(lang, "programs.relatedEvents")}</h2>
-        <ul class="records">
-          {related.map((other) => (
-            <EntryRow
-              href={localePath(`/events/${other.slug}`, lang)}
-              title={lx(other.title, lang)}
-              date={other.date}
-              summary={lx(other.summary, lang)}
-              image={other.image}
-              locale={lang}
-            />
-          ))}
-        </ul>
-      </section>
-    )
-  }
+  {related.length > 0 && (
+    <section slot="related" class="related">
+      <h2 class="related-title">{t(lang, "programs.relatedEvents")}</h2>
+      <ul class="records">
+        {related.map((other) => (
+          <EntryRow
+            href={localePath(`/events/${other.slug}`, lang)}
+            title={lx(other.title, lang)}
+            date={other.date}
+            summary={lx(other.summary, lang)}
+            image={other.image}
+            locale={lang}
+          />
+        ))}
+      </ul>
+    </section>
+  )}
 </EntryDetail>
 
 <style>
   .related {
     margin-block-start: clamp(var(--s-7), 5vw, var(--s-9));
+    padding: 0;
   }
 
   .related-title {
-    font-size: var(--step-1);
-    margin-block-end: var(--s-4);
+    font-size: var(--step-3);
+    margin-block-end: var(--s-5);
   }
 </style>

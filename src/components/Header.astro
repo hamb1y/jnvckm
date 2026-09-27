@@ -20,37 +20,14 @@ const siteName = lx(site.name, lang);
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand" href={localePath("/", lang)}>
-      <img
-        class="brand-mark"
-        src="/logo-mark.webp"
-        alt={siteName}
-        width="420"
-        height="193"
-      />
+      <img class="brand-mark" src="/logo-mark.webp" alt={siteName} width="420" height="193" />
     </a>
 
     <nav class="site-nav" aria-label={t(lang, "a11y.primaryNav")}>
       <details class="nav-details">
         <summary class="nav-summary">{t(lang, "a11y.menu")}</summary>
         <ul class="nav-list">
-          {
-            NAV.map((item) => (
-              <li>
-                <a
-                  href={localePath(item.path, lang)}
-                  aria-current={isActive(item, here) ? "page" : undefined}
-                >
-                  {t(lang, item.key)}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </details>
-
-      <ul class="nav-list nav-inline">
-        {
-          NAV.map((item) => (
+          {NAV.map((item) => (
             <li>
               <a
                 href={localePath(item.path, lang)}
@@ -59,11 +36,29 @@ const siteName = lx(site.name, lang);
                 {t(lang, item.key)}
               </a>
             </li>
-          ))
-        }
+          ))}
+        </ul>
+      </details>
+
+      <ul class="nav-list nav-inline">
+        {NAV.map((item) => (
+          <li>
+            <a
+              href={localePath(item.path, lang)}
+              aria-current={isActive(item, here) ? "page" : undefined}
+            >
+              {t(lang, item.key)}
+            </a>
+          </li>
+        ))}
       </ul>
 
-      <a class="lang-switch" href={otherHref} hreflang={other} aria-label={t(lang, "lang.switchAria")}>
+      <a
+        class="lang-switch"
+        href={otherHref}
+        hreflang={other}
+        aria-label={t(lang, "lang.switchAria")}
+      >
         {t(lang, "lang.switchLabel")}
       </a>
     </nav>
@@ -71,8 +66,11 @@ const siteName = lx(site.name, lang);
 </header>
 
 <style>
+  /* Sticky, and a containing block for the absolutely positioned mobile menu. */
   .site-header {
-    position: relative;
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 30;
     border-block-end: 1px solid var(--rule);
     background: var(--paper);
   }
@@ -82,7 +80,8 @@ const siteName = lx(site.name, lang);
     align-items: center;
     justify-content: space-between;
     gap: var(--s-5);
-    padding-block: var(--s-3);
+    min-block-size: var(--header-h);
+    padding-block: var(--s-2);
   }
 
   .brand {
@@ -91,51 +90,58 @@ const siteName = lx(site.name, lang);
   }
 
   .brand-mark {
-    width: clamp(8.5rem, 20vw, 11rem);
+    width: clamp(8rem, 18vw, 10rem);
     height: auto;
   }
 
   .site-nav {
     display: flex;
     align-items: center;
-    gap: var(--s-5);
+    gap: var(--s-4);
   }
 
   .nav-list {
     display: flex;
     align-items: center;
-    gap: var(--s-5);
+    gap: var(--s-1);
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
   .nav-list a {
+    display: block;
     color: var(--ink);
     font-weight: 600;
     text-decoration: none;
     white-space: nowrap;
-    padding-block: var(--s-1);
-    border-block-end: 2px solid transparent;
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--r-pill);
+    transition:
+      background-color var(--dur-1) var(--ease-out),
+      color var(--dur-1) var(--ease-out);
   }
 
   .nav-list a:hover {
-    border-block-end-color: var(--rule-strong);
+    background: var(--brand-tint);
   }
 
-  .nav-list a[aria-current="page"] {
-    border-block-end-color: var(--brand);
-    color: var(--brand);
+  .nav-inline a[aria-current="page"] {
+    background: var(--brand);
+    color: var(--brand-ink);
   }
 
   .lang-switch {
     color: var(--ink);
-    font-weight: 600;
+    font-weight: 700;
     text-decoration: none;
-    padding: var(--s-1) var(--s-3);
+    padding: 0.35rem 0.9rem;
     border: 1px solid var(--rule-strong);
-    border-radius: var(--r-2);
+    border-radius: var(--r-pill);
     white-space: nowrap;
+    transition:
+      background-color var(--dur-1) var(--ease-out),
+      border-color var(--dur-1) var(--ease-out);
   }
 
   .lang-switch:hover {
@@ -149,26 +155,38 @@ const siteName = lx(site.name, lang);
 
   .nav-summary {
     cursor: pointer;
-    font-weight: 600;
-    padding: var(--s-2) var(--s-3);
+    font-weight: 700;
+    padding: 0.45rem 1rem;
     border: 1px solid var(--rule-strong);
-    border-radius: var(--r-2);
+    border-radius: var(--r-pill);
+    list-style: none;
     /* Push the marker to the far side so the label stays left-aligned. */
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--s-4);
-    min-width: 7rem;
+    gap: var(--s-3);
+    min-width: 6.5rem;
+  }
+
+  .nav-summary::-webkit-details-marker {
+    display: none;
   }
 
   .nav-summary::after {
     content: "";
-    inline-size: 0.5rem;
-    block-size: 0.5rem;
+    inline-size: 0.45rem;
+    block-size: 0.45rem;
     border-inline-end: 2px solid currentColor;
     border-block-end: 2px solid currentColor;
     rotate: 45deg;
     margin-block-start: -0.2rem;
+    transition: rotate var(--dur-2) var(--ease-out);
+  }
+
+  .nav-details[open] .nav-summary {
+    background: var(--brand);
+    border-color: var(--brand);
+    color: var(--brand-ink);
   }
 
   .nav-details[open] .nav-summary::after {
@@ -180,22 +198,30 @@ const siteName = lx(site.name, lang);
     flex-direction: column;
     align-items: stretch;
     gap: 0;
-    margin-block-start: var(--s-3);
-    border-block-start: 1px solid var(--rule);
+    margin-block-start: var(--s-2);
   }
 
   .nav-details .nav-list a {
     display: block;
-    padding-block: var(--s-3);
+    padding: var(--s-3) 0;
+    border-radius: 0;
     border-block-end: 1px solid var(--rule);
-    border-inline-end: 0;
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-details .nav-list a:hover {
+    background: transparent;
+    color: var(--accent-give);
   }
 
   .nav-details .nav-list a[aria-current="page"] {
     color: var(--accent-give);
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 1100px) {
     .header-inner {
       flex-wrap: wrap;
     }
@@ -213,12 +239,11 @@ const siteName = lx(site.name, lang);
     }
 
     /* The open menu spans the full width, directly beneath the header bar. */
-    .nav-details[open] {
+    .nav-details[open] .nav-list {
       position: absolute;
       inset-block-start: 100%;
       inset-inline: 0;
-      padding-inline: var(--gutter);
-      padding-block-end: var(--s-4);
+      padding: var(--s-2) var(--gutter) var(--s-5);
       background: var(--paper);
       border-block-end: 1px solid var(--rule);
       box-shadow: var(--shadow-lift);
@@ -226,7 +251,7 @@ const siteName = lx(site.name, lang);
     }
   }
 
-  @media (min-width: 901px) {
+  @media (min-width: 1101px) {
     .nav-details {
       display: none;
     }

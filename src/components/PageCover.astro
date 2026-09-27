@@ -1,0 +1,43 @@
+---
+/**
+ * The olive section divider every index page opens on: an optional label or
+ * back link, the page title in paper, the lede, and — where the page has one —
+ * a real figure set in the report gold beside it (the `figure` slot).
+ */
+export interface Props {
+  title: string;
+  lede?: string;
+  eyebrow?: string;
+}
+
+const { title, lede = "", eyebrow = "" } = Astro.props;
+const hasFigure = Astro.slots.has("figure");
+---
+
+<header class="page-cover">
+  <div class="container">
+    <slot name="above" />
+    <div class:list={["page-cover-grid", !hasFigure && "page-cover-grid--solo"]}>
+      <div>
+        {eyebrow !== "" && <p class="eyebrow">{eyebrow}</p>}
+        <h1>{title}</h1>
+        {lede !== "" && <p class="cover-lede">{lede}</p>}
+      </div>
+      {hasFigure && <slot name="figure" />}
+    </div>
+  </div>
+</header>
+
+<style>
+  .page-cover-grid--solo {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .page-cover-grid--solo h1 {
+    max-inline-size: 20ch;
+  }
+
+  :global(.page-cover) :global(.back-link) {
+    margin-block-end: var(--s-6);
+  }
+</style>

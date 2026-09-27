@@ -15,6 +15,11 @@ const { kicker, title, body, primaryHref, primaryLabel, secondaryHref, secondary
 ---
 
 <section class="cta on-brand">
+  <svg class="cta-mark" viewBox="0 0 560 190" aria-hidden="true" focusable="false">
+    <text x="560" y="170" text-anchor="end">
+      1993
+    </text>
+  </svg>
   <div class="container cta-inner">
     <div>
       <p class="eyebrow cta-kicker">{kicker}</p>
@@ -22,39 +27,63 @@ const { kicker, title, body, primaryHref, primaryLabel, secondaryHref, secondary
       <p class="cta-body">{body}</p>
     </div>
     <div class="cta-actions">
-      <a class="btn cta-primary" href={primaryHref}>{primaryLabel}</a>
-      {
-        secondaryHref && secondaryLabel && (
-          <a class="btn cta-secondary" href={secondaryHref}>
-            {secondaryLabel}
-          </a>
-        )
-      }
+      <a class="btn btn-light" href={primaryHref}>
+        {primaryLabel}
+      </a>
+      {secondaryHref && secondaryLabel && (
+        <a class="btn btn-ghost" href={secondaryHref}>
+          {secondaryLabel}
+        </a>
+      )}
     </div>
   </div>
 </section>
 
 <style>
+  .cta {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(4rem, 9vw, 7.5rem);
+  }
+
+  /* The founding year, very large and quiet, behind the call to action. */
+  .cta-mark {
+    position: absolute;
+    inset-inline-end: -1vw;
+    inset-block-end: -3.5vw;
+    inline-size: clamp(22rem, 62vw, 56rem);
+    block-size: auto;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .cta-mark text {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 200px;
+    letter-spacing: -8px;
+    fill: var(--brand-2);
+  }
+
   .cta-inner {
+    position: relative;
     display: grid;
     grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
     align-items: end;
     gap: clamp(var(--s-6), 5vw, var(--s-9));
   }
 
-  .cta-kicker {
-    color: color-mix(in oklab, var(--brand-ink) 70%, var(--brand));
-  }
-
   .cta-title {
     margin-block-start: var(--s-3);
-    max-inline-size: 22ch;
+    font-size: var(--step-5);
+    max-inline-size: 14ch;
   }
 
   .cta-body {
-    margin-block-start: var(--s-4);
-    max-inline-size: 52ch;
-    color: color-mix(in oklab, var(--brand-ink) 88%, var(--brand));
+    margin-block-start: var(--s-5);
+    font-size: var(--step-1);
+    max-inline-size: 44ch;
+    color: var(--brand-muted);
   }
 
   .cta-actions {
@@ -62,21 +91,6 @@ const { kicker, title, body, primaryHref, primaryLabel, secondaryHref, secondary
     flex-wrap: wrap;
     gap: var(--s-3);
     justify-content: flex-end;
-  }
-
-  .cta-primary {
-    --btn-bg: var(--accent-give);
-    --btn-fg: #fff8f2;
-    --btn-border: var(--accent-give);
-  }
-
-  .cta-secondary {
-    --btn-fg: var(--brand-ink);
-    --btn-border: color-mix(in oklab, var(--brand-ink) 40%, var(--brand));
-  }
-
-  .cta-secondary:hover {
-    --btn-bg: color-mix(in oklab, var(--brand-ink) 14%, var(--brand));
   }
 
   @media (max-width: 900px) {

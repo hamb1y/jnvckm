@@ -1,5 +1,7 @@
 ---
+import { ArrowUpRight } from "lucide-astro";
 import Figure from "@/components/Figure.astro";
+import PageCover from "@/components/PageCover.astro";
 import { programs } from "@/data/programs";
 import { lx, t } from "@/i18n/utils";
 import { localePath } from "@/lib/paths";
@@ -12,75 +14,68 @@ export interface Props {
 const { lang } = Astro.props;
 ---
 
-<div class="container">
-  <header class="page-head">
-    <h1>{t(lang, "programs.title")}</h1>
-    <p>{t(lang, "programs.lede")}</p>
-  </header>
-</div>
+<PageCover title={t(lang, "programs.title")} lede={t(lang, "programs.lede")} />
 
 <section class="accent-program">
   <div class="container">
     <div class="programs">
-      {
-        programs.map((program) => (
-          <article class="program">
-            <div class="program-media">
-              {
-                program.image ? (
-                  <Figure media={program.image} locale={lang} ratio="4 / 3" />
-                ) : (
-                  /* No photograph exists for this program, so it gets a composed
-                     typographic panel rather than an empty frame. */
-                  <div class="program-panel">
-                    <p class="panel-mark mono">
-                      {program.shortName ? lx(program.shortName, lang) : ""}
-                    </p>
-                    <p class="panel-name">{lx(program.name, lang)}</p>
-                    <p class="panel-years">{lx(program.startNote, lang)}</p>
-                  </div>
-                )
-              }
-            </div>
-            <div class="program-main">
-              <h2>
-                <a href={localePath(`/programs/${program.id}`, lang)}>{lx(program.name, lang)}</a>
-              </h2>
-              <p class="program-tagline">{lx(program.tagline, lang)}</p>
-              <p class="program-summary">{lx(program.summary, lang)}</p>
-              <p class="program-note">{lx(program.startNote, lang)}</p>
-            </div>
-          </article>
-        ))
-      }
+      {programs.map((program) => (
+        <article class="program">
+          <div class="program-media">
+            {program.image ? (
+              <Figure media={program.image} locale={lang} ratio="4 / 3" />
+            ) : (
+              /* No photograph exists for this program, so it gets a composed
+                     typographic poster rather than an empty frame. */
+              <div class="program-panel">
+                <p class="panel-mark">{program.shortName ? lx(program.shortName, lang) : ""}</p>
+                <p class="panel-name">{lx(program.name, lang)}</p>
+              </div>
+            )}
+          </div>
+          <div class="program-main">
+            <h2>
+              <a href={localePath(`/programs/${program.id}`, lang)}>{lx(program.name, lang)}</a>
+            </h2>
+            <p class="program-tagline">{lx(program.tagline, lang)}</p>
+            <p class="program-summary">{lx(program.summary, lang)}</p>
+            <p class="program-note">{lx(program.startNote, lang)}</p>
+            <a class="btn btn-secondary" href={localePath(`/programs/${program.id}`, lang)}>
+              {t(lang, "programs.more").replace("{name}", lx(program.name, lang))}
+              <ArrowUpRight size={17} stroke-width={1.8} aria-hidden="true" />
+            </a>
+          </div>
+        </article>
+      ))}
     </div>
   </div>
 </section>
 
 <style>
-  .container {
-    padding-block-start: clamp(2rem, 5vw, 4rem);
-  }
-
-  /* Keep the first program close to the page title. */
-  section {
-    padding-block: var(--s-5) clamp(3rem, 6vw, 5rem);
-  }
-
   .programs {
     display: grid;
-    gap: clamp(var(--s-7), 5vw, var(--s-9));
+    gap: clamp(var(--s-8), 8vw, var(--s-10));
   }
 
   .program {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: clamp(var(--s-6), 5vw, var(--s-9));
-    align-items: start;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: clamp(var(--s-6), 6vw, var(--s-9));
+    align-items: center;
+  }
+
+  .program:nth-child(even) .program-media {
+    order: 2;
+  }
+
+  .program-media,
+  .program-main {
+    min-inline-size: 0;
   }
 
   .program-main h2 {
-    max-inline-size: 18ch;
+    font-size: var(--step-5);
+    max-inline-size: 14ch;
   }
 
   .program-main h2 a {
@@ -93,19 +88,22 @@ const { lang } = Astro.props;
   }
 
   .program-tagline {
-    margin-block-start: var(--s-2);
-    font-weight: 600;
+    margin-block-start: var(--s-3);
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    line-height: 1.3;
     color: var(--accent);
+    max-inline-size: 28ch;
   }
 
   .program-summary {
-    margin-block-start: var(--s-4);
+    margin-block-start: var(--s-5);
     color: var(--text-2);
     max-inline-size: 54ch;
   }
 
   .program-note {
-    margin-block-start: var(--s-5);
+    margin-block: var(--s-5);
     padding-block-start: var(--s-4);
     border-block-start: 1px solid var(--rule);
     color: var(--text-3);
@@ -115,32 +113,29 @@ const { lang } = Astro.props;
 
   .program-panel {
     display: grid;
-    align-content: center;
-    gap: var(--s-2);
+    align-content: end;
+    gap: var(--s-3);
     padding: clamp(var(--s-5), 4vw, var(--s-7));
-    background: var(--accent-wash);
-    border: 1px solid var(--rule);
-    border-radius: var(--r-2);
+    background: var(--gold);
+    color: var(--ink);
+    border-radius: var(--r-4);
     aspect-ratio: 4 / 3;
   }
 
   .panel-mark {
-    color: var(--accent);
+    font-family: var(--font-display);
     font-weight: 700;
-    letter-spacing: 0.06em;
+    font-size: clamp(4.5rem, 3rem + 8vw, 11rem);
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+    margin-block-end: auto;
   }
 
   .panel-name {
     font-family: var(--font-display);
-    font-size: var(--step-2);
-    line-height: 1.15;
+    font-size: var(--step-3);
+    line-height: 1.1;
     letter-spacing: -0.02em;
-    color: var(--ink);
-  }
-
-  .panel-years {
-    font-size: var(--step--1);
-    color: var(--text-3);
   }
 
   @media (max-width: 900px) {
@@ -148,8 +143,20 @@ const { lang } = Astro.props;
       grid-template-columns: 1fr;
     }
 
+    .program:nth-child(even) .program-media {
+      order: 0;
+    }
+
     .program-panel {
       aspect-ratio: auto;
+      min-block-size: 16rem;
     }
+  }
+
+  /* Kannada set at poster size is far wider than the Latin short name. */
+  :global(:lang(kn)) .panel-mark {
+    font-size: clamp(2.5rem, 1.4rem + 5vw, 5.5rem);
+    letter-spacing: 0;
+    line-height: 1.1;
   }
 </style>

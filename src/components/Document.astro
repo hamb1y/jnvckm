@@ -33,12 +33,13 @@ const caption = lx(doc.caption ?? "", locale);
     display: grid;
     place-items: center;
     /* Reserve space before the file loads: document images carry no intrinsic
-       dimensions in the markup, so without a floor the page shifts. */
+         dimensions in the markup, so without a floor the page shifts. */
     min-block-size: 14rem;
     padding: var(--s-3);
     background: var(--surface);
     border: 1px solid var(--rule);
-    border-radius: var(--r-2);
+    border-radius: var(--r-4);
+    transition: border-color var(--dur-1) var(--ease-out);
   }
 
   .document-frame img {
@@ -47,6 +48,10 @@ const caption = lx(doc.caption ?? "", locale);
     max-block-size: 30rem;
     margin-inline: auto;
     object-fit: contain;
+  }
+
+  .document-frame:hover {
+    border-color: var(--brand);
   }
 
   figcaption {

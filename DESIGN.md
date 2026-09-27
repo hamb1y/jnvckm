@@ -23,6 +23,9 @@ Roles, not hues. Defined in `src/styles/tokens.css`.
 | `--brand` | `#3d4a21` | structure: header rule, footer, dark bands |
 | `--accent-program` | `#7e5a0a` | programs (IGNITE, NCL); text-safe gold |
 | `--accent-give` | `#a8410f` | giving (contributions, the action button) |
+| `--gold` | `#dcbd73` | the report covers' gold caps — type and rules **on the olive only** |
+| `--brand-2` | `#4a5a2a` | a raised panel or quiet mark on the olive |
+| `--brand-muted` | olive-mixed paper | secondary text on the olive (clears 4.5:1) |
 
 Tints are derived with `color-mix()`; no pastel is hand-picked. Gold and orange
 have a second "mark" value (`--accent-program-mark`, `--accent-give-mark`) for
@@ -44,6 +47,20 @@ Kannada headings fall back to Noto Serif Kannada, paired with Arvo. No Latin-onl
 flourishes (drop caps, small caps) are applied to Kannada.
 
 ## 3. How pages are composed
+
+### The annual report (the 2026 rework)
+
+The site now reads as the association's printed report, cover to back page:
+
+- **The home page is the cover.** Olive ground; `1993` set at poster size (`--step-6`) in the gold; the name, tagline and actions; the campus photograph mounted with a gold keyline offset behind it; and a **figures strip** of three real counts read from the records (documented contributions with their year range, events on record, programs).
+- **Every index page opens on a section divider** (`PageCover.astro`): the olive, the title in paper, the lede, and — where the page has one — a real figure in gold beside it (recorded giving on Contributions, events on record on Events, `1986` on the Vidyalaya, the NCL mark on its program page).
+- **Detail pages open on the olive too**, with the date in gold mono; the photograph is mounted so it overlaps the cover's lower edge, like a plate, and the who/what/where sits beneath it in a ruled **record strip**.
+- **The giving statement.** On the home page the recorded total is set at display size in a sticky column beside the ledger it adds up; each ledger bar is drawn on a faint full-width track so its length reads as a share.
+- **Events are a timeline**: each year in large gold-brown Arvo, pinned beside its records while you scroll.
+- **NCL's poster.** With no photograph, NCL gets a gold panel with its short name at poster scale — composed, never a placeholder.
+- The CTA carries `1993` very large and quiet behind it, drawn as SVG text so it is decoration, not copy.
+
+**Kannada at poster scale.** The Kannada short names are much wider than the Latin ones; poster marks drop to a smaller clamp under `:lang(kn)`, and headings drop negative tracking.
 
 **Photographs lead, at size.** The archive's real photographs are the site's
 strongest asset, so they are given real width — half a row, a full-bleed band,
@@ -126,7 +143,8 @@ Two supporting components:
   separated by space; one shape for every section is what makes a page monotone.
 - No postage-stamp photographs. If a record has a real photograph, give it size;
   if it does not, do not invent one.
-- Radii are 2–8px, drawn from the token scale.
+- Four radii only — `2px`, `4px`, `8px` and `999px` (`--r-pill`, used for pills **and** circles; never `50%`). The verifier fails a page with more than four.
+- No CSS animation of any kind (the verifier fails on one). Motion is transitions only: colour, a 2px button lift, an arrow nudge.
 - No all-caps headings or labels; no wide letter-spacing; body text is 16px+ at
   a 1.62 line-height and a measure of 66ch.
 - No pill or badge above the h1, no icon in a rounded tile, no icon cards in a

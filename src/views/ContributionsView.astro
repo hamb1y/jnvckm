@@ -1,10 +1,11 @@
 ---
 import ContributionFilter from "@/components/ContributionFilter.svelte";
 import EntryRow from "@/components/EntryRow.astro";
+import PageCover from "@/components/PageCover.astro";
 import { contributions, usedCategories } from "@/data/contributions";
 import { lx, t, tDynamic } from "@/i18n/utils";
 import { localePath } from "@/lib/paths";
-import { formatAmount } from "@/utils/format";
+import { formatAmount, formatCount } from "@/utils/format";
 import type { Locale } from "@/data/types";
 
 export interface Props {
@@ -22,15 +23,24 @@ const years = contributions
   .map((entry) => entry.date.slice(0, 4))
   .filter(Boolean)
   .sort();
+const recordedTotal = contributions.reduce((sum, entry) => sum + (entry.amount ?? 0), 0);
+const recordedCount = contributions.filter((entry) => entry.amount !== null).length;
 const range = years.length > 1 ? `${years[0]}–${years.at(-1)}` : (years[0] ?? "");
 ---
 
-<div class="container section">
-  <header class="page-head">
-    <h1>{t(lang, "impact.title")}</h1>
-    <p>{t(lang, "impact.lede")}</p>
-  </header>
+<PageCover title={t(lang, "impact.title")} lede={t(lang, "impact.lede")}>
+  <div class="cover-figure" slot="figure">
+    <span class="cover-figure-label">{t(lang, "home.given")}</span>
+    <span class="cover-figure-value">{formatAmount(recordedTotal, lang)}</span>
+    <span class="cover-figure-note">
+      {t(lang, "home.givenNote")
+        .replace("{with}", formatCount(recordedCount, lang))
+        .replace("{all}", formatCount(total, lang))}
+    </span>
+  </div>
+</PageCover>
 
+<div class="container records-section">
   <ContributionFilter
     client:idle
     categories={categories}
@@ -43,25 +53,31 @@ const range = years.length > 1 ? `${years[0]}–${years.at(-1)}` : (years[0] ?? 
   />
 
   <ul class="records" data-contribution-list>
-    {
-      contributions.map((entry) => (
-        <EntryRow
-          href={localePath(`/contributions/${entry.slug}`, lang)}
-          title={lx(entry.title, lang)}
-          date={entry.date}
-          summary={lx(entry.summary, lang)}
-          image={entry.image}
-          amount={entry.amount !== null ? formatAmount(entry.amount, lang) : null}
-          meta={[
-            tDynamic(lang, `categories.${entry.category}`),
-            ...(entry.batch ? [lx(entry.batch, lang)] : []),
-          ]}
-          locale={lang}
-          attrs={{ "data-contribution": "", "data-category": entry.category }}
-        />
-      ))
-    }
+    {contributions.map((entry) => (
+      <EntryRow
+        href={localePath(`/contributions/${entry.slug}`, lang)}
+        title={lx(entry.title, lang)}
+        date={entry.date}
+        summary={lx(entry.summary, lang)}
+        image={entry.image}
+        amount={entry.amount !== null ? formatAmount(entry.amount, lang) : null}
+        meta={[
+          tDynamic(lang, `categories.${entry.category}`),
+          ...(entry.batch ? [lx(entry.batch, lang)] : []),
+        ]}
+        locale={lang}
+        attrs={{ "data-contribution": "", "data-category": entry.category }}
+      />
+    ))}
   </ul>
 
-  <p class="empty-state" data-filter-empty hidden>{t(lang, "impact.empty")}</p>
+  <p class="empty-state" data-filter-empty hidden>
+    {t(lang, "impact.empty")}
+  </p>
 </div>
+
+<style>
+  .records-section {
+    padding-block: 0 clamp(3rem, 7vw, 6rem);
+  }
+</style>

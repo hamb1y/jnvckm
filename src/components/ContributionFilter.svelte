@@ -44,7 +44,9 @@
     if (empty) empty.hidden = shown !== 0;
   }
 
-  const countLabel = $derived(countTemplate.replace("{n}", String(visible)).replace("{total}", String(total)));
+  const countLabel = $derived(
+    countTemplate.replace("{n}", String(visible)).replace("{total}", String(total)),
+  );
 </script>
 
 <div class="filter">
@@ -74,15 +76,20 @@
 </div>
 
 <style>
+  /* Sticks under the header so the categories stay in reach down a long list. */
   .filter {
+    position: sticky;
+    inset-block-start: var(--header-h);
+    z-index: 5;
     display: flex;
     flex-wrap: wrap;
-    align-items: baseline;
+    align-items: center;
     justify-content: space-between;
     gap: var(--s-3) var(--s-5);
     padding-block: var(--s-4);
-    border-block: 1px solid var(--rule);
-    margin-block-end: var(--s-6);
+    margin-block-end: var(--s-5);
+    background: var(--paper);
+    border-block-end: 1px solid var(--rule);
   }
 
   .filter-row {
@@ -92,13 +99,17 @@
   }
 
   .filter-chip {
-    padding: 0.4em 0.9em;
-    background: transparent;
+    padding: 0.5em 1.05em;
+    background: var(--surface);
     border: 1px solid var(--rule-strong);
-    border-radius: var(--r-2);
+    border-radius: var(--r-pill);
     font-size: var(--step--1);
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
+    transition:
+      background-color var(--dur-1) var(--ease-out),
+      border-color var(--dur-1) var(--ease-out),
+      color var(--dur-1) var(--ease-out);
   }
 
   .filter-chip:hover {
@@ -107,12 +118,18 @@
   }
 
   .filter-chip[aria-pressed="true"] {
-    background: var(--ink);
-    border-color: var(--ink);
-    color: var(--paper);
+    background: var(--brand);
+    border-color: var(--brand);
+    color: var(--brand-ink);
   }
 
   .filter-count {
     color: var(--text-3);
+  }
+
+  @media (max-width: 720px) {
+    .filter {
+      position: static;
+    }
   }
 </style>

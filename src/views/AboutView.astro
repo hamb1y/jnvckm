@@ -1,5 +1,7 @@
 ---
 import Figure from "@/components/Figure.astro";
+import PageCover from "@/components/PageCover.astro";
+import { ArrowUpRight } from "lucide-astro";
 import { site } from "@/data/site";
 import { lx, t } from "@/i18n/utils";
 import { localePath } from "@/lib/paths";
@@ -47,104 +49,182 @@ const work = [
 ];
 ---
 
-<div class="container">
-  <header class="page-head">
-    <h1>{t(lang, "about.title")}</h1>
-    <p>{t(lang, "about.lede")}</p>
-  </header>
-</div>
+<PageCover
+  title={t(lang, "about.title")}
+  lede={t(lang, "about.lede")}
+  eyebrow={t(lang, "site.formedShort")}
+/>
 
 <section class="accent-brand">
   <div class="container about">
-    <div class="about-copy">
-      <h2 class="section-title">{t(lang, "about.whatWeDo")}</h2>
-      <ul class="work-list">
-        {work.map((item) => <li>{lx(item, lang)}</li>)}
-      </ul>
-      <p class="links">
-        <a href={localePath("/programs", lang)}>{t(lang, "nav.programs")}</a>
-        <a href={localePath("/contributions", lang)}>{t(lang, "nav.impact")}</a>
-        <a href={localePath("/vidyalaya", lang)}>{t(lang, "nav.vidyalaya")}</a>
-      </p>
-    </div>
     <div class="about-media">
       <Figure media={group} locale={lang} ratio="4 / 3" showCaption={true} />
     </div>
+    <div class="about-copy">
+      <h2 class="section-title">{t(lang, "about.whatWeDo")}</h2>
+      <ul class="work-list">
+        {work.map((item) => (
+          <li>{lx(item, lang)}</li>
+        ))}
+      </ul>
+    </div>
+  </div>
+  <div class="container">
+    <p class="links">
+      <a class="link-tile" href={localePath("/programs", lang)}>
+        {t(lang, "nav.programs")}
+        <ArrowUpRight size={22} stroke-width={1.7} aria-hidden="true" />
+      </a>
+      <a class="link-tile" href={localePath("/contributions", lang)}>
+        {t(lang, "nav.impact")}
+        <ArrowUpRight size={22} stroke-width={1.7} aria-hidden="true" />
+      </a>
+      <a class="link-tile" href={localePath("/vidyalaya", lang)}>
+        {t(lang, "nav.vidyalaya")}
+        <ArrowUpRight size={22} stroke-width={1.7} aria-hidden="true" />
+      </a>
+    </p>
   </div>
 </section>
 
-<section class="accent-brand">
-  <div class="container">
-    <div class="section-head">
-      <h2 class="section-title">{t(lang, "about.schoolTitle")}</h2>
+<section class="school-section">
+  <div class="container school-grid">
+    <h2 class="section-title">{t(lang, "about.schoolTitle")}</h2>
+    <div>
+      <p class="school-tagline">{lx(site.tagline, lang)}</p>
+      <p class="school">{lx(site.schoolName, lang)}</p>
     </div>
-    <p class="measure">{lx(site.tagline, lang)}</p>
-    <p class="measure school">{lx(site.schoolName, lang)}</p>
   </div>
 </section>
 
 <style>
-  .container {
-    padding-block-start: clamp(2rem, 5vw, 4rem);
-  }
-
   .about {
     display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-    gap: clamp(var(--s-6), 5vw, var(--s-9));
-    align-items: center;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(var(--s-7), 6vw, var(--s-10));
+    align-items: start;
+  }
+
+  .about-media {
+    position: sticky;
+    inset-block-start: calc(var(--header-h) + var(--s-5));
+  }
+
+  .about-copy .section-title {
+    font-size: var(--step-4);
+    max-inline-size: 16ch;
   }
 
   .work-list {
     list-style: none;
-    margin: var(--s-5) 0 0;
+    margin: var(--s-6) 0 0;
     padding: 0;
     display: grid;
-    gap: var(--s-3);
+    border-block-start: 2px solid var(--ink);
   }
 
   .work-list li {
-    position: relative;
-    padding-inline-start: 1.1rem;
+    display: flex;
+    gap: var(--s-4);
+    align-items: baseline;
+    padding-block: var(--s-4);
+    border-block-end: 1px solid var(--rule);
     font-size: var(--step-1);
-    max-inline-size: 46ch;
+    line-height: 1.45;
+    max-inline-size: 52ch;
   }
 
   .work-list li::before {
     content: "";
-    position: absolute;
-    inset-inline-start: 0;
-    inset-block-start: 0.6em;
-    inline-size: 6px;
-    block-size: 6px;
-    border-radius: 50%;
-    background: var(--accent);
+    flex: none;
+    inline-size: 0.6rem;
+    block-size: 0.6rem;
+    border-radius: var(--r-pill);
+    background: var(--accent-program);
+    translate: 0 -0.1em;
   }
 
   .links {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--s-4);
+    margin-block-start: clamp(var(--s-7), 6vw, var(--s-9));
+  }
+
+  .link-tile {
     display: flex;
-    flex-wrap: wrap;
-    gap: var(--s-5);
-    margin-block-start: var(--s-6);
-    font-weight: 700;
+    align-items: end;
+    justify-content: space-between;
+    gap: var(--s-4);
+    min-block-size: 8rem;
+    padding: var(--s-5);
+    background: var(--brand);
+    color: var(--brand-ink);
+    border-radius: var(--r-4);
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    transition: background-color var(--dur-2) var(--ease-out);
   }
 
-  .container > section {
-    padding-block: 0;
+  .link-tile :global(svg) {
+    flex: none;
+    color: var(--gold);
+    transition: transform var(--dur-2) var(--ease-out);
   }
 
-  section + section .container {
-    padding-block-start: clamp(var(--s-7), 5vw, var(--s-9));
+  .link-tile:hover {
+    background: var(--brand-deep);
+  }
+
+  .link-tile:hover :global(svg) {
+    transform: translate(3px, -3px);
+  }
+
+  .school-section {
+    background: var(--surface-sunk);
+  }
+
+  .school-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: var(--s-5) clamp(var(--s-6), 6vw, var(--s-9));
+    align-items: baseline;
+  }
+
+  .school-tagline {
+    font-family: var(--font-display);
+    font-size: var(--step-3);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    max-inline-size: 28ch;
   }
 
   .school {
-    margin-block-start: var(--s-4);
+    margin-block-start: var(--s-5);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
     color: var(--text-2);
   }
 
   @media (max-width: 900px) {
-    .about {
+    .about,
+    .school-grid {
       grid-template-columns: 1fr;
+    }
+
+    .about-media {
+      position: static;
+    }
+
+    .links {
+      grid-template-columns: 1fr;
+    }
+
+    .link-tile {
+      min-block-size: 0;
     }
   }
 </style>

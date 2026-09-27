@@ -1,5 +1,6 @@
 ---
 import EntryRow from "@/components/EntryRow.astro";
+import PageCover from "@/components/PageCover.astro";
 import { posts } from "@/data/posts";
 import { lx, t } from "@/i18n/utils";
 import { localePath } from "@/lib/paths";
@@ -18,29 +19,30 @@ const KIND_LABEL: Record<string, UIKey> = {
 };
 ---
 
-<div class="container section">
-  <header class="page-head">
-    <h1>{t(lang, "stories.title")}</h1>
-    <p>{t(lang, "stories.lede")}</p>
-  </header>
+<PageCover title={t(lang, "stories.title")} lede={t(lang, "stories.lede")} />
 
-  {
-    posts.length > 0 ? (
-      <ul class="records">
-        {posts.map((entry) => (
-          <EntryRow
-            href={localePath(`/stories/${entry.slug}`, lang)}
-            title={lx(entry.title, lang)}
-            date={entry.date}
-            summary={lx(entry.summary, lang)}
-            image={entry.image}
-            meta={[t(lang, KIND_LABEL[entry.kind]), ...(entry.batch ? [lx(entry.batch, lang)] : [])]}
-            locale={lang}
-          />
-        ))}
-      </ul>
-    ) : (
-      <p class="empty-state">{t(lang, "stories.empty")}</p>
-    )
-  }
+<div class="container stories-list">
+  {posts.length > 0 ? (
+    <ul class="records">
+      {posts.map((entry) => (
+        <EntryRow
+          href={localePath(`/stories/${entry.slug}`, lang)}
+          title={lx(entry.title, lang)}
+          date={entry.date}
+          summary={lx(entry.summary, lang)}
+          image={entry.image}
+          meta={[t(lang, KIND_LABEL[entry.kind]), ...(entry.batch ? [lx(entry.batch, lang)] : [])]}
+          locale={lang}
+        />
+      ))}
+    </ul>
+  ) : (
+    <p class="empty-state">{t(lang, "stories.empty")}</p>
+  )}
 </div>
+
+<style>
+  .stories-list {
+    padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(3rem, 7vw, 6rem);
+  }
+</style>

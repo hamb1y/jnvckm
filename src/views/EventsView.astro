@@ -1,5 +1,7 @@
 ---
 import EntryRow from "@/components/EntryRow.astro";
+import PageCover from "@/components/PageCover.astro";
+import { formatCount } from "@/utils/format";
 import { events } from "@/data/events";
 import { lx, t } from "@/i18n/utils";
 import { localePath } from "@/lib/paths";
@@ -24,22 +26,51 @@ const byYear = years.map((year) => ({
 }));
 ---
 
-<div class="container">
-  <header class="page-head">
-    <h1>{t(lang, "events.title")}</h1>
-    <p>{t(lang, "events.lede")}</p>
-  </header>
-</div>
+<PageCover title={t(lang, "events.title")} lede={t(lang, "events.lede")}>
+  <div class="cover-figure" slot="figure">
+    <span class="cover-figure-label">{t(lang, "home.figures.events")}</span>
+    <span class="cover-figure-value">{formatCount(events.length, lang)}</span>
+    {years.length > 0 && (
+      <span class="cover-figure-note mono">
+        {years.at(-1)}–{years[0]}
+      </span>
+    )}
+  </div>
+</PageCover>
 
-{
-  upcoming.length > 0 && (
-    <section class="accent-brand">
-      <div class="container">
-        <div class="section-head">
-          <h2 class="section-title">{t(lang, "events.upcoming")}</h2>
-        </div>
+{upcoming.length > 0 && (
+  <section class="accent-brand">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">{t(lang, "events.upcoming")}</h2>
+      </div>
+      <ul class="records">
+        {upcoming.map((entry) => (
+          <EntryRow
+            href={localePath(`/events/${entry.slug}`, lang)}
+            title={lx(entry.title, lang)}
+            date={entry.date}
+            summary={lx(entry.summary, lang)}
+            image={entry.image}
+            meta={entry.location ? [lx(entry.location, lang)] : []}
+            locale={lang}
+          />
+        ))}
+      </ul>
+    </div>
+  </section>
+)}
+
+<section class="accent-brand">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">{t(lang, "events.past")}</h2>
+    </div>
+    {byYear.map(({ year, entries }) => (
+      <div class="year-group">
+        <h3 class="year">{year}</h3>
         <ul class="records">
-          {upcoming.map((entry) => (
+          {entries.map((entry) => (
             <EntryRow
               href={localePath(`/events/${entry.slug}`, lang)}
               title={lx(entry.title, lang)}
@@ -52,68 +83,50 @@ const byYear = years.map((year) => ({
           ))}
         </ul>
       </div>
-    </section>
-  )
-}
-
-<section class="accent-brand">
-  <div class="container">
-    <div class="section-head">
-      <h2 class="section-title">{t(lang, "events.past")}</h2>
-    </div>
-    {
-      byYear.map(({ year, entries }) => (
-        <div class="year-group">
-          <h3 class="year mono">{year}</h3>
-          <ul class="records">
-            {entries.map((entry) => (
-              <EntryRow
-                href={localePath(`/events/${entry.slug}`, lang)}
-                title={lx(entry.title, lang)}
-                date={entry.date}
-                summary={lx(entry.summary, lang)}
-                image={entry.image}
-                meta={entry.location ? [lx(entry.location, lang)] : []}
-                locale={lang}
-              />
-            ))}
-          </ul>
-        </div>
-      ))
-    }
+    ))}
   </div>
 </section>
 
 <style>
-  .container {
-    padding-block-start: clamp(2rem, 5vw, 4rem);
+  section {
+    padding-block: clamp(3rem, 6vw, 5rem) 0;
   }
 
-  section {
-    padding-block: 0 clamp(2.5rem, 5vw, 4rem);
+  section:last-of-type {
+    padding-block-end: clamp(3rem, 7vw, 6rem);
   }
 
   .container .section-head {
-    margin-block-end: var(--s-5);
+    margin-block-end: var(--s-6);
   }
 
+  .section-title {
+    font-size: var(--step-4);
+  }
+
+  /* A timeline: each year set large in the report gold, pinned beside its
+     records while you read through them. */
   .year-group {
     display: grid;
-    grid-template-columns: 5rem minmax(0, 1fr);
-    gap: var(--s-4);
+    grid-template-columns: 11rem minmax(0, 1fr);
+    gap: var(--s-6);
     align-items: start;
   }
 
   .year-group + .year-group {
-    margin-block-start: var(--s-6);
+    margin-block-start: var(--s-8);
   }
 
   .year {
-    font-family: var(--font-mono);
-    font-size: var(--step--1);
-    font-weight: 400;
-    color: var(--text-3);
-    padding-block-start: var(--s-5);
+    position: sticky;
+    inset-block-start: calc(var(--header-h) + var(--s-5));
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 1.8rem + 2.6vw, 4rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--accent-program);
+    padding-block-start: var(--s-4);
   }
 
   @media (max-width: 720px) {
@@ -123,7 +136,7 @@ const byYear = years.map((year) => ({
     }
 
     .year {
-      padding-block-start: var(--s-5);
+      position: static;
     }
   }
 </style>

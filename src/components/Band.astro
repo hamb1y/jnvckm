@@ -25,7 +25,7 @@ const { href, src, alt, caption, meta = "" } = Astro.props;
         <span class="band-title">{caption}</span>
         {meta !== "" && <span class="band-meta mono">{meta}</span>}
       </span>
-      <ArrowUpRight size={18} stroke-width={1.7} aria-hidden="true" />
+      <ArrowUpRight size={24} stroke-width={1.7} aria-hidden="true" />
     </div>
   </a>
 </section>
@@ -44,8 +44,8 @@ const { href, src, alt, caption, meta = "" } = Astro.props;
   .band-link img {
     inline-size: 100%;
     /* Deliberately shorter than the photograph's own ratio so an archive feature
-       does not outweigh the association's current work. */
-    block-size: clamp(12rem, 26vw, 22rem);
+         does not outweigh the association's current work. */
+    block-size: clamp(14rem, 30vw, 26rem);
     object-fit: cover;
     background: var(--surface-sunk);
   }
@@ -55,8 +55,13 @@ const { href, src, alt, caption, meta = "" } = Astro.props;
     align-items: center;
     justify-content: space-between;
     gap: var(--s-5);
-    padding: var(--s-4) var(--gutter);
+    padding: var(--s-5) var(--gutter);
     background: var(--brand);
+    transition: background-color var(--dur-2) var(--ease-out);
+  }
+
+  .band-link:hover .band-caption {
+    background: var(--brand-deep);
   }
 
   .band-text {
@@ -68,12 +73,21 @@ const { href, src, alt, caption, meta = "" } = Astro.props;
 
   .band-title {
     font-family: var(--font-display);
-    font-size: var(--step-1);
-    letter-spacing: -0.015em;
+    font-size: var(--step-2);
+    letter-spacing: -0.02em;
   }
 
   .band-meta {
-    color: color-mix(in oklab, var(--brand-ink) 74%, var(--brand));
+    color: var(--gold);
+  }
+
+  .band-caption :global(svg) {
+    flex: none;
+    transition: transform var(--dur-2) var(--ease-out);
+  }
+
+  .band-link:hover .band-caption :global(svg) {
+    transform: translate(3px, -3px);
   }
 
   .band-link:hover .band-title {

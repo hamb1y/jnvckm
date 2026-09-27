@@ -62,6 +62,8 @@ const givingYears = contributions
 const recordedTotal = contributions.reduce((sum, entry) => sum + (entry.amount ?? 0), 0);
 const recordedCount = contributions.filter((entry) => entry.amount !== null).length;
 const largestAmount = Math.max(1, ...contributions.map((entry) => entry.amount ?? 0));
+const givingRange =
+  givingYears.length > 1 ? `${givingYears[0]}–${givingYears.at(-1)}` : (givingYears[0] ?? "");
 const givingSummary = t(lang, "impact.summary")
   .replace("{count}", formatCount(contributions.length, lang))
   .replace("{from}", givingYears[0] ?? "")
@@ -89,199 +91,209 @@ const campus: Media = {
 ---
 
 <article class="home">
-  <section class="hero">
-    <div class="container hero-grid">
-      <div class="hero-copy">
-        <p class="hero-year">1993</p>
-        <p class="eyebrow hero-eyebrow">{t(lang, "site.formedShort")}</p>
-        <h1>{lx(site.name, lang)}</h1>
-        <p class="hero-line">{lx(site.tagline, lang)}</p>
-        <p class="hero-body">{t(lang, "home.heroBody")}</p>
-        <div class="hero-cta">
-          <a class="btn btn-primary" href={localePath("/contributions", lang)}>
-            {t(lang, "home.explore")}
-            <ArrowRight size={17} stroke-width={1.7} aria-hidden="true" />
-          </a>
-          <a class="btn btn-secondary" href={localePath("/events", lang)}>
-            {t(lang, "home.latestCta")}
-          </a>
+  <!-- The cover: the association's olive, the founding year as the largest mark -->
+  <section class="hero on-brand">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="hero-year">1993</p>
+          <p class="eyebrow hero-eyebrow">{t(lang, "site.formedShort")}</p>
+          <h1>{lx(site.name, lang)}</h1>
+          <p class="hero-line">{lx(site.tagline, lang)}</p>
+          <p class="hero-body">{t(lang, "home.heroBody")}</p>
+          <div class="hero-cta">
+            <a class="btn btn-light" href={localePath("/contributions", lang)}>
+              {t(lang, "home.explore")}
+              <ArrowRight size={18} stroke-width={1.8} aria-hidden="true" />
+            </a>
+            <a class="btn btn-ghost" href={localePath("/events", lang)}>
+              {t(lang, "home.latestCta")}
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-media">
+          <Figure media={hero} locale={lang} ratio="4 / 5" priority={true} showCaption={true} />
         </div>
       </div>
 
-      <div class="hero-media">
-        <Figure media={hero} locale={lang} ratio="4 / 3" priority={true} showCaption={true} />
-      </div>
+      <dl class="hero-figures">
+        <div>
+          <dt>{t(lang, "home.figures.contributions")}</dt>
+          <dd>
+            {formatCount(contributions.length, lang)}
+            <span class="hero-figure-note mono">{givingRange}</span>
+          </dd>
+        </div>
+        <div>
+          <dt>{t(lang, "home.figures.events")}</dt>
+          <dd>{formatCount(events.length, lang)}</dd>
+        </div>
+        <div>
+          <dt>{t(lang, "nav.programs")}</dt>
+          <dd>
+            {formatCount(programs.length, lang)}
+            <span class="hero-figure-note mono">
+              {programs.map((program) => lx(program.shortName ?? program.name, lang)).join(" · ")}
+            </span>
+          </dd>
+        </div>
+      </dl>
     </div>
   </section>
 
-  <section class="accent-give">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <h2 class="section-title">{t(lang, "home.impactTitle")}</h2>
-          <p class="section-lede">{givingSummary}</p>
-        </div>
-        <a class="more" href={localePath("/contributions", lang)}>
-          {t(lang, "common.allContributions")}
-          <ArrowUpRight size={15} stroke-width={1.7} aria-hidden="true" />
-        </a>
-      </div>
-
-      <div class="giving">
+  <!-- The giving statement: the total held beside the ledger it adds up -->
+  <section class="accent-give statement">
+    <div class="container giving">
+      <div class="giving-aside">
+        <h2 class="section-title">{t(lang, "home.impactTitle")}</h2>
+        <p class="section-lede">{givingSummary}</p>
+        <p class="given">
+          <span class="given-label">{t(lang, "home.given")}</span>
+          <span class="given-total">{formatAmount(recordedTotal, lang)}</span>
+        </p>
+        <p class="given-note">
+          {t(lang, "home.givenNote")
+            .replace("{with}", formatCount(recordedCount, lang))
+            .replace("{all}", formatCount(contributions.length, lang))}
+        </p>
         <div class="giving-media">
           <Figure media={lab} locale={lang} ratio="4 / 3" showCaption={true} />
         </div>
-        <div class="giving-copy">
-          <p class="given">
-            <span class="given-label">{t(lang, "home.given")}</span>
-            <span class="given-total">{formatAmount(recordedTotal, lang)}</span>
-          </p>
-          <p class="given-note">
-            {
-              t(lang, "home.givenNote")
-                .replace("{with}", formatCount(recordedCount, lang))
-                .replace("{all}", formatCount(contributions.length, lang))
-            }
-          </p>
-          <ul class="ledger">
-            {
-              giving.map((entry) => (
-                <li>
-                  <span class="label">
-                    <a href={localePath(`/contributions/${entry.slug}`, lang)}>
-                      {lx(entry.title, lang)}
-                    </a>
-                    {entry.batch && <span class="batch mono"> · {lx(entry.batch, lang)}</span>}
-                  </span>
-                  <span class="value">
-                    {entry.amount !== null ? formatAmount(entry.amount, lang) : ""}
-                  </span>
-                  {entry.amount !== null && (
-                    <span
-                      class="bar"
-                      style={`--w:${Math.max(3, Math.round((entry.amount / largestAmount) * 100))}%`}
-                      aria-hidden="true"
-                    />
-                  )}
-                </li>
-              ))
-            }
-          </ul>
-        </div>
+        <a class="more" href={localePath("/contributions", lang)}>
+          {t(lang, "common.allContributions")}
+          <ArrowUpRight size={16} stroke-width={1.8} aria-hidden="true" />
+        </a>
       </div>
+
+      <ul class="ledger">
+        {giving.map((entry) => (
+          <li>
+            <span class="label">
+              <a href={localePath(`/contributions/${entry.slug}`, lang)}>{lx(entry.title, lang)}</a>
+              {entry.batch && <span class="batch mono">{lx(entry.batch, lang)}</span>}
+            </span>
+            <span class="value">
+              {entry.amount !== null ? formatAmount(entry.amount, lang) : ""}
+            </span>
+            {entry.amount !== null && (
+              <span
+                class="bar"
+                style={`--w:${Math.max(3, Math.round((entry.amount / largestAmount) * 100))}%`}
+                aria-hidden="true"
+              />
+            )}
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 
-  {
-    hamRadio && hamRadio.image && (
-      <Band
-        href={localePath(`/events/${hamRadio.slug}`, lang)}
-        src={hamRadio.image.src}
-        alt={lx(hamRadio.image.alt, lang)}
-        caption={lx(hamRadio.title, lang)}
-        meta={formatDate(hamRadio.date, lang)}
-      />
-    )
-  }
+  {hamRadio && hamRadio.image && (
+    <Band
+      href={localePath(`/events/${hamRadio.slug}`, lang)}
+      src={hamRadio.image.src}
+      alt={lx(hamRadio.image.alt, lang)}
+      caption={lx(hamRadio.title, lang)}
+      meta={formatDate(hamRadio.date, lang)}
+    />
+  )}
 
   <section class="accent-program">
     <div class="container">
       <div class="section-head">
-        <h2 class="section-title">{t(lang, "programs.title")}</h2>
+        <h2 class="section-title big-title">{t(lang, "programs.title")}</h2>
         <p class="section-lede">{t(lang, "programs.lede")}</p>
       </div>
 
       <div class="programs">
-        {
-          ignite && (
-            <article class="program">
-              <div class="program-media">
-                <Figure media={ignite.image} locale={lang} ratio="4 / 3" />
-              </div>
-              <div class="program-main">
-                <p class="eyebrow">{lx(ignite.name, lang)}</p>
-                <h3>
-                  <a href={localePath("/programs/ignite", lang)}>{lx(ignite.tagline, lang)}</a>
-                </h3>
-                <p>{lx(ignite.summary, lang)}</p>
-                <p class="program-note">{lx(ignite.startNote, lang)}</p>
-                <a class="more" href={localePath("/programs/ignite", lang)}>
-                  {t(lang, "programs.more").replace("{name}", lx(ignite.name, lang))}
-                  <ArrowUpRight size={15} stroke-width={1.7} aria-hidden="true" />
-                </a>
-              </div>
-            </article>
-          )
-        }
-        {
-          ncl && (
-            <article class="program program--panel">
-              <div class="program-panel">
-                <p class="panel-mark mono">{ncl.shortName ? lx(ncl.shortName, lang) : ""}</p>
-                <p class="panel-name">{lx(ncl.name, lang)}</p>
-                <p class="panel-years">{lx(ncl.startNote, lang)}</p>
-              </div>
-              <div class="program-main">
-                <p class="eyebrow">{lx(ncl.name, lang)}</p>
-                <h3>
-                  <a href={localePath("/programs/ncl", lang)}>{lx(ncl.tagline, lang)}</a>
-                </h3>
-                <p>{lx(ncl.summary, lang)}</p>
-                <a class="more" href={localePath("/programs/ncl", lang)}>
-                  {t(lang, "programs.more").replace("{name}", lx(ncl.name, lang))}
-                  <ArrowUpRight size={15} stroke-width={1.7} aria-hidden="true" />
-                </a>
-              </div>
-            </article>
-          )
-        }
+        {ignite && (
+          <article class="program">
+            <div class="program-media">
+              <Figure media={ignite.image} locale={lang} ratio="4 / 3" />
+            </div>
+            <div class="program-main">
+              <p class="eyebrow">{lx(ignite.name, lang)}</p>
+              <h3>
+                <a href={localePath("/programs/ignite", lang)}>{lx(ignite.tagline, lang)}</a>
+              </h3>
+              <p>{lx(ignite.summary, lang)}</p>
+              <p class="program-note">{lx(ignite.startNote, lang)}</p>
+              <a class="more" href={localePath("/programs/ignite", lang)}>
+                {t(lang, "programs.more").replace("{name}", lx(ignite.name, lang))}
+                <ArrowUpRight size={16} stroke-width={1.8} aria-hidden="true" />
+              </a>
+            </div>
+          </article>
+        )}
+        {ncl && (
+          <article class="program program--panel">
+            <div class="program-panel">
+              <p class="panel-mark">{ncl.shortName ? lx(ncl.shortName, lang) : ""}</p>
+              <p class="panel-name">{lx(ncl.name, lang)}</p>
+              <p class="panel-years">{lx(ncl.startNote, lang)}</p>
+            </div>
+            <div class="program-main">
+              <p class="eyebrow">{lx(ncl.name, lang)}</p>
+              <h3>
+                <a href={localePath("/programs/ncl", lang)}>{lx(ncl.tagline, lang)}</a>
+              </h3>
+              <p>{lx(ncl.summary, lang)}</p>
+              <a class="more" href={localePath("/programs/ncl", lang)}>
+                {t(lang, "programs.more").replace("{name}", lx(ncl.name, lang))}
+                <ArrowUpRight size={16} stroke-width={1.8} aria-hidden="true" />
+              </a>
+            </div>
+          </article>
+        )}
       </div>
     </div>
   </section>
 
-  <section class="accent-brand">
+  <section class="accent-brand latest">
     <div class="container">
       <div class="section-head">
-        <h2 class="section-title">{t(lang, "home.latestTitle")}</h2>
+        <h2 class="section-title big-title">{t(lang, "home.latestTitle")}</h2>
         <a class="more" href={localePath("/events", lang)}>
           {t(lang, "common.allEvents")}
-          <ArrowUpRight size={15} stroke-width={1.7} aria-hidden="true" />
+          <ArrowUpRight size={16} stroke-width={1.8} aria-hidden="true" />
         </a>
       </div>
-      {
-        latest.length > 0 ? (
-          <div class="recent-grid">
-            {latest.map((item) => (
-              <EntryCard
-                href={localePath(item.path, lang)}
-                title={lx(item.title, lang)}
-                summary={lx(item.summary, lang)}
-                date={item.date}
-                label={t(lang, KIND_LABEL[item.kind])}
-                image={item.image}
-                locale={lang}
-              />
-            ))}
-          </div>
-        ) : (
-          <p class="empty-state">{t(lang, "empty.generic")}</p>
-        )
-      }
+      {latest.length > 0 ? (
+        <div class="recent-grid">
+          {latest.map((item) => (
+            <EntryCard
+              href={localePath(item.path, lang)}
+              title={lx(item.title, lang)}
+              summary={lx(item.summary, lang)}
+              date={item.date}
+              label={t(lang, KIND_LABEL[item.kind])}
+              image={item.image}
+              locale={lang}
+            />
+          ))}
+        </div>
+      ) : (
+        <p class="empty-state">{t(lang, "empty.generic")}</p>
+      )}
     </div>
   </section>
 
-  <section class="accent-brand">
+  <section class="accent-brand origin-section">
     <div class="container origin">
       <div class="origin-media">
         <Figure media={campus} locale={lang} ratio="4 / 3" />
       </div>
       <div class="origin-copy">
+        <p class="origin-year" aria-hidden="true">
+          1986
+        </p>
         <p class="eyebrow">{t(lang, "nav.vidyalaya")}</p>
         <h2>{t(lang, "home.vidyalayaTitle")}</h2>
         <p>{t(lang, "home.vidyalayaLede")}</p>
         <a class="more" href={localePath("/vidyalaya", lang)}>
           {t(lang, "nav.vidyalaya")}
-          <ArrowUpRight size={15} stroke-width={1.7} aria-hidden="true" />
+          <ArrowUpRight size={16} stroke-width={1.8} aria-hidden="true" />
         </a>
       </div>
     </div>
@@ -299,111 +311,198 @@ const campus: Media = {
 </article>
 
 <style>
-  /* The association's own olive, at scale, with the year as the largest mark on
-     the page. The cream pages below then read as the inside of the report. */
+  /* ---------- the cover ---------- */
   .hero {
-    background: var(--brand);
-    color: var(--brand-ink);
-    padding-block: clamp(2.5rem, 6vw, 5rem) clamp(2.5rem, 5vw, 4rem);
+    padding-block: clamp(2.5rem, 6vw, 5rem) 0;
   }
 
   .hero-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-    gap: clamp(var(--s-6), 5vw, var(--s-9));
-    align-items: start;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.8fr);
+    gap: clamp(var(--s-7), 6vw, var(--s-10));
+    align-items: center;
   }
 
   .hero-year {
     font-family: var(--font-display);
-    font-size: clamp(4.5rem, 3rem + 10vw, 11rem);
-    line-height: 0.85;
-    letter-spacing: -0.04em;
-    margin: 0;
-    color: color-mix(in oklab, var(--accent-program) 55%, var(--brand-ink));
+    font-weight: 700;
+    font-size: var(--step-6);
+    line-height: 0.8;
+    letter-spacing: -0.05em;
+    margin: 0 0 0 -0.04em;
+    color: var(--gold);
+    font-variant-numeric: lining-nums;
   }
 
   .hero-eyebrow {
-    color: color-mix(in oklab, var(--brand-ink) 78%, var(--brand));
-    margin-block-start: var(--s-3);
+    margin-block-start: var(--s-6);
   }
 
   .hero-copy h1 {
     margin-block-start: var(--s-2);
-    max-inline-size: 16ch;
+    max-inline-size: 13ch;
   }
 
   .hero-line {
     margin-block-start: var(--s-5);
+    font-family: var(--font-display);
     font-size: var(--step-2);
-    color: color-mix(in oklab, var(--brand-ink) 88%, var(--brand));
+    line-height: 1.3;
+    color: var(--brand-ink);
     max-inline-size: 30ch;
   }
 
   .hero-body {
     margin-block-start: var(--s-4);
-    color: color-mix(in oklab, var(--brand-ink) 82%, var(--brand));
-    max-inline-size: 52ch;
-  }
-
-  .hero .btn-secondary {
-    --btn-fg: var(--brand-ink);
-    --btn-border: color-mix(in oklab, var(--brand-ink) 40%, var(--brand));
-  }
-
-  .hero :global(.figure) {
-    background: var(--brand-deep);
-    border-color: color-mix(in oklab, var(--brand-ink) 24%, var(--brand));
-  }
-
-  .hero :global(figcaption) {
-    background: var(--brand-deep);
-    color: color-mix(in oklab, var(--brand-ink) 82%, var(--brand));
-    border-block-start-color: color-mix(in oklab, var(--brand-ink) 24%, var(--brand));
-  }
-
-  /* The ledger total: the largest figure on the page. */
-  .given {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: var(--s-4);
-    flex-wrap: wrap;
-    margin: 0;
-    padding-block-end: var(--s-3);
-  }
-
-  .given-label {
-    font-weight: 600;
-    color: var(--text-2);
-  }
-
-  .given-total {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 1.4rem + 2.4vw, 3.4rem);
-    line-height: 1;
-    letter-spacing: -0.02em;
-    color: var(--accent-give);
-  }
-
-  .given-note {
-    margin: 0 0 var(--s-4);
-    color: var(--text-3);
-    font-size: var(--step--1);
+    color: var(--brand-muted);
+    max-inline-size: 50ch;
   }
 
   .hero-cta {
     display: flex;
     flex-wrap: wrap;
     gap: var(--s-3);
-    margin-block-start: var(--s-6);
+    margin-block-start: var(--s-7);
   }
 
+  /* A gold keyline set off the photograph, like a plate mounted on a cover. */
+  .hero-media {
+    position: relative;
+    padding: 0 var(--s-5) var(--s-5) 0;
+  }
+
+  .hero-media::before {
+    content: "";
+    position: absolute;
+    inset: var(--s-5) 0 0 var(--s-5);
+    border: 1px solid var(--gold);
+    border-radius: var(--r-4);
+  }
+
+  .hero-media :global(.figure) {
+    position: relative;
+  }
+
+  .hero-media :global(figcaption) {
+    color: var(--brand-muted);
+    background: var(--brand);
+    padding-inline-end: var(--s-3);
+  }
+
+  /* The figures strip: three real numbers, read straight from the records. */
+  .hero-figures {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: clamp(var(--s-7), 6vw, var(--s-9)) 0 0;
+    border-block-start: 1px solid var(--brand-rule);
+  }
+
+  .hero-figures > div {
+    padding: var(--s-5) var(--s-5) clamp(var(--s-6), 5vw, var(--s-8)) 0;
+  }
+
+  .hero-figures > div + div {
+    padding-inline-start: var(--s-5);
+    border-inline-start: 1px solid var(--brand-rule);
+  }
+
+  .hero-figures dt {
+    font-weight: 600;
+    color: var(--brand-muted);
+  }
+
+  .hero-figures dd {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: var(--s-2) var(--s-3);
+    margin: var(--s-2) 0 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2rem, 1.3rem + 2.6vw, 3.6rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--gold);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hero-figure-note {
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: var(--step--1);
+    letter-spacing: 0;
+    color: var(--brand-muted);
+  }
+
+  /* ---------- the giving statement ---------- */
   .giving {
     display: grid;
-    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-    gap: clamp(var(--s-6), 4vw, var(--s-8));
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(var(--s-7), 6vw, var(--s-10));
     align-items: start;
+  }
+
+  .giving-aside {
+    position: sticky;
+    inset-block-start: calc(var(--header-h) + var(--s-5));
+  }
+
+  .giving-aside .section-title {
+    font-size: var(--step-5);
+  }
+
+  .given {
+    display: grid;
+    gap: var(--s-2);
+    margin: var(--s-6) 0 0;
+    padding-block-start: var(--s-5);
+    border-block-start: 1px solid var(--rule-strong);
+  }
+
+  .given-label {
+    font-weight: 700;
+    color: var(--text-2);
+  }
+
+  .given-total {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.8rem, 1.6rem + 4.6vw, 5.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: var(--accent-give);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .given-note {
+    margin: var(--s-3) 0 var(--s-6);
+    color: var(--text-3);
+    font-size: var(--step--1);
+  }
+
+  .giving-media {
+    margin-block-end: var(--s-5);
+  }
+
+  .giving .ledger {
+    border-block-start: 2px solid var(--ink);
+  }
+
+  .giving .ledger > li {
+    padding-block: var(--s-4);
+    gap: var(--s-2) var(--s-5);
+  }
+
+  .giving .ledger .label {
+    display: grid;
+    gap: var(--s-1);
+  }
+
+  .giving .ledger .label a {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    line-height: 1.25;
+    color: var(--ink);
   }
 
   .ledger .batch {
@@ -411,21 +510,30 @@ const campus: Media = {
     font-size: var(--step--1);
   }
 
+  /* ---------- programs ---------- */
+  .big-title {
+    font-size: var(--step-5);
+  }
+
   .programs {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr));
-    gap: clamp(var(--s-6), 4vw, var(--s-8));
+    gap: clamp(var(--s-7), 5vw, var(--s-9));
   }
 
   .program {
     display: grid;
-    gap: var(--s-4);
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--s-5);
     align-content: start;
   }
 
   .program-main h3 {
     margin-block: var(--s-2) var(--s-3);
-    max-inline-size: 20ch;
+    font-size: var(--step-3);
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    max-inline-size: 18ch;
   }
 
   .program-main h3 a {
@@ -449,39 +557,47 @@ const campus: Media = {
   }
 
   .program-main .more {
-    margin-block-start: var(--s-4);
+    margin-block-start: var(--s-5);
   }
 
-  /* NCL has no photograph, so it gets a composed typographic panel rather than
-     an empty frame. Never fabricate an image for symmetry. */
+  /* NCL has no photograph, so it gets a composed poster in the report gold
+     rather than an empty frame. Never fabricate an image for symmetry. */
   .program-panel {
     display: grid;
-    align-content: center;
+    align-content: end;
     gap: var(--s-2);
     padding: clamp(var(--s-5), 4vw, var(--s-7));
-    background: var(--accent-wash);
-    border: 1px solid var(--rule);
-    border-radius: var(--r-2);
+    background: var(--gold);
+    color: var(--ink);
+    border-radius: var(--r-4);
     aspect-ratio: 4 / 3;
   }
 
   .panel-mark {
-    color: var(--accent);
+    font-family: var(--font-display);
     font-weight: 700;
-    letter-spacing: 0.06em;
+    font-size: clamp(4rem, 2.6rem + 6vw, 8.5rem);
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+    margin-block-end: auto;
   }
 
   .panel-name {
     font-family: var(--font-display);
-    font-size: var(--step-2);
-    line-height: 1.15;
+    font-size: var(--step-3);
+    line-height: 1.1;
     letter-spacing: -0.02em;
-    color: var(--ink);
   }
 
   .panel-years {
     font-size: var(--step--1);
-    color: var(--text-3);
+    color: var(--ink);
+    max-inline-size: 36ch;
+  }
+
+  /* ---------- latest ---------- */
+  .latest {
+    background: var(--surface-sunk);
   }
 
   .recent-grid {
@@ -490,21 +606,35 @@ const campus: Media = {
     gap: clamp(var(--s-6), 4vw, var(--s-8)) clamp(var(--s-5), 3vw, var(--s-7));
   }
 
+  /* ---------- where it began ---------- */
   .origin {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: clamp(var(--s-6), 4vw, var(--s-8));
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: clamp(var(--s-7), 6vw, var(--s-10));
     align-items: center;
+  }
+
+  .origin-year {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(4rem, 2.5rem + 6vw, 8rem);
+    line-height: 0.85;
+    letter-spacing: -0.05em;
+    color: var(--accent-program);
+    margin-block-end: var(--s-5);
   }
 
   .origin-copy h2 {
     margin-block: var(--s-3) var(--s-4);
-    max-inline-size: 20ch;
+    font-size: var(--step-4);
+    max-inline-size: 16ch;
   }
 
-  .origin-copy p {
+  .origin-copy p:not(.eyebrow, .origin-year) {
     color: var(--text-2);
-    max-inline-size: 52ch;
+    font-size: var(--step-1);
+    line-height: 1.55;
+    max-inline-size: 44ch;
   }
 
   .origin-copy .more {
@@ -518,8 +648,40 @@ const campus: Media = {
       grid-template-columns: 1fr;
     }
 
+    .hero-media {
+      max-inline-size: 26rem;
+    }
+
+    .giving-aside {
+      position: static;
+    }
+
     .program-panel {
       aspect-ratio: auto;
+      min-block-size: 16rem;
     }
+  }
+
+  @media (max-width: 640px) {
+    .hero-figures {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-figures > div {
+      padding: var(--s-4) 0;
+    }
+
+    .hero-figures > div + div {
+      padding-inline-start: 0;
+      border-inline-start: 0;
+      border-block-start: 1px solid var(--brand-rule);
+    }
+  }
+
+  /* Kannada set at poster size is far wider than the Latin short name. */
+  :global(:lang(kn)) .panel-mark {
+    font-size: clamp(2.5rem, 1.4rem + 5vw, 5.5rem);
+    letter-spacing: 0;
+    line-height: 1.1;
   }
 </style>

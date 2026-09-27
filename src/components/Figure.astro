@@ -47,35 +47,29 @@ const objectPosition = media?.position ? POSITIONS[media.position] : "50% 50%";
 const captionText = caption !== "" ? caption : alt;
 ---
 
-{
-  media ? (
-    <figure class:list={["figure", `accent-${accent}`, className]}>
-      <img
-        src={media.src}
-        alt={alt}
-        loading={priority ? "eager" : "lazy"}
-        fetchpriority={priority ? "high" : "auto"}
-        decoding="async"
-        style={`aspect-ratio:${ratio};object-position:${objectPosition}`}
-      />
-      {showCaption && captionText !== "" && <figcaption>{captionText}</figcaption>}
-    </figure>
-  ) : placeholder ? (
-    <figure class:list={["figure", "figure--empty", `accent-${accent}`, className]}>
-      <div class="empty" style={`aspect-ratio:${ratio}`} role="img" aria-label={placeholderLabel}>
-        <ImageOff size={22} stroke-width={1.4} aria-hidden="true" />
-      </div>
-    </figure>
-  ) : null
-}
+{media ? (
+  <figure class:list={["figure", `accent-${accent}`, className]}>
+    <img
+      src={media.src}
+      alt={alt}
+      loading={priority ? "eager" : "lazy"}
+      fetchpriority={priority ? "high" : "auto"}
+      decoding="async"
+      style={`aspect-ratio:${ratio};object-position:${objectPosition}`}
+    />
+    {showCaption && captionText !== "" && <figcaption>{captionText}</figcaption>}
+  </figure>
+) : placeholder ? (
+  <figure class:list={["figure", "figure--empty", `accent-${accent}`, className]}>
+    <div class="empty" style={`aspect-ratio:${ratio}`} role="img" aria-label={placeholderLabel}>
+      <ImageOff size={22} stroke-width={1.4} aria-hidden="true" />
+    </div>
+  </figure>
+) : null}
 
 <style>
   .figure {
     margin: 0;
-    border: 1px solid var(--rule);
-    background: var(--surface);
-    border-radius: var(--r-2);
-    overflow: hidden;
   }
 
   .figure img {
@@ -83,6 +77,7 @@ const captionText = caption !== "" ? caption : alt;
     block-size: auto;
     object-fit: cover;
     background: var(--surface-sunk);
+    border-radius: var(--r-4);
   }
 
   .empty {
@@ -91,6 +86,7 @@ const captionText = caption !== "" ? caption : alt;
     background: var(--surface-sunk);
     color: var(--text-3);
     position: relative;
+    border-radius: var(--r-4);
   }
 
   .empty::after {
@@ -98,12 +94,23 @@ const captionText = caption !== "" ? caption : alt;
     position: absolute;
     inset: 10px;
     border: 1px dashed color-mix(in oklab, var(--text-3) 45%, transparent);
-    border-radius: var(--r-1);
+    border-radius: var(--r-2);
   }
 
+  /* The caption hangs off a short rule, like a plate note in a report. */
   figcaption {
-    padding: var(--s-2) var(--s-3);
-    border-block-start: 1px solid var(--rule);
-    background: var(--surface);
+    display: flex;
+    gap: var(--s-3);
+    align-items: baseline;
+    padding-block-start: var(--s-3);
+  }
+
+  figcaption::before {
+    content: "";
+    flex: none;
+    inline-size: 1.5rem;
+    block-size: 1px;
+    background: currentColor;
+    translate: 0 -0.3em;
   }
 </style>

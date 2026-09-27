@@ -2,6 +2,7 @@
 import Document from "./Document.astro";
 import Figure from "./Figure.astro";
 import Markdown from "./Markdown.astro";
+import { ArrowLeft } from "lucide-astro";
 import type { Locale, Localized, Media } from "@/data/types";
 import { isFallback, lx, t } from "@/i18n/utils";
 import { formatDate } from "@/utils/format";
@@ -49,41 +50,50 @@ const note = archiveNote ? lx(archiveNote, lang) : "";
 const sourceText = lx(source, lang);
 ---
 
-<article class="entry container section">
-  <a class="back" href={backHref}>{backLabel}</a>
-
-  <header class="entry-head">
-    <h1>{title}</h1>
-    {date !== "" && (
-      <p class="entry-date mono">
-        <time datetime={date}>{formatDate(date, lang)}</time>
-      </p>
-    )}
-    {summary !== "" && <p class="entry-lede">{summary}</p>}
-    {
-      meta.length > 0 && (
-        <dl class="entry-meta">
-          {meta.map((row) => (
-            <div>
-              <dt>{row.label}</dt>
-              <dd>{row.value}</dd>
-            </div>
-          ))}
-        </dl>
-      )
-    }
+<article class:list={["entry", image && "entry--photo"]}>
+  <header class="entry-cover">
+    <div class="container">
+      <a class="back-link" href={backHref}>
+        <ArrowLeft size={15} stroke-width={1.8} aria-hidden="true" />
+        {backLabel}
+      </a>
+      <div class="entry-head">
+        {date !== "" && (
+          <p class="entry-date">
+            <time datetime={date}>{formatDate(date, lang)}</time>
+          </p>
+        )}
+        <h1>{title}</h1>
+        {summary !== "" && <p class="entry-lede">{summary}</p>}
+      </div>
+    </div>
   </header>
 
-  {image && <Figure media={image} locale={lang} ratio="16 / 9" priority={priority} showCaption />}
+  <div class="container entry-body">
+    {image && (
+      <div class="entry-plate">
+        <Figure media={image} locale={lang} ratio="16 / 9" priority={priority} showCaption />
+      </div>
+    )}
 
-  {bodyText !== "" && <Markdown value={bodyText} />}
+    {meta.length > 0 && (
+      <dl class="record-strip entry-meta">
+        {meta.map((row) => (
+          <div>
+            <dt>{row.label}</dt>
+            <dd>{row.value}</dd>
+          </div>
+        ))}
+      </dl>
+    )}
 
-  {bodyIsFallback && <p class="entry-note">{t(lang, "common.englishOnly")}</p>}
+    {bodyText !== "" && <Markdown value={bodyText} class="entry-prose" />}
 
-  {note !== "" && <aside class="entry-archive">{note}</aside>}
+    {bodyIsFallback && <p class="entry-note">{t(lang, "common.englishOnly")}</p>}
 
-  {
-    documents.length > 0 && (
+    {note !== "" && <aside class="entry-archive">{note}</aside>}
+
+    {documents.length > 0 && (
       <section class="entry-documents">
         <h2 class="entry-documents-title">{t(lang, "common.documents")}</h2>
         <div class="document-grid">
@@ -92,84 +102,115 @@ const sourceText = lx(source, lang);
           ))}
         </div>
       </section>
-    )
-  }
+    )}
 
-  {sourceText !== "" && <p class="entry-source mono">{t(lang, "common.source")} · {sourceText}</p>}
+    {sourceText !== "" && (
+      <p class="entry-source mono">
+        {t(lang, "common.source")} · {sourceText}
+      </p>
+    )}
 
-  <slot name="related" />
+    <slot name="related" />
+  </div>
 </article>
 
 <style>
-  .back {
-    display: inline-block;
-    margin-block-end: var(--s-6);
-    font-weight: 600;
+  .entry-cover {
+    background: var(--brand);
+    color: var(--brand-ink);
+    padding-block: clamp(2rem, 5vw, 3.5rem) clamp(2.5rem, 6vw, 4.5rem);
+  }
+
+  /* When there is a photograph, the cover runs on behind its top edge. */
+  .entry--photo .entry-cover {
+    padding-block-end: clamp(7rem, 16vw, 13rem);
+  }
+
+  .entry-cover .back-link {
+    color: var(--brand-ink);
+    border-color: var(--brand-rule);
+  }
+
+  .entry-cover .back-link:hover {
+    border-color: var(--gold);
+    background: var(--brand-2);
   }
 
   .entry-head {
-    max-inline-size: var(--measure);
+    max-inline-size: 58rem;
+    margin-block-start: var(--s-6);
   }
 
   .entry-date {
-    margin-block-start: var(--s-3);
-    color: var(--text-3);
+    font-family: var(--font-mono);
+    font-size: var(--step-0);
+    color: var(--gold);
+    margin-block-end: var(--s-3);
+  }
+
+  .entry-head h1 {
+    font-size: var(--step-5);
+    max-inline-size: 20ch;
   }
 
   .entry-lede {
-    margin-block-start: var(--s-4);
+    margin-block-start: var(--s-5);
     font-size: var(--step-1);
-    color: var(--text-2);
+    line-height: 1.5;
+    color: var(--brand-muted);
+    max-inline-size: 52ch;
+  }
+
+  .entry-body {
+    padding-block-end: clamp(3rem, 7vw, 6rem);
+  }
+
+  .entry-plate {
+    margin-block-start: calc(-1 * clamp(5rem, 13vw, 11rem));
+    max-inline-size: 64rem;
   }
 
   .entry-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--s-3) var(--s-7);
-    margin-block-start: var(--s-6);
-    padding-block-start: var(--s-4);
-    border-block-start: 1px solid var(--rule);
-  }
-
-  .entry-meta dt {
-    font-size: var(--step--1);
-    color: var(--text-3);
-  }
-
-  .entry-meta dd {
-    margin: 0;
-    font-weight: 600;
-  }
-
-  .entry .figure,
-  .entry :global(.prose) {
     margin-block-start: var(--s-7);
+    max-inline-size: 64rem;
+  }
+
+  .entry:not(.entry--photo) .entry-meta {
+    margin-block-start: var(--s-7);
+  }
+
+  .entry-body :global(.entry-prose) {
+    margin-block-start: var(--s-7);
+    font-size: var(--step-1);
+    line-height: 1.65;
   }
 
   .entry-note {
     margin-block-start: var(--s-5);
-    padding-inline-start: var(--s-4);
-    border-inline-start: 2px solid var(--rule-strong);
-    color: var(--text-3);
+    padding: var(--s-3) var(--s-4);
+    background: var(--surface-sunk);
+    border-radius: var(--r-2);
+    color: var(--text-2);
     max-inline-size: var(--measure);
   }
 
   .entry-archive {
     margin-block-start: var(--s-7);
-    padding: var(--s-5);
-    background: var(--surface-sunk);
-    border-radius: var(--r-2);
+    padding: var(--s-5) var(--s-6);
+    background: var(--accent-program-wash);
+    border-radius: var(--r-4);
     max-inline-size: var(--measure);
     color: var(--text-2);
   }
 
   .entry-documents {
     margin-block-start: var(--s-8);
+    padding: 0;
   }
 
   .entry-documents-title {
-    font-size: var(--step-1);
-    margin-block-end: var(--s-4);
+    font-size: var(--step-3);
+    margin-block-end: var(--s-5);
   }
 
   .document-grid {
@@ -184,5 +225,6 @@ const sourceText = lx(source, lang);
     padding-block-start: var(--s-4);
     border-block-start: 1px solid var(--rule);
     color: var(--text-3);
+    max-inline-size: var(--measure);
   }
 </style>
