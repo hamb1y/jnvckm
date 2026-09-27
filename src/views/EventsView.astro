@@ -1,6 +1,7 @@
 ---
 import EntryRow from "@/components/EntryRow.astro";
 import PageCover from "@/components/PageCover.astro";
+import { formatCount } from "@/utils/format";
 import { events } from "@/data/events";
 import { lx, t } from "@/i18n/utils";
 import { localePath } from "@/lib/paths";
@@ -25,7 +26,17 @@ const byYear = years.map((year) => ({
 }));
 ---
 
-<PageCover title={t(lang, "events.title")} lede={t(lang, "events.lede")} />
+<PageCover title={t(lang, "events.title")} lede={t(lang, "events.lede")}>
+  <div class="cover-figure" slot="figure">
+    <span class="cover-figure-label">{t(lang, "home.figures.events")}</span>
+    <span class="cover-figure-value">{formatCount(events.length, lang)}</span>
+    {years.length > 0 && (
+      <span class="cover-figure-note mono">
+        {years.at(-1)}–{years[0]}
+      </span>
+    )}
+  </div>
+</PageCover>
 
 {upcoming.length > 0 && (
   <section class="accent-brand">

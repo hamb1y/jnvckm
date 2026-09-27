@@ -62,6 +62,8 @@ const givingYears = contributions
 const recordedTotal = contributions.reduce((sum, entry) => sum + (entry.amount ?? 0), 0);
 const recordedCount = contributions.filter((entry) => entry.amount !== null).length;
 const largestAmount = Math.max(1, ...contributions.map((entry) => entry.amount ?? 0));
+const givingRange =
+  givingYears.length > 1 ? `${givingYears[0]}–${givingYears.at(-1)}` : (givingYears[0] ?? "");
 const givingSummary = t(lang, "impact.summary")
   .replace("{count}", formatCount(contributions.length, lang))
   .replace("{from}", givingYears[0] ?? "")
@@ -114,6 +116,29 @@ const campus: Media = {
           <Figure media={hero} locale={lang} ratio="4 / 5" priority={true} showCaption={true} />
         </div>
       </div>
+
+      <dl class="hero-figures">
+        <div>
+          <dt>{t(lang, "home.figures.contributions")}</dt>
+          <dd>
+            {formatCount(contributions.length, lang)}
+            <span class="hero-figure-note mono">{givingRange}</span>
+          </dd>
+        </div>
+        <div>
+          <dt>{t(lang, "home.figures.events")}</dt>
+          <dd>{formatCount(events.length, lang)}</dd>
+        </div>
+        <div>
+          <dt>{t(lang, "nav.programs")}</dt>
+          <dd>
+            {formatCount(programs.length, lang)}
+            <span class="hero-figure-note mono">
+              {programs.map((program) => lx(program.shortName ?? program.name, lang)).join(" · ")}
+            </span>
+          </dd>
+        </div>
+      </dl>
     </div>
   </section>
 
@@ -260,6 +285,9 @@ const campus: Media = {
         <Figure media={campus} locale={lang} ratio="4 / 3" />
       </div>
       <div class="origin-copy">
+        <p class="origin-year" aria-hidden="true">
+          1986
+        </p>
         <p class="eyebrow">{t(lang, "nav.vidyalaya")}</p>
         <h2>{t(lang, "home.vidyalayaTitle")}</h2>
         <p>{t(lang, "home.vidyalayaLede")}</p>
@@ -285,7 +313,7 @@ const campus: Media = {
 <style>
   /* ---------- the cover ---------- */
   .hero {
-    padding-block: clamp(2.5rem, 6vw, 5rem);
+    padding-block: clamp(2.5rem, 6vw, 5rem) 0;
   }
 
   .hero-grid {
@@ -337,10 +365,73 @@ const campus: Media = {
     margin-block-start: var(--s-7);
   }
 
+  /* A gold keyline set off the photograph, like a plate mounted on a cover. */
+  .hero-media {
+    position: relative;
+    padding: 0 var(--s-5) var(--s-5) 0;
+  }
+
+  .hero-media::before {
+    content: "";
+    position: absolute;
+    inset: var(--s-5) 0 0 var(--s-5);
+    border: 1px solid var(--gold);
+    border-radius: var(--r-4);
+  }
+
+  .hero-media :global(.figure) {
+    position: relative;
+  }
+
   .hero-media :global(figcaption) {
     color: var(--brand-muted);
     background: var(--brand);
     padding-inline-end: var(--s-3);
+  }
+
+  /* The figures strip: three real numbers, read straight from the records. */
+  .hero-figures {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: clamp(var(--s-7), 6vw, var(--s-9)) 0 0;
+    border-block-start: 1px solid var(--brand-rule);
+  }
+
+  .hero-figures > div {
+    padding: var(--s-5) var(--s-5) clamp(var(--s-6), 5vw, var(--s-8)) 0;
+  }
+
+  .hero-figures > div + div {
+    padding-inline-start: var(--s-5);
+    border-inline-start: 1px solid var(--brand-rule);
+  }
+
+  .hero-figures dt {
+    font-weight: 600;
+    color: var(--brand-muted);
+  }
+
+  .hero-figures dd {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: var(--s-2) var(--s-3);
+    margin: var(--s-2) 0 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2rem, 1.3rem + 2.6vw, 3.6rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--gold);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hero-figure-note {
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: var(--step--1);
+    letter-spacing: 0;
+    color: var(--brand-muted);
   }
 
   /* ---------- the giving statement ---------- */
@@ -523,13 +614,23 @@ const campus: Media = {
     align-items: center;
   }
 
+  .origin-year {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(4rem, 2.5rem + 6vw, 8rem);
+    line-height: 0.85;
+    letter-spacing: -0.05em;
+    color: var(--accent-program);
+    margin-block-end: var(--s-5);
+  }
+
   .origin-copy h2 {
     margin-block: var(--s-3) var(--s-4);
     font-size: var(--step-4);
     max-inline-size: 16ch;
   }
 
-  .origin-copy p:not(.eyebrow) {
+  .origin-copy p:not(.eyebrow, .origin-year) {
     color: var(--text-2);
     font-size: var(--step-1);
     line-height: 1.55;
@@ -558,6 +659,22 @@ const campus: Media = {
     .program-panel {
       aspect-ratio: auto;
       min-block-size: 16rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero-figures {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-figures > div {
+      padding: var(--s-4) 0;
+    }
+
+    .hero-figures > div + div {
+      padding-inline-start: 0;
+      border-inline-start: 0;
+      border-block-start: 1px solid var(--brand-rule);
     }
   }
 

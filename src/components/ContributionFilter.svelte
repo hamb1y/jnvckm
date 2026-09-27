@@ -102,7 +102,7 @@
     padding: 0.5em 1.05em;
     background: var(--surface);
     border: 1px solid var(--rule-strong);
-    border-radius: var(--r-2);
+    border-radius: var(--r-pill);
     font-size: var(--step--1);
     font-weight: 700;
     cursor: pointer;
