@@ -28,7 +28,7 @@ backend:
   branch: main
   auth_scope: public_repo # the repository is public, so the narrower grant is enough
   auth_methods: [oauth, token] # token sign-in works before the worker exists
-  # base_url: https://sveltia-cms-auth.<your-subdomain>.workers.dev
+  base_url: https://auth.jnvckm.org
 
 media_folder: public/images
 public_folder: /images
