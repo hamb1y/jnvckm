@@ -1,227 +1,29 @@
 import type { Locale } from "@/data/types";
+import copy from "../../content/copy.json";
 
 /**
- * UI strings. Every key exists in every locale (the type below enforces the
- * shape, and `bun run verify` fails on a missing key).
+ * UI strings live in content/copy.json so editors can change them in the CMS
+ * ("Interface text"). The file keeps one block per locale; keys are the
+ * dotted paths into it, e.g. "home.heroBody".
  *
- * The Kannada was written during the rebuild and still needs a native reader.
- * It is tracked as item 4 in LAUNCH-CHECKLIST.md.
+ * Every key exists in every locale: `bun run verify` fails on a missing key.
+ * The Kannada still needs a native reader (LAUNCH-CHECKLIST.md item 4).
  */
-export const ui = {
-  en: {
-    "nav.home": "Home",
-    "nav.about": "About",
-    "nav.programs": "Programs",
-    "nav.impact": "Contributions",
-    "nav.events": "Events",
-    "nav.stories": "Stories",
-    "nav.connect": "Connect",
-    "nav.vidyalaya": "The Vidyalaya",
-    "lang.switchLabel": "ಕನ್ನಡ",
-    "lang.switchAria": "Read this page in Kannada",
-    "site.formedShort": "Formed in 1993",
-    "home.explore": "Explore our work",
-    "home.impactTitle": "Giving back",
-    "home.latestTitle": "Latest",
-    "home.heroBody":
-      "Alumni of Jawahar Navodaya Vidyalaya Chikkamagaluru, connected across batches and giving back to the school.",
-    "home.latestCta": "Read the latest",
-    "home.reconnect": "How to reconnect",
-    "home.vidyalayaTitle": "Where it began",
-    "home.vidyalayaLede":
-      "The school was founded in 1986 and moved to its permanent campus at Seegodu, near Balehonnur, two years later.",
-    "home.connectTitle": "Stay connected",
-    "home.connectLede":
-      "News, events and projects reach alumni through their batch representatives.",
-    "common.allContributions": "All contributions",
-    "common.allEvents": "All events",
-    "common.location": "Location",
-    "common.batch": "Batch",
-    "common.amount": "Amount",
-    "common.category": "Category",
-    "common.documents": "Documents",
-    "common.source": "Source",
-    "common.englishOnly": "This record is in English.",
-    "common.program": "Program",
-    "common.author": "Author",
-    "events.title": "Events",
-    "events.lede": "Reunions, workshops, the annual meet and the cricket league.",
-    "events.upcoming": "Upcoming",
-    "events.past": "Past",
-    "impact.title": "Contributions",
-    "impact.lede": "What alumni and batches have funded and built, and who they have helped.",
-    "impact.filterLabel": "Filter by category",
-    "impact.all": "All",
-    "impact.empty": "No contributions are published in this category yet.",
-    "impact.count": "Showing {n} of {total}",
-    "impact.summary": "{count} documented contributions, {from}–{to}",
-    "home.given": "Recorded giving",
-    "home.givenNote": "{with} of {all} records state an amount.",
-    "home.figures.contributions": "Documented contributions",
-    "home.figures.events": "Events on record",
-    "stories.title": "Stories",
-    "stories.lede": "News, reports and memories from the alumni community.",
-    "stories.empty": "No stories have been published yet.",
-    "vidyalaya.title": "The Vidyalaya",
-    "vidyalaya.lede":
-      "JNVCKM Alumni Association is an independent alumni body. This is the school its alumni come from.",
-    "about.title": "About the association",
-    "about.lede":
-      "JNVCKM Alumni Association is the alumni community of Jawahar Navodaya Vidyalaya Chikkamagaluru, at Seegodu near Balehonnur.",
-    "about.whatWeDo": "What the association does",
-    "about.schoolTitle": "The Vidyalaya",
-    "connect.title": "Connect",
-    "connect.lede": "Reach the association, volunteer, or offer to mentor.",
-    "connect.address": "Address",
-    "connect.unconfirmed": "To be confirmed",
-    "connect.routeTitle": "How to reach the association",
-    "connect.routeBody":
-      "The association's email address and phone number are being confirmed and are not published yet. Until they are, the way in is through your batch representative, or through the school office at the Vidyalaya.",
-    "connect.volunteerTitle": "Volunteer or mentor",
-    "connect.volunteerBody":
-      "Alumni who can offer time are always needed — a mentoring call, a career session for senior students, or a place for an intern.",
-    "connect.contributeTitle": "Contributing",
-    "connect.batchRepsTitle": "Through your batch",
-    "connect.batchRepsBody":
-      "Each batch has a representative who carries association news to their batchmates and brings questions back.",
-    "connect.batchRepsLink": "Read about batch representatives",
-    "footer.association": "The association",
-    "footer.independent":
-      "JNVCKM Alumni Association is an independent alumni body. It is not the official website of PM SHRI Jawahar Navodaya Vidyalaya or of Navodaya Vidyalaya Samiti.",
-    "footer.repository": "Source code",
-    "footer.creditLabel": "Site by",
-    "footer.licenseLabel": "Source available under",
-    "notfound.title": "We couldn't find that page",
-    "notfound.lede": "It may have moved. Try the home page, or the events list.",
-    "a11y.skip": "Skip to content",
-    "a11y.menu": "Menu",
-    "a11y.primaryNav": "Primary",
-    "categories.infrastructure": "Infrastructure",
-    "categories.technology": "Technology",
-    "categories.student-support": "Student support",
-    "categories.sports": "Sports",
-    "categories.culture": "Culture",
-    "categories.staff-community": "Staff and community",
-    "programs.title": "Programs",
-    "programs.lede": "The two long-running things the association does.",
-    "programs.relatedEvents": "Editions and seasons",
-    "programs.documented": "Only the editions with a record on this site are listed.",
-    "programs.more": "More about {name}",
-    "posts.kind.news": "News",
-    "posts.kind.report": "Report",
-    "posts.kind.story": "Story",
-    "empty.generic": "Nothing here yet.",
-  },
-  kn: {
-    "nav.home": "ಮುಖಪುಟ",
-    "nav.about": "ನಮ್ಮ ಬಗ್ಗೆ",
-    "nav.programs": "ಯೋಜನೆಗಳು",
-    "nav.impact": "ಕೊಡುಗೆಗಳು",
-    "nav.events": "ಕಾರ್ಯಕ್ರಮಗಳು",
-    "nav.stories": "ಕಥೆಗಳು",
-    "nav.connect": "ಸಂಪರ್ಕ",
-    "nav.vidyalaya": "ವಿದ್ಯಾಲಯ",
-    "lang.switchLabel": "English",
-    "lang.switchAria": "ಈ ಪುಟವನ್ನು ಇಂಗ್ಲಿಷ್‌ನಲ್ಲಿ ಓದಿ",
-    "site.formedShort": "1993ರಲ್ಲಿ ಸ್ಥಾಪಿತವಾಯಿತು",
-    "home.explore": "ನಮ್ಮ ಕೆಲಸ ನೋಡಿ",
-    "home.impactTitle": "ಕೊಡುಗೆ",
-    "home.latestTitle": "ಇತ್ತೀಚಿನವು",
-    "home.heroBody":
-      "ಜವಾಹರ ನವೋದಯ ವಿದ್ಯಾಲಯ ಚಿಕ್ಕಮಗಳೂರಿನ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳು — ಬ್ಯಾಚ್‌ಗಳಾದ್ಯಂತ ಬೆಸೆದುಕೊಂಡು ವಿದ್ಯಾಲಯಕ್ಕೆ ಕೊಡುಗೆ ನೀಡುತ್ತಿದ್ದಾರೆ.",
-    "home.latestCta": "ಇತ್ತೀಚಿನವನ್ನು ಓದಿ",
-    "home.reconnect": "ಮತ್ತೆ ಸಂಪರ್ಕಿಸುವ ಬಗ್ಗೆ",
-    "home.vidyalayaTitle": "ಎಲ್ಲಿ ಆರಂಭವಾಯಿತು",
-    "home.vidyalayaLede":
-      "ವಿದ್ಯಾಲಯ 1986ರಲ್ಲಿ ಸ್ಥಾಪಿತವಾಯಿತು; ಎರಡು ವರ್ಷಗಳ ನಂತರ ಬಾಳೆಹೊನ್ನೂರು ಸಮೀಪದ ಸೀಗೋಡುವಿನ ಶಾಶ್ವತ ಆವರಣಕ್ಕೆ ಸ್ಥಳಾಂತರಗೊಂಡಿತು.",
-    "home.connectTitle": "ಸಂಪರ್ಕದಲ್ಲಿರಿ",
-    "home.connectLede":
-      "ಸುದ್ದಿ, ಕಾರ್ಯಕ್ರಮಗಳು ಮತ್ತು ಯೋಜನೆಗಳು ಬ್ಯಾಚ್ ಪ್ರತಿನಿಧಿಗಳ ಮೂಲಕ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳನ್ನು ತಲುಪುತ್ತವೆ.",
-    "common.allContributions": "ಎಲ್ಲಾ ಕೊಡುಗೆಗಳು",
-    "common.allEvents": "ಎಲ್ಲಾ ಕಾರ್ಯಕ್ರಮಗಳು",
-    "common.location": "ಸ್ಥಳ",
-    "common.batch": "ಬ್ಯಾಚ್",
-    "common.amount": "ಮೊತ್ತ",
-    "common.category": "ವರ್ಗ",
-    "common.documents": "ದಾಖಲೆಗಳು",
-    "common.source": "ಮೂಲ",
-    "common.englishOnly": "ಈ ದಾಖಲೆ ಇಂಗ್ಲಿಷ್‌ನಲ್ಲಿದೆ.",
-    "common.program": "ಯೋಜನೆ",
-    "common.author": "ಲೇಖಕ",
-    "events.title": "ಕಾರ್ಯಕ್ರಮಗಳು",
-    "events.lede": "ಪುನರ್ಮಿಲನಗಳು, ಕಾರ್ಯಾಗಾರಗಳು, ವಾರ್ಷಿಕ ಸಮಾವೇಶ ಮತ್ತು ಕ್ರಿಕೆಟ್ ಲೀಗ್.",
-    "events.upcoming": "ಮುಂಬರುವ",
-    "events.past": "ಹಿಂದಿನವು",
-    "impact.title": "ಕೊಡುಗೆಗಳು",
-    "impact.lede":
-      "ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳು ಮತ್ತು ಬ್ಯಾಚ್‌ಗಳು ನೀಡಿದ ಹಣ, ಕಟ್ಟಿದ ಸೌಲಭ್ಯಗಳು ಮತ್ತು ಸಹಾಯದ ದಾಖಲೆ.",
-    "impact.filterLabel": "ವರ್ಗದ ಪ್ರಕಾರ ತೋರಿಸಿ",
-    "impact.all": "ಎಲ್ಲಾ",
-    "impact.empty": "ಈ ವರ್ಗದಲ್ಲಿ ಇನ್ನೂ ಯಾವುದೇ ಕೊಡುಗೆ ಪ್ರಕಟವಾಗಿಲ್ಲ.",
-    "impact.count": "ಒಟ್ಟು {total} ರಲ್ಲಿ {n} ತೋರಿಸಲಾಗಿದೆ",
-    "impact.summary": "ದಾಖಲಾದ {count} ಕೊಡುಗೆಗಳು, {from}–{to}",
-    "home.given": "ದಾಖಲಾದ ಕೊಡುಗೆ",
-    "home.givenNote": "{all} ದಾಖಲೆಗಳಲ್ಲಿ {with}ರಲ್ಲಿ ಮೊತ್ತ ನಮೂದಾಗಿದೆ.",
-    "home.figures.contributions": "ದಾಖಲಾದ ಕೊಡುಗೆಗಳು",
-    "home.figures.events": "ದಾಖಲಾದ ಕಾರ್ಯಕ್ರಮಗಳು",
-    "stories.title": "ಕಥೆಗಳು",
-    "stories.lede": "ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಮುದಾಯದ ಸುದ್ದಿ, ವರದಿಗಳು ಮತ್ತು ನೆನಪುಗಳು.",
-    "stories.empty": "ಇನ್ನೂ ಯಾವುದೇ ಕಥೆ ಪ್ರಕಟವಾಗಿಲ್ಲ.",
-    "vidyalaya.title": "ವಿದ್ಯಾಲಯ",
-    "vidyalaya.lede":
-      "ಜೆಎನ್‌ವಿಸಿಕೆಎಂ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಂಘ ಸ್ವತಂತ್ರ ಸಂಘಟನೆ. ಇದು ಆ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳು ಓದಿದ ವಿದ್ಯಾಲಯ.",
-    "about.title": "ಸಂಘದ ಬಗ್ಗೆ",
-    "about.lede":
-      "ಜೆಎನ್‌ವಿಸಿಕೆಎಂ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಂಘವು ಜವಾಹರ ನವೋದಯ ವಿದ್ಯಾಲಯ ಚಿಕ್ಕಮಗಳೂರಿನ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಮುದಾಯ. ಈ ವಿದ್ಯಾಲಯ ಬಾಳೆಹೊನ್ನೂರು ಸಮೀಪದ ಸೀಗೋಡುವಿನಲ್ಲಿದೆ.",
-    "about.whatWeDo": "ಸಂಘ ಏನು ಮಾಡುತ್ತದೆ",
-    "about.schoolTitle": "ವಿದ್ಯಾಲಯ",
-    "connect.title": "ಸಂಪರ್ಕ",
-    "connect.lede": "ಸಂಘವನ್ನು ಸಂಪರ್ಕಿಸಿ, ಸ್ವಯಂಸೇವಕರಾಗಿ, ಅಥವಾ ಮಾರ್ಗದರ್ಶನ ನೀಡಿ.",
-    "connect.address": "ವಿಳಾಸ",
-    "connect.unconfirmed": "ದೃಢೀಕರಿಸಬೇಕಿದೆ",
-    "connect.routeTitle": "ಸಂಘವನ್ನು ಸಂಪರ್ಕಿಸುವ ದಾರಿ",
-    "connect.routeBody":
-      "ಸಂಘದ ಇಮೇಲ್ ವಿಳಾಸ ಮತ್ತು ದೂರವಾಣಿ ಸಂಖ್ಯೆಯನ್ನು ದೃಢೀಕರಿಸಲಾಗುತ್ತಿದೆ; ಅವು ಇನ್ನೂ ಪ್ರಕಟವಾಗಿಲ್ಲ. ಅವು ಪ್ರಕಟವಾಗುವವರೆಗೆ, ನಿಮ್ಮ ಬ್ಯಾಚ್ ಪ್ರತಿನಿಧಿಯ ಮೂಲಕ ಅಥವಾ ವಿದ್ಯಾಲಯದ ಶಾಲಾ ಕಚೇರಿಯ ಮೂಲಕ ಸಂಪರ್ಕಿಸಬಹುದು.",
-    "connect.volunteerTitle": "ಸ್ವಯಂಸೇವೆ ಅಥವಾ ಮಾರ್ಗದರ್ಶನ",
-    "connect.volunteerBody":
-      "ಸಮಯ ನೀಡಬಲ್ಲ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳು ಯಾವಾಗಲೂ ಬೇಕು — ಒಂದು ಮಾರ್ಗದರ್ಶನ ಕರೆ, ಹಿರಿಯ ತರಗತಿಯ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಒಂದು ವೃತ್ತಿ ಅವಧಿ, ಅಥವಾ ಇಂಟರ್ನ್‌ಶಿಪ್‌ಗೆ ಒಂದು ಅವಕಾಶ.",
-    "connect.contributeTitle": "ಕೊಡುಗೆ ನೀಡುವುದು",
-    "connect.batchRepsTitle": "ನಿಮ್ಮ ಬ್ಯಾಚ್ ಮೂಲಕ",
-    "connect.batchRepsBody":
-      "ಪ್ರತಿ ಬ್ಯಾಚ್‌ಗೂ ಒಬ್ಬ ಪ್ರತಿನಿಧಿ ಇದ್ದು, ಸಂಘದ ಸುದ್ದಿಯನ್ನು ತಮ್ಮ ಬ್ಯಾಚ್‌ ಸ್ನೇಹಿತರಿಗೆ ತಲುಪಿಸುತ್ತಾರೆ.",
-    "connect.batchRepsLink": "ಬ್ಯಾಚ್ ಪ್ರತಿನಿಧಿಗಳ ಬಗ್ಗೆ ಓದಿ",
-    "footer.association": "ಸಂಘ",
-    "footer.independent":
-      "ಜೆಎನ್‌ವಿಸಿಕೆಎಂ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಂಘ ಸ್ವತಂತ್ರ ಸಂಘಟನೆ. ಇದು ಪಿಎಂ ಶ್ರೀ ಜವಾಹರ ನವೋದಯ ವಿದ್ಯಾಲಯ ಅಥವಾ ನವೋದಯ ವಿದ್ಯಾಲಯ ಸಮಿತಿಯ ಅಧಿಕೃತ ಜಾಲತಾಣವಲ್ಲ.",
-    "footer.repository": "ಮೂಲ ಕೋಡ್",
-    "footer.creditLabel": "ಜಾಲತಾಣ ರೂಪಿಸಿದವರು:",
-    "footer.licenseLabel": "ಮೂಲ ಕೋಡ್ ಲಭ್ಯವಿದೆ:",
-    "notfound.title": "ಆ ಪುಟ ಸಿಗಲಿಲ್ಲ",
-    "notfound.lede": "ಅದು ಸ್ಥಳ ಬದಲಿಸಿರಬಹುದು. ಮುಖಪುಟ ಅಥವಾ ಕಾರ್ಯಕ್ರಮಗಳ ಪಟ್ಟಿ ನೋಡಿ.",
-    "a11y.skip": "ಮುಖ್ಯ ವಿಷಯಕ್ಕೆ ಹೋಗಿ",
-    "a11y.menu": "ಮೆನು",
-    "a11y.primaryNav": "ಮುಖ್ಯ ಮೆನು",
-    "categories.infrastructure": "ಮೂಲಸೌಕರ್ಯ",
-    "categories.technology": "ತಂತ್ರಜ್ಞಾನ",
-    "categories.student-support": "ವಿದ್ಯಾರ್ಥಿ ಬೆಂಬಲ",
-    "categories.sports": "ಕ್ರೀಡೆ",
-    "categories.culture": "ಸಂಸ್ಕೃತಿ",
-    "categories.staff-community": "ಸಿಬ್ಬಂದಿ ಮತ್ತು ಸಮುದಾಯ",
-    "programs.title": "ಯೋಜನೆಗಳು",
-    "programs.lede": "ಸಂಘ ನಡೆಸುವ ಎರಡು ದೀರ್ಘಕಾಲದ ಯೋಜನೆಗಳು.",
-    "programs.relatedEvents": "ಆವೃತ್ತಿಗಳು ಮತ್ತು ಸೀಸನ್‌ಗಳು",
-    "programs.documented": "ಈ ಜಾಲತಾಣದಲ್ಲಿ ದಾಖಲೆ ಇರುವ ಆವೃತ್ತಿಗಳನ್ನು ಮಾತ್ರ ಇಲ್ಲಿ ಪಟ್ಟಿ ಮಾಡಲಾಗಿದೆ.",
-    "programs.more": "{name} ಬಗ್ಗೆ ಇನ್ನಷ್ಟು",
-    "posts.kind.news": "ಸುದ್ದಿ",
-    "posts.kind.report": "ವರದಿ",
-    "posts.kind.story": "ಕಥೆ",
-    "empty.generic": "ಇನ್ನೂ ಏನೂ ಇಲ್ಲ.",
-  },
-} as const;
+type Paths<T, Prefix extends string = ""> = {
+  [K in keyof T & string]: T[K] extends string ? `${Prefix}${K}` : Paths<T[K], `${Prefix}${K}.`>;
+}[keyof T & string];
 
-export type UIKey = keyof (typeof ui)["en"];
+export type UIKey = Paths<(typeof copy)["en"]>;
+
+function flatten(node: unknown, prefix = "", out: Record<string, string> = {}): Record<string, string> {
+  if (typeof node === "string") out[prefix] = node;
+  else if (node && typeof node === "object") {
+    for (const [key, value] of Object.entries(node)) flatten(value, prefix ? `${prefix}.${key}` : key, out);
+  }
+  return out;
+}
 
 export const dictionaries: Record<Locale, Record<string, string>> = {
-  en: ui.en,
-  kn: ui.kn,
+  en: flatten(copy.en),
+  kn: flatten(copy.kn),
 };

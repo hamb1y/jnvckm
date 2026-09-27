@@ -11,13 +11,22 @@ import { formatDate } from "@/utils/format";
  * Shared layout for a single event, contribution or story. One implementation
  * for three collections that render the same shape.
  */
+export interface MetaRow {
+  label: string;
+  value: string;
+  /** Links the value, e.g. an event's program. */
+  href?: string;
+  /** Sets the value as a figure, e.g. a contribution's amount. */
+  figure?: boolean;
+}
+
 export interface Props {
   lang: Locale;
   title: string;
   /** ISO date, YYYY-MM-DD. */
   date?: string;
   summary?: string;
-  meta?: { label: string; value: string }[];
+  meta?: MetaRow[];
   body: Localized;
   image?: Media | null;
   documents?: Media[];
@@ -79,9 +88,9 @@ const sourceText = lx(source, lang);
     {meta.length > 0 && (
       <dl class="record-strip entry-meta">
         {meta.map((row) => (
-          <div>
+          <div class:list={[row.figure && "amount"]}>
             <dt>{row.label}</dt>
-            <dd>{row.value}</dd>
+            <dd>{row.href ? <a href={row.href}>{row.value}</a> : row.value}</dd>
           </div>
         ))}
       </dl>
@@ -105,7 +114,7 @@ const sourceText = lx(source, lang);
     )}
 
     {sourceText !== "" && (
-      <p class="entry-source mono">
+      <p class="entry-source">
         {t(lang, "common.source")} · {sourceText}
       </p>
     )}
@@ -142,7 +151,8 @@ const sourceText = lx(source, lang);
   }
 
   .entry-date {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
+    font-variant-numeric: tabular-nums;
     font-size: var(--step-0);
     color: var(--gold);
     margin-block-end: var(--s-3);

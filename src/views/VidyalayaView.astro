@@ -1,9 +1,10 @@
 ---
 import Figure from "@/components/Figure.astro";
 import PageCover from "@/components/PageCover.astro";
+import { pages } from "@/data/pages";
 import { lx, t } from "@/i18n/utils";
 import { localePath } from "@/lib/paths";
-import type { Locale, Media } from "@/data/types";
+import type { Locale } from "@/data/types";
 
 export interface Props {
   lang: Locale;
@@ -11,56 +12,27 @@ export interface Props {
 
 const { lang } = Astro.props;
 
-const campus: Media = {
-  src: "/images/img4.webp",
-  alt: {
-    en: "Teachers and staff photographed together in front of a school building.",
-    kn: "ಶಾಲಾ ಕಟ್ಟಡದ ಮುಂಭಾಗದಲ್ಲಿ ಒಟ್ಟಿಗೆ ಚಿತ್ರೀಕರಿಸಲಾದ ಶಿಕ್ಷಕರು ಮತ್ತು ಸಿಬ್ಬಂದಿ.",
-  },
-};
-
-const facts = [
-  {
-    en: "Founded in 1986, and among the earlier Jawahar Navodaya Vidyalayas.",
-    kn: "1986ರಲ್ಲಿ ಸ್ಥಾಪಿತ; ಹಳೆಯ ಜವಾಹರ ನವೋದಯ ವಿದ್ಯಾಲಯಗಳಲ್ಲಿ ಒಂದು.",
-  },
-  {
-    en: "Began at the Coffee Research Station in Koppa Taluk, then moved to its permanent campus at Seegodu, about 5 km from Balehonnur.",
-    kn: "ಕೊಪ್ಪ ತಾಲೂಕಿನ ಕಾಫಿ ಸಂಶೋಧನಾ ಕೇಂದ್ರದಲ್ಲಿ ಆರಂಭವಾಗಿ, ನಂತರ ಬಾಳೆಹೊನ್ನೂರಿನಿಂದ ಸುಮಾರು 5 ಕಿ.ಮೀ. ದೂರದ ಸೀಗೋಡುವಿನ ಶಾಶ್ವತ ಆವರಣಕ್ಕೆ ಸ್ಥಳಾಂತರಗೊಂಡಿತು.",
-  },
-  {
-    en: "Fully residential, co-educational, classes 6 to 12, English medium.",
-    kn: "ಸಂಪೂರ್ಣ ವಸತಿ ಶಾಲೆ, ಸಹ-ಶಿಕ್ಷಣ, 6ರಿಂದ 12ನೇ ತರಗತಿ, ಇಂಗ್ಲಿಷ್ ಮಾಧ್ಯಮ.",
-  },
-  {
-    en: "Managed by Navodaya Vidyalaya Samiti, Ministry of Education, Government of India. CBSE affiliation 840012.",
-    kn: "ನವೋದಯ ವಿದ್ಯಾಲಯ ಸಮಿತಿ, ಶಿಕ್ಷಣ ಸಚಿವಾಲಯ, ಭಾರತ ಸರ್ಕಾರದ ಆಡಳಿತದಲ್ಲಿದೆ. ಸಿಬಿಎಸ್‌ಇ ಸಂಲಗ್ನತೆ 840012.",
-  },
-  {
-    en: "Identified as a PM SHRI School.",
-    kn: "ಪಿಎಂ ಶ್ರೀ ಶಾಲೆಯಾಗಿ ಗುರುತಿಸಲ್ಪಟ್ಟಿದೆ.",
-  },
-  {
-    en: "Library, science and computer laboratories, music and art rooms, playgrounds and hostels for boys and girls.",
-    kn: "ಗ್ರಂಥಾಲಯ, ವಿಜ್ಞಾನ ಮತ್ತು ಕಂಪ್ಯೂಟರ್ ಪ್ರಯೋಗಾಲಯಗಳು, ಸಂಗೀತ ಮತ್ತು ಕಲಾ ಕೊಠಡಿಗಳು, ಆಟದ ಮೈದಾನಗಳು, ಹುಡುಗರು ಮತ್ತು ಹುಡುಗಿಯರಿಗೆ ವಸತಿಗೃಹಗಳು.",
-  },
-];
+const { photo, facts, founded } = pages.vidyalaya;
 ---
 
 <PageCover title={t(lang, "vidyalaya.title")} lede={t(lang, "vidyalaya.lede")}>
   <p class="cover-mark" slot="figure" aria-hidden="true">
-    1986
+    {founded}
   </p>
 </PageCover>
 
 <div class="container vidyalaya">
-  <Figure media={campus} locale={lang} ratio="16 / 9" />
+  {photo && <Figure media={photo} locale={lang} ratio="16 / 9" />}
 
-  <ul class="fact-list">
+  <dl class="fact-sheet">
     {facts.map((fact) => (
-      <li>{lx(fact, lang)}</li>
+      <div class:list={["fact", fact.wide && "fact--wide"]}>
+        <dt>{lx(fact.label, lang)}</dt>
+        <dd class="fact-value">{lx(fact.value, lang)}</dd>
+        {lx(fact.note, lang) !== "" && <dd class="fact-note">{lx(fact.note, lang)}</dd>}
+      </div>
     ))}
-  </ul>
+  </dl>
 
   <div class="vidyalaya-links">
     <p>
@@ -91,36 +63,83 @@ const facts = [
     padding-block: clamp(3rem, 6vw, 5rem) clamp(3rem, 7vw, 6rem);
   }
 
-  .fact-list {
-    list-style: none;
+  .fact-sheet {
     margin: var(--s-8) 0 0;
-    padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
-    gap: var(--s-6) var(--s-8);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-block-start: 2px solid var(--ink);
   }
 
-  .fact-list li {
-    padding-block-start: var(--s-4);
-    border-block-start: 2px solid var(--ink);
+  .fact {
+    display: grid;
+    align-content: start;
+    gap: var(--s-2);
+    padding: var(--s-5) var(--s-5) var(--s-6) 0;
+    border-block-end: 1px solid var(--rule);
+  }
+
+  .fact--wide {
+    grid-column: 1 / -1;
+  }
+
+  .fact dt {
+    font-size: var(--step--1);
+    font-weight: 700;
+    color: var(--accent-program);
+  }
+
+  .fact-value {
+    font-family: var(--font-display);
+    font-size: var(--step-3);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    text-wrap: balance;
+  }
+
+  .fact--wide .fact-value {
+    font-family: var(--font-body);
     font-size: var(--step-1);
     line-height: 1.5;
-    color: var(--ink);
+    letter-spacing: 0;
+    max-inline-size: 60ch;
+  }
+
+  .fact-note {
+    color: var(--text-2);
+    max-inline-size: 36ch;
+  }
+
+  :global(:lang(kn)) .fact-value {
+    letter-spacing: 0;
+    line-height: 1.35;
   }
 
   .vidyalaya-links {
     display: flex;
     flex-wrap: wrap;
     gap: var(--s-6);
-    margin-block-start: var(--s-8);
-    padding-block-start: var(--s-5);
-    border-block-start: 1px solid var(--rule);
+    margin-block-start: var(--s-7);
     font-weight: 600;
   }
 
   @media (max-width: 900px) {
     .cover-mark {
       justify-self: start;
+    }
+
+    .fact-sheet {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 560px) {
+    .fact-sheet {
+      grid-template-columns: 1fr;
+    }
+
+    .fact {
+      padding-inline-end: 0;
     }
   }
 </style>

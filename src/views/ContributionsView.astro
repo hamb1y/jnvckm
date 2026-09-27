@@ -5,7 +5,7 @@ import PageCover from "@/components/PageCover.astro";
 import { contributions, usedCategories } from "@/data/contributions";
 import { lx, t, tDynamic } from "@/i18n/utils";
 import { localePath } from "@/lib/paths";
-import { formatAmount, formatCount } from "@/utils/format";
+import { formatAmount } from "@/utils/format";
 import type { Locale } from "@/data/types";
 
 export interface Props {
@@ -24,7 +24,6 @@ const years = contributions
   .filter(Boolean)
   .sort();
 const recordedTotal = contributions.reduce((sum, entry) => sum + (entry.amount ?? 0), 0);
-const recordedCount = contributions.filter((entry) => entry.amount !== null).length;
 const range = years.length > 1 ? `${years[0]}–${years.at(-1)}` : (years[0] ?? "");
 ---
 
@@ -32,11 +31,6 @@ const range = years.length > 1 ? `${years[0]}–${years.at(-1)}` : (years[0] ?? 
   <div class="cover-figure" slot="figure">
     <span class="cover-figure-label">{t(lang, "home.given")}</span>
     <span class="cover-figure-value">{formatAmount(recordedTotal, lang)}</span>
-    <span class="cover-figure-note">
-      {t(lang, "home.givenNote")
-        .replace("{with}", formatCount(recordedCount, lang))
-        .replace("{all}", formatCount(total, lang))}
-    </span>
   </div>
 </PageCover>
 

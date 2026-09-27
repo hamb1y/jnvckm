@@ -24,14 +24,16 @@ const byYear = years.map((year) => ({
   year,
   entries: past.filter((entry) => entry.date.startsWith(year)),
 }));
+// "Past" only means something beside an "Upcoming" list; alone, the years are
+// the section headings.
+const YearHeading = upcoming.length > 0 ? "h3" : "h2";
 ---
 
 <PageCover title={t(lang, "events.title")} lede={t(lang, "events.lede")}>
   <div class="cover-figure" slot="figure">
-    <span class="cover-figure-label">{t(lang, "home.figures.events")}</span>
     <span class="cover-figure-value">{formatCount(events.length, lang)}</span>
     {years.length > 0 && (
-      <span class="cover-figure-note mono">
+      <span class="cover-figure-note">
         {years.at(-1)}–{years[0]}
       </span>
     )}
@@ -63,12 +65,14 @@ const byYear = years.map((year) => ({
 
 <section class="accent-brand">
   <div class="container">
-    <div class="section-head">
-      <h2 class="section-title">{t(lang, "events.past")}</h2>
-    </div>
+    {upcoming.length > 0 && (
+      <div class="section-head">
+        <h2 class="section-title">{t(lang, "events.past")}</h2>
+      </div>
+    )}
     {byYear.map(({ year, entries }) => (
       <div class="year-group">
-        <h3 class="year">{year}</h3>
+        <YearHeading class="year">{year}</YearHeading>
         <ul class="records">
           {entries.map((entry) => (
             <EntryRow
@@ -79,6 +83,7 @@ const byYear = years.map((year) => ({
               image={entry.image}
               meta={entry.location ? [lx(entry.location, lang)] : []}
               locale={lang}
+              omitYear
             />
           ))}
         </ul>
@@ -113,8 +118,18 @@ const byYear = years.map((year) => ({
     align-items: start;
   }
 
-  .year-group + .year-group {
-    margin-block-start: var(--s-8);
+  /* One continuous record: a year break is a heavier rule, not a gap with
+     two hairlines in it. */
+  .year-group {
+    border-block-start: 2px solid var(--ink);
+  }
+
+  .year-group:not(:last-child) :global(.ledger-row:last-child) {
+    border-block-end: 0;
+  }
+
+  .year-group :global(.ledger-row:first-child) {
+    border-block-start: 0;
   }
 
   .year {
@@ -126,7 +141,7 @@ const byYear = years.map((year) => ({
     line-height: 1;
     letter-spacing: -0.04em;
     color: var(--accent-program);
-    padding-block-start: var(--s-4);
+    padding-block: var(--s-5);
   }
 
   @media (max-width: 720px) {

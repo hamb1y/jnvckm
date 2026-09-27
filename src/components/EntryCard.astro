@@ -40,35 +40,38 @@ const {
 } = Astro.props;
 
 const display = formatDate(date, locale);
+// Keep hyphenated words whole, so "meet-up" never breaks after its hyphen.
+const titleParts = title.split(/(\S*-\S*)/).filter((part) => part !== "");
 ---
 
 <article class:list={["card", `accent-${accent}`, !image && "card--text"]}>
   {image && <Figure media={image} locale={locale} ratio={ratio} accent={accent} />}
-  {!image && display !== "" && <p class="card-date">{display}</p>}
+  {!image && display !== "" && (
+    <time class="card-date" datetime={date}>
+      {display}
+    </time>
+  )}
 
-  <div class="meta mono">
-    {display !== "" && (
-      <time class="date" datetime={date}>
-        {display}
-      </time>
-    )}
-    {label !== "" && (
-      <span class="label">
-        <span class="card-dot" aria-hidden="true" />
-        {label}
-      </span>
-    )}
-  </div>
+  {((image && display !== "") || label !== "") && (
+    <div class="meta">
+      {image && display !== "" && (
+        <time class="date" datetime={date}>
+          {display}
+        </time>
+      )}
+      {label !== "" && <span class="label">{label}</span>}
+    </div>
+  )}
 
   <h3 class="title">
     <a href={href}>
-      {title}
+      {titleParts.map((part) => (part.includes("-") ? <span class="nowrap">{part}</span> : part))}
       <ArrowUpRight size={17} stroke-width={1.6} aria-hidden="true" />
     </a>
   </h3>
 
   {summary !== "" && <p class="summary">{summary}</p>}
-  {location !== "" && <p class="place mono">{location}</p>}
+  {location !== "" && <p class="place">{location}</p>}
 </article>
 
 <style>
@@ -100,6 +103,7 @@ const display = formatDate(date, locale);
   }
 
   .card-date {
+    display: block;
     font-family: var(--font-display);
     font-weight: 700;
     font-size: var(--step-4);
@@ -114,17 +118,10 @@ const display = formatDate(date, locale);
     color: var(--brand-muted);
   }
 
-  .card--text .date {
-    color: var(--brand-muted);
-  }
-
   .card--text .label {
     color: var(--gold);
   }
 
-  .card--text .card-dot {
-    background: var(--gold);
-  }
 
   .card--text .title a {
     color: var(--brand-ink);
@@ -174,22 +171,20 @@ const display = formatDate(date, locale);
     font-weight: 600;
   }
 
-  .card-dot {
-    inline-size: 0.5rem;
-    block-size: 0.5rem;
-    border-radius: var(--r-pill);
-    background: var(--accent);
-    flex: none;
-  }
 
   .title {
     font-size: var(--step-2);
+    font-weight: 400;
     margin: 0;
   }
 
   .title a {
     color: var(--ink);
     text-decoration: none;
+  }
+
+  .nowrap {
+    white-space: nowrap;
   }
 
   /* Stretch the one link over the whole card. */

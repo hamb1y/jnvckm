@@ -1,4 +1,5 @@
 ---
+import type { MetaRow } from "@/components/EntryDetail.astro";
 import EntryDetail from "@/components/EntryDetail.astro";
 import EntryRow from "@/components/EntryRow.astro";
 import { eventBySlug, eventsForProgram } from "@/data/events";
@@ -16,12 +17,17 @@ const { lang, slug } = Astro.props;
 const entry = eventBySlug(slug);
 if (!entry) throw new Error(`Unknown event: ${slug}`);
 
-const meta: { label: string; value: string }[] = [];
+const meta: MetaRow[] = [];
 if (entry.location)
   meta.push({ label: t(lang, "common.location"), value: lx(entry.location, lang) });
 if (entry.program) {
   const program = programById(entry.program as "ignite" | "ncl");
-  if (program) meta.push({ label: t(lang, "common.program"), value: lx(program.name, lang) });
+  if (program)
+    meta.push({
+      label: t(lang, "common.program"),
+      value: lx(program.name, lang),
+      href: localePath(`/programs/${program.id}`, lang),
+    });
 }
 
 // Closure: the other documented records from the same program, newest first.

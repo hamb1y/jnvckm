@@ -1,31 +1,33 @@
 {
-  "slug": "financial-transparency-2012-2021",
-  "kind": "report",
-  "title": {
-    "en": "Financial transparency, 2012–2021",
-    "kn": "ಆರ್ಥಿಕ ಪಾರದರ್ಶಕತೆ, 2012–2021"
-  },
-  "date": "2021-09-01",
-  "summary": {
-    "en": "The cover of the association's 2012–2021 financial report, published so contributors can see where the money went.",
-    "kn": "ಕೊಡುಗೆ ನೀಡಿದವರಿಗೆ ಹಣ ಎಲ್ಲಿ ಹೋಗಿದೆ ಎಂಬುದು ಗೊತ್ತಾಗಲಿ ಎಂದು ಪ್ರಕಟಿಸಲಾದ, ಸಂಘದ 2012–2021ರ ಆರ್ಥಿಕ ವರದಿಯ ಮುಖಪುಟ."
-  },
-  "body": {
-    "en": "The 2012–2021 record sets out what the association collected, what it spent, and how each project was funded over the decade.\n\nThe association keeps the detailed accounts and publishes a summary so that anyone who contributes can see where the money went. The cover is with this record.",
-    "kn": "2012–2021ರ ದಾಖಲೆಯಲ್ಲಿ ಸಂಘವು ಎಷ್ಟು ಸಂಗ್ರಹಿಸಿತು, ಎಷ್ಟು ಖರ್ಚು ಮಾಡಿತು ಮತ್ತು ಪ್ರತಿ ಯೋಜನೆಗೆ ಹೇಗೆ ಹಣ ಒದಗಿಸಲಾಯಿತು ಎಂಬುದಿದೆ.\n\nಸಂಘವು ವಿವರವಾದ ಲೆಕ್ಕಗಳನ್ನು ಇಟ್ಟುಕೊಂಡು, ಸಾರಾಂಶವನ್ನು ಪ್ರಕಟಿಸುತ್ತದೆ — ಕೊಡುಗೆ ನೀಡುವ ಪ್ರತಿಯೊಬ್ಬರಿಗೂ ಹಣ ಎಲ್ಲಿ ಹೋಗಿದೆ ಎಂಬುದು ಗೊತ್ತಾಗಲಿ ಎಂದು. ಮುಖಪುಟದ ಚಿತ್ರ ಈ ದಾಖಲೆಯಲ್ಲಿದೆ."
-  },
-  "image": null,
-  "documents": [
-    {
-      "src": "/images/1.webp",
-      "alt": {
-        "en": "The cover of the association's 2012–2021 financial report, the document this record refers to.",
-        "kn": "ಈ ದಾಖಲೆ ಉಲ್ಲೇಖಿಸುವ, ಸಂಘದ 2012–2021ರ ಆರ್ಥಿಕ ವರದಿಯ ಮುಖಪುಟ."
-      },
-      "caption": {
-        "en": "Report cover, 2012–2021.",
-        "kn": "ವರದಿಯ ಮುಖಪುಟ, 2012–2021."
+  "en": {
+    "slug": "financial-transparency-2012-2021",
+    "kind": "report",
+    "title": "Financial transparency, 2012–2021",
+    "date": "2021-09-01",
+    "summary": "The cover of the association's 2012–2021 financial report, published so contributors can see where the money went.",
+    "body": "The 2012–2021 record sets out what the association collected, what it spent, and how each project was funded over the decade.\n\nThe association keeps the detailed accounts and publishes a summary so that anyone who contributes can see where the money went. The cover is with this record.",
+    "image": null,
+    "documents": [
+      {
+        "src": "/images/1.webp",
+        "alt": "The cover of the association's 2012–2021 financial report, the document this record refers to.",
+        "caption": "Report cover, 2012–2021."
       }
-    }
-  ]
+    ]
+  },
+  "kn": {
+    "kind": "report",
+    "title": "ಆರ್ಥಿಕ ಪಾರದರ್ಶಕತೆ, 2012–2021",
+    "date": "2021-09-01",
+    "summary": "ಕೊಡುಗೆ ನೀಡಿದವರಿಗೆ ಹಣ ಎಲ್ಲಿ ಹೋಗಿದೆ ಎಂಬುದು ಗೊತ್ತಾಗಲಿ ಎಂದು ಪ್ರಕಟಿಸಲಾದ, ಸಂಘದ 2012–2021ರ ಆರ್ಥಿಕ ವರದಿಯ ಮುಖಪುಟ.",
+    "body": "2012–2021ರ ದಾಖಲೆಯಲ್ಲಿ ಸಂಘವು ಎಷ್ಟು ಸಂಗ್ರಹಿಸಿತು, ಎಷ್ಟು ಖರ್ಚು ಮಾಡಿತು ಮತ್ತು ಪ್ರತಿ ಯೋಜನೆಗೆ ಹೇಗೆ ಹಣ ಒದಗಿಸಲಾಯಿತು ಎಂಬುದಿದೆ.\n\nಸಂಘವು ವಿವರವಾದ ಲೆಕ್ಕಗಳನ್ನು ಇಟ್ಟುಕೊಂಡು, ಸಾರಾಂಶವನ್ನು ಪ್ರಕಟಿಸುತ್ತದೆ — ಕೊಡುಗೆ ನೀಡುವ ಪ್ರತಿಯೊಬ್ಬರಿಗೂ ಹಣ ಎಲ್ಲಿ ಹೋಗಿದೆ ಎಂಬುದು ಗೊತ್ತಾಗಲಿ ಎಂದು. ಮುಖಪುಟದ ಚಿತ್ರ ಈ ದಾಖಲೆಯಲ್ಲಿದೆ.",
+    "image": null,
+    "documents": [
+      {
+        "src": "/images/1.webp",
+        "alt": "ಈ ದಾಖಲೆ ಉಲ್ಲೇಖಿಸುವ, ಸಂಘದ 2012–2021ರ ಆರ್ಥಿಕ ವರದಿಯ ಮುಖಪುಟ.",
+        "caption": "ವರದಿಯ ಮುಖಪುಟ, 2012–2021."
+      }
+    ]
+  }
 }

@@ -1,22 +1,26 @@
 {
-  "slug": "staff-support-2017",
-  "title": {
-    "en": "Support for a retiring staff member",
-    "kn": "ನಿವೃತ್ತಿ ಹೊಂದುತ್ತಿದ್ದ ಸಿಬ್ಬಂದಿಗೆ ಬೆಂಬಲ"
+  "en": {
+    "slug": "staff-support-2017",
+    "title": "Support for a retiring staff member",
+    "date": "2017-03-01",
+    "category": "staff-community",
+    "batch": null,
+    "amount": null,
+    "summary": "A monthly contribution scheme was organised for a D-staff member facing a run of family difficulties.",
+    "body": "",
+    "archiveNote": "Bank and payment details from the original appeal have been removed. The rest of the record is unchanged.",
+    "image": null,
+    "documents": []
   },
-  "date": "2017-03-01",
-  "category": "staff-community",
-  "batch": null,
-  "amount": null,
-  "summary": {
-    "en": "A monthly contribution scheme was organised for a D-staff member facing a run of family difficulties.",
-    "kn": "ಒಂದಾದ ಮೇಲೊಂದು ಕುಟುಂಬದ ಕಷ್ಟ ಎದುರಿಸುತ್ತಿದ್ದ ಡಿ-ಸಿಬ್ಬಂದಿಗೆ ಮಾಸಿಕ ಕೊಡುಗೆ ಯೋಜನೆಯನ್ನು ಆಯೋಜಿಸಲಾಯಿತು."
-  },
-  "body": "",
-  "archiveNote": {
-    "en": "Bank and payment details from the original appeal have been removed. The rest of the record is unchanged.",
-    "kn": "ಮೂಲ ಮನವಿಯಲ್ಲಿದ್ದ ಬ್ಯಾಂಕ್ ಮತ್ತು ಪಾವತಿ ವಿವರಗಳನ್ನು ತೆಗೆದುಹಾಕಲಾಗಿದೆ. ಉಳಿದ ದಾಖಲೆ ಹಾಗೆಯೇ ಇದೆ."
-  },
-  "image": null,
-  "documents": []
+  "kn": {
+    "title": "ನಿವೃತ್ತಿ ಹೊಂದುತ್ತಿದ್ದ ಸಿಬ್ಬಂದಿಗೆ ಬೆಂಬಲ",
+    "date": "2017-03-01",
+    "category": "staff-community",
+    "batch": null,
+    "amount": null,
+    "summary": "ಒಂದಾದ ಮೇಲೊಂದು ಕುಟುಂಬದ ಕಷ್ಟ ಎದುರಿಸುತ್ತಿದ್ದ ಡಿ-ಸಿಬ್ಬಂದಿಗೆ ಮಾಸಿಕ ಕೊಡುಗೆ ಯೋಜನೆಯನ್ನು ಆಯೋಜಿಸಲಾಯಿತು.",
+    "archiveNote": "ಮೂಲ ಮನವಿಯಲ್ಲಿದ್ದ ಬ್ಯಾಂಕ್ ಮತ್ತು ಪಾವತಿ ವಿವರಗಳನ್ನು ತೆಗೆದುಹಾಕಲಾಗಿದೆ. ಉಳಿದ ದಾಖಲೆ ಹಾಗೆಯೇ ಇದೆ.",
+    "image": null,
+    "documents": []
+  }
 }

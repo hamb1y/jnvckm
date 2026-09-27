@@ -1,22 +1,26 @@
 {
-  "slug": "solar-lights-girls-dormitories",
-  "title": {
-    "en": "Indoor solar lights for the girls' dormitories",
-    "kn": "ಹುಡುಗಿಯರ ವಸತಿಗೃಹಗಳಿಗೆ ಒಳಾಂಗಣ ಸೌರ ದೀಪಗಳು"
+  "en": {
+    "slug": "solar-lights-girls-dormitories",
+    "title": "Indoor solar lights for the girls' dormitories",
+    "date": "2016-06-13",
+    "category": "infrastructure",
+    "batch": "5th batch",
+    "amount": 250000,
+    "summary": "Power failures during exam season interrupted study. The 5th batch put solar lighting in the girls' dormitories.",
+    "body": "This project was undertaken by the 5th batch in association with Menda Foundation with a total cost of ₹2.50 lakhs.\n\n**Problem Solved:**\nPower problems in girls' dormitory during exam time due to frequent power failures.\n\nThe Alumni Association wishes the 5th batch, led by Arun Gowda, all the best for their continued support.\n\n---",
+    "archiveNote": null,
+    "image": null,
+    "documents": []
   },
-  "date": "2016-06-13",
-  "category": "infrastructure",
-  "batch": {
-    "en": "5th batch",
-    "kn": "5ನೇ ಬ್ಯಾಚ್"
-  },
-  "amount": 250000,
-  "summary": {
-    "en": "Power failures during exam season interrupted study. The 5th batch put solar lighting in the girls' dormitories.",
-    "kn": "ಪರೀಕ್ಷಾ ಸಮಯದಲ್ಲಿ ವಿದ್ಯುತ್ ವೈಫಲ್ಯ ಓದಿಗೆ ಅಡ್ಡಿಯಾಗುತ್ತಿತ್ತು. 5ನೇ ಬ್ಯಾಚ್ ಹುಡುಗಿಯರ ವಸತಿಗೃಹಗಳಿಗೆ ಸೌರ ದೀಪ ಅಳವಡಿಸಿತು."
-  },
-  "body": "This project was undertaken by the 5th batch in association with Menda Foundation with a total cost of ₹2.50 lakhs.\n\n**Problem Solved:**\nPower problems in girls' dormitory during exam time due to frequent power failures.\n\nThe Alumni Association wishes the 5th batch, led by Arun Gowda, all the best for their continued support.\n\n---",
-  "archiveNote": null,
-  "image": null,
-  "documents": []
+  "kn": {
+    "title": "ಹುಡುಗಿಯರ ವಸತಿಗೃಹಗಳಿಗೆ ಒಳಾಂಗಣ ಸೌರ ದೀಪಗಳು",
+    "date": "2016-06-13",
+    "category": "infrastructure",
+    "batch": "5ನೇ ಬ್ಯಾಚ್",
+    "amount": 250000,
+    "summary": "ಪರೀಕ್ಷಾ ಸಮಯದಲ್ಲಿ ವಿದ್ಯುತ್ ವೈಫಲ್ಯ ಓದಿಗೆ ಅಡ್ಡಿಯಾಗುತ್ತಿತ್ತು. 5ನೇ ಬ್ಯಾಚ್ ಹುಡುಗಿಯರ ವಸತಿಗೃಹಗಳಿಗೆ ಸೌರ ದೀಪ ಅಳವಡಿಸಿತು.",
+    "archiveNote": null,
+    "image": null,
+    "documents": []
+  }
 }

@@ -8,11 +8,12 @@ import { recentActivity } from "@/data/activity";
 import { contributions } from "@/data/contributions";
 import { events } from "@/data/events";
 import { programs } from "@/data/programs";
+import { pages } from "@/data/pages";
 import { site } from "@/data/site";
 import { lx, t } from "@/i18n/utils";
 import { localePath } from "@/lib/paths";
 import { formatAmount, formatCount, formatDate } from "@/utils/format";
-import type { Locale, Media } from "@/data/types";
+import type { Locale } from "@/data/types";
 import type { UIKey } from "@/i18n/ui";
 
 export interface Props {
@@ -25,28 +26,10 @@ const KIND_LABEL: Record<string, UIKey> = {
   news: "posts.kind.news",
   report: "posts.kind.report",
   story: "posts.kind.story",
-  event: "nav.events",
+  event: "posts.kind.event",
 };
 
-const hero: Media = {
-  src: "/images/hero-1.webp",
-  alt: {
-    en: "Students in uniform walking together along a campus path.",
-    kn: "ಶಾಲಾ ಸಮವಸ್ತ್ರದಲ್ಲಿ ವಿದ್ಯಾರ್ಥಿಗಳು ಆವರಣದ ಹಾದಿಯಲ್ಲಿ ಜೊತೆಯಾಗಿ ನಡೆಯುತ್ತಿದ್ದಾರೆ.",
-  },
-  caption: {
-    en: "On the campus at Seegodu.",
-    kn: "ಸೀಗೋಡುವಿನ ಆವರಣದಲ್ಲಿ.",
-  },
-};
-
-const lab: Media = {
-  src: "/images/img-20181205-wa0096.webp",
-  alt: {
-    en: "Tables, stools and STEM artwork inside the Atal Tinkering Lab.",
-    kn: "ಅಟಲ್ ಟಿಂಕರಿಂಗ್ ಲ್ಯಾಬ್ ಒಳಗೆ ಮೇಜುಗಳು, ಸ್ಟೂಲ್‌ಗಳು ಮತ್ತು ವಿಜ್ಞಾನ ಕಲಾಕೃತಿಗಳು.",
-  },
-};
+const { hero, lab, campus } = pages.home;
 
 // The giving record, newest first, with one photograph to lead it. Records with
 // no recorded figure keep their row and an empty figure column, so the list and
@@ -56,11 +39,9 @@ const givingYears = contributions
   .map((entry) => entry.date.slice(0, 4))
   .filter(Boolean)
   .sort();
-// The ledger is the centrepiece, so it leads with the total. Only nine of the
-// twelve records state an amount, so the label says "recorded" and the note
-// says how many. Never present this as total giving.
+// The ledger is the centrepiece, so it leads with the total: the sum of the
+// amounts the records state. Records without a stated amount add nothing.
 const recordedTotal = contributions.reduce((sum, entry) => sum + (entry.amount ?? 0), 0);
-const recordedCount = contributions.filter((entry) => entry.amount !== null).length;
 const largestAmount = Math.max(1, ...contributions.map((entry) => entry.amount ?? 0));
 const givingRange =
   givingYears.length > 1 ? `${givingYears[0]}–${givingYears.at(-1)}` : (givingYears[0] ?? "");
@@ -76,18 +57,13 @@ const givingSummary = t(lang, "impact.summary")
 const latest = recentActivity(Infinity)
   .filter((item) => item.kind !== "contribution")
   .slice(0, 3);
+// A kind label only helps when the cards are of different kinds.
+const mixedKinds = new Set(latest.map((item) => item.kind)).size > 1;
 
 const ignite = programs.find((program) => program.id === "ignite");
 const ncl = programs.find((program) => program.id === "ncl");
 const hamRadio = events.find((entry) => entry.slug === "ham-radio-workshop-2015");
 
-const campus: Media = {
-  src: "/images/img2.webp",
-  alt: {
-    en: "Students seated in rows in the school hall.",
-    kn: "ಶಾಲಾ ಸಭಾಂಗಣದಲ್ಲಿ ಸಾಲಾಗಿ ಕುಳಿತಿರುವ ವಿದ್ಯಾರ್ಥಿಗಳು.",
-  },
-};
 ---
 
 <article class="home">
@@ -96,8 +72,7 @@ const campus: Media = {
     <div class="container">
       <div class="hero-grid">
         <div class="hero-copy">
-          <p class="hero-year">1993</p>
-          <p class="eyebrow hero-eyebrow">{t(lang, "site.formedShort")}</p>
+          <p class="hero-year">{site.formed}</p>
           <h1>{lx(site.name, lang)}</h1>
           <p class="hero-line">{lx(site.tagline, lang)}</p>
           <p class="hero-body">{t(lang, "home.heroBody")}</p>
@@ -113,7 +88,7 @@ const campus: Media = {
         </div>
 
         <div class="hero-media">
-          <Figure media={hero} locale={lang} ratio="4 / 5" priority={true} showCaption={true} />
+          {hero && <Figure media={hero} locale={lang} ratio="4 / 5" priority={true} showCaption={true} />}
         </div>
       </div>
 
@@ -134,7 +109,7 @@ const campus: Media = {
           <dd>
             {formatCount(programs.length, lang)}
             <span class="hero-figure-note mono">
-              {programs.map((program) => lx(program.shortName ?? program.name, lang)).join(" · ")}
+              {programs.map((program) => (program.shortName && lx(program.shortName, lang)) || lx(program.name, lang)).join(" · ")}
             </span>
           </dd>
         </div>
@@ -152,13 +127,8 @@ const campus: Media = {
           <span class="given-label">{t(lang, "home.given")}</span>
           <span class="given-total">{formatAmount(recordedTotal, lang)}</span>
         </p>
-        <p class="given-note">
-          {t(lang, "home.givenNote")
-            .replace("{with}", formatCount(recordedCount, lang))
-            .replace("{all}", formatCount(contributions.length, lang))}
-        </p>
         <div class="giving-media">
-          <Figure media={lab} locale={lang} ratio="4 / 3" showCaption={true} />
+          {lab && <Figure media={lab} locale={lang} ratio="4 / 3" showCaption={true} />}
         </div>
         <a class="more" href={localePath("/contributions", lang)}>
           {t(lang, "common.allContributions")}
@@ -230,7 +200,6 @@ const campus: Media = {
           <article class="program program--panel">
             <div class="program-panel">
               <p class="panel-mark">{ncl.shortName ? lx(ncl.shortName, lang) : ""}</p>
-              <p class="panel-name">{lx(ncl.name, lang)}</p>
               <p class="panel-years">{lx(ncl.startNote, lang)}</p>
             </div>
             <div class="program-main">
@@ -267,7 +236,7 @@ const campus: Media = {
               title={lx(item.title, lang)}
               summary={lx(item.summary, lang)}
               date={item.date}
-              label={t(lang, KIND_LABEL[item.kind])}
+              label={mixedKinds ? t(lang, KIND_LABEL[item.kind]) : ""}
               image={item.image}
               locale={lang}
             />
@@ -282,13 +251,12 @@ const campus: Media = {
   <section class="accent-brand origin-section">
     <div class="container origin">
       <div class="origin-media">
-        <Figure media={campus} locale={lang} ratio="4 / 3" />
+        {campus && <Figure media={campus} locale={lang} ratio="4 / 3" />}
       </div>
       <div class="origin-copy">
         <p class="origin-year" aria-hidden="true">
           1986
         </p>
-        <p class="eyebrow">{t(lang, "nav.vidyalaya")}</p>
         <h2>{t(lang, "home.vidyalayaTitle")}</h2>
         <p>{t(lang, "home.vidyalayaLede")}</p>
         <a class="more" href={localePath("/vidyalaya", lang)}>
@@ -300,7 +268,6 @@ const campus: Media = {
   </section>
 
   <CTABand
-    kicker={t(lang, "site.formedShort")}
     title={t(lang, "home.connectTitle")}
     body={t(lang, "home.connectLede")}
     primaryHref={localePath("/connect", lang)}
@@ -332,10 +299,6 @@ const campus: Media = {
     margin: 0 0 0 -0.04em;
     color: var(--gold);
     font-variant-numeric: lining-nums;
-  }
-
-  .hero-eyebrow {
-    margin-block-start: var(--s-6);
   }
 
   .hero-copy h1 {
@@ -427,7 +390,8 @@ const campus: Media = {
   }
 
   .hero-figure-note {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
+    font-variant-numeric: tabular-nums;
     font-weight: 400;
     font-size: var(--step--1);
     letter-spacing: 0;
@@ -454,7 +418,7 @@ const campus: Media = {
   .given {
     display: grid;
     gap: var(--s-2);
-    margin: var(--s-6) 0 0;
+    margin: var(--s-6) 0 var(--s-7);
     padding-block-start: var(--s-5);
     border-block-start: 1px solid var(--rule-strong);
   }
@@ -472,12 +436,6 @@ const campus: Media = {
     letter-spacing: -0.04em;
     color: var(--accent-give);
     font-variant-numeric: tabular-nums;
-  }
-
-  .given-note {
-    margin: var(--s-3) 0 var(--s-6);
-    color: var(--text-3);
-    font-size: var(--step--1);
   }
 
   .giving-media {
@@ -582,13 +540,6 @@ const campus: Media = {
     margin-block-end: auto;
   }
 
-  .panel-name {
-    font-family: var(--font-display);
-    font-size: var(--step-3);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-  }
-
   .panel-years {
     font-size: var(--step--1);
     color: var(--ink);
@@ -630,7 +581,7 @@ const campus: Media = {
     max-inline-size: 16ch;
   }
 
-  .origin-copy p:not(.eyebrow, .origin-year) {
+  .origin-copy p:not(.origin-year) {
     color: var(--text-2);
     font-size: var(--step-1);
     line-height: 1.55;

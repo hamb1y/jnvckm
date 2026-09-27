@@ -1,23 +1,23 @@
 {
-  "slug": "career-guidance-workshop-2006",
-  "title": {
-    "en": "Career and guidance workshop",
-    "kn": "ವೃತ್ತಿ ಮತ್ತು ಮಾರ್ಗದರ್ಶನ ಕಾರ್ಯಾಗಾರ"
+  "en": {
+    "slug": "career-guidance-workshop-2006",
+    "title": "Career and guidance workshop",
+    "date": "2006-12-02",
+    "program": null,
+    "location": "JNV Balehonnur",
+    "summary": "The career workshop IGNITE grew from.",
+    "body": "IGNITE grew from this career-guidance workshop. Alumni returned to the Vidyalaya to speak with students of classes 10 to 12 about what comes after school.",
+    "image": null,
+    "documents": []
   },
-  "date": "2006-12-02",
-  "program": null,
-  "location": {
-    "en": "JNV Balehonnur",
-    "kn": "ಜೆಎನ್‌ವಿ ಬಾಳೆಹೊನ್ನೂರು"
-  },
-  "summary": {
-    "en": "The association's earliest documented career workshop, and where IGNITE began.",
-    "kn": "ಸಂಘದ ದಾಖಲಿತ ಮೊದಲ ವೃತ್ತಿ ಕಾರ್ಯಾಗಾರ; ಇಗ್ನೈಟ್ ಇಲ್ಲಿಂದಲೇ ಆರಂಭವಾಯಿತು."
-  },
-  "body": {
-    "en": "This was the association's first documented career-guidance workshop, and the point the programme that became IGNITE grew from. Alumni returned to the Vidyalaya to speak with students of classes 10 to 12 about what comes after school.",
-    "kn": "ಇದು ಸಂಘದ ದಾಖಲಿತ ಮೊದಲ ವೃತ್ತಿ ಮಾರ್ಗದರ್ಶನ ಕಾರ್ಯಾಗಾರ; ಇದೇ ಮುಂದೆ ಇಗ್ನೈಟ್ ಆಗಿ ಬೆಳೆಯಿತು. ಶಾಲೆಯ ನಂತರದ ದಾರಿಗಳ ಬಗ್ಗೆ 10ರಿಂದ 12ನೇ ತರಗತಿಯ ವಿದ್ಯಾರ್ಥಿಗಳೊಂದಿಗೆ ಮಾತನಾಡಲು ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳು ವಿದ್ಯಾಲಯಕ್ಕೆ ಮರಳಿದರು."
-  },
-  "image": null,
-  "documents": []
+  "kn": {
+    "title": "ವೃತ್ತಿ ಮತ್ತು ಮಾರ್ಗದರ್ಶನ ಕಾರ್ಯಾಗಾರ",
+    "date": "2006-12-02",
+    "program": null,
+    "location": "ಜೆಎನ್‌ವಿ ಬಾಳೆಹೊನ್ನೂರು",
+    "summary": "ಇಗ್ನೈಟ್ ಬೆಳೆದು ಬಂದ ವೃತ್ತಿ ಕಾರ್ಯಾಗಾರ.",
+    "body": "ಇಗ್ನೈಟ್ ಬೆಳೆದು ಬಂದದ್ದು ಈ ವೃತ್ತಿ ಮಾರ್ಗದರ್ಶನ ಕಾರ್ಯಾಗಾರದಿಂದ. ಶಾಲೆಯ ನಂತರದ ದಾರಿಗಳ ಬಗ್ಗೆ 10ರಿಂದ 12ನೇ ತರಗತಿಯ ವಿದ್ಯಾರ್ಥಿಗಳೊಂದಿಗೆ ಮಾತನಾಡಲು ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳು ವಿದ್ಯಾಲಯಕ್ಕೆ ಮರಳಿದರು.",
+    "image": null,
+    "documents": []
+  }
 }

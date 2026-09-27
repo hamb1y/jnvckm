@@ -21,6 +21,7 @@ import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import YAML from "yaml";
+import { isLocaleFile } from "../src/data/locales.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const SCHEMA_URL = "https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json";
@@ -86,11 +87,11 @@ export async function checkCmsConfig({ root = ROOT } = {}) {
       problems.push(`i18n.structure "${config.i18n.structure}" is not a known value`);
     }
     const contentLocales = new Set();
-    const ui = await readFile(path.join(root, "src/i18n/ui.ts"), "utf8").catch(() => "");
-    for (const match of ui.matchAll(/^  (\w+): \{/gm)) contentLocales.add(match[1]);
+    const copy = JSON.parse(await readFile(path.join(root, "content/copy.json"), "utf8").catch(() => "{}"));
+    for (const locale of Object.keys(copy)) contentLocales.add(locale);
     for (const locale of config.i18n.locales ?? []) {
       if (contentLocales.size && !contentLocales.has(locale)) {
-        problems.push(`i18n locale "${locale}" has no dictionary in src/i18n/ui.ts`);
+        problems.push(`i18n locale "${locale}" has no block in content/copy.json`);
       }
     }
     if (!config.i18n.locales?.includes(config.i18n.default_locale)) {
@@ -124,53 +125,44 @@ export async function checkCmsConfig({ root = ROOT } = {}) {
   }
 
   // --- coverage: every content field must be declared ----------------------
-  const fieldNames = (fields) => new Set((fields ?? []).map((f) => f.name));
-  const subFields = (fields, name) => fieldNames((fields ?? []).find((f) => f.name === name)?.fields);
+  // Files keep one block per locale; each block is checked against the fields,
+  // down through objects and lists.
+  const undeclared = (data, fields, where, out) => {
+    if (typeof data !== "object" || data === null || Array.isArray(data)) return;
+    for (const [key, value] of Object.entries(data)) {
+      const field = (fields ?? []).find((f) => f.name === key);
+      if (!field) {
+        out.add(`${where}"${key}"`);
+        continue;
+      }
+      if (field.widget === "object") undeclared(value, field.fields, `${where}${key}.`, out);
+      if (field.widget === "list" && field.fields && Array.isArray(value)) {
+        for (const item of value) undeclared(item, field.fields, `${where}${key}[].`, out);
+      }
+    }
+  };
+  const blocks = (data) => (isLocaleFile(data) ? Object.values(data) : [data]);
 
   for (const collection of config.collections ?? []) {
-    if (collection.files) {
-      for (const file of collection.files) {
-        const data = JSON.parse(await readFile(path.join(root, file.file), "utf8"));
-        const declared = fieldNames(file.fields);
-        for (const key of Object.keys(data)) {
-          if (!declared.has(key)) problems.push(`${file.file}: "${key}" is not declared, so a save would drop it`);
-        }
-        for (const [name, keys] of [
-          ["contact", Object.keys(data.contact ?? {})],
-          ["donations", Object.keys(data.donations ?? {})],
-        ]) {
-          const declaredSub = subFields(file.fields, name);
-          for (const key of keys) {
-            if (!declaredSub.has(key)) problems.push(`${file.file} ${name}: "${key}" is not declared`);
-          }
-        }
-        for (const social of data.socials ?? []) {
-          const declaredSub = subFields(file.fields, "socials");
-          for (const key of Object.keys(social)) {
-            if (!declaredSub.has(key)) problems.push(`${file.file} socials[]: "${key}" is not declared`);
-          }
-        }
+    const entries = collection.files
+      ? collection.files.map((file) => ({ path: file.file, fields: file.fields, label: file.file }))
+      : (await readdir(path.join(root, collection.folder)).catch(() => []))
+          .filter((f) => f.endsWith(".json"))
+          .map((f) => ({ path: path.join(collection.folder, f), fields: collection.fields, label: collection.name }));
+    const found = new Map();
+    for (const entry of entries) {
+      const data = JSON.parse(await readFile(path.join(root, entry.path), "utf8"));
+      if (collection.i18n && config.i18n && !isLocaleFile(data)) {
+        problems.push(`${entry.path}: not in the per-locale shape the CMS saves (\{ en: …, kn: … \})`);
       }
-      continue;
+      const out = found.get(entry.label) ?? new Set();
+      for (const block of blocks(data)) undeclared(block, entry.fields, "", out);
+      found.set(entry.label, out);
     }
-    const dir = path.join(root, collection.folder);
-    const files = (await readdir(dir).catch(() => [])).filter((f) => f.endsWith(".json"));
-    const declared = fieldNames(collection.fields);
-    const undeclared = new Set();
-    const undeclaredImage = new Set();
-    const undeclaredDoc = new Set();
-    for (const file of files) {
-      const data = JSON.parse(await readFile(path.join(dir, file), "utf8"));
-      for (const key of Object.keys(data)) if (!declared.has(key)) undeclared.add(key);
-      if (data.image) for (const key of Object.keys(data.image)) if (!subFields(collection.fields, "image").has(key)) undeclaredImage.add(key);
-      for (const doc of data.documents ?? []) {
-        for (const key of Object.keys(doc)) if (!subFields(collection.fields, "documents").has(key)) undeclaredDoc.add(key);
-      }
+    for (const [label, keys] of found) {
+      for (const key of keys) problems.push(`${label}: ${key} is not declared, so a save would drop it`);
     }
-    for (const key of undeclared) problems.push(`${collection.name}: "${key}" is not declared, so a save would drop it`);
-    for (const key of undeclaredImage) problems.push(`${collection.name}.image: "${key}" is not declared`);
-    for (const key of undeclaredDoc) problems.push(`${collection.name}.documents[]: "${key}" is not declared`);
-    notes.push(`${collection.name}: ${files.length} files, ${declared.size} declared fields`);
+    if (collection.folder) notes.push(`${collection.name}: ${entries.length} files, ${collection.fields.length} declared fields`);
   }
 
   return { problems, notes, config, configPath };

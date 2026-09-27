@@ -1,4 +1,5 @@
 ---
+import type { MetaRow } from "@/components/EntryDetail.astro";
 import EntryDetail from "@/components/EntryDetail.astro";
 import { postBySlug } from "@/data/posts";
 import { lx, t } from "@/i18n/utils";
@@ -21,7 +22,7 @@ const KIND_LABEL: Record<string, UIKey> = {
   story: "posts.kind.story",
 };
 
-const meta: { label: string; value: string }[] = [
+const meta: MetaRow[] = [
   { label: t(lang, "common.category"), value: t(lang, KIND_LABEL[entry.kind]) },
 ];
 if (entry.author && lx(entry.author, lang) !== "") {

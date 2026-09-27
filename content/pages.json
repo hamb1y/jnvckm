@@ -1,0 +1,172 @@
+{
+  "en": {
+    "home": {
+      "hero": {
+        "src": "/images/hero-1.webp",
+        "alt": "Students in uniform walking together along a campus path.",
+        "caption": "On the campus at Seegodu."
+      },
+      "lab": {
+        "src": "/images/img-20181205-wa0096.webp",
+        "alt": "Tables, stools and STEM artwork inside the Atal Tinkering Lab."
+      },
+      "campus": {
+        "src": "/images/img2.webp",
+        "alt": "Students seated in rows in the school hall."
+      }
+    },
+    "about": {
+      "photo": {
+        "src": "/images/23116700-10212457321081858-6312346336155469781-o.webp",
+        "alt": "A large group photographed together on a sports ground, with trophies on the grass in front."
+      },
+      "work": [
+        {
+          "item": "IGNITE — student-development and career-guidance sessions for classes 10 to 12"
+        },
+        {
+          "item": "The Navodaya Cricket League — an annual alumni tournament built around batches"
+        },
+        {
+          "item": "The annual campus meet, reunions and city meet-ups"
+        },
+        {
+          "item": "Batch representatives who carry news to their own batchmates"
+        },
+        {
+          "item": "Batch-led school projects — lighting, classrooms, laboratories, audio-visual and cultural facilities"
+        },
+        {
+          "item": "Support for students, staff and families in difficulty"
+        }
+      ]
+    },
+    "vidyalaya": {
+      "founded": 1986,
+      "photo": {
+        "src": "/images/img4.webp",
+        "alt": "Teachers and staff photographed together in front of a school building."
+      },
+      "facts": [
+        {
+          "label": "Founded",
+          "value": "1986",
+          "note": "Among the earlier Jawahar Navodaya Vidyalayas."
+        },
+        {
+          "label": "Campus",
+          "value": "Seegodu",
+          "note": "About 5 km from Balehonnur. The school began at the Coffee Research Station in Koppa Taluk and moved here."
+        },
+        {
+          "label": "Classes",
+          "value": "6 to 12",
+          "note": "Fully residential, co-educational, English medium."
+        },
+        {
+          "label": "Managed by",
+          "value": "Navodaya Vidyalaya Samiti",
+          "note": "Ministry of Education, Government of India."
+        },
+        {
+          "label": "CBSE affiliation",
+          "value": "840012"
+        },
+        {
+          "label": "Recognition",
+          "value": "PM SHRI School"
+        },
+        {
+          "label": "Facilities",
+          "value": "Library, science and computer laboratories, music and art rooms, playgrounds and hostels for boys and girls.",
+          "wide": true
+        }
+      ]
+    }
+  },
+  "kn": {
+    "home": {
+      "hero": {
+        "src": "/images/hero-1.webp",
+        "alt": "ಶಾಲಾ ಸಮವಸ್ತ್ರದಲ್ಲಿ ವಿದ್ಯಾರ್ಥಿಗಳು ಆವರಣದ ಹಾದಿಯಲ್ಲಿ ಜೊತೆಯಾಗಿ ನಡೆಯುತ್ತಿದ್ದಾರೆ.",
+        "caption": "ಸೀಗೋಡುವಿನ ಆವರಣದಲ್ಲಿ."
+      },
+      "lab": {
+        "src": "/images/img-20181205-wa0096.webp",
+        "alt": "ಅಟಲ್ ಟಿಂಕರಿಂಗ್ ಲ್ಯಾಬ್ ಒಳಗೆ ಮೇಜುಗಳು, ಸ್ಟೂಲ್‌ಗಳು ಮತ್ತು ವಿಜ್ಞಾನ ಕಲಾಕೃತಿಗಳು."
+      },
+      "campus": {
+        "src": "/images/img2.webp",
+        "alt": "ಶಾಲಾ ಸಭಾಂಗಣದಲ್ಲಿ ಸಾಲಾಗಿ ಕುಳಿತಿರುವ ವಿದ್ಯಾರ್ಥಿಗಳು."
+      }
+    },
+    "about": {
+      "photo": {
+        "src": "/images/23116700-10212457321081858-6312346336155469781-o.webp",
+        "alt": "ಕ್ರೀಡಾ ಮೈದಾನದಲ್ಲಿ ಒಟ್ಟಿಗೆ ಚಿತ್ರೀಕರಿಸಿಕೊಂಡ ದೊಡ್ಡ ಗುಂಪು; ಮುಂದೆ ಹುಲ್ಲಿನ ಮೇಲೆ ಟ್ರೋಫಿಗಳು."
+      },
+      "work": [
+        {
+          "item": "ಇಗ್ನೈಟ್ — 10ರಿಂದ 12ನೇ ತರಗತಿ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಅಭಿವೃದ್ಧಿ ಮತ್ತು ವೃತ್ತಿ ಮಾರ್ಗದರ್ಶನ ಅವಧಿಗಳು"
+        },
+        {
+          "item": "ನವೋದಯ ಕ್ರಿಕೆಟ್ ಲೀಗ್ — ಬ್ಯಾಚ್‌ಗಳ ಸುತ್ತ ನಡೆಯುವ ವಾರ್ಷಿಕ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಪಂದ್ಯಾವಳಿ"
+        },
+        {
+          "item": "ವಾರ್ಷಿಕ ಆವರಣ ಸಮಾವೇಶ, ಪುನರ್ಮಿಲನಗಳು ಮತ್ತು ನಗರ ಭೇಟಿಗಳು"
+        },
+        {
+          "item": "ಸಂಘದ ಸುದ್ದಿಯನ್ನು ತಮ್ಮ ಬ್ಯಾಚ್‌ ಸ್ನೇಹಿತರಿಗೆ ತಲುಪಿಸುವ ಬ್ಯಾಚ್ ಪ್ರತಿನಿಧಿಗಳು"
+        },
+        {
+          "item": "ಬ್ಯಾಚ್‌ಗಳ ಶಾಲಾ ಯೋಜನೆಗಳು — ಬೆಳಕು, ತರಗತಿ ಕೊಠಡಿ, ಪ್ರಯೋಗಾಲಯ, ಶ್ರವ್ಯ-ದೃಶ್ಯ ಮತ್ತು ಸಾಂಸ್ಕೃತಿಕ ಸೌಲಭ್ಯಗಳು"
+        },
+        {
+          "item": "ಕಷ್ಟದಲ್ಲಿರುವ ವಿದ್ಯಾರ್ಥಿಗಳು, ಸಿಬ್ಬಂದಿ ಮತ್ತು ಕುಟುಂಬಗಳಿಗೆ ಸಹಾಯ"
+        }
+      ]
+    },
+    "vidyalaya": {
+      "founded": 1986,
+      "photo": {
+        "src": "/images/img4.webp",
+        "alt": "ಶಾಲಾ ಕಟ್ಟಡದ ಮುಂಭಾಗದಲ್ಲಿ ಒಟ್ಟಿಗೆ ಚಿತ್ರೀಕರಿಸಲಾದ ಶಿಕ್ಷಕರು ಮತ್ತು ಸಿಬ್ಬಂದಿ."
+      },
+      "facts": [
+        {
+          "label": "ಸ್ಥಾಪನೆ",
+          "value": "1986",
+          "note": "ಹಳೆಯ ಜವಾಹರ ನವೋದಯ ವಿದ್ಯಾಲಯಗಳಲ್ಲಿ ಒಂದು."
+        },
+        {
+          "label": "ಆವರಣ",
+          "value": "ಸೀಗೋಡು",
+          "note": "ಬಾಳೆಹೊನ್ನೂರಿನಿಂದ ಸುಮಾರು 5 ಕಿ.ಮೀ. ದೂರ. ವಿದ್ಯಾಲಯ ಕೊಪ್ಪ ತಾಲೂಕಿನ ಕಾಫಿ ಸಂಶೋಧನಾ ಕೇಂದ್ರದಲ್ಲಿ ಆರಂಭವಾಗಿ ಇಲ್ಲಿಗೆ ಸ್ಥಳಾಂತರಗೊಂಡಿತು."
+        },
+        {
+          "label": "ತರಗತಿಗಳು",
+          "value": "6ರಿಂದ 12",
+          "note": "ಸಂಪೂರ್ಣ ವಸತಿ ಶಾಲೆ, ಸಹ-ಶಿಕ್ಷಣ, ಇಂಗ್ಲಿಷ್ ಮಾಧ್ಯಮ."
+        },
+        {
+          "label": "ಆಡಳಿತ",
+          "value": "ನವೋದಯ ವಿದ್ಯಾಲಯ ಸಮಿತಿ",
+          "note": "ಶಿಕ್ಷಣ ಸಚಿವಾಲಯ, ಭಾರತ ಸರ್ಕಾರ."
+        },
+        {
+          "label": "ಸಿಬಿಎಸ್‌ಇ ಸಂಲಗ್ನತೆ",
+          "value": "840012"
+        },
+        {
+          "label": "ಮಾನ್ಯತೆ",
+          "value": "ಪಿಎಂ ಶ್ರೀ ಶಾಲೆ"
+        },
+        {
+          "label": "ಸೌಲಭ್ಯಗಳು",
+          "value": "ಗ್ರಂಥಾಲಯ, ವಿಜ್ಞಾನ ಮತ್ತು ಕಂಪ್ಯೂಟರ್ ಪ್ರಯೋಗಾಲಯಗಳು, ಸಂಗೀತ ಮತ್ತು ಕಲಾ ಕೊಠಡಿಗಳು, ಆಟದ ಮೈದಾನಗಳು, ಹುಡುಗರು ಮತ್ತು ಹುಡುಗಿಯರಿಗೆ ವಸತಿಗೃಹಗಳು.",
+          "wide": true
+        }
+      ]
+    }
+  }
+}

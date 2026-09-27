@@ -32,6 +32,15 @@ export function formatDate(iso: string, locale: Locale): string {
   return name ? `${Number(day)} ${name} ${year}` : iso;
 }
 
+/** Day and month only, for records already grouped under their year. */
+export function formatDayMonth(iso: string, locale: Locale): string {
+  const match = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso);
+  if (!match) return iso;
+  const [, , month, day] = match;
+  const name = MONTHS[locale][Number(month) - 1];
+  return name ? `${Number(day)} ${name}` : iso;
+}
+
 /** Whole rupees. Amounts in the archive are never fractional. */
 export function formatAmount(amount: number, locale: Locale): string {
   return new Intl.NumberFormat(INTL_LOCALE[locale], {

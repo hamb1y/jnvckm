@@ -4,16 +4,19 @@ import {
   type Localized,
   type Media,
 } from "./types";
+import { mergeLocales } from "./locales.mjs";
 
 /**
  * The only module that knows the on-disk shape of `content/`.
  * Everything downstream consumes typed models, never raw files.
  */
 
-const files = import.meta.glob("/content/**/*.json", {
-  eager: true,
-  import: "default",
-}) as Record<string, unknown>;
+// The CMS saves one block per locale; mergeLocales gives each field its { en, kn }.
+const files = Object.fromEntries(
+  Object.entries(
+    import.meta.glob("/content/**/*.json", { eager: true, import: "default" }) as Record<string, unknown>,
+  ).map(([filePath, value]) => [filePath, mergeLocales(value)]),
+) as Record<string, unknown>;
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);

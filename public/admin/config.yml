@@ -61,9 +61,10 @@ collections:
       - { name: body, label: Body, widget: markdown, required: false, hint: "Leave empty for a summary-only record.", i18n: true }
       - { name: author, label: Author, widget: string, required: false, i18n: true }
       - { name: batch, label: Batch, widget: string, required: false, hint: 'For example "9th batch".', i18n: true }
-      - { name: image, label: Photo, widget: object, required: false, fields: [ { name: src, label: File, widget: image }, { name: alt, label: Alt text, widget: string, hint: "Describe only what is visible. Required if a photo is set.", i18n: true }, { name: position, label: "Crop focus", widget: select, options: [center, top, bottom, left, right], default: center } ] }
-      - { name: documents, label: Documents, label_singular: Document, widget: list, required: false, hint: "Posters, press clippings, report covers, screenshots. These are shown uncropped.", fields: [ { name: src, label: File, widget: image }, { name: alt, label: Alt text, widget: string, i18n: true }, { name: caption, label: Caption, widget: string, required: false, i18n: true } ] }
+      - { name: image, label: Photo, widget: object, required: false, fields: [ { name: src, label: File, widget: image, i18n: duplicate }, { name: alt, label: Alt text, widget: string, hint: "Describe only what is visible. Required if a photo is set.", i18n: true }, { name: position, label: "Crop focus", widget: select, options: [center, top, bottom, left, right], default: center, i18n: duplicate } ], i18n: true }
+      - { name: documents, label: Documents, label_singular: Document, widget: list, required: false, hint: "Posters, press clippings, report covers, screenshots. These are shown uncropped.", fields: [ { name: src, label: File, widget: image, i18n: duplicate }, { name: alt, label: Alt text, widget: string, i18n: true }, { name: caption, label: Caption, widget: string, required: false, i18n: true } ], i18n: true }
       - { name: source, label: Source, widget: string, required: false, hint: "Where this record came from.", i18n: duplicate }
+    i18n: true
 
   - name: events
     label: Events
@@ -83,9 +84,10 @@ collections:
       - { name: location, label: Location, widget: string, required: false, i18n: true }
       - { name: summary, label: Summary, widget: text, i18n: true }
       - { name: body, label: Body, widget: markdown, required: false, i18n: true }
-      - { name: image, label: Photo, widget: object, required: false, fields: [ { name: src, label: File, widget: image }, { name: alt, label: Alt text, widget: string, i18n: true }, { name: position, label: "Crop focus", widget: select, options: [center, top, bottom, left, right], default: center } ] }
-      - { name: documents, label: Documents, label_singular: Document, widget: list, required: false, fields: [ { name: src, label: File, widget: image }, { name: alt, label: Alt text, widget: string, i18n: true }, { name: caption, label: Caption, widget: string, required: false, i18n: true } ] }
+      - { name: image, label: Photo, widget: object, required: false, fields: [ { name: src, label: File, widget: image, i18n: duplicate }, { name: alt, label: Alt text, widget: string, i18n: true }, { name: position, label: "Crop focus", widget: select, options: [center, top, bottom, left, right], default: center, i18n: duplicate } ], i18n: true }
+      - { name: documents, label: Documents, label_singular: Document, widget: list, required: false, fields: [ { name: src, label: File, widget: image, i18n: duplicate }, { name: alt, label: Alt text, widget: string, i18n: true }, { name: caption, label: Caption, widget: string, required: false, i18n: true } ], i18n: true }
       - { name: source, label: Source, widget: string, required: false, i18n: duplicate }
+    i18n: true
 
   - name: contributions
     label: Contributions
@@ -107,9 +109,10 @@ collections:
       - { name: summary, label: Summary, widget: text, i18n: true }
       - { name: body, label: Body, widget: markdown, required: false, i18n: true }
       - { name: archiveNote, label: "Archive note", widget: text, required: false, hint: "Shown when a historical record has been redacted for privacy.", i18n: true }
-      - { name: image, label: Photo, widget: object, required: false, fields: [ { name: src, label: File, widget: image }, { name: alt, label: Alt text, widget: string, i18n: true }, { name: position, label: "Crop focus", widget: select, options: [center, top, bottom, left, right], default: center } ] }
-      - { name: documents, label: Documents, label_singular: Document, widget: list, required: false, fields: [ { name: src, label: File, widget: image }, { name: alt, label: Alt text, widget: string, i18n: true }, { name: caption, label: Caption, widget: string, required: false, i18n: true } ] }
+      - { name: image, label: Photo, widget: object, required: false, fields: [ { name: src, label: File, widget: image, i18n: duplicate }, { name: alt, label: Alt text, widget: string, i18n: true }, { name: position, label: "Crop focus", widget: select, options: [center, top, bottom, left, right], default: center, i18n: duplicate } ], i18n: true }
+      - { name: documents, label: Documents, label_singular: Document, widget: list, required: false, fields: [ { name: src, label: File, widget: image, i18n: duplicate }, { name: alt, label: Alt text, widget: string, i18n: true }, { name: caption, label: Caption, widget: string, required: false, i18n: true } ], i18n: true }
       - { name: source, label: Source, widget: string, required: false, i18n: duplicate }
+    i18n: true
 
   - name: programs
     label: Programs
@@ -128,7 +131,8 @@ collections:
       - { name: summary, label: Summary, widget: text, i18n: true }
       - { name: body, label: Body, widget: markdown, i18n: true }
       - { name: startNote, label: "History note", widget: text, i18n: true }
-      - { name: image, label: Photo, widget: object, required: false, fields: [ { name: src, label: File, widget: image }, { name: alt, label: Alt text, widget: string, i18n: true }, { name: position, label: "Crop focus", widget: select, options: [center, top, bottom, left, right], default: center } ] }
+      - { name: image, label: Photo, widget: object, required: false, fields: [ { name: src, label: File, widget: image, i18n: duplicate }, { name: alt, label: Alt text, widget: string, i18n: true }, { name: position, label: "Crop focus", widget: select, options: [center, top, bottom, left, right], default: center, i18n: duplicate } ], i18n: true }
+    i18n: true
 
   - name: settings
     label: Site settings
@@ -151,6 +155,7 @@ collections:
               - { name: phone, label: Phone, widget: string, required: false, i18n: duplicate }
               - { name: phoneVerified, label: "Phone confirmed", widget: boolean, default: false, i18n: duplicate }
               - { name: address, label: Address, widget: string, i18n: true }
+            i18n: true
           - { name: repository, label: "Repository URL", widget: string, i18n: duplicate }
           - name: credit
             label: Credit
@@ -178,3 +183,267 @@ collections:
             widget: object
             fields:
               - { name: note, label: Note, widget: text, i18n: true }
+            i18n: true
+        i18n: true
+      - name: pages
+        label: Page photos and facts
+        file: content/pages.json
+        i18n: true
+        fields:
+          - name: home
+            label: Home page
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - { name: hero, label: "Cover photo", widget: object, required: false, i18n: true, hint: "The tall photograph beside the association's name.", fields: [ { name: src, label: File, widget: image, i18n: duplicate }, { name: alt, label: Alt text, widget: string, i18n: true, hint: "Describe only what is visible." }, { name: caption, label: Caption, widget: string, required: false, i18n: true }, { name: position, label: "Crop focus", widget: select, options: [center, top, bottom, left, right], default: center, i18n: duplicate } ] }
+              - { name: lab, label: "Giving photo", widget: object, required: false, i18n: true, hint: "Leads the giving record.", fields: [ { name: src, label: File, widget: image, i18n: duplicate }, { name: alt, label: Alt text, widget: string, i18n: true, hint: "Describe only what is visible." }, { name: caption, label: Caption, widget: string, required: false, i18n: true }, { name: position, label: "Crop focus", widget: select, options: [center, top, bottom, left, right], default: center, i18n: duplicate } ] }
+              - { name: campus, label: "Vidyalaya photo", widget: object, required: false, i18n: true, hint: "Beside 'Where it began'.", fields: [ { name: src, label: File, widget: image, i18n: duplicate }, { name: alt, label: Alt text, widget: string, i18n: true, hint: "Describe only what is visible." }, { name: caption, label: Caption, widget: string, required: false, i18n: true }, { name: position, label: "Crop focus", widget: select, options: [center, top, bottom, left, right], default: center, i18n: duplicate } ] }
+          - name: about
+            label: About page
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - { name: photo, label: "Photo", widget: object, required: false, i18n: true, hint: "Beside the association's story.", fields: [ { name: src, label: File, widget: image, i18n: duplicate }, { name: alt, label: Alt text, widget: string, i18n: true, hint: "Describe only what is visible." }, { name: caption, label: Caption, widget: string, required: false, i18n: true }, { name: position, label: "Crop focus", widget: select, options: [center, top, bottom, left, right], default: center, i18n: duplicate } ] }
+              - name: work
+                label: What the association does
+                label_singular: Line
+                widget: list
+                i18n: true
+                fields:
+                  - { name: item, label: Line, widget: string, i18n: true }
+          - name: vidyalaya
+            label: Vidyalaya page
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - { name: founded, label: "Founded in", widget: number, i18n: duplicate, hint: "Set large beside the page title." }
+              - { name: photo, label: "Photo", widget: object, required: false, i18n: true, hint: "Above the fact sheet.", fields: [ { name: src, label: File, widget: image, i18n: duplicate }, { name: alt, label: Alt text, widget: string, i18n: true, hint: "Describe only what is visible." }, { name: caption, label: Caption, widget: string, required: false, i18n: true }, { name: position, label: "Crop focus", widget: select, options: [center, top, bottom, left, right], default: center, i18n: duplicate } ] }
+              - name: facts
+                label: Fact sheet
+                label_singular: Fact
+                widget: list
+                i18n: true
+                fields:
+                  - { name: label, label: Label, widget: string, i18n: true }
+                  - { name: value, label: Value, widget: string, i18n: true, hint: "The figure or name, set large." }
+                  - { name: note, label: Note, widget: text, required: false, i18n: true }
+                  - { name: wide, label: "Full width", widget: boolean, default: false, required: false, i18n: duplicate, hint: "For a long value, such as a list." }
+      - name: copy
+        label: Interface text
+        file: content/copy.json
+        i18n: true
+        description: "Headings, introductions, buttons and labels across the site. Each section is one page or part of the page."
+        fields:
+          - name: "nav"
+            label: "Navigation"
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - { name: "home", label: "Home", widget: string, i18n: true }
+              - { name: "about", label: "About", widget: string, i18n: true }
+              - { name: "programs", label: "Programs", widget: string, i18n: true }
+              - { name: "impact", label: "Impact", widget: string, i18n: true }
+              - { name: "events", label: "Events", widget: string, i18n: true }
+              - { name: "stories", label: "Stories", widget: string, i18n: true }
+              - { name: "connect", label: "Connect", widget: string, i18n: true }
+              - { name: "vidyalaya", label: "Vidyalaya", widget: string, i18n: true }
+          - name: "lang"
+            label: "Language switch"
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - { name: "switchLabel", label: "Switch label", widget: string, i18n: true }
+              - { name: "switchAria", label: "Switch aria", widget: string, i18n: true }
+          - name: "site"
+            label: "Site"
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - { name: "formedShort", label: "Formed short", widget: string, i18n: true }
+          - name: "home"
+            label: "Home page"
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - { name: "explore", label: "Explore", widget: string, i18n: true }
+              - { name: "impactTitle", label: "Impact title", widget: string, i18n: true }
+              - { name: "latestTitle", label: "Latest title", widget: string, i18n: true }
+              - { name: "heroBody", label: "Hero body", widget: text, i18n: true }
+              - { name: "latestCta", label: "Latest cta", widget: string, i18n: true }
+              - { name: "reconnect", label: "Reconnect", widget: string, i18n: true }
+              - { name: "vidyalayaTitle", label: "Vidyalaya title", widget: string, i18n: true }
+              - { name: "vidyalayaLede", label: "Vidyalaya lede", widget: text, i18n: true }
+              - { name: "connectTitle", label: "Connect title", widget: string, i18n: true }
+              - { name: "connectLede", label: "Connect lede", widget: text, i18n: true }
+              - { name: "given", label: "Given", widget: string, i18n: true }
+              - name: "figures"
+                label: "Figures"
+                widget: object
+                i18n: true
+                collapsed: true
+                fields:
+                  - { name: "contributions", label: "Contributions", widget: string, i18n: true }
+                  - { name: "events", label: "Events", widget: string, i18n: true }
+          - name: "common"
+            label: "Shared labels"
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - { name: "allContributions", label: "All contributions", widget: string, i18n: true }
+              - { name: "allEvents", label: "All events", widget: string, i18n: true }
+              - { name: "location", label: "Location", widget: string, i18n: true }
+              - { name: "batch", label: "Batch", widget: string, i18n: true }
+              - { name: "amount", label: "Amount", widget: string, i18n: true }
+              - { name: "category", label: "Category", widget: string, i18n: true }
+              - { name: "documents", label: "Documents", widget: string, i18n: true }
+              - { name: "source", label: "Source", widget: string, i18n: true }
+              - { name: "englishOnly", label: "English only", widget: string, i18n: true }
+              - { name: "program", label: "Program", widget: string, i18n: true }
+              - { name: "author", label: "Author", widget: string, i18n: true }
+          - name: "events"
+            label: "Events page"
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - { name: "title", label: "Title", widget: string, i18n: true }
+              - { name: "lede", label: "Lede", widget: text, i18n: true }
+              - { name: "upcoming", label: "Upcoming", widget: string, i18n: true }
+              - { name: "past", label: "Past", widget: string, i18n: true }
+          - name: "impact"
+            label: "Contributions page"
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - { name: "title", label: "Title", widget: string, i18n: true }
+              - { name: "lede", label: "Lede", widget: text, i18n: true }
+              - { name: "filterLabel", label: "Filter label", widget: string, i18n: true }
+              - { name: "all", label: "All", widget: string, i18n: true }
+              - { name: "empty", label: "Empty", widget: string, i18n: true }
+              - { name: "count", label: "Count", widget: string, i18n: true, hint: "Keep {n}, {total} as written; the site fills them in." }
+              - { name: "summary", label: "Summary", widget: string, i18n: true, hint: "Keep {count}, {from}, {to} as written; the site fills them in." }
+          - name: "stories"
+            label: "Stories page"
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - { name: "title", label: "Title", widget: string, i18n: true }
+              - { name: "lede", label: "Lede", widget: string, i18n: true }
+              - { name: "empty", label: "Empty", widget: string, i18n: true }
+          - name: "vidyalaya"
+            label: "Vidyalaya page"
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - { name: "title", label: "Title", widget: string, i18n: true }
+              - { name: "lede", label: "Lede", widget: string, i18n: true }
+          - name: "about"
+            label: "About page"
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - { name: "title", label: "Title", widget: string, i18n: true }
+              - { name: "lede", label: "Lede", widget: text, i18n: true }
+              - { name: "whatWeDo", label: "What we do", widget: string, i18n: true }
+          - name: "connect"
+            label: "Connect page"
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - { name: "title", label: "Title", widget: string, i18n: true }
+              - { name: "lede", label: "Lede", widget: string, i18n: true }
+              - { name: "address", label: "Address", widget: string, i18n: true }
+              - { name: "routeTitle", label: "Route title", widget: string, i18n: true }
+              - { name: "routeBody", label: "Route body", widget: text, i18n: true }
+              - { name: "volunteerTitle", label: "Volunteer title", widget: string, i18n: true }
+              - { name: "volunteerBody", label: "Volunteer body", widget: text, i18n: true }
+              - { name: "contributeTitle", label: "Contribute title", widget: string, i18n: true }
+              - { name: "batchRepsTitle", label: "Batch reps title", widget: string, i18n: true }
+              - { name: "batchRepsBody", label: "Batch reps body", widget: text, i18n: true }
+              - { name: "batchRepsLink", label: "Batch reps link", widget: string, i18n: true }
+          - name: "footer"
+            label: "Footer"
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - { name: "association", label: "Association", widget: string, i18n: true }
+              - { name: "independent", label: "Independent", widget: text, i18n: true }
+              - { name: "repository", label: "Repository", widget: string, i18n: true }
+              - { name: "creditLabel", label: "Credit label", widget: string, i18n: true }
+          - name: "notfound"
+            label: "Page not found"
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - { name: "title", label: "Title", widget: string, i18n: true }
+              - { name: "lede", label: "Lede", widget: string, i18n: true }
+          - name: "a11y"
+            label: "Accessibility labels"
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - { name: "skip", label: "Skip", widget: string, i18n: true }
+              - { name: "menu", label: "Menu", widget: string, i18n: true }
+              - { name: "primaryNav", label: "Primary nav", widget: string, i18n: true }
+          - name: "categories"
+            label: "Contribution categories"
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - { name: "infrastructure", label: "Infrastructure", widget: string, i18n: true }
+              - { name: "technology", label: "Technology", widget: string, i18n: true }
+              - { name: "student-support", label: "Student support", widget: string, i18n: true }
+              - { name: "sports", label: "Sports", widget: string, i18n: true }
+              - { name: "culture", label: "Culture", widget: string, i18n: true }
+              - { name: "staff-community", label: "Staff community", widget: string, i18n: true }
+          - name: "programs"
+            label: "Programs page"
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - { name: "title", label: "Title", widget: string, i18n: true }
+              - { name: "lede", label: "Lede", widget: text, i18n: true }
+              - { name: "relatedEvents", label: "Related events", widget: string, i18n: true }
+              - { name: "more", label: "More", widget: string, i18n: true, hint: "Keep {name} as written; the site fills it in." }
+          - name: "posts"
+            label: "Story kinds"
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - name: "kind"
+                label: "Kinds"
+                widget: object
+                i18n: true
+                collapsed: true
+                fields:
+                  - { name: "news", label: "News", widget: string, i18n: true }
+                  - { name: "report", label: "Report", widget: string, i18n: true }
+                  - { name: "story", label: "Story", widget: string, i18n: true }
+                  - { name: "event", label: "Event", widget: string, i18n: true }
+          - name: "empty"
+            label: "Empty states"
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - { name: "generic", label: "Generic", widget: string, i18n: true }
+    i18n: true

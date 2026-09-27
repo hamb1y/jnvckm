@@ -34,6 +34,15 @@ const html = value.trim() === "" ? "" : await marked.parse(value);
     gap: var(--s-2);
   }
 
+  /* A quiet en dash, not a heavy bullet, so a list reads as text. */
+  .prose :global(ul) {
+    list-style: "–  ";
+  }
+
+  .prose :global(li::marker) {
+    color: var(--text-3);
+  }
+
   .prose :global(h2),
   .prose :global(h3) {
     margin-block-start: var(--s-6);

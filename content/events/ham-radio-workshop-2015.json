@@ -1,29 +1,29 @@
 {
-  "slug": "ham-radio-workshop-2015",
-  "title": {
-    "en": "Amateur HAM radio workshop",
-    "kn": "ಹವ್ಯಾಸಿ ಹ್ಯಾಮ್ ರೇಡಿಯೋ ಕಾರ್ಯಾಗಾರ"
+  "en": {
+    "slug": "ham-radio-workshop-2015",
+    "title": "Amateur HAM radio workshop",
+    "date": "2015-12-19",
+    "program": null,
+    "location": "JNV Balehonnur",
+    "summary": "The Mangalore Amateur Radio Club introduced students to amateur radio, with a live demonstration.",
+    "body": "Members of the Mangalore Amateur Radio Club visited the Vidyalaya in December 2015 and introduced students to amateur radio. They brought equipment and ran a live demonstration, so students could see a working station rather than only hear about one.",
+    "image": {
+      "src": "/images/img-20151220-wa0011.webp",
+      "alt": "A radio transceiver and a camera on a table in a hall, with students seated on the floor."
+    },
+    "documents": []
   },
-  "date": "2015-12-19",
-  "program": null,
-  "location": {
-    "en": "JNV Balehonnur",
-    "kn": "ಜೆಎನ್‌ವಿ ಬಾಳೆಹೊನ್ನೂರು"
-  },
-  "summary": {
-    "en": "The Mangalore Amateur Radio Club introduced students to amateur radio, with a live demonstration.",
-    "kn": "ಮಂಗಳೂರು ಹವ್ಯಾಸಿ ರೇಡಿಯೋ ಕ್ಲಬ್, ನೇರ ಪ್ರದರ್ಶನದೊಂದಿಗೆ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಹವ್ಯಾಸಿ ರೇಡಿಯೋವನ್ನು ಪರಿಚಯಿಸಿತು."
-  },
-  "body": {
-    "en": "Members of the Mangalore Amateur Radio Club visited the Vidyalaya in December 2015 and introduced students to amateur radio. They brought equipment and ran a live demonstration, so students could see a working station rather than only hear about one.",
-    "kn": "ಮಂಗಳೂರು ಹವ್ಯಾಸಿ ರೇಡಿಯೋ ಕ್ಲಬ್‌ನ ಸದಸ್ಯರು ಡಿಸೆಂಬರ್ 2015ರಲ್ಲಿ ವಿದ್ಯಾಲಯಕ್ಕೆ ಬಂದು ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಹವ್ಯಾಸಿ ರೇಡಿಯೋ ಪರಿಚಯಿಸಿದರು. ಅವರು ಉಪಕರಣಗಳನ್ನು ತಂದು ನೇರ ಪ್ರದರ್ಶನ ನಡೆಸಿದರು; ಹೀಗಾಗಿ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಕೇವಲ ಕೇಳುವ ಬದಲು ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತಿರುವ ಸ್ಟೇಷನ್ ಅನ್ನು ನೋಡುವ ಅವಕಾಶ ಸಿಕ್ಕಿತು."
-  },
-  "image": {
-    "src": "/images/img-20151220-wa0011.webp",
-    "alt": {
-      "en": "A radio transceiver and a camera on a table in a hall, with students seated on the floor.",
-      "kn": "ಸಭಾಂಗಣದಲ್ಲಿನ ಮೇಜಿನ ಮೇಲೆ ರೇಡಿಯೋ ಟ್ರಾನ್ಸ್‌ಸೀವರ್ ಮತ್ತು ಕ್ಯಾಮೆರಾ; ನೆಲದ ಮೇಲೆ ವಿದ್ಯಾರ್ಥಿಗಳು ಕುಳಿತಿದ್ದಾರೆ."
-    }
-  },
-  "documents": []
+  "kn": {
+    "title": "ಹವ್ಯಾಸಿ ಹ್ಯಾಮ್ ರೇಡಿಯೋ ಕಾರ್ಯಾಗಾರ",
+    "date": "2015-12-19",
+    "program": null,
+    "location": "ಜೆಎನ್‌ವಿ ಬಾಳೆಹೊನ್ನೂರು",
+    "summary": "ಮಂಗಳೂರು ಹವ್ಯಾಸಿ ರೇಡಿಯೋ ಕ್ಲಬ್, ನೇರ ಪ್ರದರ್ಶನದೊಂದಿಗೆ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಹವ್ಯಾಸಿ ರೇಡಿಯೋವನ್ನು ಪರಿಚಯಿಸಿತು.",
+    "body": "ಮಂಗಳೂರು ಹವ್ಯಾಸಿ ರೇಡಿಯೋ ಕ್ಲಬ್‌ನ ಸದಸ್ಯರು ಡಿಸೆಂಬರ್ 2015ರಲ್ಲಿ ವಿದ್ಯಾಲಯಕ್ಕೆ ಬಂದು ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಹವ್ಯಾಸಿ ರೇಡಿಯೋ ಪರಿಚಯಿಸಿದರು. ಅವರು ಉಪಕರಣಗಳನ್ನು ತಂದು ನೇರ ಪ್ರದರ್ಶನ ನಡೆಸಿದರು; ಹೀಗಾಗಿ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಕೇವಲ ಕೇಳುವ ಬದಲು ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತಿರುವ ಸ್ಟೇಷನ್ ಅನ್ನು ನೋಡುವ ಅವಕಾಶ ಸಿಕ್ಕಿತು.",
+    "image": {
+      "src": "/images/img-20151220-wa0011.webp",
+      "alt": "ಸಭಾಂಗಣದಲ್ಲಿನ ಮೇಜಿನ ಮೇಲೆ ರೇಡಿಯೋ ಟ್ರಾನ್ಸ್‌ಸೀವರ್ ಮತ್ತು ಕ್ಯಾಮೆರಾ; ನೆಲದ ಮೇಲೆ ವಿದ್ಯಾರ್ಥಿಗಳು ಕುಳಿತಿದ್ದಾರೆ."
+    },
+    "documents": []
+  }
 }

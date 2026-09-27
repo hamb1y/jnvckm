@@ -2,10 +2,14 @@
 import Figure from "@/components/Figure.astro";
 import PageCover from "@/components/PageCover.astro";
 import { ArrowUpRight } from "lucide-astro";
+import { pages } from "@/data/pages";
 import { site } from "@/data/site";
+import { contributions } from "@/data/contributions";
+import { programs } from "@/data/programs";
+import { formatCount } from "@/utils/format";
 import { lx, t } from "@/i18n/utils";
 import { localePath } from "@/lib/paths";
-import type { Locale, Media } from "@/data/types";
+import type { Locale } from "@/data/types";
 
 export interface Props {
   lang: Locale;
@@ -13,40 +17,37 @@ export interface Props {
 
 const { lang } = Astro.props;
 
-const group: Media = {
-  src: "/images/23116700-10212457321081858-6312346336155469781-o.webp",
-  alt: {
-    en: "A large group photographed together on a sports ground, with trophies on the grass in front.",
-    kn: "ಕ್ರೀಡಾ ಮೈದಾನದಲ್ಲಿ ಒಟ್ಟಿಗೆ ಚಿತ್ರೀಕರಿಸಿಕೊಂಡ ದೊಡ್ಡ ಗುಂಪು; ಮುಂದೆ ಹುಲ್ಲಿನ ಮೇಲೆ ಟ್ರೋಫಿಗಳು.",
-  },
-};
+const givingYears = contributions
+  .map((entry) => entry.date.slice(0, 4))
+  .filter(Boolean)
+  .sort();
 
-const work = [
+// Each onward link carries a real line from the records beneath its name.
+const onward = [
   {
-    en: "IGNITE — student-development and career-guidance sessions for classes 10 to 12",
-    kn: "ಇಗ್ನೈಟ್ — 10ರಿಂದ 12ನೇ ತರಗತಿ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಅಭಿವೃದ್ಧಿ ಮತ್ತು ವೃತ್ತಿ ಮಾರ್ಗದರ್ಶನ ಅವಧಿಗಳು",
+    path: "/programs",
+    label: t(lang, "nav.programs"),
+    note: programs
+      .map((program) => (program.shortName && lx(program.shortName, lang)) || lx(program.name, lang))
+      .join(" · "),
   },
   {
-    en: "The Navodaya Cricket League — an annual alumni tournament built around batches",
-    kn: "ನವೋದಯ ಕ್ರಿಕೆಟ್ ಲೀಗ್ — ಬ್ಯಾಚ್‌ಗಳ ಸುತ್ತ ನಡೆಯುವ ವಾರ್ಷಿಕ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಪಂದ್ಯಾವಳಿ",
+    path: "/contributions",
+    label: t(lang, "nav.impact"),
+    note: t(lang, "impact.summary")
+      .replace("{count}", formatCount(contributions.length, lang))
+      .replace("{from}", givingYears[0] ?? "")
+      .replace("{to}", givingYears.at(-1) ?? ""),
   },
   {
-    en: "The annual campus meet, reunions and city meet-ups",
-    kn: "ವಾರ್ಷಿಕ ಆವರಣ ಸಮಾವೇಶ, ಪುನರ್ಮಿಲನಗಳು ಮತ್ತು ನಗರ ಭೇಟಿಗಳು",
-  },
-  {
-    en: "Batch representatives who carry news to their own batchmates",
-    kn: "ಸಂಘದ ಸುದ್ದಿಯನ್ನು ತಮ್ಮ ಬ್ಯಾಚ್‌ ಸ್ನೇಹಿತರಿಗೆ ತಲುಪಿಸುವ ಬ್ಯಾಚ್ ಪ್ರತಿನಿಧಿಗಳು",
-  },
-  {
-    en: "Batch-led school projects — lighting, classrooms, laboratories, audio-visual and cultural facilities",
-    kn: "ಬ್ಯಾಚ್‌ಗಳ ಶಾಲಾ ಯೋಜನೆಗಳು — ಬೆಳಕು, ತರಗತಿ ಕೊಠಡಿ, ಪ್ರಯೋಗಾಲಯ, ಶ್ರವ್ಯ-ದೃಶ್ಯ ಮತ್ತು ಸಾಂಸ್ಕೃತಿಕ ಸೌಲಭ್ಯಗಳು",
-  },
-  {
-    en: "Support for students, staff and families in difficulty",
-    kn: "ಕಷ್ಟದಲ್ಲಿರುವ ವಿದ್ಯಾರ್ಥಿಗಳು, ಸಿಬ್ಬಂದಿ ಮತ್ತು ಕುಟುಂಬಗಳಿಗೆ ಸಹಾಯ",
+    path: "/vidyalaya",
+    label: t(lang, "nav.vidyalaya"),
+    note: lx(site.schoolName, lang),
   },
 ];
+
+const { photo, work } = pages.about;
+
 ---
 
 <PageCover
@@ -58,7 +59,7 @@ const work = [
 <section class="accent-brand">
   <div class="container about">
     <div class="about-media">
-      <Figure media={group} locale={lang} ratio="4 / 3" showCaption={true} />
+      {photo && <Figure media={photo} locale={lang} ratio="4 / 3" showCaption={true} />}
     </div>
     <div class="about-copy">
       <h2 class="section-title">{t(lang, "about.whatWeDo")}</h2>
@@ -69,31 +70,24 @@ const work = [
       </ul>
     </div>
   </div>
-  <div class="container">
-    <p class="links">
-      <a class="link-tile" href={localePath("/programs", lang)}>
-        {t(lang, "nav.programs")}
-        <ArrowUpRight size={22} stroke-width={1.7} aria-hidden="true" />
-      </a>
-      <a class="link-tile" href={localePath("/contributions", lang)}>
-        {t(lang, "nav.impact")}
-        <ArrowUpRight size={22} stroke-width={1.7} aria-hidden="true" />
-      </a>
-      <a class="link-tile" href={localePath("/vidyalaya", lang)}>
-        {t(lang, "nav.vidyalaya")}
-        <ArrowUpRight size={22} stroke-width={1.7} aria-hidden="true" />
-      </a>
-    </p>
-  </div>
 </section>
 
-<section class="school-section">
-  <div class="container school-grid">
-    <h2 class="section-title">{t(lang, "about.schoolTitle")}</h2>
-    <div>
-      <p class="school-tagline">{lx(site.tagline, lang)}</p>
-      <p class="school">{lx(site.schoolName, lang)}</p>
-    </div>
+<section class="closing">
+  <div class="container">
+    <p class="closing-line">{lx(site.tagline, lang)}</p>
+    <ul class="links">
+      {onward.map((item) => (
+        <li>
+          <a class="link-tile" href={localePath(item.path, lang)}>
+            <span class="link-label">
+              {item.label}
+              <ArrowUpRight size={22} stroke-width={1.7} aria-hidden="true" />
+            </span>
+            <span class="link-note">{item.note}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
   </div>
 </section>
 
@@ -134,39 +128,62 @@ const work = [
     max-inline-size: 52ch;
   }
 
-  .work-list li::before {
-    content: "";
-    flex: none;
-    inline-size: 0.6rem;
-    block-size: 0.6rem;
-    border-radius: var(--r-pill);
-    background: var(--accent-program);
-    translate: 0 -0.1em;
+  /* The back page: the association's line, then where to read on. */
+  .closing {
+    background: var(--surface-sunk);
+  }
+
+  .closing-line {
+    font-family: var(--font-display);
+    font-size: var(--step-4);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    max-inline-size: 22ch;
+    text-wrap: balance;
+  }
+
+  :global(:lang(kn)) .closing-line {
+    letter-spacing: 0;
+    line-height: 1.4;
   }
 
   .links {
+    list-style: none;
+    margin: clamp(var(--s-7), 5vw, var(--s-8)) 0 0;
+    padding: 0;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--s-4);
-    margin-block-start: clamp(var(--s-7), 6vw, var(--s-9));
   }
 
   .link-tile {
-    display: flex;
-    align-items: end;
-    justify-content: space-between;
-    gap: var(--s-4);
-    min-block-size: 8rem;
+    display: grid;
+    align-content: space-between;
+    gap: var(--s-6);
+    block-size: 100%;
     padding: var(--s-5);
     background: var(--brand);
     color: var(--brand-ink);
     border-radius: var(--r-4);
+    text-decoration: none;
+    transition: background-color var(--dur-2) var(--ease-out);
+  }
+
+  .link-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: var(--s-4);
     font-family: var(--font-display);
     font-size: var(--step-2);
     line-height: 1.1;
     letter-spacing: -0.02em;
-    text-decoration: none;
-    transition: background-color var(--dur-2) var(--ease-out);
+  }
+
+  .link-note {
+    color: var(--gold);
+    font-size: var(--step-0);
+    line-height: 1.4;
   }
 
   .link-tile :global(svg) {
@@ -183,35 +200,8 @@ const work = [
     transform: translate(3px, -3px);
   }
 
-  .school-section {
-    background: var(--surface-sunk);
-  }
-
-  .school-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-    gap: var(--s-5) clamp(var(--s-6), 6vw, var(--s-9));
-    align-items: baseline;
-  }
-
-  .school-tagline {
-    font-family: var(--font-display);
-    font-size: var(--step-3);
-    line-height: 1.25;
-    letter-spacing: -0.02em;
-    max-inline-size: 28ch;
-  }
-
-  .school {
-    margin-block-start: var(--s-5);
-    font-family: var(--font-mono);
-    font-size: var(--step--1);
-    color: var(--text-2);
-  }
-
   @media (max-width: 900px) {
-    .about,
-    .school-grid {
+    .about {
       grid-template-columns: 1fr;
     }
 
@@ -221,10 +211,6 @@ const work = [
 
     .links {
       grid-template-columns: 1fr;
-    }
-
-    .link-tile {
-      min-block-size: 0;
     }
   }
 </style>

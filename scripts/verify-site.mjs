@@ -14,6 +14,7 @@ import { mkdir, readFile, readdir, stat } from "node:fs/promises";
 import path from "node:path";
 import puppeteer from "puppeteer-core";
 import { checkCmsConfig } from "./check-cms-config.mjs";
+import { mergeLocales } from "../src/data/locales.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const DIST = path.join(ROOT, "dist");
@@ -363,46 +364,34 @@ async function auditRoute(page, route, viewport, { navigate = true } = {}) {
 
 /** Key parity, empty strings, and Latin text left inside the Kannada values. */
 async function auditDictionaries() {
-  const file = path.join(ROOT, "src/i18n/ui.ts");
-  const source = await readFile(file, "utf8");
-
-  const entriesOf = (locale) => {
-    const marker = `  ${locale}: {`;
-    const start = source.indexOf(marker);
-    if (start === -1) return null;
-    const end = source.indexOf("\n  },", start);
-    const block = source.slice(start + marker.length, end === -1 ? undefined : end);
-    const keys = [...block.matchAll(/"([^"]+)":/g)].map((match) => match[1]);
-    const out = new Map();
-    keys.forEach((key, index) => {
-      const from = block.indexOf(`"${key}":`) + key.length + 3;
-      const to = index + 1 < keys.length ? block.indexOf(`"${keys[index + 1]}":`) : block.length;
-      const raw = block.slice(from, to).trim().replace(/^"/, "").replace(/",?$/, "");
-      out.set(key, raw.replace(/\s+/g, " ").trim());
-    });
+  const copy = JSON.parse(await readFile(path.join(ROOT, "content/copy.json"), "utf8"));
+  const flatten = (node, prefix = "", out = new Map()) => {
+    if (typeof node === "string") out.set(prefix, node.trim());
+    else if (node && typeof node === "object") {
+      for (const [key, value] of Object.entries(node)) flatten(value, prefix ? `${prefix}.${key}` : key, out);
+    }
     return out;
   };
-
-  const en = entriesOf("en");
-  const kn = entriesOf("kn");
+  const en = copy.en ? flatten(copy.en) : null;
+  const kn = copy.kn ? flatten(copy.kn) : null;
   if (!en || !kn) {
-    fail("src/i18n/ui.ts", "could not parse the en and kn dictionaries");
+    fail("content/copy.json", "could not read the en and kn blocks");
     return;
   }
 
   for (const key of en.keys()) {
-    if (!kn.has(key)) fail("src/i18n/ui.ts", `kn is missing the key ${key}`);
+    if (!kn.has(key)) fail("content/copy.json", `kn is missing the key ${key}`);
   }
   for (const key of kn.keys()) {
-    if (!en.has(key)) fail("src/i18n/ui.ts", `en is missing the key ${key}`);
+    if (!en.has(key)) fail("content/copy.json", `en is missing the key ${key}`);
   }
   for (const [key, value] of kn) {
-    if (value === "") fail("src/i18n/ui.ts", `kn.${key} is empty`);
+    if (value === "") fail("content/copy.json", `kn.${key} is empty`);
     // Latin words left untranslated. "English" is the language-switch label.
     const latin = value.replace(/\{[^}]*\}/g, "").match(/[A-Za-z]{3,}/g) ?? [];
     for (const word of latin) {
       if (word === "English") continue;
-      fail("src/i18n/ui.ts", `kn.${key} still contains Latin text: “${word}”`);
+      fail("content/copy.json", `kn.${key} still contains Latin text: “${word}”`);
     }
   }
   notes.push(`dictionaries: ${en.size} keys, en and kn in parity`);
@@ -422,6 +411,8 @@ async function auditDictionaries() {
     "archiveNote",
     "description",
     "startNote",
+    "item",
+    "note",
   ]);
   const files = [];
   const collect = async (dir) => {
@@ -456,7 +447,8 @@ async function auditDictionaries() {
 
   for (const candidate of files) {
     current = candidate;
-    walk(JSON.parse(await readFile(candidate, "utf8")), "");
+    if (path.basename(candidate) === "copy.json") continue; // audited above
+    walk(mergeLocales(JSON.parse(await readFile(candidate, "utf8"))), "");
   }
   notes.push(`content: ${files.length} files checked for Kannada coverage`);
 

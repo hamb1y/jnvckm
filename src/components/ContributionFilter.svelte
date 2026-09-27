@@ -99,28 +99,31 @@
   }
 
   .filter-chip {
-    padding: 0.5em 1.05em;
-    background: var(--surface);
-    border: 1px solid var(--rule-strong);
-    border-radius: var(--r-pill);
-    font-size: var(--step--1);
+    padding: 0.35em 0;
+    margin-inline-end: var(--s-4);
+    background: none;
+    border: 0;
+    font-size: var(--step-0);
     font-weight: 700;
+    color: var(--ink-2, var(--ink));
     cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.4em;
     transition:
-      background-color var(--dur-1) var(--ease-out),
-      border-color var(--dur-1) var(--ease-out),
-      color var(--dur-1) var(--ease-out);
+      color var(--dur-1) var(--ease-out),
+      text-decoration-color var(--dur-1) var(--ease-out);
   }
 
   .filter-chip:hover {
-    background: var(--brand-tint);
-    border-color: var(--brand);
+    color: var(--ink);
+    text-decoration-color: var(--rule-strong);
   }
 
   .filter-chip[aria-pressed="true"] {
-    background: var(--brand);
-    border-color: var(--brand);
-    color: var(--brand-ink);
+    color: var(--ink);
+    text-decoration-color: var(--brand);
   }
 
   .filter-count {

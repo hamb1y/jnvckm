@@ -1,45 +1,47 @@
 {
-  "name": {
-    "en": "JNVCKM Alumni Association",
-    "kn": "ಜೆಎನ್‌ವಿಸಿಕೆಎಂ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಂಘ"
-  },
-  "schoolName": {
-    "en": "PM SHRI Jawahar Navodaya Vidyalaya, Chikkamagaluru",
-    "kn": "ಪಿಎಂ ಶ್ರೀ ಜವಾಹರ ನವೋದಯ ವಿದ್ಯಾಲಯ, ಚಿಕ್ಕಮಗಳೂರು"
-  },
-  "formed": 1993,
-  "tagline": {
-    "en": "Generations of Navodayans, connected by Seegodu and committed to giving back.",
-    "kn": "ಸೀಗೋಡು ಬೆಸೆದಿರುವ ನವೋದಯ ಪೀಳಿಗೆಗಳು, ವಿದ್ಯಾಲಯಕ್ಕೆ ಕೊಡುಗೆ ಸಲ್ಲಿಸಲು ಬದ್ಧ."
-  },
-  "description": {
-    "en": "The alumni community of Jawahar Navodaya Vidyalaya Chikkamagaluru: IGNITE, the Navodaya Cricket League, reunions, mentoring, batch projects and years of giving back.",
-    "kn": "ಜವಾಹರ ನವೋದಯ ವಿದ್ಯಾಲಯ ಚಿಕ್ಕಮಗಳೂರಿನ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಮುದಾಯ: ಇಗ್ನೈಟ್, ನವೋದಯ ಕ್ರಿಕೆಟ್ ಲೀಗ್, ಪುನರ್ಮಿಲನಗಳು, ಮಾರ್ಗದರ್ಶನ, ಬ್ಯಾಚ್ ಯೋಜನೆಗಳು ಮತ್ತು ವರ್ಷಗಳಿಂದ ಸಲ್ಲಿಸಿದ ಕೊಡುಗೆಗಳು."
-  },
-  "contact": {
-    "email": null,
-    "emailVerified": false,
-    "phone": null,
-    "phoneVerified": false,
-    "address": {
-      "en": "Seegodu, near Balehonnur, Koppa Taluk, Chikkamagaluru district, Karnataka",
-      "kn": "ಸೀಗೋಡು, ಬಾಳೆಹೊನ್ನೂರು ಸಮೀಪ, ಕೊಪ್ಪ ತಾಲೂಕು, ಚಿಕ್ಕಮಗಳೂರು ಜಿಲ್ಲೆ, ಕರ್ನಾಟಕ"
+  "en": {
+    "name": "JNVCKM Alumni Association",
+    "schoolName": "PM SHRI Jawahar Navodaya Vidyalaya, Chikkamagaluru",
+    "formed": 1993,
+    "tagline": "Generations of Navodayans, connected by Seegodu and committed to giving back.",
+    "description": "The alumni community of Jawahar Navodaya Vidyalaya Chikkamagaluru: IGNITE, the Navodaya Cricket League, reunions, mentoring, batch projects and years of giving back.",
+    "contact": {
+      "email": null,
+      "emailVerified": false,
+      "phone": null,
+      "phoneVerified": false,
+      "address": "Seegodu, near Balehonnur, Koppa Taluk, Chikkamagaluru district, Karnataka"
+    },
+    "socials": [],
+    "repository": "https://github.com/hamb1y/jnvckm",
+    "credit": {
+      "label": "Rishi Malnad (hamb1y)",
+      "url": "https://github.com/hamb1y"
+    },
+    "license": {
+      "label": "CWSL-1.0",
+      "url": "https://github.com/hamb1y/jnvckm/blob/main/LICENSE"
+    },
+    "donations": {
+      "note": "Batches pool their contributions for school projects and for people in need. To contribute, reach your batch representative."
     }
   },
-  "socials": [],
-  "repository": "https://github.com/hamb1y/jnvckm",
-  "credit": {
-    "label": "Rishi Malnad (hamb1y)",
-    "url": "https://github.com/hamb1y"
-  },
-  "license": {
-    "label": "CWSL-1.0",
-    "url": "https://github.com/hamb1y/jnvckm/blob/main/LICENSE"
-  },
-  "donations": {
-    "note": {
-      "en": "The association's current ways to contribute are being confirmed. Until they are published here, please reach a batch representative.",
-      "kn": "ಸಂಘಕ್ಕೆ ಕೊಡುಗೆ ನೀಡುವ ಪ್ರಸ್ತುತ ದಾರಿಗಳನ್ನು ದೃಢೀಕರಿಸಲಾಗುತ್ತಿದೆ. ಅವು ಇಲ್ಲಿ ಪ್ರಕಟವಾಗುವವರೆಗೆ, ದಯವಿಟ್ಟು ನಿಮ್ಮ ಬ್ಯಾಚ್ ಪ್ರತಿನಿಧಿಯನ್ನು ಸಂಪರ್ಕಿಸಿ."
+  "kn": {
+    "name": "ಜೆಎನ್‌ವಿಸಿಕೆಎಂ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಂಘ",
+    "schoolName": "ಪಿಎಂ ಶ್ರೀ ಜವಾಹರ ನವೋದಯ ವಿದ್ಯಾಲಯ, ಚಿಕ್ಕಮಗಳೂರು",
+    "formed": 1993,
+    "tagline": "ಸೀಗೋಡು ಬೆಸೆದಿರುವ ನವೋದಯ ಪೀಳಿಗೆಗಳು, ವಿದ್ಯಾಲಯಕ್ಕೆ ಕೊಡುಗೆ ಸಲ್ಲಿಸಲು ಬದ್ಧ.",
+    "description": "ಜವಾಹರ ನವೋದಯ ವಿದ್ಯಾಲಯ ಚಿಕ್ಕಮಗಳೂರಿನ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಮುದಾಯ: ಇಗ್ನೈಟ್, ನವೋದಯ ಕ್ರಿಕೆಟ್ ಲೀಗ್, ಪುನರ್ಮಿಲನಗಳು, ಮಾರ್ಗದರ್ಶನ, ಬ್ಯಾಚ್ ಯೋಜನೆಗಳು ಮತ್ತು ವರ್ಷಗಳಿಂದ ಸಲ್ಲಿಸಿದ ಕೊಡುಗೆಗಳು.",
+    "contact": {
+      "email": null,
+      "emailVerified": false,
+      "phone": null,
+      "phoneVerified": false,
+      "address": "ಸೀಗೋಡು, ಬಾಳೆಹೊನ್ನೂರು ಸಮೀಪ, ಕೊಪ್ಪ ತಾಲೂಕು, ಚಿಕ್ಕಮಗಳೂರು ಜಿಲ್ಲೆ, ಕರ್ನಾಟಕ"
+    },
+    "repository": "https://github.com/hamb1y/jnvckm",
+    "donations": {
+      "note": "ಬ್ಯಾಚ್‌ಗಳು ಒಟ್ಟಾಗಿ ಹಣ ಸಂಗ್ರಹಿಸಿ ಶಾಲಾ ಯೋಜನೆಗಳಿಗೂ ಅಗತ್ಯವಿರುವವರಿಗೂ ನೆರವಾಗುತ್ತವೆ. ಕೊಡುಗೆ ನೀಡಲು ನಿಮ್ಮ ಬ್ಯಾಚ್ ಪ್ರತಿನಿಧಿಯನ್ನು ಸಂಪರ್ಕಿಸಿ."
     }
   }
 }

@@ -40,8 +40,10 @@ giving. Nothing is coloured for decoration.
   association's logotype. This is continuity, not a default.
 - **Body: Mukta** — a warm humanist sans from Ek Type, Mumbai. Kannada falls
   back to Noto Sans Kannada.
-- **Mono: Spline Sans Mono** — dates, ₹ amounts and batch codes. This archive is
-  full of figures and they should read as record, not prose.
+- **No mono face.** Dates, ₹ amounts and batch codes are set in Mukta with
+  tabular numerals (`font-variant-numeric: tabular-nums`), so figures line up as
+  a record without a typewriter look. `--font-mono` stays in `tokens.css` only
+  because the verifier checks every stack for a Kannada family; nothing uses it.
 
 Kannada headings fall back to Noto Serif Kannada, paired with Arvo. No Latin-only
 flourishes (drop caps, small caps) are applied to Kannada.
@@ -53,12 +55,13 @@ flourishes (drop caps, small caps) are applied to Kannada.
 The site now reads as the association's printed report, cover to back page:
 
 - **The home page is the cover.** Olive ground; `1993` set at poster size (`--step-6`) in the gold; the name, tagline and actions; the campus photograph mounted with a gold keyline offset behind it; and a **figures strip** of three real counts read from the records (documented contributions with their year range, events on record, programs).
-- **Every index page opens on a section divider** (`PageCover.astro`): the olive, the title in paper, the lede, and — where the page has one — a real figure in gold beside it (recorded giving on Contributions, events on record on Events, `1986` on the Vidyalaya, the NCL mark on its program page).
-- **Detail pages open on the olive too**, with the date in gold mono; the photograph is mounted so it overlaps the cover's lower edge, like a plate, and the who/what/where sits beneath it in a ruled **record strip**.
-- **The giving statement.** On the home page the recorded total is set at display size in a sticky column beside the ledger it adds up; each ledger bar is drawn on a faint full-width track so its length reads as a share.
-- **Events are a timeline**: each year in large gold-brown Arvo, pinned beside its records while you scroll.
+- **Every index page opens on a section divider** (`PageCover.astro`): the olive, the title in paper, the lede, and — where the page has one — a real figure in gold beside it (recorded giving on Contributions, events on record on Events, `1986` on the Vidyalaya, the NCL mark on its program page). The figure never repeats the page title as its label: Events shows `18` and its year range, not "Events 18".
+- **Detail pages open on the olive too**, with the date in gold; the photograph is mounted so it overlaps the cover's lower edge, like a plate, and the who/what/where sits beneath it in a ruled **record strip**.
+- **The giving statement.** On the home page the total is set at display size in a sticky column beside the ledger it adds up; each ledger bar is drawn on a faint full-width track so its length reads as a share.
+- **Events are a timeline**: each year in large gold-brown Arvo, pinned beside its records while you scroll. The records run as one continuous list — a year break is a 2px ink rule, not a gap — and each row shows only day and month, since the year is already beside it.
+- **The Vidyalaya is a fact sheet**: a `<dl>` of labelled facts, each leading with its figure or name in Arvo (1986, Seegodu, 6 to 12, 840012) and the detail beneath.
+- **About ends on the association's line**, set large, then three onward tiles that each carry a real line from the records (IGNITE · NCL; 12 contributions, 2015–2024; the school's name).
 - **NCL's poster.** With no photograph, NCL gets a gold panel with its short name at poster scale — composed, never a placeholder.
-- The CTA carries `1993` very large and quiet behind it, drawn as SVG text so it is decoration, not copy.
 
 **Kannada at poster scale.** The Kannada short names are much wider than the Latin ones; poster marks drop to a smaller clamp under `:lang(kn)`, and headings drop negative tracking.
 
@@ -81,11 +84,11 @@ band. The shapes vary because the content does; a uniform grid is what made the
 first attempt monotonous.
 
 **The ledger leads with the total, and bars show the proportions.** The giving
-ledger opens with the recorded total in the largest display type on the page,
+ledger opens with the total in the largest display type on the page,
 then one row per contribution with the figure set large in Arvo and a bar whose
-length is the figure's share of the largest. The label says *recorded* and a note
-says how many records state an amount, because only some do. This is a chart of
-what is documented, never a claim of total giving.
+length is the figure's share of the largest. The label is "Given so far": the
+total sums the amounts the records state, and a record with no stated amount
+keeps an empty figure column rather than a guessed one.
 
 **Sections are separated by space, not by rules.** `section` carries
 `padding-block: clamp(3rem, 7vw, 6rem)` and nothing else. There is no hairline
@@ -96,16 +99,17 @@ label/value rows and is used where the content really is an account — the
 summary of what alumni funded, on the home page, where every contribution gets a
 row and records with no recorded figure keep an empty figure column. Complete
 dated indexes (all events, all contributions) use `.records`, which is
-`EntryRow.astro`: date in mono, the record, a place or a figure, and a small
+`EntryRow.astro`: the date, the record, a place or a figure, and a small
 plate when a photograph exists. Curated selections use `EntryCard.astro`, and a
 record with no photograph renders as a bordered text card rather than an empty
-frame. That text card is an olive block: the date set large in the report gold,
-the title beneath it, so a record without a photograph looks planned rather than
+frame. That text card is an olive block: the date set large in the report gold
+(and not repeated in the meta line), the title beneath it, so a record without a photograph looks planned rather than
 like a photograph that failed to load.
 
 **No photograph is never faked.** A program with no image gets a composed
 typographic panel (see NCL on the home and programs pages), not a placeholder
-frame and not a generated image.
+frame and not a generated image. The panel carries the short name only — never
+the full name that already heads the text beside it.
 
 **One archive feature, not a climax.** The full-bleed `Band.astro` is capped in
 height so a single historical photograph cannot outweigh the association's
@@ -113,7 +117,7 @@ current work.
 
 **A section can carry an accent.** `.accent-program` (gold), `.accent-give`
 (burnt orange) and `.accent-brand` (olive) set `--accent`, which `.eyebrow`,
-dots and hover states consume. One accent per section, applied by a wrapper.
+underlines and hover states consume. One accent per section, applied by a wrapper.
 
 > **Removed by design — do not reintroduce:** the first rebuild gave every block
 > a left rail (a label column) and a hairline rule above it. With the same shape
@@ -149,6 +153,12 @@ Two supporting components:
   a 1.62 line-height and a measure of 66ch.
 - No pill or badge above the h1, no icon in a rounded tile, no icon cards in a
   row. Icons appear inline beside text, or not at all.
+- No pills, chips or dots in front of text. The nav, the contributions filter,
+  the language switch and back links are underlined text; the active one is
+  marked by its underline colour. Prose lists use a muted en dash, not a bullet.
+- No label that repeats its heading, and no hedging copy ("being confirmed",
+  "to be confirmed", "documented so far"). State what is known; leave out what
+  is not.
 - No stock imagery, no illustrations standing in for documentary evidence. Where
   a record has no photograph it simply has none.
 - No invented metrics, testimonials, staff or events. Empty collections render an
@@ -156,13 +166,14 @@ Two supporting components:
 
 ## Missing states
 
-- **Contributions filter** — chips filter the server-rendered rows by toggling
+- **Contributions filter** — underlined filter buttons show and hide the server-rendered rows by toggling
   `hidden`, so content stays crawlable and works without JavaScript.
-- **Empty collections** — events (no upcoming), stories, and any filtered
-  category render an explicit message, never blank space.
-- **Unverified contact** — `contact.emailVerified` / `phoneVerified` are false,
-  so the footer and Connect page render "To be confirmed" instead of a
-  placeholder address.
+- **Empty collections** — stories and any filtered category render an explicit
+  message, never blank space. With nothing upcoming, the Events page is the
+  timeline alone, and the years are its section headings.
+- **Unverified contact** — while `contact.emailVerified` / `phoneVerified` are
+  false the email and phone are simply not published; the footer and Connect page
+  give the address and the batch-representative route instead.
 - **Archived records shown in English on a Kannada page** — a visible note
   explains why, rather than silently mixing languages.
 

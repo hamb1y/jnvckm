@@ -1,23 +1,23 @@
 {
-  "slug": "ncl-7",
-  "title": {
-    "en": "Navodaya Cricket League — season 7",
-    "kn": "ನವೋದಯ ಕ್ರಿಕೆಟ್ ಲೀಗ್ — 7ನೇ ಸೀಸನ್"
+  "en": {
+    "slug": "ncl-7",
+    "title": "Navodaya Cricket League — season 7",
+    "date": "2017-11-11",
+    "program": "ncl",
+    "location": "RNS Institute of Technology Grounds, Bengaluru",
+    "summary": "A two-day tournament bringing batches together.",
+    "body": "The seventh edition ran over two days at the RNS Institute of Technology grounds in Bengaluru, with alumni from across the batches taking part.",
+    "image": null,
+    "documents": []
   },
-  "date": "2017-11-11",
-  "program": "ncl",
-  "location": {
-    "en": "RNS Institute of Technology Grounds, Bengaluru",
-    "kn": "ಆರ್‌ಎನ್‌ಎಸ್ ಇನ್‌ಸ್ಟಿಟ್ಯೂಟ್ ಆಫ್ ಟೆಕ್ನಾಲಜಿ ಮೈದಾನ, ಬೆಂಗಳೂರು"
-  },
-  "summary": {
-    "en": "A two-day tournament bringing batches together.",
-    "kn": "ಬ್ಯಾಚ್‌ಗಳನ್ನು ಒಂದೆಡೆ ತಂದ ಎರಡು ದಿನಗಳ ಪಂದ್ಯಾವಳಿ."
-  },
-  "body": {
-    "en": "The seventh edition ran over two days at the RNS Institute of Technology grounds in Bengaluru, with alumni from across the batches taking part.",
-    "kn": "ಏಳನೇ ಆವೃತ್ತಿ ಎರಡು ದಿನಗಳ ಪಂದ್ಯಾವಳಿಯಾಗಿ ಬೆಂಗಳೂರಿನ ಆರ್‌ಎನ್‌ಎಸ್ ಇನ್‌ಸ್ಟಿಟ್ಯೂಟ್ ಆಫ್ ಟೆಕ್ನಾಲಜಿ ಮೈದಾನದಲ್ಲಿ ನಡೆಯಿತು; ವಿವಿಧ ಬ್ಯಾಚ್‌ಗಳ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳು ಪಾಲ್ಗೊಂಡರು."
-  },
-  "image": null,
-  "documents": []
+  "kn": {
+    "title": "ನವೋದಯ ಕ್ರಿಕೆಟ್ ಲೀಗ್ — 7ನೇ ಸೀಸನ್",
+    "date": "2017-11-11",
+    "program": "ncl",
+    "location": "ಆರ್‌ಎನ್‌ಎಸ್ ಇನ್‌ಸ್ಟಿಟ್ಯೂಟ್ ಆಫ್ ಟೆಕ್ನಾಲಜಿ ಮೈದಾನ, ಬೆಂಗಳೂರು",
+    "summary": "ಬ್ಯಾಚ್‌ಗಳನ್ನು ಒಂದೆಡೆ ತಂದ ಎರಡು ದಿನಗಳ ಪಂದ್ಯಾವಳಿ.",
+    "body": "ಏಳನೇ ಆವೃತ್ತಿ ಎರಡು ದಿನಗಳ ಪಂದ್ಯಾವಳಿಯಾಗಿ ಬೆಂಗಳೂರಿನ ಆರ್‌ಎನ್‌ಎಸ್ ಇನ್‌ಸ್ಟಿಟ್ಯೂಟ್ ಆಫ್ ಟೆಕ್ನಾಲಜಿ ಮೈದಾನದಲ್ಲಿ ನಡೆಯಿತು; ವಿವಿಧ ಬ್ಯಾಚ್‌ಗಳ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳು ಪಾಲ್ಗೊಂಡರು.",
+    "image": null,
+    "documents": []
+  }
 }

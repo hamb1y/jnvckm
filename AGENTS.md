@@ -26,7 +26,8 @@ that are easy to break by accident.
    import `BaseLayout` and the view, pass `lang` and `path`.
 3. Add the route to `NAV` (or `SECONDARY_NAV`) in `src/lib/nav.ts` **with a UI
    key that exists in both dictionaries**.
-4. Add the key to both `en` and `kn` in `src/i18n/ui.ts`.
+4. Add the key to both the `en` and `kn` blocks of `content/copy.json`, and its
+   field to the "Interface text" file in `public/admin/config.yml`.
 5. Run `bun run check`, `bun run build`, `bun run verify`.
 
 ## Adding a content collection
@@ -35,7 +36,9 @@ that are easy to break by accident.
 2. Add a mapping module in `src/data/` using the helpers in `load.ts`
    (`str`, `text`, `media`, `mediaList`, `num`, `isoDate`) — never a raw
    `JSON.parse` in a view.
-3. Seed `content/<collection>/*.json`, filename = slug.
+3. Seed `content/<collection>/*.json`, filename = slug, in the shape the CMS
+   saves: `{ "en": { …fields }, "kn": { …translated fields } }`.
+   `mergeLocales()` in `src/data/locales.mjs` turns that into `{ en, kn }` per field.
 4. Declare it in `public/admin/config.yml` with a label and a hint per field.
 5. Include it in `recentActivity()` only if it belongs in the home feed.
 
@@ -56,9 +59,9 @@ that are easy to break by accident.
   `archiveNote`, `name`, `tagline` or `startNote` that has no Kannada value, or
   that is a plain string instead of `{ en, kn }`. Long-form `body` may stay in its
   original language — the page shows a note when it does.
-- **Font stacks must carry a Kannada fallback.** The mono stack is used for date
-  stamps and amounts; without a Kannada fallback the month names rendered as
-  tofu boxes. `bun run verify` now fails if any of `--font-display`, `--font-body`
+- **Font stacks must carry a Kannada fallback.** Dates and amounts once used the
+  mono stack, and without a Kannada fallback the month names rendered as tofu
+  boxes. They now use the body face with tabular numerals, but the check stays. `bun run verify` now fails if any of `--font-display`, `--font-body`
   or `--font-mono` in `tokens.css` lacks a Kannada family.
 - **Dates**: do not use `Intl.DateTimeFormat` for the month. Kannada month names
   are missing from some ICU builds and it silently renders "22, 2024". Use
