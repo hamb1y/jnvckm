@@ -12,6 +12,7 @@
     "format": "prettier --write .",
     "verify": "node scripts/verify-site.mjs",
     "cms": "node scripts/check-cms-config.mjs",
+    "cms:worker": "node scripts/check-auth-worker.mjs",
     "logo": "node scripts/make-logo.mjs",
     "images": "node scripts/optimize-images.mjs"
   },

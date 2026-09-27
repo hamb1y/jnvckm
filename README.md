@@ -119,6 +119,14 @@ Only people with write access to the repository can save, whatever the scope.
 
 ### 3. Editing in the browser with OAuth (the worker)
 
+Everything that needs a Cloudflare, GitHub or DNS account is listed here. The
+rest of the site is already wired for it; only `backend.base_url` changes once
+the worker exists.
+
+```bash
+bun run cms:worker https://<worker-url>   # after step 4, verifies the contract
+```
+
 1. **Deploy the worker**
 
    ```bash
@@ -155,13 +163,15 @@ Only people with write access to the repository can save, whatever the scope.
 4. **Verify the worker before trusting it**
 
    ```bash
-   curl -sI "https://<worker-url>/auth?provider=github&site_id=jnvckm.pages.dev" | head -3
+   bun run cms:worker https://<worker-url>
    ```
 
-   Expect `302` with a `location:` pointing at
-   `https://github.com/login/oauth/authorize?...client_id=...`. A hostname is
-   passed as `site_id`, not a URL. An untrusted hostname must show an error page,
-   not a redirect.
+   It checks the three things that actually break: an allowed hostname must get
+   a `302` to `https://github.com/login/oauth/authorize` carrying a real
+   `client_id` and a `state`; a hostname that is *not* in `ALLOWED_DOMAINS` must
+   be refused; and `/callback` must exist. A hostname is passed as `site_id`,
+   not a URL. This is the step that catches an unset secret or a missing domain
+   before an editor does.
 
 5. **Point the CMS at it** — set `backend.base_url` in
    `public/admin/config.yml` to the worker origin, then run `bun run cms`.

@@ -11,9 +11,10 @@
 #    choose "Work with Local Repository" and pick the repo root (Chromium only).
 # 2. In the browser, right now: sign in with a GitHub personal access token
 #    (contents: write). No server needed. See README.
-# 3. In the browser, with OAuth: deploy the auth worker, set its secrets and
-#    ALLOWED_DOMAINS, create a GitHub OAuth app whose callback is
-#    <worker-url>/callback, then set `base_url` below to the worker origin.
+# 3. In the browser, with OAuth: deploy the auth worker (README section 3),
+#    set its secrets and ALLOWED_DOMAINS, create a GitHub OAuth app whose
+#    callback is <worker-url>/callback, verify it with `bun run cms:worker`,
+#    then set `base_url` below to the worker origin.
 #
 # `base_url` is required for OAuth: with it unset, Sveltia falls back to Netlify's
 # auth endpoint, which only works for sites hosted on Netlify. PKCE is not an
