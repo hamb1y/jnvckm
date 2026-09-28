@@ -5,7 +5,7 @@
  * Two kinds of check:
  *
  *  1. Offline structure and coverage — required keys, valid widget names, a
- *     valid `auth_scope`, i18n locales matching the content, and (the one that
+ *     valid `auth_scope`, and (the one that
  *     actually prevents data loss) every field present in `content/` being
  *     declared in `config.yml`. Sveltia drops fields it does not know about when
  *     an editor saves, so an undeclared field is silent data loss.
@@ -21,7 +21,6 @@ import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import YAML from "yaml";
-import { isLocaleFile } from "../src/data/locales.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const SCHEMA_URL = "https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json";
@@ -33,7 +32,6 @@ export const WIDGETS = new Set([
   "richtext", "select", "string", "text", "uuid",
 ]);
 export const AUTH_SCOPES = new Set(["repo", "public_repo"]);
-export const I18N_STRUCTURES = new Set(["single_file", "multiple_files", "multiple_folders"]);
 
 const fail = (where, message) => console.error(`  ✗ ${where}: ${message}`);
 
@@ -81,23 +79,8 @@ export async function checkCmsConfig({ root = ROOT } = {}) {
   if (!config.media_folder) problems.push("media_folder is missing");
   if (!config.public_folder) problems.push("public_folder is missing");
 
-  // --- i18n ----------------------------------------------------------------
-  if (config.i18n) {
-    if (!I18N_STRUCTURES.has(config.i18n.structure)) {
-      problems.push(`i18n.structure "${config.i18n.structure}" is not a known value`);
-    }
-    const contentLocales = new Set();
-    const copy = JSON.parse(await readFile(path.join(root, "content/copy.json"), "utf8").catch(() => "{}"));
-    for (const locale of Object.keys(copy)) contentLocales.add(locale);
-    for (const locale of config.i18n.locales ?? []) {
-      if (contentLocales.size && !contentLocales.has(locale)) {
-        problems.push(`i18n locale "${locale}" has no block in content/copy.json`);
-      }
-    }
-    if (!config.i18n.locales?.includes(config.i18n.default_locale)) {
-      problems.push("i18n.default_locale is not in i18n.locales");
-    }
-  }
+  // --- single language ---------------------------------------------------
+  if (config.i18n) problems.push("the site is English only; remove the i18n block");
 
   // --- collections ---------------------------------------------------------
   if (!Array.isArray(config.collections) || config.collections.length === 0) {
@@ -125,8 +108,7 @@ export async function checkCmsConfig({ root = ROOT } = {}) {
   }
 
   // --- coverage: every content field must be declared ----------------------
-  // Files keep one block per locale; each block is checked against the fields,
-  // down through objects and lists.
+  // Each file is checked against the fields, down through objects and lists.
   const undeclared = (data, fields, where, out) => {
     if (typeof data !== "object" || data === null || Array.isArray(data)) return;
     for (const [key, value] of Object.entries(data)) {
@@ -141,7 +123,6 @@ export async function checkCmsConfig({ root = ROOT } = {}) {
       }
     }
   };
-  const blocks = (data) => (isLocaleFile(data) ? Object.values(data) : [data]);
 
   for (const collection of config.collections ?? []) {
     const entries = collection.files
@@ -152,11 +133,8 @@ export async function checkCmsConfig({ root = ROOT } = {}) {
     const found = new Map();
     for (const entry of entries) {
       const data = JSON.parse(await readFile(path.join(root, entry.path), "utf8"));
-      if (collection.i18n && config.i18n && !isLocaleFile(data)) {
-        problems.push(`${entry.path}: not in the per-locale shape the CMS saves (\{ en: …, kn: … \})`);
-      }
       const out = found.get(entry.label) ?? new Set();
-      for (const block of blocks(data)) undeclared(block, entry.fields, "", out);
+      undeclared(data, entry.fields, "", out);
       found.set(entry.label, out);
     }
     for (const [label, keys] of found) {

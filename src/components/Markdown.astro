@@ -7,7 +7,11 @@ export interface Props {
 }
 
 const { value, class: className } = Astro.props;
-const html = value.trim() === "" ? "" : await marked.parse(value);
+// Links out of the site open in a new tab; links within it stay in this one.
+const html =
+  value.trim() === ""
+    ? ""
+    : (await marked.parse(value)).replace(/<a href="((?!https?:\/\/(?:www\.)?jnvckm\.org)https?:\/\/[^"]+)"/g, '<a href="$1" target="_blank" rel="noopener"');
 ---
 
 {html !== "" && <div class:list={["prose", className]} set:html={html} />}

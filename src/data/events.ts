@@ -1,13 +1,5 @@
-import { isoDate, media, mediaList, recordsIn, str, text } from "./load";
+import { isoDate, media, mediaList, optionalStr, recordsIn, str, text } from "./load";
 import type { EventEntry, ProgramId } from "./types";
-
-const PROGRAM_IDS = ["ignite", "ncl", "meet", "workshop"] as const;
-
-function asProgram(value: unknown): ProgramId {
-  return typeof value === "string" && (PROGRAM_IDS as readonly string[]).includes(value)
-    ? (value as ProgramId)
-    : null;
-}
 
 function asLocation(value: unknown) {
   const location = text(value);
@@ -24,7 +16,8 @@ function toEvent(record: Record<string, unknown>): EventEntry {
     image: media(record.image),
     documents: mediaList(record.documents),
     source: text(record.source),
-    program: asProgram(record.program),
+    program: optionalStr(record.program),
+    series: optionalStr(record.series),
     location: asLocation(record.location),
   };
 }
@@ -41,4 +34,11 @@ export function eventBySlug(slug: string): EventEntry | undefined {
 
 export function eventsForProgram(id: ProgramId): EventEntry[] {
   return events.filter((entry) => entry.program === id);
+}
+
+/** Other events in the same program, or failing that the same series, newest first. */
+export function relatedEvents(entry: EventEntry): EventEntry[] {
+  const key: "program" | "series" | null = entry.program ? "program" : entry.series ? "series" : null;
+  if (!key) return [];
+  return events.filter((other) => other.slug !== entry.slug && other[key] === entry[key]);
 }

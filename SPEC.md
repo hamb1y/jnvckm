@@ -1,17 +1,15 @@
 # Spec
 
-## Locales
+## Language
 
-`en` (default, unprefixed) and `kn` (prefix `/kn`). Configured in
-`astro.config.mjs` with `prefixDefaultLocale: false`.
+The site is English only. Old `/kn/…` addresses redirect to the English page
+(`public/_redirects`).
 
-Every route exists in both locales. `src/pages/` holds the English routes;
-`src/pages/kn/` mirrors them. Route files are thin: they import a view from
-`src/views/` and pass `lang`, plus `title`/`description`/`image` for detail
-routes so SEO metadata does not depend on the view.
+Route files in `src/pages/` are thin: they import a view from `src/views/` and
+pass `lang`, plus `title`/`description`/`image` for detail routes so SEO
+metadata does not depend on the view.
 
-`localePath(path, locale)` in `src/lib/paths.ts` is the only way internal links
-are built. Never hand-write a `/kn` prefix.
+`localePath(path)` in `src/lib/paths.ts` builds internal links.
 
 ## Routes
 
@@ -50,7 +48,7 @@ content/
 
 Shared fields: `slug`, `title`, `date` (ISO `YYYY-MM-DD`), `summary`, `body`
 (markdown, may be empty for a redacted record), `image`, `documents`, `source`.
-`Localized = string | { en, kn }`.
+`Localized` is a plain string (the type still allows `{ en }`).
 
 Guards that exist on purpose:
 
@@ -60,19 +58,14 @@ Guards that exist on purpose:
 - Sort order puts undated records last, not first.
 - `archiveNote` renders the redaction note on migrated historical records.
 
-## i18n behaviour
+## Text helpers
 
-- `t(locale, key)` — UI strings, complete in both locales. Falls back to the
-  default locale, then the key itself, so a gap is visible in review.
-- `tDynamic(locale, key)` — for keys built at runtime (`categories.*`).
-- `lx(value, locale)` — content fields, falling back to English.
-- `isFallback(value, locale)` — true when a field had to fall back, which is how
-  a Kannada page knows to show "this archived record is kept in its original
-  language".
+- `t(locale, key)` — interface text from `content/copy.json`. An unknown key
+  returns itself, so a gap is visible in review.
+- `lx(value, locale)` — content fields.
 
-Dates are formatted from a table in `src/utils/format.ts`, not `Intl`: Kannada
-month names are missing from some ICU builds and `Intl` silently produced
-"22, 2024". Amounts use `Intl` with Indian digit grouping.
+Dates are formatted from a table in `src/utils/format.ts`, not `Intl`. Amounts
+use `Intl` with Indian digit grouping.
 
 ## Layout
 
@@ -120,11 +113,10 @@ local static server, and audits each at 1440px plus layout-only re-measures at
 - no gradients, `background-clip: text`, thick coloured edges, border+shadow
   pairs, uppercase multi-word copy, image hover transforms, or stray animations
 - ≤ 4 distinct border radii
-- every nav entry renders as a link on every page, in the right locale
+- every nav entry renders as a link on every page
 - no internal link 404s
 - the contributions filter actually changes the visible count
-- the mobile nav reveals its links; the language switch points at the mirrored
-  route
+- the mobile nav reveals its links
 - `/admin/` mounts with zero console errors and no config-error banner
 
 Exits non-zero on any failure. `--shots` writes full-page screenshots to

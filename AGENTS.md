@@ -12,23 +12,31 @@ that are easy to break by accident.
 - **Views and components never read files.** Only `src/data/load.ts` touches the
   on-disk shape; everything downstream consumes the typed models in
   `src/data/types.ts`.
-- **`localePath()` is the only way to build an internal link.** Never write `/kn`
-  by hand. Nav lives locale-free in `src/lib/nav.ts`.
-- **Every route exists twice.** Add a page to `src/pages/` and mirror it in
-  `src/pages/kn/`; both import the same view from `src/views/`.
+- **The site is English only.** Build internal links with `localePath()`. The
+  pages nav can link to live in `PAGES` in `src/lib/nav.ts`; which appear, and
+  in what order, is set in the CMS.
 - **`bun run check` must report 0 errors, 0 warnings, 0 hints.** `bun run build`
   must pass. `bun run verify` must be all green before you claim anything works.
 
 ## Adding a page
 
 1. Write `src/views/MyView.astro` taking `lang: Locale`.
-2. Add `src/pages/my-page.astro` and `src/pages/kn/my-page.astro`, each ~6 lines:
-   import `BaseLayout` and the view, pass `lang` and `path`.
-3. Add the route to `NAV` (or `SECONDARY_NAV`) in `src/lib/nav.ts` **with a UI
-   key that exists in both dictionaries**.
-4. Add the key to both the `en` and `kn` blocks of `content/copy.json`, and its
-   field to the "Interface text" file in `public/admin/config.yml`.
+2. Add `src/pages/my-page.astro`, ~6 lines: import `BaseLayout` and the view,
+   pass `lang` and `path`.
+3. Add the route to `PAGES` in `src/lib/nav.ts` **with a UI key that exists in
+   `content/copy.json`**, add it to the page options of both Navigation lists in
+   `public/admin/config.yml`, and to `nav.header` or `nav.footer` in
+   `content/site.json` if it should be linked.
+4. Add the key to `content/copy.json`, and its field to the "Interface text"
+   file in `public/admin/config.yml`.
 5. Run `bun run check`, `bun run build`, `bun run verify`.
+
+## Nothing visible is hardcoded
+
+Text, photos, links, years, counts and lists come from `content/` and have a
+CMS field. Programs and contribution categories are content too: a new one needs
+no code. Interface text can use `{formed}` and `{founded}` for the years set in
+settings.
 
 ## Adding a content collection
 
@@ -36,9 +44,7 @@ that are easy to break by accident.
 2. Add a mapping module in `src/data/` using the helpers in `load.ts`
    (`str`, `text`, `media`, `mediaList`, `num`, `isoDate`) — never a raw
    `JSON.parse` in a view.
-3. Seed `content/<collection>/*.json`, filename = slug, in the shape the CMS
-   saves: `{ "en": { …fields }, "kn": { …translated fields } }`.
-   `mergeLocales()` in `src/data/locales.mjs` turns that into `{ en, kn }` per field.
+3. Seed `content/<collection>/*.json`, filename = slug.
 4. Declare it in `public/admin/config.yml` with a label and a hint per field.
 5. Include it in `recentActivity()` only if it belongs in the home feed.
 
@@ -54,25 +60,11 @@ that are easy to break by accident.
   list above the viewport, off-screen. `bun run verify` now opens the menu and
   asserts the list starts below its toggle, inside the viewport, and clear of the
   logo.
-- **Content must carry Kannada for everything a reader sees except `body`.** The
-  verifier fails on a `title`, `summary`, `alt`, `caption`, `batch`, `location`,
-  `archiveNote`, `name`, `tagline` or `startNote` that has no Kannada value, or
-  that is a plain string instead of `{ en, kn }`. Long-form `body` may stay in its
-  original language — the page shows a note when it does.
-- **Font stacks must carry a Kannada fallback.** Dates and amounts once used the
-  mono stack, and without a Kannada fallback the month names rendered as tofu
-  boxes. They now use the body face with tabular numerals, but the check stays. `bun run verify` now fails if any of `--font-display`, `--font-body`
-  or `--font-mono` in `tokens.css` lacks a Kannada family.
-- **Dates**: do not use `Intl.DateTimeFormat` for the month. Kannada month names
-  are missing from some ICU builds and it silently renders "22, 2024". Use
-  `formatDate()`.
+- **Dates**: format them with `formatDate()`, not `Intl.DateTimeFormat`.
 - **`[hidden]` must win**: `global.css` sets `[hidden] { display: none !important }`.
   The filter depends on it. Never add a `display` rule that overrides it.
 - **Islands**: after a dependency change, if an island stops responding, restart
   the dev server and clear `node_modules/.vite` before debugging the component.
-- **Kannada fallback**: an English-only record is fine. `lx()` falls back and
-  `isFallback()` drives the visible note. Do not machine-translate long-form prose
-  and ship it as final.
 - **The 404 page returns a real page** in `dist/404.html`; the verify server maps
   it explicitly.
 - **`getStaticPaths` is hoisted** out of the component. Import any constant it

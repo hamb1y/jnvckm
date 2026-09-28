@@ -1,6 +1,6 @@
 ---
 import { NAV, isActive } from "@/lib/nav";
-import { alternatePath, localePath, stripLocale } from "@/lib/paths";
+import { localePath } from "@/lib/paths";
 import { site } from "@/data/site";
 import { lx, t } from "@/i18n/utils";
 import type { Locale } from "@/data/types";
@@ -11,16 +11,18 @@ export interface Props {
 }
 
 const { lang, pathname } = Astro.props;
-const here = stripLocale(pathname);
-const other: Locale = lang === "en" ? "kn" : "en";
-const otherHref = alternatePath(pathname, other);
+const here = pathname;
 const siteName = lx(site.name, lang);
 ---
 
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand" href={localePath("/", lang)}>
-      <img class="brand-mark" src="/logo-mark.webp" alt={siteName} width="420" height="193" />
+      {site.logo ? (
+        <img class="brand-mark" src={site.logo.src} alt={siteName} width={site.logo.width} height={site.logo.height} />
+      ) : (
+        <span class="brand-name">{siteName}</span>
+      )}
     </a>
 
     <nav class="site-nav" aria-label={t(lang, "a11y.primaryNav")}>
@@ -52,15 +54,6 @@ const siteName = lx(site.name, lang);
           </li>
         ))}
       </ul>
-
-      <a
-        class="lang-switch"
-        href={otherHref}
-        hreflang={other}
-        aria-label={t(lang, "lang.switchAria")}
-      >
-        {t(lang, "lang.switchLabel")}
-      </a>
     </nav>
   </div>
 </header>
@@ -87,11 +80,22 @@ const siteName = lx(site.name, lang);
   .brand {
     display: block;
     flex-shrink: 0;
+    color: var(--ink);
+    text-decoration: none;
   }
 
   .brand-mark {
     width: clamp(8rem, 18vw, 10rem);
     height: auto;
+  }
+
+  .brand-name {
+    display: block;
+    max-width: 11rem;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.15;
   }
 
   .site-nav {
@@ -129,20 +133,6 @@ const siteName = lx(site.name, lang);
 
   .nav-list a[aria-current="page"] {
     text-decoration-color: var(--brand);
-  }
-
-  .lang-switch {
-    color: var(--ink);
-    font-weight: 700;
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.3em;
-    white-space: nowrap;
-    transition: color var(--dur-1) var(--ease-out);
-  }
-
-  .lang-switch:hover {
-    color: var(--brand);
   }
 
   .nav-details {

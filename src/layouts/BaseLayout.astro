@@ -5,15 +5,11 @@ import "@fontsource/arvo/700.css";
 import "@fontsource/mukta/400.css";
 import "@fontsource/mukta/600.css";
 import "@fontsource/mukta/700.css";
-import "@fontsource/noto-sans-kannada/400.css";
-import "@fontsource/noto-sans-kannada/600.css";
-import "@fontsource/noto-serif-kannada/600.css";
-import "@fontsource/noto-serif-kannada/700.css";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import { site } from "@/data/site";
 import { lx, t } from "@/i18n/utils";
-import { LOCALES, type Locale } from "@/data/types";
+import type { Locale } from "@/data/types";
 import { localePath } from "@/lib/paths";
 
 export interface Props {
@@ -47,7 +43,7 @@ const canonical = new URL(localePath(path, lang), origin).href;
  * twin and fall back to the branded default.
  */
 function socialCard(image: string | null): string {
-  if (!image) return "/og-default.png";
+  if (!image) return site.socialImage ? socialCard(site.socialImage) : "/og-default.png";
   const match = /^\/images\/(.+)\.webp$/i.exec(image);
   return match ? `/og/${match[1]}.jpg` : image;
 }
@@ -63,16 +59,6 @@ const socialImage = new URL(socialCard(image), origin).href;
     <title>{pageTitle}</title>
     <meta name="description" content={metaDescription} />
     <link rel="canonical" href={canonical} />
-    {
-      LOCALES.map((locale) => (
-        <link
-          rel="alternate"
-          hreflang={locale}
-          href={new URL(localePath(path, locale), origin).href}
-        />
-      ))
-    }
-    <link rel="alternate" hreflang="x-default" href={new URL(localePath(path, "en"), origin).href} />
     {noindex && <meta name="robots" content="noindex" />}
 
     <meta property="og:type" content="website" />
@@ -80,7 +66,7 @@ const socialImage = new URL(socialCard(image), origin).href;
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={metaDescription} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:locale" content={lang === "kn" ? "kn_IN" : "en_IN"} />
+    <meta property="og:locale" content="en_IN" />
     <meta property="og:image" content={socialImage} />
     <meta property="og:image:alt" content={siteName} />
     <meta name="twitter:card" content="summary_large_image" />

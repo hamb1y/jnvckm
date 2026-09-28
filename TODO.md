@@ -38,9 +38,6 @@ Open work, roughly in the order it should be tackled.
 - [ ] `content/drafts/` is excluded by `load.ts` (any path containing
       `/drafts/`), so quarantined material can be kept in the repo without
       publishing it. Nothing uses it yet.
-- [ ] A visual pass on the Kannada pages by a Kannada reader: line breaks,
-      heading balance, and whether `Noto Serif Kannada` is the right display
-      pairing for Arvo.
 
 ## Infrastructure
 

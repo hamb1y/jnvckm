@@ -12,10 +12,5 @@ export default defineConfig({
     svelte(),
     sitemap({ filter: (page) => !page.replace(/\/$/, "").endsWith("/404") }),
   ],
-  i18n: {
-    defaultLocale: "en",
-    locales: ["en", "kn"],
-    routing: { prefixDefaultLocale: false },
-  },
   server: { port: 4321 },
 });

@@ -1,6 +1,8 @@
 ---
 import { ArrowUpRight } from "lucide-astro";
 import PageCover from "@/components/PageCover.astro";
+import { pages } from "@/data/pages";
+import { posts } from "@/data/posts";
 import { site } from "@/data/site";
 import { lx, t } from "@/i18n/utils";
 import { localePath } from "@/lib/paths";
@@ -11,6 +13,7 @@ export interface Props {
 }
 
 const { lang } = Astro.props;
+const batchReps = posts.find((entry) => entry.slug === pages.connect.batchReps);
 ---
 
 <PageCover title={t(lang, "connect.title")} lede={t(lang, "connect.lede")} />
@@ -26,10 +29,12 @@ const { lang } = Astro.props;
       <article>
         <h2>{t(lang, "connect.batchRepsTitle")}</h2>
         <p>{t(lang, "connect.batchRepsBody")}</p>
-        <a class="more" href={localePath("/stories/batch-representatives", lang)}>
-          {t(lang, "connect.batchRepsLink")}
-          <ArrowUpRight size={15} stroke-width={1.7} aria-hidden="true" />
-        </a>
+        {batchReps && (
+          <a class="more" href={localePath(`/stories/${batchReps.slug}`, lang)}>
+            {t(lang, "connect.batchRepsLink")}
+            <ArrowUpRight size={15} stroke-width={1.7} aria-hidden="true" />
+          </a>
+        )}
       </article>
 
       <article>

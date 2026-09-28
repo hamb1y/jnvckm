@@ -1,21 +1,10 @@
 {
-  "en": {
-    "slug": "batch-representatives",
-    "kind": "news",
-    "title": "Batch representatives formed",
-    "date": "2022-01-12",
-    "summary": "A representative from each batch carries association news to their own batchmates.",
-    "body": "Each batch has a representative whose job is to keep their batchmates in the loop: carrying association news — events, reunions, projects under way — to their own batch, and bringing questions and offers of help back to the association.\n\nRepresentatives were put in place in January 2022, covering the batches from 1986 to 2001.",
-    "image": null,
-    "documents": []
-  },
-  "kn": {
-    "kind": "news",
-    "title": "ಬ್ಯಾಚ್ ಪ್ರತಿನಿಧಿಗಳ ರಚನೆ",
-    "date": "2022-01-12",
-    "summary": "ಪ್ರತಿ ಬ್ಯಾಚ್‌ನಿಂದ ಒಬ್ಬ ಪ್ರತಿನಿಧಿ, ತಮ್ಮ ಬ್ಯಾಚ್ ಸ್ನೇಹಿತರಿಗೆ ಸಂಘದ ಸುದ್ದಿ ತಲುಪಿಸುತ್ತಾರೆ.",
-    "body": "ಪ್ರತಿ ಬ್ಯಾಚ್‌ಗೂ ಒಬ್ಬ ಪ್ರತಿನಿಧಿ ಇದ್ದಾರೆ. ಅವರ ಕೆಲಸ: ಸಂಘದ ಸುದ್ದಿಯನ್ನು — ಕಾರ್ಯಕ್ರಮಗಳು, ಪುನರ್ಮಿಲನಗಳು, ನಡೆಯುತ್ತಿರುವ ಯೋಜನೆಗಳು — ತಮ್ಮ ಬ್ಯಾಚ್‌ಗೆ ತಲುಪಿಸುವುದು, ಮತ್ತು ಬ್ಯಾಚ್‌ನ ಪ್ರಶ್ನೆಗಳನ್ನು ಹಾಗೂ ಸಹಾಯದ ಆಸಕ್ತಿಯನ್ನು ಸಂಘಕ್ಕೆ ತಿಳಿಸುವುದು.\n\nಜನವರಿ 2022ರಲ್ಲಿ ಪ್ರತಿನಿಧಿಗಳನ್ನು ನೇಮಿಸಲಾಯಿತು; ಇದು 1986ರಿಂದ 2001ರವರೆಗಿನ ಬ್ಯಾಚ್‌ಗಳನ್ನು ಒಳಗೊಂಡಿತ್ತು.",
-    "image": null,
-    "documents": []
-  }
+  "slug": "batch-representatives",
+  "kind": "news",
+  "title": "Batch representatives formed",
+  "date": "2022-01-12",
+  "summary": "A representative from each batch carries association news to their own batchmates.",
+  "body": "Each batch has a representative whose job is to keep their batchmates in the loop: carrying association news — events, reunions, projects under way — to their own batch, and bringing questions and offers of help back to the association.\n\nRepresentatives were put in place in January 2022, covering the batches from 1986 to 2001.",
+  "image": null,
+  "documents": []
 }

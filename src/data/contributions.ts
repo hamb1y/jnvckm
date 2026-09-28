@@ -1,10 +1,15 @@
-import { isoDate, media, mediaList, num, recordsIn, str, text } from "./load";
-import { CONTRIBUTION_CATEGORIES, type ContributionCategory, type ContributionEntry } from "./types";
+import { isoDate, media, mediaList, num, recordsIn, singleton, str, text } from "./load";
+import type { Category, ContributionEntry } from "./types";
 
-function asCategory(value: unknown): ContributionCategory {
-  return typeof value === "string" && (CONTRIBUTION_CATEGORIES as readonly string[]).includes(value)
-    ? (value as ContributionCategory)
-    : "infrastructure";
+/** The categories editors can file a contribution under, in display order. */
+export const categories: Category[] = (
+  Array.isArray(singleton("categories").categories) ? (singleton("categories").categories as Record<string, unknown>[]) : []
+)
+  .map((record) => ({ id: str(record.id), label: text(record.label) }))
+  .filter((category) => category.id !== "");
+
+export function categoryLabel(id: string): Category["label"] {
+  return categories.find((category) => category.id === id)?.label ?? id;
 }
 
 function toContribution(record: Record<string, unknown>): ContributionEntry {
@@ -19,7 +24,7 @@ function toContribution(record: Record<string, unknown>): ContributionEntry {
     image: media(record.image),
     documents: mediaList(record.documents),
     source: text(record.source),
-    category: asCategory(record.category),
+    category: str(record.category),
     batch: batch === "" ? null : batch,
     amount: num(record.amount),
     archiveNote: archiveNote === "" ? null : archiveNote,
@@ -35,9 +40,7 @@ export function contributionBySlug(slug: string): ContributionEntry | undefined 
   return contributions.find((entry) => entry.slug === slug);
 }
 
-/** Only the categories that actually have records, in canonical order. */
-export function usedCategories(): ContributionCategory[] {
-  return CONTRIBUTION_CATEGORIES.filter((category) =>
-    contributions.some((entry) => entry.category === category),
-  );
+/** Only the categories that actually have records, in the configured order. */
+export function usedCategories(): Category[] {
+  return categories.filter((category) => contributions.some((entry) => entry.category === category.id));
 }

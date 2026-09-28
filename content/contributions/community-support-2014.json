@@ -1,26 +1,13 @@
 {
-  "en": {
-    "slug": "community-support-2014",
-    "title": "Support for a staff member's family",
-    "date": "2016-06-13",
-    "category": "staff-community",
-    "batch": null,
-    "amount": 311550,
-    "summary": "The alumni community and the school together raised ₹3,11,550 for the family of a staff member during a serious illness in 2014.",
-    "body": "",
-    "archiveNote": "Some personal and medical details from the original appeal have been removed to protect the family. The campaign and its outcome are unchanged.",
-    "image": null,
-    "documents": []
-  },
-  "kn": {
-    "title": "ಸಿಬ್ಬಂದಿಯ ಕುಟುಂಬಕ್ಕೆ ಬೆಂಬಲ",
-    "date": "2016-06-13",
-    "category": "staff-community",
-    "batch": null,
-    "amount": 311550,
-    "summary": "2014ರಲ್ಲಿ ಗಂಭೀರ ಕಾಯಿಲೆ ಎದುರಿಸುತ್ತಿದ್ದ ಸಿಬ್ಬಂದಿಯ ಕುಟುಂಬಕ್ಕೆ, ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಮುದಾಯ ಮತ್ತು ಶಾಲೆ ಸೇರಿ ₹3,11,550 ಸಂಗ್ರಹವಾಯಿತು.",
-    "archiveNote": "ಮೂಲ ಮನವಿಯಲ್ಲಿದ್ದ ಕೆಲವು ವೈಯಕ್ತಿಕ ಮತ್ತು ವೈದ್ಯಕೀಯ ವಿವರಗಳನ್ನು ಕುಟುಂಬದ ರಕ್ಷಣೆಗಾಗಿ ತೆಗೆದುಹಾಕಲಾಗಿದೆ. ಸಹಾಯದ ಪ್ರಯತ್ನ ಮತ್ತು ಫಲಿತಾಂಶದಲ್ಲಿ ಯಾವುದೇ ಬದಲಾವಣೆ ಇಲ್ಲ.",
-    "image": null,
-    "documents": []
-  }
+  "slug": "community-support-2014",
+  "title": "Support for a staff member's family",
+  "date": "2016-06-13",
+  "category": "staff-community",
+  "batch": null,
+  "amount": 311550,
+  "summary": "The alumni community and the school together raised ₹3,11,550 for the family of a staff member during a serious illness in 2014.",
+  "body": "",
+  "archiveNote": "Some personal and medical details from the original appeal have been removed to protect the family. The campaign and its outcome are unchanged.",
+  "image": null,
+  "documents": []
 }

@@ -1,23 +1,11 @@
 {
-  "en": {
-    "slug": "ignite-2017",
-    "title": "IGNITE 2017",
-    "date": "2017-12-02",
-    "program": "ignite",
-    "location": "JNV Balehonnur",
-    "summary": "The thirteenth edition of the workshop.",
-    "body": "The thirteenth edition of IGNITE was held at the Vidyalaya in December 2017. Alumni returned to speak with students of classes 10 to 12 about the careers and courses open to them after school.",
-    "image": null,
-    "documents": []
-  },
-  "kn": {
-    "title": "ಇಗ್ನೈಟ್ 2017",
-    "date": "2017-12-02",
-    "program": "ignite",
-    "location": "ಜೆಎನ್‌ವಿ ಬಾಳೆಹೊನ್ನೂರು",
-    "summary": "ಕಾರ್ಯಾಗಾರದ ಹದಿಮೂರನೇ ಆವೃತ್ತಿ.",
-    "body": "ಇಗ್ನೈಟ್‌ನ ಹದಿಮೂರನೇ ಆವೃತ್ತಿ ಡಿಸೆಂಬರ್ 2017ರಲ್ಲಿ ವಿದ್ಯಾಲಯದಲ್ಲಿ ನಡೆಯಿತು. ಶಾಲೆಯ ನಂತರ ಲಭ್ಯವಿರುವ ವೃತ್ತಿ ಮತ್ತು ಕೋರ್ಸ್‌ಗಳ ಬಗ್ಗೆ 10ರಿಂದ 12ನೇ ತರಗತಿಯ ವಿದ್ಯಾರ್ಥಿಗಳೊಂದಿಗೆ ಮಾತನಾಡಲು ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳು ಮರಳಿ ಬಂದರು.",
-    "image": null,
-    "documents": []
-  }
+  "slug": "ignite-2017",
+  "title": "IGNITE 2017",
+  "date": "2017-12-02",
+  "program": "ignite",
+  "location": "JNV Balehonnur",
+  "summary": "The thirteenth edition of the workshop.",
+  "body": "The thirteenth edition of IGNITE was held at the Vidyalaya in December 2017. Alumni returned to speak with students of classes 10 to 12 about the careers and courses open to them after school.",
+  "image": null,
+  "documents": []
 }

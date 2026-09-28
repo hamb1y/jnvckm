@@ -29,7 +29,8 @@ const KIND_LABEL: Record<string, UIKey> = {
   event: "posts.kind.event",
 };
 
-const { hero, lab, campus } = pages.home;
+const { hero, lab, campus, featured: featuredSlug, latestCount } = pages.home;
+const founded = pages.vidyalaya.founded;
 
 // The giving record, newest first, with one photograph to lead it. Records with
 // no recorded figure keep their row and an empty figure column, so the list and
@@ -56,13 +57,11 @@ const givingSummary = t(lang, "impact.summary")
 // contributions fill the limit and leave fewer than three cards.
 const latest = recentActivity(Infinity)
   .filter((item) => item.kind !== "contribution")
-  .slice(0, 3);
+  .slice(0, latestCount);
 // A kind label only helps when the cards are of different kinds.
 const mixedKinds = new Set(latest.map((item) => item.kind)).size > 1;
 
-const ignite = programs.find((program) => program.id === "ignite");
-const ncl = programs.find((program) => program.id === "ncl");
-const hamRadio = events.find((entry) => entry.slug === "ham-radio-workshop-2015");
+const featured = featuredSlug ? events.find((entry) => entry.slug === featuredSlug) : undefined;
 
 ---
 
@@ -159,13 +158,13 @@ const hamRadio = events.find((entry) => entry.slug === "ham-radio-workshop-2015"
     </div>
   </section>
 
-  {hamRadio && hamRadio.image && (
+  {featured && featured.image && (
     <Band
-      href={localePath(`/events/${hamRadio.slug}`, lang)}
-      src={hamRadio.image.src}
-      alt={lx(hamRadio.image.alt, lang)}
-      caption={lx(hamRadio.title, lang)}
-      meta={formatDate(hamRadio.date, lang)}
+      href={localePath(`/events/${featured.slug}`, lang)}
+      src={featured.image.src}
+      alt={lx(featured.image.alt, lang)}
+      caption={lx(featured.title, lang)}
+      meta={formatDate(featured.date, lang)}
     />
   )}
 
@@ -177,43 +176,44 @@ const hamRadio = events.find((entry) => entry.slug === "ham-radio-workshop-2015"
       </div>
 
       <div class="programs">
-        {ignite && (
-          <article class="program">
-            <div class="program-media">
-              <Figure media={ignite.image} locale={lang} ratio="4 / 3" />
-            </div>
-            <div class="program-main">
-              <p class="eyebrow">{lx(ignite.name, lang)}</p>
-              <h3>
-                <a href={localePath("/programs/ignite", lang)}>{lx(ignite.tagline, lang)}</a>
-              </h3>
-              <p>{lx(ignite.summary, lang)}</p>
-              <p class="program-note">{lx(ignite.startNote, lang)}</p>
-              <a class="more" href={localePath("/programs/ignite", lang)}>
-                {t(lang, "programs.more").replace("{name}", lx(ignite.name, lang))}
-                <ArrowUpRight size={16} stroke-width={1.8} aria-hidden="true" />
-              </a>
-            </div>
-          </article>
-        )}
-        {ncl && (
-          <article class="program program--panel">
-            <div class="program-panel">
-              <p class="panel-mark">{ncl.shortName ? lx(ncl.shortName, lang) : ""}</p>
-              <p class="panel-years">{lx(ncl.startNote, lang)}</p>
-            </div>
-            <div class="program-main">
-              <p class="eyebrow">{lx(ncl.name, lang)}</p>
-              <h3>
-                <a href={localePath("/programs/ncl", lang)}>{lx(ncl.tagline, lang)}</a>
-              </h3>
-              <p>{lx(ncl.summary, lang)}</p>
-              <a class="more" href={localePath("/programs/ncl", lang)}>
-                {t(lang, "programs.more").replace("{name}", lx(ncl.name, lang))}
-                <ArrowUpRight size={16} stroke-width={1.8} aria-hidden="true" />
-              </a>
-            </div>
-          </article>
+        {programs.map((program) =>
+          program.image ? (
+            <article class="program">
+              <div class="program-media">
+                <Figure media={program.image} locale={lang} ratio="4 / 3" />
+              </div>
+              <div class="program-main">
+                <p class="eyebrow">{lx(program.name, lang)}</p>
+                <h3>
+                  <a href={localePath(`/programs/${program.id}`, lang)}>{lx(program.tagline, lang)}</a>
+                </h3>
+                <p>{lx(program.summary, lang)}</p>
+                <p class="program-note">{lx(program.startNote, lang)}</p>
+                <a class="more" href={localePath(`/programs/${program.id}`, lang)}>
+                  {t(lang, "programs.more").replace("{name}", lx(program.name, lang))}
+                  <ArrowUpRight size={16} stroke-width={1.8} aria-hidden="true" />
+                </a>
+              </div>
+            </article>
+          ) : (
+            <article class="program program--panel">
+              <div class="program-panel">
+                <p class="panel-mark">{(program.shortName && lx(program.shortName, lang)) || lx(program.name, lang)}</p>
+                <p class="panel-years">{lx(program.startNote, lang)}</p>
+              </div>
+              <div class="program-main">
+                <p class="eyebrow">{lx(program.name, lang)}</p>
+                <h3>
+                  <a href={localePath(`/programs/${program.id}`, lang)}>{lx(program.tagline, lang)}</a>
+                </h3>
+                <p>{lx(program.summary, lang)}</p>
+                <a class="more" href={localePath(`/programs/${program.id}`, lang)}>
+                  {t(lang, "programs.more").replace("{name}", lx(program.name, lang))}
+                  <ArrowUpRight size={16} stroke-width={1.8} aria-hidden="true" />
+                </a>
+              </div>
+            </article>
+          ),
         )}
       </div>
     </div>
@@ -254,9 +254,11 @@ const hamRadio = events.find((entry) => entry.slug === "ham-radio-workshop-2015"
         {campus && <Figure media={campus} locale={lang} ratio="4 / 3" />}
       </div>
       <div class="origin-copy">
-        <p class="origin-year" aria-hidden="true">
-          1986
-        </p>
+        {founded && (
+          <p class="origin-year" aria-hidden="true">
+            {founded}
+          </p>
+        )}
         <h2>{t(lang, "home.vidyalayaTitle")}</h2>
         <p>{t(lang, "home.vidyalayaLede")}</p>
         <a class="more" href={localePath("/vidyalaya", lang)}>
@@ -629,10 +631,4 @@ const hamRadio = events.find((entry) => entry.slug === "ham-radio-workshop-2015"
     }
   }
 
-  /* Kannada set at poster size is far wider than the Latin short name. */
-  :global(:lang(kn)) .panel-mark {
-    font-size: clamp(2.5rem, 1.4rem + 5vw, 5.5rem);
-    letter-spacing: 0;
-    line-height: 1.1;
-  }
 </style>

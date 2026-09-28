@@ -4,7 +4,7 @@ import Figure from "./Figure.astro";
 import Markdown from "./Markdown.astro";
 import { ArrowLeft } from "lucide-astro";
 import type { Locale, Localized, Media } from "@/data/types";
-import { isFallback, lx, t } from "@/i18n/utils";
+import { lx, t } from "@/i18n/utils";
 import { formatDate } from "@/utils/format";
 
 /**
@@ -54,7 +54,6 @@ const {
 } = Astro.props;
 
 const bodyText = lx(body, lang);
-const bodyIsFallback = bodyText !== "" && isFallback(body, lang);
 const note = archiveNote ? lx(archiveNote, lang) : "";
 const sourceText = lx(source, lang);
 ---
@@ -97,8 +96,6 @@ const sourceText = lx(source, lang);
     )}
 
     {bodyText !== "" && <Markdown value={bodyText} class="entry-prose" />}
-
-    {bodyIsFallback && <p class="entry-note">{t(lang, "common.englishOnly")}</p>}
 
     {note !== "" && <aside class="entry-archive">{note}</aside>}
 

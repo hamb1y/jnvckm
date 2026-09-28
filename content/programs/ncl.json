@@ -1,21 +1,11 @@
 {
-  "en": {
-    "id": "ncl",
-    "name": "Navodaya Cricket League",
-    "shortName": "NCL",
-    "tagline": "A reunion played out on the cricket field",
-    "summary": "NCL is the alumni cricket tournament, and it is really a reunion with a scoreboard. Teams are built around batches, so a season brings alumni from different generations into the same ground.",
-    "startNote": "14 seasons, the latest in 2025.",
-    "body": "The league is usually played in Bengaluru, at the RNS Institute of Technology grounds, and it runs across a weekend. The 2010 batch won season 5; the seventh edition was a two-day tournament. Seasons 11, 12 and 14 followed in 2022, 2023 and 2025.\n\nMatches are recorded on CricHeroes, so scores and scorecards stay public after the weekend is over.",
-    "image": null
-  },
-  "kn": {
-    "name": "ನವೋದಯ ಕ್ರಿಕೆಟ್ ಲೀಗ್",
-    "shortName": "ಎನ್‌ಸಿಎಲ್",
-    "tagline": "ಕ್ರಿಕೆಟ್ ಮೈದಾನದಲ್ಲಿ ನಡೆಯುವ ಪುನರ್ಮಿಲನ",
-    "summary": "ಎನ್‌ಸಿಎಲ್ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳ ಕ್ರಿಕೆಟ್ ಪಂದ್ಯಾವಳಿ. ವಾಸ್ತವವಾಗಿ ಇದು ಅಂಕಪಟ್ಟಿಯೊಂದಿಗಿನ ಪುನರ್ಮಿಲನ. ತಂಡಗಳು ಬ್ಯಾಚ್‌ಗಳ ಸುತ್ತ ಕಟ್ಟಲ್ಪಡುತ್ತವೆ; ಒಂದು ಸೀಸನ್ ವಿವಿಧ ಪೀಳಿಗೆಯ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳನ್ನು ಒಂದೇ ಮೈದಾನಕ್ಕೆ ತರುತ್ತದೆ.",
-    "startNote": "14 ಸೀಸನ್‌ಗಳು; ಇತ್ತೀಚಿನದು 2025ರಲ್ಲಿ.",
-    "body": "ಲೀಗ್ ಸಾಮಾನ್ಯವಾಗಿ ಬೆಂಗಳೂರಿನ ಆರ್‌ಎನ್‌ಎಸ್ ಇನ್‌ಸ್ಟಿಟ್ಯೂಟ್ ಆಫ್ ಟೆಕ್ನಾಲಜಿ ಮೈದಾನದಲ್ಲಿ, ಒಂದು ವಾರಾಂತ್ಯದಲ್ಲಿ ನಡೆಯುತ್ತದೆ. 2010ನೇ ಬ್ಯಾಚ್ 5ನೇ ಸೀಸನ್ ಅನ್ನು ಗೆದ್ದಿತು; ಏಳನೇ ಆವೃತ್ತಿ ಎರಡು ದಿನಗಳ ಪಂದ್ಯಾವಳಿಯಾಗಿತ್ತು. 2022, 2023 ಮತ್ತು 2025ರಲ್ಲಿ 11, 12 ಮತ್ತು 14ನೇ ಸೀಸನ್‌ಗಳು ನಡೆದವು.\n\nಪಂದ್ಯಗಳು ಕ್ರಿಕ್‌ಹೀರೋಸ್‌ನಲ್ಲಿ ದಾಖಲಾಗುತ್ತವೆ; ಹೀಗಾಗಿ ವಾರಾಂತ್ಯದ ನಂತರವೂ ಅಂಕಗಳು ಸಾರ್ವಜನಿಕವಾಗಿ ಉಳಿಯುತ್ತವೆ.",
-    "image": null
-  }
+  "id": "ncl",
+  "order": 2,
+  "name": "Navodaya Cricket League",
+  "shortName": "NCL",
+  "tagline": "A reunion played out on the cricket field",
+  "summary": "NCL is the alumni cricket tournament, and it is really a reunion with a scoreboard. Teams are built around batches, so a season brings alumni from different generations into the same ground.",
+  "startNote": "14 seasons, the latest in 2025.",
+  "body": "The league is usually played in Bengaluru, at the RNS Institute of Technology grounds, and it runs across a weekend. The 2010 batch won season 5; the seventh edition was a two-day tournament. Seasons 11, 12 and 14 followed in 2022, 2023 and 2025.\n\nMatches are recorded on CricHeroes, so scores and scorecards stay public after the weekend is over.",
+  "image": null
 }

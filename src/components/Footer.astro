@@ -1,5 +1,5 @@
 ---
-import { NAV, SECONDARY_NAV } from "@/lib/nav";
+import { FOOTER_NAV } from "@/lib/nav";
 import { localePath } from "@/lib/paths";
 import { site } from "@/data/site";
 import { lx, t } from "@/i18n/utils";
@@ -16,7 +16,6 @@ const year = new Date().getFullYear();
 const { contact } = site;
 // Only channels the association has confirmed are published as official.
 const confirmedSocials = site.socials.filter((social) => social.verified);
-const pages = [...NAV.filter((item) => item.path !== "/"), ...SECONDARY_NAV];
 ---
 
 <footer class="site-footer on-brand">
@@ -29,14 +28,14 @@ const pages = [...NAV.filter((item) => item.path !== "/"), ...SECONDARY_NAV];
     <nav class="footer-block" aria-label={t(lang, "footer.association")}>
       <h2 class="footer-title">{t(lang, "footer.association")}</h2>
       <ul class="footer-list footer-pages">
-        {pages.map((item) => (
+        {FOOTER_NAV.map((item) => (
           <li>
             <a href={localePath(item.path, lang)}>{t(lang, item.key)}</a>
           </li>
         ))}
         {confirmedSocials.map((social) => (
           <li>
-            <a href={social.url} rel="noopener">
+            <a href={social.url} target="_blank" rel="noopener">
               {social.label}
             </a>
           </li>
@@ -67,19 +66,19 @@ const pages = [...NAV.filter((item) => item.path !== "/"), ...SECONDARY_NAV];
       {site.credit && (
         <>
           {t(lang, "footer.creditLabel")}{" "}
-          <a href={site.credit.url} rel="noopener">
+          <a href={site.credit.url} target="_blank" rel="noopener">
             {site.credit.label}
           </a>
         </>
       )}
       <span aria-hidden="true"> · </span>
-      <a href={site.repository} rel="noopener">
+      <a href={site.repository} target="_blank" rel="noopener">
         {t(lang, "footer.repository")}
       </a>
       {site.license && (
         <>
           <span aria-hidden="true"> · </span>
-          <a href={site.license.url} rel="noopener">
+          <a href={site.license.url} target="_blank" rel="noopener">
             {site.license.label}
           </a>
         </>
@@ -113,10 +112,6 @@ const pages = [...NAV.filter((item) => item.path !== "/"), ...SECONDARY_NAV];
     text-wrap: balance;
   }
 
-  :global(:lang(kn)) .footer-name {
-    letter-spacing: 0;
-    line-height: 1.3;
-  }
 
   .footer-independent {
     max-inline-size: 48ch;

@@ -1,23 +1,11 @@
 {
-  "en": {
-    "slug": "ignite-2016",
-    "title": "IGNITE 2016",
-    "date": "2016-12-03",
-    "program": "ignite",
-    "location": "JNV Balehonnur",
-    "summary": "The twelfth edition. Mindbenders, the quiz, was held as part of it.",
-    "body": "The twelfth edition of IGNITE was held at the Vidyalaya in December 2016. Mindbenders, the quiz for students of classes 8 to 12, ran as part of the same programme on 3 December.",
-    "image": null,
-    "documents": []
-  },
-  "kn": {
-    "title": "ಇಗ್ನೈಟ್ 2016",
-    "date": "2016-12-03",
-    "program": "ignite",
-    "location": "ಜೆಎನ್‌ವಿ ಬಾಳೆಹೊನ್ನೂರು",
-    "summary": "ಹನ್ನೆರಡನೇ ಆವೃತ್ತಿ; ಇದರ ಭಾಗವಾಗಿ ಮೈಂಡ್ಬೆಂಡರ್ಸ್ ರಸಪ್ರಶ್ನೆ ನಡೆಯಿತು.",
-    "body": "ಇಗ್ನೈಟ್‌ನ ಹನ್ನೆರಡನೇ ಆವೃತ್ತಿ ಡಿಸೆಂಬರ್ 2016ರಲ್ಲಿ ವಿದ್ಯಾಲಯದಲ್ಲಿ ನಡೆಯಿತು. ಅದೇ ಕಾರ್ಯಕ್ರಮದ ಭಾಗವಾಗಿ, 8ರಿಂದ 12ನೇ ತರಗತಿಯ ವಿದ್ಯಾರ್ಥಿಗಳಿಗಾಗಿ ಮೈಂಡ್‌ಬೆಂಡರ್ಸ್ ರಸಪ್ರಶ್ನೆ ಡಿಸೆಂಬರ್ 3ರಂದು ನಡೆಯಿತು.",
-    "image": null,
-    "documents": []
-  }
+  "slug": "ignite-2016",
+  "title": "IGNITE 2016",
+  "date": "2016-12-03",
+  "program": "ignite",
+  "location": "JNV Balehonnur",
+  "summary": "The twelfth edition. Mindbenders, the quiz, was held as part of it.",
+  "body": "The twelfth edition of IGNITE was held at the Vidyalaya in December 2016. Mindbenders, the quiz for students of classes 8 to 12, ran as part of the same programme on 3 December.",
+  "image": null,
+  "documents": []
 }

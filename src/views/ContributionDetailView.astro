@@ -1,8 +1,8 @@
 ---
 import type { MetaRow } from "@/components/EntryDetail.astro";
 import EntryDetail from "@/components/EntryDetail.astro";
-import { contributionBySlug } from "@/data/contributions";
-import { lx, t, tDynamic } from "@/i18n/utils";
+import { categoryLabel, contributionBySlug } from "@/data/contributions";
+import { lx, t } from "@/i18n/utils";
 import { localePath } from "@/lib/paths";
 import { formatAmount } from "@/utils/format";
 import type { Locale } from "@/data/types";
@@ -17,7 +17,7 @@ const entry = contributionBySlug(slug);
 if (!entry) throw new Error(`Unknown contribution: ${slug}`);
 
 const meta: MetaRow[] = [
-  { label: t(lang, "common.category"), value: tDynamic(lang, `categories.${entry.category}`) },
+  { label: t(lang, "common.category"), value: lx(categoryLabel(entry.category), lang) },
 ];
 if (entry.batch) meta.push({ label: t(lang, "common.batch"), value: lx(entry.batch, lang) });
 if (entry.amount !== null) {

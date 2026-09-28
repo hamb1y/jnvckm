@@ -2,8 +2,8 @@
 import ContributionFilter from "@/components/ContributionFilter.svelte";
 import EntryRow from "@/components/EntryRow.astro";
 import PageCover from "@/components/PageCover.astro";
-import { contributions, usedCategories } from "@/data/contributions";
-import { lx, t, tDynamic } from "@/i18n/utils";
+import { categoryLabel, contributions, usedCategories } from "@/data/contributions";
+import { lx, t } from "@/i18n/utils";
 import { localePath } from "@/lib/paths";
 import { formatAmount } from "@/utils/format";
 import type { Locale } from "@/data/types";
@@ -14,9 +14,9 @@ export interface Props {
 
 const { lang } = Astro.props;
 
-const categories = usedCategories().map((id) => ({
-  id,
-  label: tDynamic(lang, `categories.${id}`),
+const categories = usedCategories().map((category) => ({
+  id: category.id,
+  label: lx(category.label, lang),
 }));
 const total = contributions.length;
 const years = contributions
@@ -56,7 +56,7 @@ const range = years.length > 1 ? `${years[0]}–${years.at(-1)}` : (years[0] ?? 
         image={entry.image}
         amount={entry.amount !== null ? formatAmount(entry.amount, lang) : null}
         meta={[
-          tDynamic(lang, `categories.${entry.category}`),
+          lx(categoryLabel(entry.category), lang),
           ...(entry.batch ? [lx(entry.batch, lang)] : []),
         ]}
         locale={lang}

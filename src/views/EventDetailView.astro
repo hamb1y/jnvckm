@@ -2,7 +2,7 @@
 import type { MetaRow } from "@/components/EntryDetail.astro";
 import EntryDetail from "@/components/EntryDetail.astro";
 import EntryRow from "@/components/EntryRow.astro";
-import { eventBySlug, eventsForProgram } from "@/data/events";
+import { eventBySlug, relatedEvents } from "@/data/events";
 import { programById } from "@/data/programs";
 import { lx, t } from "@/i18n/utils";
 import { localePath } from "@/lib/paths";
@@ -21,7 +21,7 @@ const meta: MetaRow[] = [];
 if (entry.location)
   meta.push({ label: t(lang, "common.location"), value: lx(entry.location, lang) });
 if (entry.program) {
-  const program = programById(entry.program as "ignite" | "ncl");
+  const program = programById(entry.program);
   if (program)
     meta.push({
       label: t(lang, "common.program"),
@@ -30,12 +30,8 @@ if (entry.program) {
     });
 }
 
-// Closure: the other documented records from the same program, newest first.
-const related = entry.program
-  ? eventsForProgram(entry.program)
-      .filter((other) => other.slug !== entry.slug)
-      .slice(0, 3)
-  : [];
+// Closure: the other documented records from the same program or series.
+const related = relatedEvents(entry).slice(0, 3);
 ---
 
 <EntryDetail

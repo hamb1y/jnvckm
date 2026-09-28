@@ -12,13 +12,15 @@ export interface Props {
 
 const { lang } = Astro.props;
 
-const { photo, facts, founded } = pages.vidyalaya;
+const { photo, facts, founded, links } = pages.vidyalaya;
 ---
 
 <PageCover title={t(lang, "vidyalaya.title")} lede={t(lang, "vidyalaya.lede")}>
-  <p class="cover-mark" slot="figure" aria-hidden="true">
-    {founded}
-  </p>
+  {founded && (
+    <p class="cover-mark" slot="figure" aria-hidden="true">
+      {founded}
+    </p>
+  )}
 </PageCover>
 
 <div class="container vidyalaya">
@@ -35,13 +37,15 @@ const { photo, facts, founded } = pages.vidyalaya;
   </dl>
 
   <div class="vidyalaya-links">
-    <p>
-      <a href="https://navodaya.gov.in" rel="noopener">
-        navodaya.gov.in
-      </a>
-      {" — "}
-      {lang === "kn" ? "ಅಧಿಕೃತ ಶಾಲಾ ಜಾಲತಾಣ" : "the school's official website"}
-    </p>
+    {links.map((link) => (
+      <p>
+        <a href={link.url} target="_blank" rel="noopener">
+          {link.url.replace(/^https?:\/\//, "").replace(/\/$/, "")}
+        </a>
+        {" — "}
+        {lx(link.label, lang)}
+      </p>
+    ))}
     <p>
       <a href={localePath("/about", lang)}>{t(lang, "about.title")}</a>
     </p>
@@ -110,10 +114,6 @@ const { photo, facts, founded } = pages.vidyalaya;
     max-inline-size: 36ch;
   }
 
-  :global(:lang(kn)) .fact-value {
-    letter-spacing: 0;
-    line-height: 1.35;
-  }
 
   .vidyalaya-links {
     display: flex;

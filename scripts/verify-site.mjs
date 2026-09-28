@@ -14,7 +14,6 @@ import { mkdir, readFile, readdir, stat } from "node:fs/promises";
 import path from "node:path";
 import puppeteer from "puppeteer-core";
 import { checkCmsConfig } from "./check-cms-config.mjs";
-import { mergeLocales } from "../src/data/locales.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const DIST = path.join(ROOT, "dist");
@@ -362,7 +361,7 @@ async function auditRoute(page, route, viewport, { navigate = true } = {}) {
   return audit;
 }
 
-/** Key parity, empty strings, and Latin text left inside the Kannada values. */
+/** Interface text has no empty strings. */
 async function auditDictionaries() {
   const copy = JSON.parse(await readFile(path.join(ROOT, "content/copy.json"), "utf8"));
   const flatten = (node, prefix = "", out = new Map()) => {
@@ -372,95 +371,11 @@ async function auditDictionaries() {
     }
     return out;
   };
-  const en = copy.en ? flatten(copy.en) : null;
-  const kn = copy.kn ? flatten(copy.kn) : null;
-  if (!en || !kn) {
-    fail("content/copy.json", "could not read the en and kn blocks");
-    return;
+  const keys = flatten(copy);
+  for (const [key, value] of keys) {
+    if (value === "") fail("content/copy.json", `${key} is empty`);
   }
-
-  for (const key of en.keys()) {
-    if (!kn.has(key)) fail("content/copy.json", `kn is missing the key ${key}`);
-  }
-  for (const key of kn.keys()) {
-    if (!en.has(key)) fail("content/copy.json", `en is missing the key ${key}`);
-  }
-  for (const [key, value] of kn) {
-    if (value === "") fail("content/copy.json", `kn.${key} is empty`);
-    // Latin words left untranslated. "English" is the language-switch label.
-    const latin = value.replace(/\{[^}]*\}/g, "").match(/[A-Za-z]{3,}/g) ?? [];
-    for (const word of latin) {
-      if (word === "English") continue;
-      fail("content/copy.json", `kn.${key} still contains Latin text: “${word}”`);
-    }
-  }
-  notes.push(`dictionaries: ${en.size} keys, en and kn in parity`);
-
-  // Content: everything a reader sees except long-form `body` must carry
-  // Kannada. Bodies may stay in their original language, with a visible note.
-  const TEXT_KEYS = new Set([
-    "title",
-    "summary",
-    "name",
-    "tagline",
-    "shortName",
-    "alt",
-    "caption",
-    "batch",
-    "location",
-    "archiveNote",
-    "description",
-    "startNote",
-    "item",
-    "note",
-  ]);
-  const files = [];
-  const collect = async (dir) => {
-    for (const item of await readdir(dir, { withFileTypes: true })) {
-      const full = path.join(dir, item.name);
-      if (item.isDirectory()) await collect(full);
-      else if (item.name.endsWith(".json")) files.push(full);
-    }
-  };
-  await collect(path.join(ROOT, "content"));
-
-  let current = "";
-  const walk = (node, key) => {
-    if (Array.isArray(node)) {
-      for (const item of node) walk(item, key);
-      return;
-    }
-    if (node && typeof node === "object") {
-      if (typeof node.en === "string" || typeof node.kn === "string") {
-        if (typeof node.en === "string" && node.en.trim() !== "" && !(typeof node.kn === "string" && node.kn.trim() !== "")) {
-          fail(path.relative(ROOT, current), `${key} has no Kannada value`);
-        }
-        return;
-      }
-      for (const [k, v] of Object.entries(node)) walk(v, k);
-      return;
-    }
-    if (typeof node === "string" && TEXT_KEYS.has(key) && node.trim() !== "") {
-      fail(path.relative(ROOT, current), `${key} is a plain string with no Kannada value`);
-    }
-  };
-
-  for (const candidate of files) {
-    current = candidate;
-    if (path.basename(candidate) === "copy.json") continue; // audited above
-    walk(mergeLocales(JSON.parse(await readFile(candidate, "utf8"))), "");
-  }
-  notes.push(`content: ${files.length} files checked for Kannada coverage`);
-
-  // Every font stack must carry a Kannada fallback. Without one, Kannada set in
-  // that face renders as tofu boxes — which is how the mono date stamps broke.
-  const tokens = await readFile(path.join(ROOT, "src/styles/tokens.css"), "utf8");
-  for (const stack of ["display", "body", "mono"]) {
-    const line = tokens.match(new RegExp(`--font-${stack}:[^;]+;`))?.[0] ?? "";
-    if (!/Kannada/.test(line)) {
-      fail("src/styles/tokens.css", `--font-${stack} has no Kannada fallback`);
-    }
-  }
+  notes.push(`dictionaries: ${keys.size} keys`);
 }
 
 /** The CMS config must stay valid, and must declare every content field. */
@@ -518,7 +433,9 @@ async function main() {
 
   let audited = 0;
   const internalLinks = new Set();
-  const navHrefs = ["/", "/about", "/programs", "/contributions", "/events", "/stories", "/connect"];
+  // The header links editors chose in Site settings → Navigation.
+  const siteSettings = JSON.parse(await readFile(path.join(ROOT, "content/site.json"), "utf8"));
+  const navHrefs = (siteSettings.nav?.header ?? []).map(({ page }) => (page === "home" ? "/" : `/${page}`));
   const page = await browser.newPage();
 
   for (const route of routes) {
@@ -541,10 +458,8 @@ async function main() {
         internalLinks.add(new URL(found.og).pathname);
       }
 
-      const isKn = route === "/kn" || route.startsWith("/kn/");
       for (const target of navHrefs) {
-        const expected = isKn ? (target === "/" ? "/kn" : `/kn${target}`) : target;
-        if (!found.nav.includes(expected)) fail(route, `nav link missing: ${expected}`);
+        if (!found.nav.includes(target)) fail(route, `nav link missing: ${target}`);
       }
 
       if (WANT_SHOTS) {
@@ -647,13 +562,6 @@ async function main() {
     notes.push(`mobile nav: ${mobileNav.visibleLinks} links, list below the bar`);
   }
 
-  await interactions.goto(`${ORIGIN}/about`, { waitUntil: "load" });
-  const switched = await interactions.evaluate(() => {
-    const link = document.querySelector(".lang-switch");
-    return link ? link.getAttribute("href") : null;
-  });
-  if (switched !== "/kn/about") fail("/about", `language switch points at ${switched}`);
-  else notes.push("language switch: /about -> /kn/about");
   await interactions.close();
 
   // The CMS admin must render its login screen with a valid config.yml.

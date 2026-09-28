@@ -1,3 +1,4 @@
+import sharp from "sharp";
 import { bool, num, optionalStr, singleton, text } from "./load";
 import type { SiteSettings, Social } from "./types";
 
@@ -28,10 +29,34 @@ function credit(value: unknown): { label: string; url: string } | null {
   const url = optionalStr(record.url);
   return label && url ? { label, url } : null;
 }
+/** Pages the header and footer can link to, in the order editors list them. */
+function pageList(value: unknown): string[] {
+  if (!Array.isArray(value)) return [];
+  return value
+    .map((item) => (typeof item === "object" && item !== null ? optionalStr((item as Record<string, unknown>).page) : null))
+    .filter((page): page is string => page !== null);
+}
+
+const nav = (raw.nav ?? {}) as Record<string, unknown>;
+
+/** The logo's own dimensions, so the header reserves the right space. */
+async function logo(value: unknown): Promise<SiteSettings["logo"]> {
+  const src = optionalStr(value);
+  if (!src || !src.startsWith("/")) return null;
+  try {
+    const { width, height } = await sharp(`public${src}`).metadata();
+    return width && height ? { src, width, height } : null;
+  } catch {
+    return null;
+  }
+}
+
 export const site: SiteSettings = {
   name: text(raw.name),
+  logo: await logo(raw.logo),
+  socialImage: optionalStr(raw.socialImage),
   schoolName: text(raw.schoolName),
-  formed: num(raw.formed) ?? 1993,
+  formed: num(raw.formed) ?? 1994,
   tagline: text(raw.tagline),
   description: text(raw.description),
   contact: {
@@ -47,5 +72,9 @@ export const site: SiteSettings = {
   license: credit(raw.license),
   donations: {
     note: text(donations.note),
+  },
+  nav: {
+    header: pageList(nav.header),
+    footer: pageList(nav.footer),
   },
 };

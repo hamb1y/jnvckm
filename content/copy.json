@@ -1,264 +1,118 @@
 {
-  "en": {
-    "nav": {
-      "home": "Home",
-      "about": "About",
-      "programs": "Programs",
-      "impact": "Contributions",
-      "events": "Events",
-      "stories": "Stories",
-      "connect": "Connect",
-      "vidyalaya": "The Vidyalaya"
-    },
-    "lang": {
-      "switchLabel": "ಕನ್ನಡ",
-      "switchAria": "Read this page in Kannada"
-    },
-    "site": {
-      "formedShort": "Formed in 1993"
-    },
-    "home": {
-      "explore": "Explore our work",
-      "impactTitle": "Giving back",
-      "latestTitle": "Latest",
-      "heroBody": "The alumni association of Jawahar Navodaya Vidyalaya Chikkamagaluru, formed in 1993.",
-      "latestCta": "Read the latest",
-      "reconnect": "How to reconnect",
-      "vidyalayaTitle": "Where it began",
-      "vidyalayaLede": "The school was founded in 1986 and moved to its permanent campus at Seegodu, near Balehonnur, two years later.",
-      "connectTitle": "Stay connected",
-      "connectLede": "News, events and projects reach alumni through their batch representatives.",
-      "given": "Given so far",
-      "figures": {
-        "contributions": "Contributions",
-        "events": "Events"
-      }
-    },
-    "common": {
-      "allContributions": "All contributions",
-      "allEvents": "All events",
-      "location": "Location",
-      "batch": "Batch",
-      "amount": "Amount",
-      "category": "Category",
-      "documents": "Documents",
-      "source": "Source",
-      "englishOnly": "This record is in English.",
-      "program": "Program",
-      "author": "Author"
-    },
-    "events": {
-      "title": "Events",
-      "lede": "Reunions, workshops, the annual meet and the cricket league.",
-      "upcoming": "Upcoming",
-      "past": "Past"
-    },
-    "impact": {
-      "title": "Contributions",
-      "lede": "What alumni and batches have funded and built, and who they have helped.",
-      "filterLabel": "Filter by category",
-      "all": "All",
-      "empty": "No contributions are published in this category yet.",
-      "count": "Showing {n} of {total}",
-      "summary": "{count} contributions, {from}–{to}"
-    },
-    "stories": {
-      "title": "Stories",
-      "lede": "News, reports and memories from the alumni community.",
-      "empty": "No stories have been published yet."
-    },
-    "vidyalaya": {
-      "title": "The Vidyalaya",
-      "lede": "The school every member of the association comes from."
-    },
-    "about": {
-      "title": "About the association",
-      "lede": "JNVCKM Alumni Association is the alumni community of Jawahar Navodaya Vidyalaya Chikkamagaluru, at Seegodu near Balehonnur.",
-      "whatWeDo": "What the association does"
-    },
-    "connect": {
-      "title": "Connect",
-      "lede": "Reach the association, volunteer, or offer to mentor.",
-      "address": "Address",
-      "routeTitle": "How to reach the association",
-      "routeBody": "Through your batch representative, or the school office at the Vidyalaya.",
-      "volunteerTitle": "Volunteer or mentor",
-      "volunteerBody": "Alumni who can offer time are always needed — a mentoring call, a career session for senior students, or a place for an intern.",
-      "contributeTitle": "Contributing",
-      "batchRepsTitle": "Through your batch",
-      "batchRepsBody": "Each batch has a representative who carries association news to their batchmates and brings questions back.",
-      "batchRepsLink": "Read about batch representatives"
-    },
-    "footer": {
-      "association": "The association",
-      "independent": "JNVCKM Alumni Association is an independent alumni body. It is not the official website of PM SHRI Jawahar Navodaya Vidyalaya or of Navodaya Vidyalaya Samiti.",
-      "repository": "Source code",
-      "creditLabel": "Site by"
-    },
-    "notfound": {
-      "title": "We couldn't find that page",
-      "lede": "It may have moved. Try the home page, or the events list."
-    },
-    "a11y": {
-      "skip": "Skip to content",
-      "menu": "Menu",
-      "primaryNav": "Primary"
-    },
-    "categories": {
-      "infrastructure": "Infrastructure",
-      "technology": "Technology",
-      "student-support": "Student support",
-      "sports": "Sports",
-      "culture": "Culture",
-      "staff-community": "Staff and community"
-    },
-    "programs": {
-      "title": "Programs",
-      "lede": "IGNITE brings alumni back to guide students. NCL brings every batch back to play.",
-      "relatedEvents": "Editions and seasons",
-      "more": "More about {name}"
-    },
-    "posts": {
-      "kind": {
-        "news": "News",
-        "report": "Report",
-        "story": "Story",
-        "event": "Event"
-      }
-    },
-    "empty": {
-      "generic": "Nothing here yet."
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "programs": "Programs",
+    "impact": "Contributions",
+    "events": "Events",
+    "stories": "Stories",
+    "connect": "Connect",
+    "vidyalaya": "The Vidyalaya"
+  },
+  "site": {
+    "formedShort": "Formed in {formed}"
+  },
+  "home": {
+    "explore": "Explore our work",
+    "impactTitle": "Giving back",
+    "latestTitle": "Latest",
+    "heroBody": "The alumni association of Jawahar Navodaya Vidyalaya Chikkamagaluru, formed in {formed}.",
+    "latestCta": "Read the latest",
+    "reconnect": "How to reconnect",
+    "vidyalayaTitle": "Where it began",
+    "vidyalayaLede": "The school was founded in {founded} and moved to its permanent campus at Seegodu, near Balehonnur, two years later.",
+    "connectTitle": "Stay connected",
+    "connectLede": "News, events and projects reach alumni through their batch representatives.",
+    "given": "Given so far",
+    "figures": {
+      "contributions": "Contributions",
+      "events": "Events"
     }
   },
-  "kn": {
-    "nav": {
-      "home": "ಮುಖಪುಟ",
-      "about": "ನಮ್ಮ ಬಗ್ಗೆ",
-      "programs": "ಯೋಜನೆಗಳು",
-      "impact": "ಕೊಡುಗೆಗಳು",
-      "events": "ಕಾರ್ಯಕ್ರಮಗಳು",
-      "stories": "ಕಥೆಗಳು",
-      "connect": "ಸಂಪರ್ಕ",
-      "vidyalaya": "ವಿದ್ಯಾಲಯ"
-    },
-    "lang": {
-      "switchLabel": "English",
-      "switchAria": "ಈ ಪುಟವನ್ನು ಇಂಗ್ಲಿಷ್‌ನಲ್ಲಿ ಓದಿ"
-    },
-    "site": {
-      "formedShort": "1993ರಲ್ಲಿ ಸ್ಥಾಪಿತವಾಯಿತು"
-    },
-    "home": {
-      "explore": "ನಮ್ಮ ಕೆಲಸ ನೋಡಿ",
-      "impactTitle": "ಕೊಡುಗೆ",
-      "latestTitle": "ಇತ್ತೀಚಿನವು",
-      "heroBody": "ಜವಾಹರ ನವೋದಯ ವಿದ್ಯಾಲಯ ಚಿಕ್ಕಮಗಳೂರಿನ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳ ಸಂಘ; 1993ರಲ್ಲಿ ಸ್ಥಾಪಿತ.",
-      "latestCta": "ಇತ್ತೀಚಿನವನ್ನು ಓದಿ",
-      "reconnect": "ಮತ್ತೆ ಸಂಪರ್ಕಿಸುವ ಬಗ್ಗೆ",
-      "vidyalayaTitle": "ಎಲ್ಲಿ ಆರಂಭವಾಯಿತು",
-      "vidyalayaLede": "ವಿದ್ಯಾಲಯ 1986ರಲ್ಲಿ ಸ್ಥಾಪಿತವಾಯಿತು; ಎರಡು ವರ್ಷಗಳ ನಂತರ ಬಾಳೆಹೊನ್ನೂರು ಸಮೀಪದ ಸೀಗೋಡುವಿನ ಶಾಶ್ವತ ಆವರಣಕ್ಕೆ ಸ್ಥಳಾಂತರಗೊಂಡಿತು.",
-      "connectTitle": "ಸಂಪರ್ಕದಲ್ಲಿರಿ",
-      "connectLede": "ಸುದ್ದಿ, ಕಾರ್ಯಕ್ರಮಗಳು ಮತ್ತು ಯೋಜನೆಗಳು ಬ್ಯಾಚ್ ಪ್ರತಿನಿಧಿಗಳ ಮೂಲಕ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳನ್ನು ತಲುಪುತ್ತವೆ.",
-      "given": "ಇದುವರೆಗಿನ ಕೊಡುಗೆ",
-      "figures": {
-        "contributions": "ಕೊಡುಗೆಗಳು",
-        "events": "ಕಾರ್ಯಕ್ರಮಗಳು"
-      }
-    },
-    "common": {
-      "allContributions": "ಎಲ್ಲಾ ಕೊಡುಗೆಗಳು",
-      "allEvents": "ಎಲ್ಲಾ ಕಾರ್ಯಕ್ರಮಗಳು",
-      "location": "ಸ್ಥಳ",
-      "batch": "ಬ್ಯಾಚ್",
-      "amount": "ಮೊತ್ತ",
-      "category": "ವರ್ಗ",
-      "documents": "ದಾಖಲೆಗಳು",
-      "source": "ಮೂಲ",
-      "englishOnly": "ಈ ದಾಖಲೆ ಇಂಗ್ಲಿಷ್‌ನಲ್ಲಿದೆ.",
-      "program": "ಯೋಜನೆ",
-      "author": "ಲೇಖಕ"
-    },
-    "events": {
-      "title": "ಕಾರ್ಯಕ್ರಮಗಳು",
-      "lede": "ಪುನರ್ಮಿಲನಗಳು, ಕಾರ್ಯಾಗಾರಗಳು, ವಾರ್ಷಿಕ ಸಮಾವೇಶ ಮತ್ತು ಕ್ರಿಕೆಟ್ ಲೀಗ್.",
-      "upcoming": "ಮುಂಬರುವ",
-      "past": "ಹಿಂದಿನವು"
-    },
-    "impact": {
-      "title": "ಕೊಡುಗೆಗಳು",
-      "lede": "ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳು ಮತ್ತು ಬ್ಯಾಚ್‌ಗಳು ನೀಡಿದ ಹಣ, ಕಟ್ಟಿದ ಸೌಲಭ್ಯಗಳು ಮತ್ತು ಸಹಾಯದ ದಾಖಲೆ.",
-      "filterLabel": "ವರ್ಗದ ಪ್ರಕಾರ ತೋರಿಸಿ",
-      "all": "ಎಲ್ಲಾ",
-      "empty": "ಈ ವರ್ಗದಲ್ಲಿ ಇನ್ನೂ ಯಾವುದೇ ಕೊಡುಗೆ ಪ್ರಕಟವಾಗಿಲ್ಲ.",
-      "count": "ಒಟ್ಟು {total} ರಲ್ಲಿ {n} ತೋರಿಸಲಾಗಿದೆ",
-      "summary": "{count} ಕೊಡುಗೆಗಳು, {from}–{to}"
-    },
-    "stories": {
-      "title": "ಕಥೆಗಳು",
-      "lede": "ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಮುದಾಯದ ಸುದ್ದಿ, ವರದಿಗಳು ಮತ್ತು ನೆನಪುಗಳು.",
-      "empty": "ಇನ್ನೂ ಯಾವುದೇ ಕಥೆ ಪ್ರಕಟವಾಗಿಲ್ಲ."
-    },
-    "vidyalaya": {
-      "title": "ವಿದ್ಯಾಲಯ",
-      "lede": "ಸಂಘದ ಪ್ರತಿಯೊಬ್ಬ ಸದಸ್ಯರೂ ಓದಿದ ವಿದ್ಯಾಲಯ."
-    },
-    "about": {
-      "title": "ಸಂಘದ ಬಗ್ಗೆ",
-      "lede": "ಜೆಎನ್‌ವಿಸಿಕೆಎಂ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಂಘವು ಜವಾಹರ ನವೋದಯ ವಿದ್ಯಾಲಯ ಚಿಕ್ಕಮಗಳೂರಿನ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಮುದಾಯ. ಈ ವಿದ್ಯಾಲಯ ಬಾಳೆಹೊನ್ನೂರು ಸಮೀಪದ ಸೀಗೋಡುವಿನಲ್ಲಿದೆ.",
-      "whatWeDo": "ಸಂಘ ಏನು ಮಾಡುತ್ತದೆ"
-    },
-    "connect": {
-      "title": "ಸಂಪರ್ಕ",
-      "lede": "ಸಂಘವನ್ನು ಸಂಪರ್ಕಿಸಿ, ಸ್ವಯಂಸೇವಕರಾಗಿ, ಅಥವಾ ಮಾರ್ಗದರ್ಶನ ನೀಡಿ.",
-      "address": "ವಿಳಾಸ",
-      "routeTitle": "ಸಂಘವನ್ನು ಸಂಪರ್ಕಿಸುವ ದಾರಿ",
-      "routeBody": "ನಿಮ್ಮ ಬ್ಯಾಚ್ ಪ್ರತಿನಿಧಿಯ ಮೂಲಕ, ಅಥವಾ ವಿದ್ಯಾಲಯದ ಶಾಲಾ ಕಚೇರಿಯ ಮೂಲಕ.",
-      "volunteerTitle": "ಸ್ವಯಂಸೇವೆ ಅಥವಾ ಮಾರ್ಗದರ್ಶನ",
-      "volunteerBody": "ಸಮಯ ನೀಡಬಲ್ಲ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳು ಯಾವಾಗಲೂ ಬೇಕು — ಒಂದು ಮಾರ್ಗದರ್ಶನ ಕರೆ, ಹಿರಿಯ ತರಗತಿಯ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಒಂದು ವೃತ್ತಿ ಅವಧಿ, ಅಥವಾ ಇಂಟರ್ನ್‌ಶಿಪ್‌ಗೆ ಒಂದು ಅವಕಾಶ.",
-      "contributeTitle": "ಕೊಡುಗೆ ನೀಡುವುದು",
-      "batchRepsTitle": "ನಿಮ್ಮ ಬ್ಯಾಚ್ ಮೂಲಕ",
-      "batchRepsBody": "ಪ್ರತಿ ಬ್ಯಾಚ್‌ಗೂ ಒಬ್ಬ ಪ್ರತಿನಿಧಿ ಇದ್ದು, ಸಂಘದ ಸುದ್ದಿಯನ್ನು ತಮ್ಮ ಬ್ಯಾಚ್‌ ಸ್ನೇಹಿತರಿಗೆ ತಲುಪಿಸುತ್ತಾರೆ.",
-      "batchRepsLink": "ಬ್ಯಾಚ್ ಪ್ರತಿನಿಧಿಗಳ ಬಗ್ಗೆ ಓದಿ"
-    },
-    "footer": {
-      "association": "ಸಂಘ",
-      "independent": "ಜೆಎನ್‌ವಿಸಿಕೆಎಂ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಂಘ ಸ್ವತಂತ್ರ ಸಂಘಟನೆ. ಇದು ಪಿಎಂ ಶ್ರೀ ಜವಾಹರ ನವೋದಯ ವಿದ್ಯಾಲಯ ಅಥವಾ ನವೋದಯ ವಿದ್ಯಾಲಯ ಸಮಿತಿಯ ಅಧಿಕೃತ ಜಾಲತಾಣವಲ್ಲ.",
-      "repository": "ಮೂಲ ಕೋಡ್",
-      "creditLabel": "ಜಾಲತಾಣ ರೂಪಿಸಿದವರು:"
-    },
-    "notfound": {
-      "title": "ಆ ಪುಟ ಸಿಗಲಿಲ್ಲ",
-      "lede": "ಅದು ಸ್ಥಳ ಬದಲಿಸಿರಬಹುದು. ಮುಖಪುಟ ಅಥವಾ ಕಾರ್ಯಕ್ರಮಗಳ ಪಟ್ಟಿ ನೋಡಿ."
-    },
-    "a11y": {
-      "skip": "ಮುಖ್ಯ ವಿಷಯಕ್ಕೆ ಹೋಗಿ",
-      "menu": "ಮೆನು",
-      "primaryNav": "ಮುಖ್ಯ ಮೆನು"
-    },
-    "categories": {
-      "infrastructure": "ಮೂಲಸೌಕರ್ಯ",
-      "technology": "ತಂತ್ರಜ್ಞಾನ",
-      "student-support": "ವಿದ್ಯಾರ್ಥಿ ಬೆಂಬಲ",
-      "sports": "ಕ್ರೀಡೆ",
-      "culture": "ಸಂಸ್ಕೃತಿ",
-      "staff-community": "ಸಿಬ್ಬಂದಿ ಮತ್ತು ಸಮುದಾಯ"
-    },
-    "programs": {
-      "title": "ಯೋಜನೆಗಳು",
-      "lede": "ಇಗ್ನೈಟ್ ಮೂಲಕ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳು ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಮಾರ್ಗದರ್ಶನ ನೀಡುತ್ತಾರೆ. ಎನ್‌ಸಿಎಲ್ ಪ್ರತಿ ಬ್ಯಾಚ್ ಅನ್ನೂ ಮತ್ತೆ ಮೈದಾನಕ್ಕೆ ಕರೆತರುತ್ತದೆ.",
-      "relatedEvents": "ಆವೃತ್ತಿಗಳು ಮತ್ತು ಸೀಸನ್‌ಗಳು",
-      "more": "{name} ಬಗ್ಗೆ ಇನ್ನಷ್ಟು"
-    },
-    "posts": {
-      "kind": {
-        "news": "ಸುದ್ದಿ",
-        "report": "ವರದಿ",
-        "story": "ಕಥೆ",
-        "event": "ಕಾರ್ಯಕ್ರಮ"
-      }
-    },
-    "empty": {
-      "generic": "ಇನ್ನೂ ಏನೂ ಇಲ್ಲ."
+  "common": {
+    "allContributions": "All contributions",
+    "allEvents": "All events",
+    "location": "Location",
+    "batch": "Batch",
+    "amount": "Amount",
+    "category": "Category",
+    "documents": "Documents",
+    "source": "Source",
+    "program": "Program",
+    "author": "Author"
+  },
+  "events": {
+    "title": "Events",
+    "lede": "Reunions, workshops, the annual meet and the cricket league.",
+    "upcoming": "Upcoming",
+    "past": "Past"
+  },
+  "impact": {
+    "title": "Contributions",
+    "lede": "What alumni and batches have funded and built, and who they have helped.",
+    "filterLabel": "Filter by category",
+    "all": "All",
+    "empty": "No contributions are published in this category yet.",
+    "count": "Showing {n} of {total}",
+    "summary": "{count} contributions, {from}–{to}"
+  },
+  "stories": {
+    "title": "Stories",
+    "lede": "News, reports and memories from the alumni community.",
+    "empty": "No stories have been published yet."
+  },
+  "vidyalaya": {
+    "title": "The Vidyalaya",
+    "lede": "The school every member of the association comes from."
+  },
+  "about": {
+    "title": "About the association",
+    "lede": "JNVCKM Alumni Association is the alumni community of Jawahar Navodaya Vidyalaya Chikkamagaluru, at Seegodu near Balehonnur.",
+    "whatWeDo": "What the association does"
+  },
+  "connect": {
+    "title": "Connect",
+    "lede": "Reach the association, volunteer, or offer to mentor.",
+    "address": "Address",
+    "routeTitle": "How to reach the association",
+    "routeBody": "Through your batch representative, or the school office at the Vidyalaya.",
+    "volunteerTitle": "Volunteer or mentor",
+    "volunteerBody": "Alumni who can offer time are always needed — a mentoring call, a career session for senior students, or a place for an intern.",
+    "contributeTitle": "Contributing",
+    "batchRepsTitle": "Through your batch",
+    "batchRepsBody": "Each batch has a representative who carries association news to their batchmates and brings questions back.",
+    "batchRepsLink": "Read about batch representatives"
+  },
+  "footer": {
+    "association": "The association",
+    "independent": "JNVCKM Alumni Association is an independent alumni body. It is not the official website of PM SHRI Jawahar Navodaya Vidyalaya or of Navodaya Vidyalaya Samiti.",
+    "repository": "Source code",
+    "creditLabel": "Site by"
+  },
+  "notfound": {
+    "title": "We couldn't find that page",
+    "lede": "It may have moved. Try the home page, or the events list."
+  },
+  "a11y": {
+    "skip": "Skip to content",
+    "menu": "Menu",
+    "primaryNav": "Primary"
+  },
+  "programs": {
+    "title": "Programs",
+    "lede": "IGNITE brings alumni back to guide students. NCL brings every batch back to play.",
+    "relatedEvents": "Editions and seasons",
+    "more": "More about {name}"
+  },
+  "posts": {
+    "kind": {
+      "news": "News",
+      "report": "Report",
+      "story": "Story",
+      "event": "Event"
     }
+  },
+  "empty": {
+    "generic": "Nothing here yet."
   }
 }

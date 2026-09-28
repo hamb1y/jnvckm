@@ -38,15 +38,10 @@ giving. Nothing is coloured for decoration.
 
 - **Display: Arvo** — a slab serif, and the same letterform family as the
   association's logotype. This is continuity, not a default.
-- **Body: Mukta** — a warm humanist sans from Ek Type, Mumbai. Kannada falls
-  back to Noto Sans Kannada.
+- **Body: Mukta** — a warm humanist sans from Ek Type, Mumbai.
 - **No mono face.** Dates, ₹ amounts and batch codes are set in Mukta with
   tabular numerals (`font-variant-numeric: tabular-nums`), so figures line up as
-  a record without a typewriter look. `--font-mono` stays in `tokens.css` only
-  because the verifier checks every stack for a Kannada family; nothing uses it.
-
-Kannada headings fall back to Noto Serif Kannada, paired with Arvo. No Latin-only
-flourishes (drop caps, small caps) are applied to Kannada.
+  a record without a typewriter look. `--font-mono` stays in `tokens.css`; nothing uses it.
 
 ## 3. How pages are composed
 
@@ -62,8 +57,6 @@ The site now reads as the association's printed report, cover to back page:
 - **The Vidyalaya is a fact sheet**: a `<dl>` of labelled facts, each leading with its figure or name in Arvo (1986, Seegodu, 6 to 12, 840012) and the detail beneath.
 - **About ends on the association's line**, set large, then three onward tiles that each carry a real line from the records (IGNITE · NCL; 12 contributions, 2015–2024; the school's name).
 - **NCL's poster.** With no photograph, NCL gets a gold panel with its short name at poster scale — composed, never a placeholder.
-
-**Kannada at poster scale.** The Kannada short names are much wider than the Latin ones; poster marks drop to a smaller clamp under `:lang(kn)`, and headings drop negative tracking.
 
 **Photographs lead, at size.** The archive's real photographs are the site's
 strongest asset, so they are given real width — half a row, a full-bleed band,
@@ -174,8 +167,6 @@ Two supporting components:
 - **Unverified contact** — while `contact.emailVerified` / `phoneVerified` are
   false the email and phone are simply not published; the footer and Connect page
   give the address and the batch-representative route instead.
-- **Archived records shown in English on a Kannada page** — a visible note
-  explains why, rather than silently mixing languages.
 
 ## The three questions
 

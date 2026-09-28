@@ -1,47 +1,23 @@
 {
-  "en": {
-    "slug": "medical-camp-2015",
-    "title": "Medical camp for students and staff",
-    "date": "2015-01-25",
-    "program": null,
-    "location": "JNV Balehonnur",
-    "summary": "Health check-ups for students and staff at the Vidyalaya.",
-    "body": "A medical camp was held at the Vidyalaya for students and staff, offering health check-ups and basic services. Doctors sat as a panel for the gathering, and a registration desk ran through the day. Both are in the photographs with this record.",
-    "image": {
-      "src": "/images/dsc0043.webp",
-      "alt": "Students lined up outside a school building beneath a medical camp banner."
-    },
-    "documents": [
-      {
-        "src": "/images/dsc0166.webp",
-        "alt": "A panel seated on a stage beneath the medical camp banner."
-      },
-      {
-        "src": "/images/dsc0054.webp",
-        "alt": "Two people at a registration desk during the camp."
-      }
-    ]
+  "slug": "medical-camp-2015",
+  "title": "Medical camp for students and staff",
+  "date": "2015-01-25",
+  "program": null,
+  "location": "JNV Balehonnur",
+  "summary": "Health check-ups for students and staff at the Vidyalaya.",
+  "body": "A medical camp was held at the Vidyalaya for students and staff, offering health check-ups and basic services. Doctors sat as a panel for the gathering, and a registration desk ran through the day. Both are in the photographs with this record.",
+  "image": {
+    "src": "/images/dsc0043.webp",
+    "alt": "Students lined up outside a school building beneath a medical camp banner."
   },
-  "kn": {
-    "title": "ವಿದ್ಯಾರ್ಥಿಗಳು ಮತ್ತು ಸಿಬ್ಬಂದಿಗೆ ವೈದ್ಯಕೀಯ ಶಿಬಿರ",
-    "date": "2015-01-25",
-    "program": null,
-    "location": "ಜೆಎನ್‌ವಿ ಬಾಳೆಹೊನ್ನೂರು",
-    "summary": "ವಿದ್ಯಾರ್ಥಿಗಳು ಮತ್ತು ಸಿಬ್ಬಂದಿಗೆ ಆರೋಗ್ಯ ತಪಾಸಣೆ.",
-    "body": "ವಿದ್ಯಾರ್ಥಿಗಳು ಮತ್ತು ಸಿಬ್ಬಂದಿಗಾಗಿ ವಿದ್ಯಾಲಯದಲ್ಲಿ ವೈದ್ಯಕೀಯ ಶಿಬಿರ ನಡೆಯಿತು. ಆರೋಗ್ಯ ತಪಾಸಣೆ ಮತ್ತು ಮೂಲಭೂತ ಸೇವೆಗಳನ್ನು ನೀಡಲಾಯಿತು. ವೈದ್ಯರು ಪ್ಯಾನೆಲ್ ಆಗಿ ಸಭೆಯನ್ನು ಉದ್ದೇಶಿಸಿ ಮಾತನಾಡಿದರು; ದಿನವಿಡೀ ನೋಂದಣಿ ಮೇಜು ನಡೆಯಿತು. ಎರಡೂ ಈ ದಾಖಲೆಯ ಚಿತ್ರಗಳಲ್ಲಿವೆ.",
-    "image": {
-      "src": "/images/dsc0043.webp",
-      "alt": "ವೈದ್ಯಕೀಯ ಶಿಬಿರದ ಬ್ಯಾನರ್ ಕೆಳಗೆ ಶಾಲಾ ಕಟ್ಟಡದ ಹೊರಗೆ ಸಾಲಾಗಿ ನಿಂತಿರುವ ವಿದ್ಯಾರ್ಥಿಗಳು."
+  "documents": [
+    {
+      "src": "/images/dsc0166.webp",
+      "alt": "A panel seated on a stage beneath the medical camp banner."
     },
-    "documents": [
-      {
-        "src": "/images/dsc0166.webp",
-        "alt": "ವೈದ್ಯಕೀಯ ಶಿಬಿರದ ಬ್ಯಾನರ್ ಕೆಳಗೆ ವೇದಿಕೆಯಲ್ಲಿ ಕುಳಿತಿರುವ ಪ್ಯಾನೆಲ್."
-      },
-      {
-        "src": "/images/dsc0054.webp",
-        "alt": "ಶಿಬಿರದ ಸಮಯದಲ್ಲಿ ನೋಂದಣಿ ಮೇಜಿನಲ್ಲಿ ಇಬ್ಬರು."
-      }
-    ]
-  }
+    {
+      "src": "/images/dsc0054.webp",
+      "alt": "Two people at a registration desk during the camp."
+    }
+  ]
 }

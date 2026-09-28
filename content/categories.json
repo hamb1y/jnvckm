@@ -1,0 +1,28 @@
+{
+  "categories": [
+    {
+      "id": "infrastructure",
+      "label": "Infrastructure"
+    },
+    {
+      "id": "technology",
+      "label": "Technology"
+    },
+    {
+      "id": "student-support",
+      "label": "Student support"
+    },
+    {
+      "id": "sports",
+      "label": "Sports"
+    },
+    {
+      "id": "culture",
+      "label": "Culture"
+    },
+    {
+      "id": "staff-community",
+      "label": "Staff and community"
+    }
+  ]
+}

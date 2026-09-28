@@ -1,4 +1,4 @@
-export const LOCALES = ["en", "kn"] as const;
+export const LOCALES = ["en"] as const;
 export type Locale = (typeof LOCALES)[number];
 export const DEFAULT_LOCALE: Locale = "en";
 
@@ -19,17 +19,14 @@ export interface Media {
   position?: FocalPosition;
 }
 
-export type ProgramId = "ignite" | "ncl" | "meet" | "workshop" | null;
+/** A program's id, which is also its address under /programs. */
+export type ProgramId = string | null;
 
-export const CONTRIBUTION_CATEGORIES = [
-  "infrastructure",
-  "technology",
-  "student-support",
-  "sports",
-  "culture",
-  "staff-community",
-] as const;
-export type ContributionCategory = (typeof CONTRIBUTION_CATEGORIES)[number];
+/** A contribution category, set in content/categories.json. */
+export interface Category {
+  id: string;
+  label: Localized;
+}
 
 export interface EntryBase {
   slug: string;
@@ -47,11 +44,13 @@ export interface EntryBase {
 
 export interface EventEntry extends EntryBase {
   program: ProgramId;
+  /** Groups events that are not a program's editions, such as alumni meets. */
+  series: string | null;
   location: Localized | null;
 }
 
 export interface ContributionEntry extends EntryBase {
-  category: ContributionCategory;
+  category: string;
   batch: Localized | null;
   /** Rupees, whole units. Null when the record does not state an amount. */
   amount: number | null;
@@ -68,7 +67,8 @@ export interface PostEntry extends EntryBase {
 }
 
 export interface Program {
-  id: "ignite" | "ncl";
+  id: string;
+  order: number;
   name: Localized;
   shortName?: Localized;
   tagline: Localized;
@@ -86,6 +86,10 @@ export interface Social {
 
 export interface SiteSettings {
   name: Localized;
+  /** Header logo; null falls back to the site name set as text. */
+  logo: { src: string; width: number; height: number } | null;
+  /** Social card for pages without their own photograph. */
+  socialImage: string | null;
   schoolName: Localized;
   formed: number;
   tagline: Localized;
@@ -103,5 +107,9 @@ export interface SiteSettings {
   license: { label: string; url: string } | null;
   donations: {
     note: Localized;
+  };
+  nav: {
+    header: string[];
+    footer: string[];
   };
 }
