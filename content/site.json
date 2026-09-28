@@ -2,17 +2,14 @@
   "en": {
     "name": "JNVCKM Alumni Association",
     "schoolName": "PM SHRI Jawahar Navodaya Vidyalaya, Chikkamagaluru",
-    "formed": 1993,
+    "formed": 1994,
     "tagline": "Generations of Navodayans, connected by Seegodu and committed to giving back.",
     "description": "The alumni community of Jawahar Navodaya Vidyalaya Chikkamagaluru: IGNITE, the Navodaya Cricket League, reunions, mentoring, batch projects and years of giving back.",
     "contact": {
-      "email": null,
       "emailVerified": false,
-      "phone": null,
       "phoneVerified": false,
       "address": "Seegodu, near Balehonnur, Koppa Taluk, Chikkamagaluru district, Karnataka"
     },
-    "socials": [],
     "repository": "https://github.com/hamb1y/jnvckm",
     "credit": {
       "label": "Rishi Malnad (hamb1y)",
@@ -29,13 +26,11 @@
   "kn": {
     "name": "ಜೆಎನ್‌ವಿಸಿಕೆಎಂ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಂಘ",
     "schoolName": "ಪಿಎಂ ಶ್ರೀ ಜವಾಹರ ನವೋದಯ ವಿದ್ಯಾಲಯ, ಚಿಕ್ಕಮಗಳೂರು",
-    "formed": 1993,
+    "formed": 1994,
     "tagline": "ಸೀಗೋಡು ಬೆಸೆದಿರುವ ನವೋದಯ ಪೀಳಿಗೆಗಳು, ವಿದ್ಯಾಲಯಕ್ಕೆ ಕೊಡುಗೆ ಸಲ್ಲಿಸಲು ಬದ್ಧ.",
     "description": "ಜವಾಹರ ನವೋದಯ ವಿದ್ಯಾಲಯ ಚಿಕ್ಕಮಗಳೂರಿನ ಹಿರಿಯ ವಿದ್ಯಾರ್ಥಿ ಸಮುದಾಯ: ಇಗ್ನೈಟ್, ನವೋದಯ ಕ್ರಿಕೆಟ್ ಲೀಗ್, ಪುನರ್ಮಿಲನಗಳು, ಮಾರ್ಗದರ್ಶನ, ಬ್ಯಾಚ್ ಯೋಜನೆಗಳು ಮತ್ತು ವರ್ಷಗಳಿಂದ ಸಲ್ಲಿಸಿದ ಕೊಡುಗೆಗಳು.",
     "contact": {
-      "email": null,
       "emailVerified": false,
-      "phone": null,
       "phoneVerified": false,
       "address": "ಸೀಗೋಡು, ಬಾಳೆಹೊನ್ನೂರು ಸಮೀಪ, ಕೊಪ್ಪ ತಾಲೂಕು, ಚಿಕ್ಕಮಗಳೂರು ಜಿಲ್ಲೆ, ಕರ್ನಾಟಕ"
     },
