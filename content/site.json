@@ -7,6 +7,7 @@
   "tagline": "Generations of Navodayans, connected by Seegodu and committed to giving back.",
   "description": "The alumni community of Jawahar Navodaya Vidyalaya Chikkamagaluru: IGNITE, the Navodaya Cricket League, reunions, mentoring, batch projects and years of giving back.",
   "contact": {
+    "email": "jnvckm[at]gmail.com",
     "emailVerified": false,
     "phoneVerified": false,
     "address": "Seegodu, near Balehonnur, Koppa Taluk, Chikkamagaluru district, Karnataka"
@@ -19,9 +20,6 @@
   "license": {
     "label": "CWSL-1.0",
     "url": "https://github.com/hamb1y/jnvckm/blob/main/LICENSE"
-  },
-  "donations": {
-    "note": "Batches pool their contributions for school projects and for people in need. To contribute, reach your batch representative."
   },
   "nav": {
     "header": [
@@ -70,5 +68,8 @@
         "page": "vidyalaya"
       }
     ]
+  },
+  "donations": {
+    "note": "Batches pool their contributions for school projects and for people in need. To contribute, reach your batch representative."
   }
 }
