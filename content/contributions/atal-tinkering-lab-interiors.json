@@ -11,5 +11,17 @@
     "src": "/images/img-20181205-wa0096.webp",
     "alt": "The Atal Tinkering Lab: grey and yellow tables, stools, and STEM artwork along the walls.",
     "position": "center"
-  }
+  },
+  "documents": [
+    {
+      "src": "/images/img-20181205-wa0098.webp",
+      "alt": "Before renovation ATL Lab",
+      "caption": "Before renovation ATL Lab"
+    },
+    {
+      "src": "/images/img-20181205-wa0097.webp",
+      "alt": "Before renovation ATL Lab",
+      "caption": "Before renovation ATL Lab"
+    }
+  ]
 }
